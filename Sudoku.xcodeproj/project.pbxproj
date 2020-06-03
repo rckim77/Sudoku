@@ -10,6 +10,8 @@
 		94677437248756CA00F636D4 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677436248756CA00F636D4 /* Row.swift */; };
 		946774392487572700F636D4 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946774382487572700F636D4 /* Square.swift */; };
 		9467743B2487579300F636D4 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743A2487579300F636D4 /* Grid.swift */; };
+		9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743C24875D4E00F636D4 /* SelectedCell.swift */; };
+		9467743F248762EB00F636D4 /* RowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743E248762EB00F636D4 /* RowButton.swift */; };
 		94E108832487333B0091D043 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108822487333A0091D043 /* AppDelegate.swift */; };
 		94E108852487333B0091D043 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108842487333B0091D043 /* SceneDelegate.swift */; };
 		94E108872487333B0091D043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108862487333B0091D043 /* ContentView.swift */; };
@@ -25,6 +27,8 @@
 		94677436248756CA00F636D4 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		946774382487572700F636D4 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		9467743A2487579300F636D4 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		9467743C24875D4E00F636D4 /* SelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCell.swift; sourceTree = "<group>"; };
+		9467743E248762EB00F636D4 /* RowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowButton.swift; sourceTree = "<group>"; };
 		94E1087F2487333A0091D043 /* Sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E108822487333A0091D043 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94E108842487333B0091D043 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,8 +77,10 @@
 				94E108862487333B0091D043 /* ContentView.swift */,
 				9467743A2487579300F636D4 /* Grid.swift */,
 				946774382487572700F636D4 /* Square.swift */,
+				9467743E248762EB00F636D4 /* RowButton.swift */,
 				94677436248756CA00F636D4 /* Row.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
+				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
 				94E1089824874AFB0091D043 /* Extensions.swift */,
 				94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */,
 				94E108882487333E0091D043 /* Assets.xcassets */,
@@ -170,6 +176,8 @@
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
+				9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */,
+				9467743F248762EB00F636D4 /* RowButton.swift in Sources */,
 				94677437248756CA00F636D4 /* Row.swift in Sources */,
 				94E108872487333B0091D043 /* ContentView.swift in Sources */,
 				9467743B2487579300F636D4 /* Grid.swift in Sources */,

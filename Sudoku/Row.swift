@@ -9,15 +9,26 @@
 import SwiftUI
 
 struct Row: View {
-    @State
-    private var selectedIndex: Int?
+
+    @EnvironmentObject
+    var selectedCell: SelectedCell
+
+    private func isSelected(columnIndex: Int) -> Bool {
+        return selectedCell.coordinate?.row == index &&
+            selectedCell.coordinate?.column == columnIndex &&
+            selectedCell.coordinate?.square == squareIndex
+    }
+    let index: Int
+    let columns: [Int]
+    let squareIndex: Int
+
     var body: some View {
         HStack(spacing: 0) {
             Button(action: {
-                if self.selectedIndex == 0 {
-                    self.selectedIndex = nil
+                if !self.isSelected(columnIndex: 0) {
+                    self.selectedCell.coordinate = (row: self.index, column: self.columns[0], square: self.squareIndex)
                 } else {
-                    self.selectedIndex = 0
+                    self.selectedCell.coordinate = nil
                 }
             }) {
                 Text("1")
@@ -26,12 +37,12 @@ struct Row: View {
                     .frame(maxWidth: .infinity)
             }
                 .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-            .background(selectedIndex == 0 ? Color.gray.opacity(0.4) : Color.white)
+            .background(isSelected(columnIndex: 0) ? Color.gray.opacity(0.4) : Color.white)
             Button(action: {
-                if self.selectedIndex == 1 {
-                    self.selectedIndex = nil
+                if !self.isSelected(columnIndex: 1) {
+                    self.selectedCell.coordinate = (row: self.index, column: self.columns[1], square: self.squareIndex)
                 } else {
-                    self.selectedIndex = 1
+                    self.selectedCell.coordinate = nil
                 }
             }) {
                 Text("2")
@@ -40,12 +51,12 @@ struct Row: View {
                     .frame(maxWidth: .infinity)
             }
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-            .background(selectedIndex == 1 ? Color.gray.opacity(0.4) : Color.white)
+            .background(isSelected(columnIndex: 1) ? Color.gray.opacity(0.4) : Color.white)
             Button(action: {
-                if self.selectedIndex == 2 {
-                    self.selectedIndex = nil
+                if !self.isSelected(columnIndex: 2) {
+                    self.selectedCell.coordinate = (row: self.index, column: self.columns[2], square: self.squareIndex)
                 } else {
-                    self.selectedIndex = 2
+                    self.selectedCell.coordinate = nil
                 }
             }) {
                 Text("3")
@@ -54,7 +65,7 @@ struct Row: View {
                     .frame(maxWidth: .infinity)
             }
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                .background(selectedIndex == 2 ? Color.gray.opacity(0.4) : Color.white)
+                .background(isSelected(columnIndex: 2) ? Color.gray.opacity(0.4) : Color.white)
         }
         .frame(maxWidth: .infinity)
     }
@@ -62,6 +73,6 @@ struct Row: View {
 
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
-        Row()
+        Row(index: 0, columns: [0, 1, 2], squareIndex: 0)
     }
 }

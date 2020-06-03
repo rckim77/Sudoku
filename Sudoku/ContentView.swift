@@ -10,6 +10,9 @@ import SwiftUI
 
 struct ContentView: View {
 
+    @EnvironmentObject
+    var selectedCell: SelectedCell
+
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus

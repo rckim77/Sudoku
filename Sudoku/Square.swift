@@ -9,11 +9,15 @@
 import SwiftUI
 
 struct Square: View {
+    let index: Int
+
+    private let columns = [0, 1, 2]
+
     var body: some View {
         VStack(alignment: .leading) {
-            Row()
-            Row()
-            Row()
+            Row(index: 0, columns: columns, squareIndex: index)
+            Row(index: 1, columns: columns, squareIndex: index)
+            Row(index: 2, columns: columns, squareIndex: index)
         }
         .border(Color.black, width: 3)
     }
@@ -21,6 +25,6 @@ struct Square: View {
 
 struct Square_Previews: PreviewProvider {
     static var previews: some View {
-        Square()
+        Square(index: 0)
     }
 }

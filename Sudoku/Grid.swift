@@ -9,24 +9,27 @@
 import SwiftUI
 
 struct Grid: View {
+    @EnvironmentObject
+    var selectedCell: SelectedCell
+
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
             HStack(spacing: 0) {
                 VStack {
-                    Square()
-                    Square()
-                    Square()
+                    Square(index: 0)
+                    Square(index: 1)
+                    Square(index: 2)
                 }
                 VStack {
-                    Square()
-                    Square()
-                    Square()
+                    Square(index: 3)
+                    Square(index: 4)
+                    Square(index: 5)
                 }
                 VStack {
-                    Square()
-                    Square()
-                    Square()
+                    Square(index: 6)
+                    Square(index: 7)
+                    Square(index: 8)
                 }
             }
             Spacer()
