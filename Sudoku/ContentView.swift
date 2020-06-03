@@ -9,24 +9,52 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    private var verticalSpacing: CGFloat {
+        let screenHeight = UIScreen.main.bounds.height
+        if screenHeight > 736 { // taller than 8 Plus
+            return 40
+        } else if screenHeight > 667 { // 8 Plus
+            return 26
+        } else { // 8, SE (2nd gen)
+            return 12
+        }
+    }
+
+    private var clearButtonHorizontalPadding: CGFloat {
+        let screenHeight = UIScreen.main.bounds.height
+        if screenHeight > 736 { // taller than 8 Plus
+            return 24
+        } else { // 8 Plus, 8, SE (2nd gen)
+            return 16
+        }
+    }
+
+    private var clearButtonVerticalPadding: CGFloat {
+        let screenHeight = UIScreen.main.bounds.height
+        if screenHeight > 736 { // taller than 8 Plus
+            return 14
+        } else { // 8 Plus, 8, SE (2nd gen)
+            return 10
+        }
+    }
+
     var body: some View {
-        VStack {
+        VStack(spacing: verticalSpacing) {
             Text("Sudoku")
                 .font(.title)
             Grid()
-            Spacer()
             HStack(spacing: 0) {
                 Spacer()
                 KeysRow()
                 Spacer()
             }
-            Spacer()
             Button(action: {}) {
                 Text("Clear")
                     .foregroundColor(.black)
             }
-                .padding(.horizontal)
-                .padding(.vertical, 8)
+                .padding(.horizontal, clearButtonHorizontalPadding)
+                .padding(.vertical, clearButtonVerticalPadding)
                 .background(Color.gray.opacity(0.4))
                 .cornerRadius(8)
             Spacer()
