@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct KeysRow: View {
-    private let buttonHeight: CGFloat = 40
+    private let buttonHeight: CGFloat = 48
     var body: some View {
         HStack(spacing: 2) {
             Button(action: {}) {
