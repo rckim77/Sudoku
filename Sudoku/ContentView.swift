@@ -13,27 +13,7 @@ struct ContentView: View {
         VStack {
             Text("Sudoku")
                 .font(.title)
-            HStack(spacing: 0) {
-                Spacer()
-                HStack(spacing: 0) {
-                    VStack {
-                        Square()
-                        Square()
-                        Square()
-                    }
-                    VStack {
-                        Square()
-                        Square()
-                        Square()
-                    }
-                    VStack {
-                        Square()
-                        Square()
-                        Square()
-                    }
-                }
-                Spacer()
-            }
+            Grid()
             Spacer()
             HStack(spacing: 0) {
                 Spacer()
