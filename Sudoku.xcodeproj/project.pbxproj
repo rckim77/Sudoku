@@ -13,6 +13,7 @@
 		9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743C24875D4E00F636D4 /* SelectedCell.swift */; };
 		9467743F248762EB00F636D4 /* RowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743E248762EB00F636D4 /* RowButton.swift */; };
 		94A9CCB62488A394008551B6 /* RowButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCB52488A394008551B6 /* RowButtonText.swift */; };
+		94A9CCB82488A96D008551B6 /* KeysRowButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */; };
 		94E108832487333B0091D043 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108822487333A0091D043 /* AppDelegate.swift */; };
 		94E108852487333B0091D043 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108842487333B0091D043 /* SceneDelegate.swift */; };
 		94E108872487333B0091D043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108862487333B0091D043 /* ContentView.swift */; };
@@ -31,6 +32,7 @@
 		9467743C24875D4E00F636D4 /* SelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCell.swift; sourceTree = "<group>"; };
 		9467743E248762EB00F636D4 /* RowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowButton.swift; sourceTree = "<group>"; };
 		94A9CCB52488A394008551B6 /* RowButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowButtonText.swift; sourceTree = "<group>"; };
+		94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysRowButtonText.swift; sourceTree = "<group>"; };
 		94E1087F2487333A0091D043 /* Sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E108822487333A0091D043 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94E108842487333B0091D043 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				94677436248756CA00F636D4 /* Row.swift */,
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
+				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
 				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
 				94E1089824874AFB0091D043 /* Extensions.swift */,
 				94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */,
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94A9CCB82488A96D008551B6 /* KeysRowButtonText.swift in Sources */,
 				946774392487572700F636D4 /* Square.swift in Sources */,
 				94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */,
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,

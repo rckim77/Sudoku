@@ -49,11 +49,7 @@ struct ContentView: View {
             Text("Sudoku")
                 .font(.title)
             Grid()
-            HStack(spacing: 0) {
-                Spacer()
-                KeysRow()
-                Spacer()
-            }
+            KeysRow()
             Button(action: {}) {
                 Text("Clear")
                     .foregroundColor(.black)

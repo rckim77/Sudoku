@@ -10,95 +10,57 @@ import SwiftUI
 
 struct KeysRow: View {
 
-    private let buttonHeight: CGFloat = 48
-    private let buttonTextFont = Font.system(.title, design: .rounded)
     private let buttonCornerRadius: CGFloat = 5
 
     var body: some View {
-        HStack(spacing: 2) {
-            Button(action: {}) {
-                Text("1")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
+        HStack(spacing: 0) {
+            Spacer()
+            HStack(spacing: 2) {
+                Button(action: {}) {
+                    KeysRowButtonText(text: "1")
+                }
+                    .cornerRadius(buttonCornerRadius)
+                Button(action: {}) {
+                    KeysRowButtonText(text: "2")
+                }
+                    .cornerRadius(buttonCornerRadius)
+                Button(action: {}) {
+                    KeysRowButtonText(text: "3")
+                }
+                    .cornerRadius(buttonCornerRadius)
+                Button(action: {}) {
+                    KeysRowButtonText(text: "4")
+                }
+                    .cornerRadius(buttonCornerRadius)
+                Button(action: {}) {
+                    KeysRowButtonText(text: "5")
+                }
+                    .cornerRadius(buttonCornerRadius)
+                Button(action: {}) {
+                    KeysRowButtonText(text: "6")
+                }
+                    .cornerRadius(buttonCornerRadius)
+                Button(action: {}) {
+                    KeysRowButtonText(text: "7")
+                }
+                    .cornerRadius(buttonCornerRadius)
+                Button(action: {}) {
+                    KeysRowButtonText(text: "8")
+                }
+                    .cornerRadius(buttonCornerRadius)
+                Button(action: {}) {
+                    KeysRowButtonText(text: "9")
+                }
+                    .cornerRadius(buttonCornerRadius)
             }
-                .cornerRadius(buttonCornerRadius)
-            Button(action: {}) {
-                Text("2")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
-            }
-                .cornerRadius(buttonCornerRadius)
-            Button(action: {}) {
-                Text("3")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
-            }
-                .cornerRadius(buttonCornerRadius)
-            Button(action: {}) {
-                Text("4")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
-            }
-                .cornerRadius(buttonCornerRadius)
-            Button(action: {}) {
-                Text("5")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
-            }
-                .cornerRadius(buttonCornerRadius)
-            Button(action: {}) {
-                Text("6")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
-            }
-                .cornerRadius(buttonCornerRadius)
-            Button(action: {}) {
-                Text("7")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
-            }
-                .cornerRadius(buttonCornerRadius)
-            Button(action: {}) {
-                Text("8")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
-            }
-                .cornerRadius(buttonCornerRadius)
-            Button(action: {}) {
-                Text("9")
-                    .foregroundColor(.black)
-                    .font(buttonTextFont)
-                    .frame(maxWidth: .infinity, minHeight: buttonHeight)
-                    .background(Color.gray.opacity(0.4))
-            }
-                .cornerRadius(buttonCornerRadius)
+            .frame(maxWidth: .infinity)
+            Spacer()
         }
-        .frame(maxWidth: .infinity)
     }
 }
 
 struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
-        HStack {
-            Spacer()
-            KeysRow()
-            Spacer()
-        }
+        KeysRow()
     }
 }
