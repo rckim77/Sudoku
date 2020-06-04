@@ -12,6 +12,8 @@ struct ContentView: View {
 
     @EnvironmentObject
     var selectedCell: SelectedCell
+    @EnvironmentObject
+    var userAction: UserAction
 
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
@@ -50,7 +52,9 @@ struct ContentView: View {
                 .font(.title)
             Grid()
             KeysRow()
-            Button(action: {}) {
+            Button(action: {
+                self.userAction.action = .clear
+            }) {
                 Text("Clear")
                     .foregroundColor(.black)
                     .font(clearButtonFont)

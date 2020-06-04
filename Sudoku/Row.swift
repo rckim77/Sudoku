@@ -11,13 +11,10 @@ import SwiftUI
 struct Row: View {
 
     @EnvironmentObject
-    var selectedCell: SelectedCell
+    private var selectedCell: SelectedCell
+    @EnvironmentObject
+    private var userAction: UserAction
 
-    private func isSelected(columnIndex: Int) -> Bool {
-        return selectedCell.coordinate?.row == index &&
-            selectedCell.coordinate?.column == columnIndex &&
-            selectedCell.coordinate?.square == squareIndex
-    }
     let index: Int
     let columns: [Int]
     let squareIndex: Int
@@ -25,40 +22,47 @@ struct Row: View {
     var body: some View {
         HStack(spacing: 0) {
             Button(action: {
-                if !self.isSelected(columnIndex: 0) {
-                    self.selectedCell.coordinate = (row: self.index, column: self.columns[0], square: self.squareIndex)
-                } else {
-                    self.selectedCell.coordinate = nil
-                }
+                self.updateSelectedButton(columnIndex: 0)
             }) {
-                RowButtonText(text: "1")
+                RowButtonText(text: shouldClearText(columnIndex: 0) ? "" : "1")
             }
                 .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             .background(isSelected(columnIndex: 0) ? Color.gray.opacity(0.4) : Color.white)
             Button(action: {
-                if !self.isSelected(columnIndex: 1) {
-                    self.selectedCell.coordinate = (row: self.index, column: self.columns[1], square: self.squareIndex)
-                } else {
-                    self.selectedCell.coordinate = nil
-                }
+                self.updateSelectedButton(columnIndex: 1)
             }) {
-                RowButtonText(text: "2")
+                RowButtonText(text: shouldClearText(columnIndex: 1) ? "" : "2")
             }
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             .background(isSelected(columnIndex: 1) ? Color.gray.opacity(0.4) : Color.white)
             Button(action: {
-                if !self.isSelected(columnIndex: 2) {
-                    self.selectedCell.coordinate = (row: self.index, column: self.columns[2], square: self.squareIndex)
-                } else {
-                    self.selectedCell.coordinate = nil
-                }
+                self.updateSelectedButton(columnIndex: 2)
             }) {
-                RowButtonText(text: "")
+                RowButtonText(text: shouldClearText(columnIndex: 2) ? "" :  "3")
             }
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                 .background(isSelected(columnIndex: 2) ? Color.gray.opacity(0.4) : Color.white)
         }
         .frame(maxWidth: .infinity)
+    }
+
+    private func isSelected(columnIndex: Int) -> Bool {
+        return selectedCell.coordinate?.row == index &&
+            selectedCell.coordinate?.column == columnIndex &&
+            selectedCell.coordinate?.square == squareIndex
+    }
+
+    private func shouldClearText(columnIndex: Int) -> Bool {
+        return isSelected(columnIndex: columnIndex) && userAction.action == .clear
+    }
+
+    private func updateSelectedButton(columnIndex: Int) {
+        if !isSelected(columnIndex: columnIndex) {
+            selectedCell.coordinate = (row: index, column: columns[columnIndex], square: squareIndex)
+        } else {
+            selectedCell.coordinate = nil
+        }
+        userAction.action = .none
     }
 }
 
