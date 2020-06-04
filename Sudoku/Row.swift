@@ -21,6 +21,8 @@ struct Row: View {
     let index: Int
     let columns: [Int]
     let squareIndex: Int
+    private let buttonTextFont = Font.system(.title, design: .rounded).bold()
+    private let buttonVerticalPadding: CGFloat = 6
 
     var body: some View {
         HStack(spacing: 0) {
@@ -33,7 +35,8 @@ struct Row: View {
             }) {
                 Text("1")
                     .foregroundColor(.black)
-                    .padding(.vertical)
+                    .font(buttonTextFont)
+                    .padding(.vertical, buttonVerticalPadding)
                     .frame(maxWidth: .infinity)
             }
                 .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
@@ -47,7 +50,8 @@ struct Row: View {
             }) {
                 Text("2")
                     .foregroundColor(.black)
-                    .padding(.vertical)
+                    .font(buttonTextFont)
+                    .padding(.vertical, buttonVerticalPadding)
                     .frame(maxWidth: .infinity)
             }
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
@@ -61,7 +65,8 @@ struct Row: View {
             }) {
                 Text("3")
                     .foregroundColor(.black)
-                    .padding(.vertical)
+                    .font(buttonTextFont)
+                    .padding(.vertical, buttonVerticalPadding)
                     .frame(maxWidth: .infinity)
             }
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
