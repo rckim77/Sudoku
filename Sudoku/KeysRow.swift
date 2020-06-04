@@ -12,6 +12,7 @@ struct KeysRow: View {
 
     private let buttonHeight: CGFloat = 48
     private let buttonTextFont = Font.system(.title, design: .rounded)
+    private let buttonCornerRadius: CGFloat = 5
 
     var body: some View {
         HStack(spacing: 2) {
@@ -22,7 +23,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
             Button(action: {}) {
                 Text("2")
                     .foregroundColor(.black)
@@ -30,7 +31,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
             Button(action: {}) {
                 Text("3")
                     .foregroundColor(.black)
@@ -38,7 +39,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
             Button(action: {}) {
                 Text("4")
                     .foregroundColor(.black)
@@ -46,7 +47,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
             Button(action: {}) {
                 Text("5")
                     .foregroundColor(.black)
@@ -54,7 +55,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
             Button(action: {}) {
                 Text("6")
                     .foregroundColor(.black)
@@ -62,7 +63,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
             Button(action: {}) {
                 Text("7")
                     .foregroundColor(.black)
@@ -70,7 +71,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
             Button(action: {}) {
                 Text("8")
                     .foregroundColor(.black)
@@ -78,7 +79,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
             Button(action: {}) {
                 Text("9")
                     .foregroundColor(.black)
@@ -86,7 +87,7 @@ struct KeysRow: View {
                     .frame(maxWidth: .infinity, minHeight: buttonHeight)
                     .background(Color.gray.opacity(0.4))
             }
-                .cornerRadius(5)
+                .cornerRadius(buttonCornerRadius)
         }
         .frame(maxWidth: .infinity)
     }
