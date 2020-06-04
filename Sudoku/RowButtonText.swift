@@ -19,6 +19,12 @@ struct RowButtonText: View {
             .foregroundColor(.black)
             .font(buttonTextFont)
             .padding(.vertical, buttonVerticalPadding)
-            .frame(maxWidth: .infinity, minHeight: 45)
+            .frame(maxWidth: .infinity, minHeight: 45.5)
+    }
+}
+
+struct RowButtonText_Previews: PreviewProvider {
+    static var previews: some View {
+        RowButtonText(text: "1")
     }
 }
