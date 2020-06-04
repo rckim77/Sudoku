@@ -53,12 +53,21 @@ struct Row: View {
     }
 
     private func setRowButtonText(columnIndex: Int) -> String {
-        let shouldClearText = isSelected(columnIndex: columnIndex) && userAction.action == .clear
-
-        guard !shouldClearText else {
-            return ""
+        guard isSelected(columnIndex: columnIndex) else {
+            return setDefaultRowButtonText(columnIndex: columnIndex)
         }
 
+        switch userAction.action {
+        case .clear:
+            return ""
+        case .digit(let digit):
+            return String(describing: digit)
+        case .none:
+            return setDefaultRowButtonText(columnIndex: columnIndex)
+        }
+    }
+
+    private func setDefaultRowButtonText(columnIndex: Int) -> String {
         if index == 0 {
             let digit = 1 + columnIndex
             return String(describing: digit)
