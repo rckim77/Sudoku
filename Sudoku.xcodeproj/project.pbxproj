@@ -57,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		94A9CCB92488AA1B008551B6 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				94E1089824874AFB0091D043 /* Extensions.swift */,
+				94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		94E108762487333A0091D043 = {
 			isa = PBXGroup;
 			children = (
@@ -87,8 +96,7 @@
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
 				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
-				94E1089824874AFB0091D043 /* Extensions.swift */,
-				94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */,
+				94A9CCB92488AA1B008551B6 /* Shared */,
 				94E108882487333E0091D043 /* Assets.xcassets */,
 				94E1088D2487333E0091D043 /* LaunchScreen.storyboard */,
 				94E108902487333E0091D043 /* Info.plist */,
