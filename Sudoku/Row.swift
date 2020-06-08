@@ -15,7 +15,9 @@ struct Row: View {
     @EnvironmentObject
     private var userAction: UserAction
     @EnvironmentObject
-    private var startingGrid: StartingGrid
+    private var startingGrid: GridValues
+    @EnvironmentObject
+    private var workingGrid: GridValues
 
     let index: Int
     let columns: [Int]

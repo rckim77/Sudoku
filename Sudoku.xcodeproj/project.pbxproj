@@ -15,7 +15,7 @@
 		94A9CCB62488A394008551B6 /* RowButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCB52488A394008551B6 /* RowButtonText.swift */; };
 		94A9CCB82488A96D008551B6 /* KeysRowButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */; };
 		94A9CCBB2488AAFE008551B6 /* UserAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCBA2488AAFE008551B6 /* UserAction.swift */; };
-		94A9CCCA248DD7A4008551B6 /* StartingGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCC9248DD7A4008551B6 /* StartingGrid.swift */; };
+		94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCC9248DD7A4008551B6 /* GridValues.swift */; };
 		94E108832487333B0091D043 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108822487333A0091D043 /* AppDelegate.swift */; };
 		94E108852487333B0091D043 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108842487333B0091D043 /* SceneDelegate.swift */; };
 		94E108872487333B0091D043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E108862487333B0091D043 /* ContentView.swift */; };
@@ -36,7 +36,7 @@
 		94A9CCB52488A394008551B6 /* RowButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowButtonText.swift; sourceTree = "<group>"; };
 		94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysRowButtonText.swift; sourceTree = "<group>"; };
 		94A9CCBA2488AAFE008551B6 /* UserAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAction.swift; sourceTree = "<group>"; };
-		94A9CCC9248DD7A4008551B6 /* StartingGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingGrid.swift; sourceTree = "<group>"; };
+		94A9CCC9248DD7A4008551B6 /* GridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridValues.swift; sourceTree = "<group>"; };
 		94E1087F2487333A0091D043 /* Sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94E108822487333A0091D043 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94E108842487333B0091D043 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
 				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
-				94A9CCC9248DD7A4008551B6 /* StartingGrid.swift */,
+				94A9CCC9248DD7A4008551B6 /* GridValues.swift */,
 				94A9CCBA2488AAFE008551B6 /* UserAction.swift */,
 				94A9CCB92488AA1B008551B6 /* Shared */,
 				94E108882487333E0091D043 /* Assets.xcassets */,
@@ -197,7 +197,7 @@
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
-				94A9CCCA248DD7A4008551B6 /* StartingGrid.swift in Sources */,
+				94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */,
 				9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */,
 				9467743F248762EB00F636D4 /* RowButton.swift in Sources */,
 				94677437248756CA00F636D4 /* Row.swift in Sources */,

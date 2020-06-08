@@ -15,7 +15,9 @@ struct ContentView: View {
     @EnvironmentObject
     var userAction: UserAction
     @EnvironmentObject
-    var startingGrid: StartingGrid
+    var startingGrid: GridValues
+    @EnvironmentObject
+    var workingGrid: GridValues
 
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height

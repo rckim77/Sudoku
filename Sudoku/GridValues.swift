@@ -1,5 +1,5 @@
 //
-//  StartingGrid.swift
+//  GridValues.swift
 //  Sudoku
 //
 //  Created by Raymond Kim on 6/7/20.
@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-final class StartingGrid: ObservableObject {
+final class GridValues: ObservableObject {
     @Published
     var grid: [CoordinateValue] = []
 
