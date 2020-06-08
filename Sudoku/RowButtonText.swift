@@ -13,10 +13,11 @@ struct RowButtonText: View {
     private let buttonTextFont = Font.system(.title, design: .rounded).bold()
     private let buttonVerticalPadding: CGFloat = 6
     let text: String
+    let foregroundColor: Color
 
     var body: some View {
         Text(text)
-            .foregroundColor(.black)
+            .foregroundColor(foregroundColor)
             .font(buttonTextFont)
             .padding(.vertical, buttonVerticalPadding)
             .frame(maxWidth: .infinity, minHeight: 45.5)
@@ -25,6 +26,6 @@ struct RowButtonText: View {
 
 struct RowButtonText_Previews: PreviewProvider {
     static var previews: some View {
-        RowButtonText(text: "1")
+        RowButtonText(text: "1", foregroundColor: .black)
     }
 }

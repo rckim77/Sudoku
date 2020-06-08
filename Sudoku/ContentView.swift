@@ -58,6 +58,9 @@ struct ContentView: View {
             KeysRow()
             Button(action: {
                 self.userAction.action = .clear
+                if let selectedCoordinate = self.selectedCell.coordinate {
+                    self.workingGrid.removeValue(at: selectedCoordinate)
+                }
             }) {
                 Text("Clear")
                     .foregroundColor(.black)

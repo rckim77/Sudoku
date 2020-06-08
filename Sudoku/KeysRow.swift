@@ -12,6 +12,10 @@ struct KeysRow: View {
 
     @EnvironmentObject
     private var userAction: UserAction
+    @EnvironmentObject
+    private var selectedCell: SelectedCell
+    @EnvironmentObject
+    private var workingGrid: GridValues
     private let buttonCornerRadius: CGFloat = 5
 
     var body: some View {
@@ -19,55 +23,55 @@ struct KeysRow: View {
             Spacer()
             HStack(spacing: 2) {
                 Button(action: {
-                    self.userAction.action = .digit(1)
+                    self.updateForDigit(1)
                 }) {
                     KeysRowButtonText(text: "1")
                 }
                     .cornerRadius(buttonCornerRadius)
                 Button(action: {
-                    self.userAction.action = .digit(2)
+                    self.updateForDigit(2)
                 }) {
                     KeysRowButtonText(text: "2")
                 }
                     .cornerRadius(buttonCornerRadius)
                 Button(action: {
-                    self.userAction.action = .digit(3)
+                    self.updateForDigit(3)
                 }) {
                     KeysRowButtonText(text: "3")
                 }
                     .cornerRadius(buttonCornerRadius)
                 Button(action: {
-                    self.userAction.action = .digit(4)
+                    self.updateForDigit(4)
                 }) {
                     KeysRowButtonText(text: "4")
                 }
                     .cornerRadius(buttonCornerRadius)
                 Button(action: {
-                    self.userAction.action = .digit(5)
+                    self.updateForDigit(5)
                 }) {
                     KeysRowButtonText(text: "5")
                 }
                     .cornerRadius(buttonCornerRadius)
                 Button(action: {
-                    self.userAction.action = .digit(6)
+                    self.updateForDigit(6)
                 }) {
                     KeysRowButtonText(text: "6")
                 }
                     .cornerRadius(buttonCornerRadius)
                 Button(action: {
-                    self.userAction.action = .digit(7)
+                    self.updateForDigit(7)
                 }) {
                     KeysRowButtonText(text: "7")
                 }
                     .cornerRadius(buttonCornerRadius)
                 Button(action: {
-                    self.userAction.action = .digit(8)
+                    self.updateForDigit(8)
                 }) {
                     KeysRowButtonText(text: "8")
                 }
                     .cornerRadius(buttonCornerRadius)
                 Button(action: {
-                    self.userAction.action = .digit(9)
+                    self.updateForDigit(9)
                 }) {
                     KeysRowButtonText(text: "9")
                 }
@@ -75,6 +79,14 @@ struct KeysRow: View {
             }
             .frame(maxWidth: .infinity)
             Spacer()
+        }
+    }
+
+    private func updateForDigit(_ digit: Int) {
+        self.userAction.action = .digit(digit)
+        if let selectedCoordinate = self.selectedCell.coordinate {
+            let coordinateValue = (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
+            self.workingGrid.add(coordinateValue)
         }
     }
 }

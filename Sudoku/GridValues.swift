@@ -18,6 +18,32 @@ final class GridValues: ObservableObject {
             s == squareIndex
         }
     }
+
+    func add(_ coordinateValue: CoordinateValue) {
+        let coordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+        removeValue(at: coordinate)
+        grid.append(coordinateValue)
+    }
+
+    func removeValue(at coordinate: Coordinate) {
+        grid.removeAll { r, c, s, v -> Bool in
+            r == coordinate.r && c == coordinate.c && s == coordinate.s
+        }
+    }
+
+    func containsValue(at coordinate: Coordinate) -> Bool {
+        grid.contains { r, c, s, _ -> Bool in
+            let gridCoordinate = (r: r, c: c, s: s)
+            return gridCoordinate == coordinate
+        }
+    }
+
+    private func contains(_ coordinateValue: CoordinateValue) -> Bool {
+        let squareValues = values(in: coordinateValue.s)
+        return squareValues.first { coordinateVal -> Bool in
+            coordinateVal == coordinateValue
+        } != nil
+    }
 }
 
 
