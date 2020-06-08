@@ -20,9 +20,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
+        let startingGrid = StartingGrid()
+        let square0 = [(r: 1, c: 0, s: 0, v: 8), (r: 1, c: 2, s: 0, v: 3), (r: 2, c: 1, s: 0, v: 7)]
+        let square1 = [(r: 0, c: 2, s: 1, v: 6), (r: 2, c: 0, s: 1, v: 2), (r: 2, c: 1, s: 1, v: 5)]
+        let square2 = [(r: 0, c: 1, s: 2, v: 3), (r: 1, c: 0, s: 2, v: 1)]
+        let square3 = [(r: 0, c: 0, s: 3, v: 9), (r: 0, c: 2, s: 3, v: 7), (r: 1, c: 1, s: 3, v: 5)]
+        let square4 = [(r: 1, c: 0, s: 4, v: 7), (r: 1, c: 1, s: 4, v: 6), (r: 1, c: 2, s: 4, v: 9)]
+        let square5 = [(r: 0, c: 0, s: 5, v: 5), (r: 1, c: 1, s: 5, v: 4), (r: 2, c: 0, s: 5, v: 7)]
+        let square6 = [(r: 1, c: 2, s: 6, v: 6), (r: 2, c: 1, s: 6, v: 3)]
+        let square7 = [(r: 0, c: 1, s: 7, v: 1), (r: 0, c: 2, s: 7, v: 4), (r: 2, c: 0, s: 7, v: 5)]
+        let square8 = [(r: 0, c: 1, s: 8, v: 2), (r: 1, c: 0, s: 8, v: 9), (r: 1, c: 2, s: 8, v: 5)]
+        let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
+        let coordinates = squares.flatMap { $0 }
+        startingGrid.grid = coordinates
         let contentView = ContentView()
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
+            .environmentObject(startingGrid)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

@@ -15,18 +15,18 @@ struct Grid: View {
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
-            HStack(spacing: 0) {
-                VStack {
+            VStack {
+                HStack(spacing: 0) {
                     Square(index: 0)
                     Square(index: 1)
                     Square(index: 2)
                 }
-                VStack {
+                HStack(spacing: 0) {
                     Square(index: 3)
                     Square(index: 4)
                     Square(index: 5)
                 }
-                VStack {
+                HStack(spacing: 0) {
                     Square(index: 6)
                     Square(index: 7)
                     Square(index: 8)

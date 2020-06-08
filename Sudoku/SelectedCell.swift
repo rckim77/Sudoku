@@ -14,4 +14,5 @@ final class SelectedCell: ObservableObject {
     var coordinate: Coordinate?
 }
 
-typealias Coordinate = (row: Int, column: Int, square: Int)
+typealias Coordinate = (r: Int, c: Int, s: Int)
+typealias CoordinateValue = (r: Int, c: Int, s: Int, v: Int)

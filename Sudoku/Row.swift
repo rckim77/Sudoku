@@ -14,6 +14,8 @@ struct Row: View {
     private var selectedCell: SelectedCell
     @EnvironmentObject
     private var userAction: UserAction
+    @EnvironmentObject
+    private var startingGrid: StartingGrid
 
     let index: Int
     let columns: [Int]
@@ -47,9 +49,9 @@ struct Row: View {
     }
 
     private func isSelected(columnIndex: Int) -> Bool {
-        return selectedCell.coordinate?.row == index &&
-            selectedCell.coordinate?.column == columnIndex &&
-            selectedCell.coordinate?.square == squareIndex
+        return selectedCell.coordinate?.r == index &&
+            selectedCell.coordinate?.c == columnIndex &&
+            selectedCell.coordinate?.s == squareIndex
     }
 
     private func setRowButtonText(columnIndex: Int) -> String {
@@ -68,23 +70,25 @@ struct Row: View {
     }
 
     private func setDefaultRowButtonText(columnIndex: Int) -> String {
-        if index == 0 {
-            let digit = 1 + columnIndex
-            return String(describing: digit)
-        } else if index == 1 {
-            let digit = 4 + columnIndex
-            return String(describing: digit)
-        } else if index == 2 {
-            let digit = 7 + columnIndex
-            return String(describing: digit)
+        let rowValues = startingGrid.values(in: squareIndex).filter { r, c, _, v -> Bool in
+            r == index
+        }
+        guard !rowValues.isEmpty else {
+            return ""
         }
 
-        return ""
+        if let value = rowValues.filter({ _, c, _, v -> Bool in
+            c == columnIndex
+        }).first?.v {
+            return "\(value)"
+        } else {
+            return ""
+        }
     }
 
     private func updateSelectedButton(columnIndex: Int) {
         if !isSelected(columnIndex: columnIndex) {
-            selectedCell.coordinate = (row: index, column: columns[columnIndex], square: squareIndex)
+            selectedCell.coordinate = (r: index, c: columns[columnIndex], s: squareIndex)
         } else {
             selectedCell.coordinate = nil
         }
