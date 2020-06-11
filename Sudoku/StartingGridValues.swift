@@ -27,7 +27,15 @@ final class StartingGridValues: ObservableObject {
         grid = newGrid
     }
 
-    func containsValue(at coordinate: Coordinate) -> Bool {
+    func square(_ squareIndex: Int, contains value: Int) -> Bool {
+        let squareValues = values(in: squareIndex)
+        return squareValues.contains { _, _, _, v -> Bool in
+            return v == value
+        }
+    }
+
+
+    func containsAValue(at coordinate: Coordinate) -> Bool {
         let result = grid.contains { r, c, s, _ -> Bool in
             let gridCoordinate = (r: r, c: c, s: s)
             return gridCoordinate == coordinate

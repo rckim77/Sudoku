@@ -35,12 +35,28 @@ final class GridValues: ObservableObject {
         }
     }
 
-    func containsValue(at coordinate: Coordinate) -> Bool {
+    func containsAValue(at coordinate: Coordinate) -> Bool {
         let result = grid.contains { r, c, s, _ -> Bool in
             let gridCoordinate = (r: r, c: c, s: s)
             return gridCoordinate == coordinate
         }
         return result
+    }
+
+    func contains(value: Int, at coordinate: Coordinate) -> Bool {
+        let result = grid.contains { r, c, s, v -> Bool in
+            let gridCoordinate = (r: r, c: c, s: s)
+            return gridCoordinate == coordinate && v == value
+        }
+        return result
+    }
+
+    func retrieveValue(at coordinate: Coordinate) -> Int? {
+        let squareValues = values(in: coordinate.s)
+        return squareValues.filter({ r, c, s, v -> Bool in
+                    let gridCoordinate = (r: r, c: c, s: s)
+                    return gridCoordinate == coordinate
+                }).first?.v
     }
 
     private func contains(_ coordinateValue: CoordinateValue) -> Bool {

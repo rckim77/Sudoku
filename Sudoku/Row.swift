@@ -83,9 +83,15 @@ struct Row: View {
 
     private func setForegroundColor(columnIndex: Int) -> Color {
         let coordinate = (r: index, c: columnIndex, s: squareIndex)
-        let workingGridHasValue = workingGrid.containsValue(at: coordinate)
-        let startingGridHasValue = startingGrid.containsValue(at: coordinate)
-        if workingGridHasValue && !startingGridHasValue {
+        let workingGridHasAValue = workingGrid.containsAValue(at: coordinate)
+        let startingGridHasAValue = startingGrid.containsAValue(at: coordinate)
+        if workingGridHasAValue && !startingGridHasAValue {
+            if case let UserAction.ActionType.digit(digit) = userAction.action, startingGrid.square(squareIndex, contains: digit) {
+                return .red
+            } else if let retrievedValue = workingGrid.retrieveValue(at: coordinate), startingGrid.square(squareIndex, contains: retrievedValue) {
+                return .red
+            }
+
             return .blue
         } else {
             return .black

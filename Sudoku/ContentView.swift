@@ -58,7 +58,7 @@ struct ContentView: View {
             KeysRow()
             Button(action: {
                 self.userAction.action = .clear
-                if let selectedCoordinate = self.selectedCell.coordinate, !self.startingGrid.containsValue(at: selectedCoordinate) {
+                if let selectedCoordinate = self.selectedCell.coordinate, !self.startingGrid.containsAValue(at: selectedCoordinate) {
                     self.workingGrid.removeValue(at: selectedCoordinate)
                 }
             }) {
