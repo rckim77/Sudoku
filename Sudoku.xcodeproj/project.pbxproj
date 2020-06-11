@@ -25,6 +25,7 @@
 		94E10897248740890091D043 /* KeysRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E10896248740890091D043 /* KeysRow.swift */; };
 		94E1089924874AFB0091D043 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E1089824874AFB0091D043 /* Extensions.swift */; };
 		94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */; };
+		94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F3242491F10C00B1D003 /* StartingGridValues.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		94E10896248740890091D043 /* KeysRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysRow.swift; sourceTree = "<group>"; };
 		94E1089824874AFB0091D043 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusStyle.swift; sourceTree = "<group>"; };
+		94E9F3242491F10C00B1D003 /* StartingGridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingGridValues.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
 				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
 				94A9CCC9248DD7A4008551B6 /* GridValues.swift */,
+				94E9F3242491F10C00B1D003 /* StartingGridValues.swift */,
 				94A9CCBA2488AAFE008551B6 /* UserAction.swift */,
 				94A9CCB92488AA1B008551B6 /* Shared */,
 				94E108882487333E0091D043 /* Assets.xcassets */,
@@ -195,6 +198,7 @@
 				94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */,
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
+				94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
 				94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */,

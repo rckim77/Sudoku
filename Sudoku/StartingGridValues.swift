@@ -1,15 +1,15 @@
 //
-//  GridValues.swift
+//  StartingGridValues.swift
 //  Sudoku
 //
-//  Created by Raymond Kim on 6/7/20.
+//  Created by Raymond Kim on 6/11/20.
 //  Copyright © 2020 Self. All rights reserved.
 //
 
 import SwiftUI
 import Combine
 
-final class GridValues: ObservableObject {
+final class StartingGridValues: ObservableObject {
     @Published
     private(set) var grid: [CoordinateValue]
 
@@ -23,16 +23,8 @@ final class GridValues: ObservableObject {
         }
     }
 
-    func add(_ coordinateValue: CoordinateValue) {
-        let coordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
-        removeValue(at: coordinate)
-        grid.append(coordinateValue)
-    }
-
-    func removeValue(at coordinate: Coordinate) {
-        grid.removeAll { r, c, s, v -> Bool in
-            r == coordinate.r && c == coordinate.c && s == coordinate.s
-        }
+    func reset(newGrid: [CoordinateValue]) {
+        grid = newGrid
     }
 
     func containsValue(at coordinate: Coordinate) -> Bool {
@@ -50,5 +42,3 @@ final class GridValues: ObservableObject {
         } != nil
     }
 }
-
-

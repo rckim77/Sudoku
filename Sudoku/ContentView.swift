@@ -15,7 +15,7 @@ struct ContentView: View {
     @EnvironmentObject
     var userAction: UserAction
     @EnvironmentObject
-    var startingGrid: GridValues
+    var startingGrid: StartingGridValues
     @EnvironmentObject
     var workingGrid: GridValues
 

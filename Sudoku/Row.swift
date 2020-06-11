@@ -15,7 +15,7 @@ struct Row: View {
     @EnvironmentObject
     private var userAction: UserAction
     @EnvironmentObject
-    private var startingGrid: GridValues
+    private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var workingGrid: GridValues
 
@@ -83,8 +83,10 @@ struct Row: View {
 
     private func setForegroundColor(columnIndex: Int) -> Color {
         let coordinate = (r: index, c: columnIndex, s: squareIndex)
-        if workingGrid.containsValue(at: coordinate) && !startingGrid.containsValue(at: coordinate) {
-            return .black // TODO
+        let workingGridHasValue = workingGrid.containsValue(at: coordinate)
+        let startingGridHasValue = startingGrid.containsValue(at: coordinate)
+        if workingGridHasValue && !startingGridHasValue {
+            return .blue
         } else {
             return .black
         }

@@ -13,14 +13,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let startingGrid = GridValues()
         let square0 = [(r: 1, c: 0, s: 0, v: 8), (r: 1, c: 2, s: 0, v: 3), (r: 2, c: 1, s: 0, v: 7)]
         let square1 = [(r: 0, c: 2, s: 1, v: 6), (r: 2, c: 0, s: 1, v: 2), (r: 2, c: 1, s: 1, v: 5)]
         let square2 = [(r: 0, c: 1, s: 2, v: 3), (r: 1, c: 0, s: 2, v: 1)]
@@ -32,9 +30,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let square8 = [(r: 0, c: 1, s: 8, v: 2), (r: 1, c: 0, s: 8, v: 9), (r: 1, c: 2, s: 8, v: 5)]
         let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
         let coordinates = squares.flatMap { $0 }
-        startingGrid.grid = coordinates
-        let workingGrid = GridValues()
-        workingGrid.grid = coordinates
+        let startingGrid = StartingGridValues(grid: coordinates)
+        let workingGrid = GridValues(grid: coordinates)
+        
         let contentView = ContentView()
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())

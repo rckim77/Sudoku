@@ -14,8 +14,13 @@ struct KeysRow: View {
     private var userAction: UserAction
     @EnvironmentObject
     private var selectedCell: SelectedCell
+    // Note: startingGrid and workingGrid need to be different types in order for @EnvironmentObject to work properly
+    // Reference: https://www.hackingwithswift.com/quick-start/swiftui/what-is-the-environmentobject-property-wrapper
     @EnvironmentObject
     private var workingGrid: GridValues
+    @EnvironmentObject
+    private var startingGrid: StartingGridValues
+
     private let buttonCornerRadius: CGFloat = 5
 
     var body: some View {
@@ -86,7 +91,7 @@ struct KeysRow: View {
         self.userAction.action = .digit(digit)
         if let selectedCoordinate = self.selectedCell.coordinate {
             let coordinateValue = (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
-            self.workingGrid.add(coordinateValue)
+            workingGrid.add(coordinateValue)
         }
     }
 }
