@@ -88,8 +88,8 @@ struct KeysRow: View {
     }
 
     private func updateForDigit(_ digit: Int) {
-        self.userAction.action = .digit(digit)
-        if let selectedCoordinate = self.selectedCell.coordinate {
+        userAction.action = .digit(digit)
+        if let selectedCoordinate = selectedCell.coordinate, !startingGrid.containsValue(at: selectedCoordinate) {
             let coordinateValue = (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
             workingGrid.add(coordinateValue)
         }

@@ -11,13 +11,13 @@ import SwiftUI
 struct ContentView: View {
 
     @EnvironmentObject
-    var selectedCell: SelectedCell
+    private var selectedCell: SelectedCell
     @EnvironmentObject
-    var userAction: UserAction
+    private var userAction: UserAction
     @EnvironmentObject
-    var startingGrid: StartingGridValues
+    private var startingGrid: StartingGridValues
     @EnvironmentObject
-    var workingGrid: GridValues
+    private var workingGrid: GridValues
 
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
@@ -58,7 +58,7 @@ struct ContentView: View {
             KeysRow()
             Button(action: {
                 self.userAction.action = .clear
-                if let selectedCoordinate = self.selectedCell.coordinate {
+                if let selectedCoordinate = self.selectedCell.coordinate, !self.startingGrid.containsValue(at: selectedCoordinate) {
                     self.workingGrid.removeValue(at: selectedCoordinate)
                 }
             }) {
