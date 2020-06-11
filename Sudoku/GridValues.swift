@@ -13,6 +13,10 @@ final class GridValues: ObservableObject {
     @Published
     private(set) var grid: [CoordinateValue]
 
+    var isFull: Bool {
+        grid.count == 81
+    }
+
     init(grid: [CoordinateValue]) {
         self.grid = grid
     }

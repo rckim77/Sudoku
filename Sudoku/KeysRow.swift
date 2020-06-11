@@ -20,6 +20,8 @@ struct KeysRow: View {
     private var workingGrid: GridValues
     @EnvironmentObject
     private var startingGrid: StartingGridValues
+    @Binding
+    var gridIsComplete: Bool
 
     private let buttonCornerRadius: CGFloat = 5
 
@@ -92,12 +94,13 @@ struct KeysRow: View {
         if let selectedCoordinate = selectedCell.coordinate, !startingGrid.containsAValue(at: selectedCoordinate) {
             let coordinateValue = (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
             workingGrid.add(coordinateValue)
+            gridIsComplete = workingGrid.isFull
         }
     }
 }
 
 struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
-        KeysRow()
+        KeysRow(gridIsComplete: .constant(false))
     }
 }

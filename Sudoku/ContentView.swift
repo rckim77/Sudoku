@@ -18,6 +18,8 @@ struct ContentView: View {
     private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var workingGrid: GridValues
+    @State
+    private var workingGridIsComplete = false
 
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
@@ -55,7 +57,7 @@ struct ContentView: View {
             Text("Sudoku")
                 .font(.title)
             Grid()
-            KeysRow()
+            KeysRow(gridIsComplete: $workingGridIsComplete)
             Button(action: {
                 self.userAction.action = .clear
                 if let selectedCoordinate = self.selectedCell.coordinate, !self.startingGrid.containsAValue(at: selectedCoordinate) {
@@ -71,6 +73,9 @@ struct ContentView: View {
                 .background(Color.gray.opacity(0.4))
                 .cornerRadius(8)
             Spacer()
+        }
+        .alert(isPresented: $workingGridIsComplete) {
+            Alert(title: Text("Congratulations!"), message: Text("You've completed the sudoku!"), dismissButton: .default(Text("Dismiss")))
         }
     }
 }
