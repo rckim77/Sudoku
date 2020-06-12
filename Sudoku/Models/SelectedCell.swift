@@ -13,5 +13,3 @@ final class SelectedCell: ObservableObject {
     @Published
     var coordinate: Coordinate?
 }
-
-typealias Coordinate = (r: Int, c: Int, s: Int)

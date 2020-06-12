@@ -105,12 +105,8 @@
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
-				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
-				94E9F32E2494001100B1D003 /* CoordinateValue.swift */,
-				94A9CCC9248DD7A4008551B6 /* GridValues.swift */,
+				94E9F330249402C800B1D003 /* Models */,
 				94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */,
-				94E9F3242491F10C00B1D003 /* StartingGridValues.swift */,
-				94A9CCBA2488AAFE008551B6 /* UserAction.swift */,
 				94A9CCB92488AA1B008551B6 /* Shared */,
 				94E108882487333E0091D043 /* Assets.xcassets */,
 				94E1088D2487333E0091D043 /* LaunchScreen.storyboard */,
@@ -126,6 +122,18 @@
 				94E1088B2487333E0091D043 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		94E9F330249402C800B1D003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
+				94E9F32E2494001100B1D003 /* CoordinateValue.swift */,
+				94A9CCC9248DD7A4008551B6 /* GridValues.swift */,
+				94E9F3242491F10C00B1D003 /* StartingGridValues.swift */,
+				94A9CCBA2488AAFE008551B6 /* UserAction.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

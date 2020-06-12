@@ -14,3 +14,5 @@ struct CoordinateValue: Hashable {
     let s: Int
     let v: Int
 }
+
+typealias Coordinate = (r: Int, c: Int, s: Int)
