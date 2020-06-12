@@ -63,6 +63,8 @@ final class GridValues: ObservableObject {
         }).first?.v
     }
 
+    // MARK: - Private methods
+
     private func contains(_ coordinateValue: CoordinateValue) -> Bool {
         let squareValues = values(in: coordinateValue.s)
         return squareValues.first { coordinateVal -> Bool in
