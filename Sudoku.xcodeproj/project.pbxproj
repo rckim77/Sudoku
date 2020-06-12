@@ -28,6 +28,7 @@
 		94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F3242491F10C00B1D003 /* StartingGridValues.swift */; };
 		94E9F32D2493FC3300B1D003 /* SudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */; };
 		94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32E2494001100B1D003 /* CoordinateValue.swift */; };
+		94E9F332249406F500B1D003 /* AbsoluteCoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		94E9F3242491F10C00B1D003 /* StartingGridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingGridValues.swift; sourceTree = "<group>"; };
 		94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuSolver.swift; sourceTree = "<group>"; };
 		94E9F32E2494001100B1D003 /* CoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateValue.swift; sourceTree = "<group>"; };
+		94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsoluteCoordinateValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			children = (
 				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
 				94E9F32E2494001100B1D003 /* CoordinateValue.swift */,
+				94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */,
 				94A9CCC9248DD7A4008551B6 /* GridValues.swift */,
 				94E9F3242491F10C00B1D003 /* StartingGridValues.swift */,
 				94A9CCBA2488AAFE008551B6 /* UserAction.swift */,
@@ -224,6 +227,7 @@
 				94E108872487333B0091D043 /* ContentView.swift in Sources */,
 				9467743B2487579300F636D4 /* Grid.swift in Sources */,
 				94A9CCBB2488AAFE008551B6 /* UserAction.swift in Sources */,
+				94E9F332249406F500B1D003 /* AbsoluteCoordinateValue.swift in Sources */,
 				94A9CCB62488A394008551B6 /* RowButtonText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
