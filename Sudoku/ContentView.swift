@@ -18,8 +18,11 @@ struct ContentView: View {
     private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var workingGrid: GridValues
+
     @State
     private var workingGridIsComplete = false
+    @State
+    private var editModeIsToggled = false
 
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
@@ -58,20 +61,31 @@ struct ContentView: View {
                 .font(.title)
             Grid()
             KeysRow(gridIsComplete: $workingGridIsComplete)
-            Button(action: {
-                self.userAction.action = .clear
-                if let selectedCoordinate = self.selectedCell.coordinate, !self.startingGrid.containsAValue(at: selectedCoordinate) {
-                    self.workingGrid.removeValue(at: selectedCoordinate)
+            HStack(spacing: 0) {
+                Button(action: {
+                    self.userAction.action = .clear
+                    if let selectedCoordinate = self.selectedCell.coordinate, !self.startingGrid.containsAValue(at: selectedCoordinate) {
+                        self.workingGrid.removeValue(at: selectedCoordinate)
+                    }
+                }) {
+                    Text("Clear")
+                        .foregroundColor(.black)
+                        .font(clearButtonFont)
                 }
-            }) {
-                Text("Clear")
-                    .foregroundColor(.black)
-                    .font(clearButtonFont)
+                    .padding(.horizontal, clearButtonHorizontalPadding)
+                    .padding(.vertical, clearButtonVerticalPadding)
+                    .background(Color("dynamicGray"))
+                    .cornerRadius(8)
+                Button(action: {
+                    self.editModeIsToggled.toggle()
+                }) {
+                    Image(systemName: self.editModeIsToggled ? "pencil.circle.fill" : "pencil.circle")
+                        .font(.system(size: 36, weight: .bold))
+                        .foregroundColor(Color("dynamicBlack"))
+                }
+                    .padding(.horizontal, clearButtonHorizontalPadding)
+                    .padding(.vertical, clearButtonVerticalPadding)
             }
-                .padding(.horizontal, clearButtonHorizontalPadding)
-                .padding(.vertical, clearButtonVerticalPadding)
-                .background(Color.gray.opacity(0.4))
-                .cornerRadius(8)
             Spacer()
         }
         .alert(isPresented: $workingGridIsComplete) {

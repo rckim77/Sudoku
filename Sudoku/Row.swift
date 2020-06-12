@@ -23,6 +23,9 @@ struct Row: View {
     let columns: [Int]
     let squareIndex: Int
 
+    private let backgroundColor = Color("dynamicGridWhite")
+    private let selectedBackgroundColor = Color("dynamicGridSelection")
+
     var body: some View {
         HStack(spacing: 0) {
             Button(action: {
@@ -31,21 +34,21 @@ struct Row: View {
                 RowButtonText(text: setRowButtonText(columnIndex: 0), foregroundColor: setForegroundColor(columnIndex: 0))
             }
                 .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-            .background(isSelected(columnIndex: 0) ? Color.gray.opacity(0.4) : Color.white)
+            .background(isSelected(columnIndex: 0) ? selectedBackgroundColor : backgroundColor)
             Button(action: {
                 self.updateSelectedButton(columnIndex: 1)
             }) {
                 RowButtonText(text: setRowButtonText(columnIndex: 1), foregroundColor: setForegroundColor(columnIndex: 1))
             }
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-            .background(isSelected(columnIndex: 1) ? Color.gray.opacity(0.4) : Color.white)
+            .background(isSelected(columnIndex: 1) ? selectedBackgroundColor : backgroundColor)
             Button(action: {
                 self.updateSelectedButton(columnIndex: 2)
             }) {
                 RowButtonText(text: setRowButtonText(columnIndex: 2), foregroundColor: setForegroundColor(columnIndex: 2))
             }
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                .background(isSelected(columnIndex: 2) ? Color.gray.opacity(0.4) : Color.white)
+                .background(isSelected(columnIndex: 2) ? selectedBackgroundColor : backgroundColor)
         }
         .frame(maxWidth: .infinity)
     }

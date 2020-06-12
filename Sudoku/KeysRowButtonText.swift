@@ -20,6 +20,6 @@ struct KeysRowButtonText: View {
             .foregroundColor(.black)
             .font(textFont)
             .frame(maxWidth: .infinity, minHeight: textHeight)
-            .background(Color.gray.opacity(0.4))
+            .background(Color("dynamicGray"))
     }
 }
