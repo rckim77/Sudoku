@@ -38,21 +38,22 @@ struct ContentView: View {
     private var clearButtonHorizontalPadding: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
-            return 24
+            return 22
         } else { // 8 Plus, 8, SE (2nd gen)
-            return 16
+            return 14
         }
     }
 
     private var clearButtonVerticalPadding: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
-            return 12
-        } else { // 8 Plus, 8, SE (2nd gen)
             return 10
+        } else { // 8 Plus, 8, SE (2nd gen)
+            return 8
         }
     }
 
+    private let editButtonHorizontalPadding: CGFloat = 18
     private let clearButtonFont = Font.system(.title, design:.rounded).smallCaps()
 
     var body: some View {
@@ -83,7 +84,7 @@ struct ContentView: View {
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(Color("dynamicBlack"))
                 }
-                    .padding(.horizontal, clearButtonHorizontalPadding)
+                    .padding(.horizontal, editButtonHorizontalPadding)
                     .padding(.vertical, clearButtonVerticalPadding)
             }
             Spacer()
