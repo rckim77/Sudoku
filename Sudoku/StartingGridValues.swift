@@ -63,6 +63,34 @@ final class StartingGridValues: ObservableObject {
         return containsValueInRow
     }
 
+    /// Checks the full column of the grid for duplicates
+    func fullColumn(for coordinate: Coordinate, contains value: Int) -> Bool {
+        var colCoordinates = [CoordinateValue]()
+
+        if [0, 3, 6].contains(coordinate.s) {
+            colCoordinates = grid.filter { _, c, s, _ -> Bool in
+                return c == coordinate.c && [0, 3, 6].contains(s)
+            }
+        } else if [1, 4, 7].contains(coordinate.s) {
+            colCoordinates = grid.filter { _, c, s, _ -> Bool in
+                return c == coordinate.c && [1, 4, 7].contains(s)
+            }
+        } else if [2, 5, 8].contains(coordinate.s) {
+            colCoordinates = grid.filter { _, c, s, _ -> Bool in
+                return c == coordinate.c && [2, 5, 8].contains(s)
+            }
+        }
+
+        var containsValueInCol = false
+        for coordinate in colCoordinates {
+            if coordinate.v == value {
+                containsValueInCol = true
+                break
+            }
+        }
+        return containsValueInCol
+    }
+
     func containsAValue(at coordinate: Coordinate) -> Bool {
         let result = grid.contains { r, c, s, _ -> Bool in
             let gridCoordinate = (r: r, c: c, s: s)

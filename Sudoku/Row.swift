@@ -82,27 +82,37 @@ struct Row: View {
     }
 
     private func setForegroundColor(columnIndex: Int) -> Color {
-        let coordinate = (r: index, c: columnIndex, s: squareIndex)
-        let workingGridHasAValue = workingGrid.containsAValue(at: coordinate)
-        let startingGridHasAValue = startingGrid.containsAValue(at: coordinate)
+        let currentCoordinate = (r: index, c: columnIndex, s: squareIndex)
+        let workingGridHasAValue = workingGrid.containsAValue(at: currentCoordinate)
+        let startingGridHasAValue = startingGrid.containsAValue(at: currentCoordinate)
         if workingGridHasAValue && !startingGridHasAValue {
             if case let UserAction.ActionType.digit(digit) = userAction.action,
-                startingGrid.square(squareIndex, contains: digit) || startingGrid.fullRow(for: coordinate, contains: digit),
+                coordinate(currentCoordinate, withValue: digit, isInvalidFor: startingGrid) &&
                 isSelected(columnIndex: columnIndex) {
                 // user has just entered an invalid digit
                 return .red
             }
 
-            if let retrievedValue = workingGrid.retrieveValue(at: coordinate),
-            startingGrid.square(squareIndex, contains: retrievedValue) || startingGrid.fullRow(for: coordinate, contains: retrievedValue) {
+            if let retrievedValue = workingGrid.retrieveValue(at: currentCoordinate),
+                coordinate(currentCoordinate, withValue: retrievedValue, isInvalidFor: startingGrid) {
                 // persist red text for other invalid digits in square that haven't been cleared
                 return .red
             }
 
+            // in working grid but not starting grid
             return .blue
         } else {
+            // starting grid
             return .black
         }
+    }
+
+    /// Encapsulates logic to check whether there are duplicates of the input value in the current
+    /// coordinate's 3x3 square, grid row, or grid column.
+    private func coordinate(_ coordinate: Coordinate, withValue value: Int, isInvalidFor startingGrid: StartingGridValues) -> Bool {
+        return startingGrid.square(coordinate.s, contains: value) ||
+            startingGrid.fullRow(for: coordinate, contains: value) ||
+            startingGrid.fullColumn(for: coordinate, contains: value)
     }
 
     private func updateSelectedButton(columnIndex: Int) {
