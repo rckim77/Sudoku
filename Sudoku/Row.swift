@@ -65,15 +65,15 @@ struct Row: View {
     }
 
     private func getRowButtonValue(columnIndex: Int) -> Int? {
-        let rowValues = workingGrid.values(in: squareIndex).filter { r, c, _, v -> Bool in
-            r == index
+        let rowValues = workingGrid.values(in: squareIndex).filter { coordinateValue -> Bool in
+            coordinateValue.r == index
         }
         guard !rowValues.isEmpty else {
             return nil
         }
 
-        if let value = rowValues.filter({ _, c, _, v -> Bool in
-            c == columnIndex
+        if let value = rowValues.filter({ coordinateValue -> Bool in
+            coordinateValue.c == columnIndex
         }).first?.v {
             return value
         } else {

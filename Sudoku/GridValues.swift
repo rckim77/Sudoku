@@ -13,8 +13,8 @@ final class GridValues: ObservableObject {
     @Published
     private(set) var grid: [CoordinateValue]
 
-    var isFull: Bool {
-        grid.count == 81
+    var isSolved: Bool {
+        return SudokuSolver.gridIsSolved(self)
     }
 
     init(grid: [CoordinateValue]) {
@@ -22,8 +22,8 @@ final class GridValues: ObservableObject {
     }
 
     func values(in squareIndex: Int) -> [CoordinateValue] {
-        grid.filter { _, _, s, _ -> Bool in
-            s == squareIndex
+        grid.filter { coordinateValue -> Bool in
+            coordinateValue.s == squareIndex
         }
     }
 
@@ -34,33 +34,33 @@ final class GridValues: ObservableObject {
     }
 
     func removeValue(at coordinate: Coordinate) {
-        grid.removeAll { r, c, s, v -> Bool in
-            r == coordinate.r && c == coordinate.c && s == coordinate.s
+        grid.removeAll { coordinateValue -> Bool in
+            coordinateValue.r == coordinate.r && coordinateValue.c == coordinate.c && coordinateValue.s == coordinate.s
         }
     }
 
     func containsAValue(at coordinate: Coordinate) -> Bool {
-        let result = grid.contains { r, c, s, _ -> Bool in
-            let gridCoordinate = (r: r, c: c, s: s)
+        let result = grid.contains { coordinateValue -> Bool in
+            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }
         return result
     }
 
     func contains(value: Int, at coordinate: Coordinate) -> Bool {
-        let result = grid.contains { r, c, s, v -> Bool in
-            let gridCoordinate = (r: r, c: c, s: s)
-            return gridCoordinate == coordinate && v == value
+        let result = grid.contains { coordinateValue -> Bool in
+            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            return gridCoordinate == coordinate && coordinateValue.v == value
         }
         return result
     }
 
     func retrieveValue(at coordinate: Coordinate) -> Int? {
         let squareValues = values(in: coordinate.s)
-        return squareValues.filter({ r, c, s, v -> Bool in
-                    let gridCoordinate = (r: r, c: c, s: s)
-                    return gridCoordinate == coordinate
-                }).first?.v
+        return squareValues.filter({ coordinateValue -> Bool in
+            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            return gridCoordinate == coordinate
+        }).first?.v
     }
 
     private func contains(_ coordinateValue: CoordinateValue) -> Bool {

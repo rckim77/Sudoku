@@ -18,8 +18,8 @@ final class StartingGridValues: ObservableObject {
     }
 
     func values(in squareIndex: Int) -> [CoordinateValue] {
-        grid.filter { _, _, s, _ -> Bool in
-            s == squareIndex
+        grid.filter { coordinateValue -> Bool in
+            coordinateValue.s == squareIndex
         }
     }
 
@@ -30,8 +30,8 @@ final class StartingGridValues: ObservableObject {
     /// Checks the 3x3 square for duplicates
     func square(_ squareIndex: Int, contains value: Int) -> Bool {
         let squareValues = values(in: squareIndex)
-        return squareValues.contains { _, _, _, v -> Bool in
-            return v == value
+        return squareValues.contains { coordinateValue -> Bool in
+            return coordinateValue.v == value
         }
     }
 
@@ -40,16 +40,16 @@ final class StartingGridValues: ObservableObject {
         var rowCoordinates = [CoordinateValue]()
 
         if (0...2).contains(coordinate.s) {
-            rowCoordinates = grid.filter { r, _, s, _ -> Bool in
-                return r == coordinate.r && (0...2).contains(s)
+            rowCoordinates = grid.filter { coordinateValue -> Bool in
+                return coordinateValue.r == coordinate.r && (0...2).contains(coordinateValue.s)
             }
         } else if (3...5).contains(coordinate.s) {
-            rowCoordinates = grid.filter { r, _, s, _ -> Bool in
-                return r == coordinate.r && (3...5).contains(s)
+            rowCoordinates = grid.filter { coordinateValue -> Bool in
+                return coordinateValue.r == coordinate.r && (3...5).contains(coordinateValue.s)
             }
         } else if (6...8).contains(coordinate.s) {
-            rowCoordinates = grid.filter { r, _, s, _ -> Bool in
-                return r == coordinate.r && (6...8).contains(s)
+            rowCoordinates = grid.filter { coordinateValue -> Bool in
+                return coordinateValue.r == coordinate.r && (6...8).contains(coordinateValue.s)
             }
         }
 
@@ -68,16 +68,16 @@ final class StartingGridValues: ObservableObject {
         var colCoordinates = [CoordinateValue]()
 
         if [0, 3, 6].contains(coordinate.s) {
-            colCoordinates = grid.filter { _, c, s, _ -> Bool in
-                return c == coordinate.c && [0, 3, 6].contains(s)
+            colCoordinates = grid.filter { coordinateValue -> Bool in
+                return coordinateValue.c == coordinate.c && [0, 3, 6].contains(coordinateValue.s)
             }
         } else if [1, 4, 7].contains(coordinate.s) {
-            colCoordinates = grid.filter { _, c, s, _ -> Bool in
-                return c == coordinate.c && [1, 4, 7].contains(s)
+            colCoordinates = grid.filter { coordinateValue -> Bool in
+                return coordinateValue.c == coordinate.c && [1, 4, 7].contains(coordinateValue.s)
             }
         } else if [2, 5, 8].contains(coordinate.s) {
-            colCoordinates = grid.filter { _, c, s, _ -> Bool in
-                return c == coordinate.c && [2, 5, 8].contains(s)
+            colCoordinates = grid.filter { coordinateValue -> Bool in
+                return coordinateValue.c == coordinate.c && [2, 5, 8].contains(coordinateValue.s)
             }
         }
 
@@ -92,8 +92,8 @@ final class StartingGridValues: ObservableObject {
     }
 
     func containsAValue(at coordinate: Coordinate) -> Bool {
-        let result = grid.contains { r, c, s, _ -> Bool in
-            let gridCoordinate = (r: r, c: c, s: s)
+        let result = grid.contains { coordinateValue -> Bool in
+            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }
         return result

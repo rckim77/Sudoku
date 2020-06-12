@@ -15,4 +15,3 @@ final class SelectedCell: ObservableObject {
 }
 
 typealias Coordinate = (r: Int, c: Int, s: Int)
-typealias CoordinateValue = (r: Int, c: Int, s: Int, v: Int)

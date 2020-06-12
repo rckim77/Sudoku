@@ -26,6 +26,8 @@
 		94E1089924874AFB0091D043 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E1089824874AFB0091D043 /* Extensions.swift */; };
 		94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */; };
 		94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F3242491F10C00B1D003 /* StartingGridValues.swift */; };
+		94E9F32D2493FC3300B1D003 /* SudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */; };
+		94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32E2494001100B1D003 /* CoordinateValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		94E1089824874AFB0091D043 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusStyle.swift; sourceTree = "<group>"; };
 		94E9F3242491F10C00B1D003 /* StartingGridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingGridValues.swift; sourceTree = "<group>"; };
+		94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuSolver.swift; sourceTree = "<group>"; };
+		94E9F32E2494001100B1D003 /* CoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +106,9 @@
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
 				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
+				94E9F32E2494001100B1D003 /* CoordinateValue.swift */,
 				94A9CCC9248DD7A4008551B6 /* GridValues.swift */,
+				94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */,
 				94E9F3242491F10C00B1D003 /* StartingGridValues.swift */,
 				94A9CCBA2488AAFE008551B6 /* UserAction.swift */,
 				94A9CCB92488AA1B008551B6 /* Shared */,
@@ -198,6 +204,7 @@
 				94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */,
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
+				94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */,
 				94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
@@ -205,6 +212,7 @@
 				9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */,
 				9467743F248762EB00F636D4 /* RowButton.swift in Sources */,
 				94677437248756CA00F636D4 /* Row.swift in Sources */,
+				94E9F32D2493FC3300B1D003 /* SudokuSolver.swift in Sources */,
 				94E108872487333B0091D043 /* ContentView.swift in Sources */,
 				9467743B2487579300F636D4 /* Grid.swift in Sources */,
 				94A9CCBB2488AAFE008551B6 /* UserAction.swift in Sources */,
