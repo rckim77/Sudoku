@@ -91,7 +91,7 @@ struct Row: View {
             }
 
             // in working grid but not starting grid
-            return .blue
+            return Color("dynamicBlue")
         } else {
             // starting grid
             return .black
