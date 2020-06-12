@@ -86,9 +86,15 @@ struct Row: View {
         let workingGridHasAValue = workingGrid.containsAValue(at: coordinate)
         let startingGridHasAValue = startingGrid.containsAValue(at: coordinate)
         if workingGridHasAValue && !startingGridHasAValue {
-            if case let UserAction.ActionType.digit(digit) = userAction.action, startingGrid.square(squareIndex, contains: digit) {
+            if case let UserAction.ActionType.digit(digit) = userAction.action,
+                startingGrid.square(squareIndex, contains: digit),
+                isSelected(columnIndex: columnIndex) {
+                // user has just entered an invalid digit
                 return .red
-            } else if let retrievedValue = workingGrid.retrieveValue(at: coordinate), startingGrid.square(squareIndex, contains: retrievedValue) {
+            }
+
+            if let retrievedValue = workingGrid.retrieveValue(at: coordinate), startingGrid.square(squareIndex, contains: retrievedValue) {
+                // persist red text for other invalid digits in square that haven't been cleared
                 return .red
             }
 
