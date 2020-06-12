@@ -15,14 +15,14 @@ struct ContentView: View {
     @EnvironmentObject
     private var userAction: UserAction
     @EnvironmentObject
+    private var editState: EditState
+    @EnvironmentObject
     private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var workingGrid: GridValues
 
     @State
     private var workingGridIsComplete = false
-    @State
-    private var editModeIsToggled = false
 
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
@@ -78,9 +78,9 @@ struct ContentView: View {
                     .background(Color("dynamicGray"))
                     .cornerRadius(8)
                 Button(action: {
-                    self.editModeIsToggled.toggle()
+                    self.editState.isEditing.toggle()
                 }) {
-                    Image(systemName: self.editModeIsToggled ? "pencil.circle.fill" : "pencil.circle")
+                    Image(systemName: self.editState.isEditing ? "pencil.circle.fill" : "pencil.circle")
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(Color("dynamicBlack"))
                 }

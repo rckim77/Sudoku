@@ -79,12 +79,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let coordinates = squares.flatMap { $0 }
         let startingGrid = StartingGridValues(grid: coordinates)
         let workingGrid = GridValues(grid: coordinates)
+        let editState = EditState()
         
         let contentView = ContentView()
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(startingGrid)
             .environmentObject(workingGrid)
+            .environmentObject(editState)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
