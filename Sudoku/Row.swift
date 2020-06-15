@@ -18,6 +18,10 @@ struct Row: View {
     private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var workingGrid: GridValues
+    @EnvironmentObject
+    private var editState: EditState
+    @EnvironmentObject
+    private var editGrid: EditGridValues
 
     let index: Int
     let columns: [Int]
@@ -31,21 +35,40 @@ struct Row: View {
             Button(action: {
                 self.updateSelectedButton(columnIndex: 0)
             }) {
-                RowButtonText(text: setRowButtonText(columnIndex: 0), foregroundColor: setForegroundColor(columnIndex: 0))
+                // NOTE: SwiftUI does not support if let statements, hence the force unwrapping.
+                if selectedCell.coordinate != nil && editState.isEditing && isSelected(columnIndex: 0) {
+                    EditCellText(values: editGrid.values(for: selectedCell.coordinate!))
+                } else {
+                    RowButtonText(text: setRowButtonText(columnIndex: 0),
+                                  foregroundColor: setForegroundColor(columnIndex: 0))
+                }
             }
                 .border(Color.black, width: 1)
                 .background(isSelected(columnIndex: 0) ? selectedBackgroundColor : backgroundColor)
             Button(action: {
                 self.updateSelectedButton(columnIndex: 1)
             }) {
-                RowButtonText(text: setRowButtonText(columnIndex: 1), foregroundColor: setForegroundColor(columnIndex: 1))
+                // NOTE: SwiftUI does not support if let statements, hence the force unwrapping.
+                if selectedCell.coordinate != nil && editState.isEditing && isSelected(columnIndex: 1) {
+                    EditCellText(values: editGrid.values(for: selectedCell.coordinate!))
+                } else {
+                    RowButtonText(text: setRowButtonText(columnIndex: 1),
+                                  foregroundColor: setForegroundColor(columnIndex: 1))
+                }
             }
                 .border(Color.black, width: 1)
                 .background(isSelected(columnIndex: 1) ? selectedBackgroundColor : backgroundColor)
             Button(action: {
                 self.updateSelectedButton(columnIndex: 2)
             }) {
-                RowButtonText(text: setRowButtonText(columnIndex: 2), foregroundColor: setForegroundColor(columnIndex: 2))
+                // NOTE: SwiftUI does not support if let statements, hence the force unwrapping.
+                if selectedCell.coordinate != nil && editState.isEditing && isSelected(columnIndex: 2) {
+                    // TODO: why does this not work?!
+                    EditCellText(values: editGrid.values(for: selectedCell.coordinate!))
+                } else {
+                    RowButtonText(text: setRowButtonText(columnIndex: 2),
+                                  foregroundColor: setForegroundColor(columnIndex: 2))
+                }
             }
                 .border(Color.black, width: 1)
                 .background(isSelected(columnIndex: 2) ? selectedBackgroundColor : backgroundColor)

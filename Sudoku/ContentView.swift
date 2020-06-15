@@ -27,7 +27,7 @@ struct ContentView: View {
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
-            return 40
+            return 48
         } else if screenHeight > 667 { // 8 Plus
             return 26
         } else { // 8, SE (2nd gen)

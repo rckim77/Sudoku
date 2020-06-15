@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94600FB224973BD600E605FD /* EditCellText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB124973BD600E605FD /* EditCellText.swift */; };
+		94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB324973ECC00E605FD /* CoordinateEditValues.swift */; };
+		94600FB624973EF300E605FD /* EditGridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB524973EF300E605FD /* EditGridValues.swift */; };
 		94677437248756CA00F636D4 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677436248756CA00F636D4 /* Row.swift */; };
 		946774392487572700F636D4 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946774382487572700F636D4 /* Square.swift */; };
 		9467743B2487579300F636D4 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743A2487579300F636D4 /* Grid.swift */; };
@@ -33,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		94600FB124973BD600E605FD /* EditCellText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellText.swift; sourceTree = "<group>"; };
+		94600FB324973ECC00E605FD /* CoordinateEditValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateEditValues.swift; sourceTree = "<group>"; };
+		94600FB524973EF300E605FD /* EditGridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGridValues.swift; sourceTree = "<group>"; };
 		94677436248756CA00F636D4 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		946774382487572700F636D4 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		9467743A2487579300F636D4 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
@@ -106,6 +112,7 @@
 				946774382487572700F636D4 /* Square.swift */,
 				9467743E248762EB00F636D4 /* RowButton.swift */,
 				94677436248756CA00F636D4 /* Row.swift */,
+				94600FB124973BD600E605FD /* EditCellText.swift */,
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
@@ -133,6 +140,8 @@
 			children = (
 				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
 				94E9F32E2494001100B1D003 /* CoordinateValue.swift */,
+				94600FB324973ECC00E605FD /* CoordinateEditValues.swift */,
+				94600FB524973EF300E605FD /* EditGridValues.swift */,
 				94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */,
 				94A9CCC9248DD7A4008551B6 /* GridValues.swift */,
 				94E9F3242491F10C00B1D003 /* StartingGridValues.swift */,
@@ -220,9 +229,12 @@
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
 				94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */,
+				94600FB624973EF300E605FD /* EditGridValues.swift in Sources */,
 				94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,
+				94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
+				94600FB224973BD600E605FD /* EditCellText.swift in Sources */,
 				94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */,
 				9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */,
 				9467743F248762EB00F636D4 /* RowButton.swift in Sources */,
