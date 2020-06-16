@@ -64,16 +64,12 @@ struct Row: View {
     }
 
     private func setRowButtonText(columnIndex: Int) -> String {
-        if let buttonText = getRowButtonValue(columnIndex: columnIndex) {
+        let coordinate = (r: index, c: columnIndex, s: squareIndex)
+        if let buttonText = workingGrid.retrieveValue(at: coordinate) {
             return "\(buttonText)"
         } else {
             return ""
         }
-    }
-
-    private func getRowButtonValue(columnIndex: Int) -> Int? {
-        let coordinate = (r: index, c: columnIndex, s: squareIndex)
-        return workingGrid.retrieveValue(at: coordinate)
     }
 
     private func setForegroundColor(columnIndex: Int) -> Color {
@@ -121,7 +117,6 @@ struct Row: View {
 
     // Note: Use AnyView to type erase View.
     private func renderCellText(columnIndex: Int) -> AnyView {
-        // NOTE: SwiftUI does not support if let statements, hence the force unwrapping.
         if let selectedCoordinate = selectedCell.coordinate, editState.isEditing && isSelected(columnIndex: columnIndex) {
             print("show edit cell text with values: \(editGrid.values(for: selectedCoordinate))")
             return AnyView(EditCellText(values: editGrid.values(for: selectedCoordinate)))
