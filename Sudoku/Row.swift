@@ -123,6 +123,7 @@ struct Row: View {
     private func renderCellText(columnIndex: Int) -> AnyView {
         // NOTE: SwiftUI does not support if let statements, hence the force unwrapping.
         if let selectedCoordinate = selectedCell.coordinate, editState.isEditing && isSelected(columnIndex: columnIndex) {
+            print("show edit cell text with values: \(editGrid.values(for: selectedCoordinate))")
             return AnyView(EditCellText(values: editGrid.values(for: selectedCoordinate)))
         } else {
             return AnyView(RowButtonText(text: setRowButtonText(columnIndex: columnIndex), foregroundColor: setForegroundColor(columnIndex: columnIndex)))

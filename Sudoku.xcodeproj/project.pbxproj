@@ -10,6 +10,7 @@
 		94600FB224973BD600E605FD /* EditCellText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB124973BD600E605FD /* EditCellText.swift */; };
 		94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB324973ECC00E605FD /* CoordinateEditValues.swift */; };
 		94600FB624973EF300E605FD /* EditGridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB524973EF300E605FD /* EditGridValues.swift */; };
+		94600FB8249846F600E605FD /* ButtonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB7249846F600E605FD /* ButtonExample.swift */; };
 		94677437248756CA00F636D4 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677436248756CA00F636D4 /* Row.swift */; };
 		946774392487572700F636D4 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946774382487572700F636D4 /* Square.swift */; };
 		9467743B2487579300F636D4 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743A2487579300F636D4 /* Grid.swift */; };
@@ -39,6 +40,7 @@
 		94600FB124973BD600E605FD /* EditCellText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellText.swift; sourceTree = "<group>"; };
 		94600FB324973ECC00E605FD /* CoordinateEditValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateEditValues.swift; sourceTree = "<group>"; };
 		94600FB524973EF300E605FD /* EditGridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGridValues.swift; sourceTree = "<group>"; };
+		94600FB7249846F600E605FD /* ButtonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExample.swift; sourceTree = "<group>"; };
 		94677436248756CA00F636D4 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		946774382487572700F636D4 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		9467743A2487579300F636D4 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
+				94600FB7249846F600E605FD /* ButtonExample.swift */,
 				94E9F330249402C800B1D003 /* Models */,
 				94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */,
 				94A9CCB92488AA1B008551B6 /* Shared */,
@@ -244,6 +247,7 @@
 				9467743B2487579300F636D4 /* Grid.swift in Sources */,
 				94A9CCBB2488AAFE008551B6 /* UserAction.swift in Sources */,
 				94E9F332249406F500B1D003 /* AbsoluteCoordinateValue.swift in Sources */,
+				94600FB8249846F600E605FD /* ButtonExample.swift in Sources */,
 				94A9CCB62488A394008551B6 /* RowButtonText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -51,8 +51,10 @@ struct EditCellText: View {
 
     private func text(for editIndex: Int) -> String {
         if values.contains(where: { $0 == editIndex }) {
+            print("\(editIndex)")
             return "\(editIndex)"
         } else {
+            print("blank")
             return ""
         }
     }
