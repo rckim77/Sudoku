@@ -30,10 +30,10 @@ struct EditButton: View {
             Image(systemName: editState.isEditing ? "pencil.circle.fill" : "pencil.circle")
                 .font(.system(size: 24, weight: .regular))
                 .foregroundColor(.black)
+                .padding(.horizontal, editButtonHorizontalPadding)
+                .padding(.vertical, editButtonVerticalPadding)
+                .background(editState.isEditing ? Color("dynamicDarkGray") : Color("dynamicGray"))
         }
-            .padding(.horizontal, editButtonHorizontalPadding)
-            .padding(.vertical, editButtonVerticalPadding)
-            .background(editState.isEditing ? Color("dynamicDarkGray") : Color("dynamicGray"))
             .cornerRadius(8)
     }
 }

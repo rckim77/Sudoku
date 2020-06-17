@@ -60,10 +60,10 @@ struct ClearButton: View {
             Text("Clear")
                 .foregroundColor(.black)
                 .font(Font.system(.title, design:.rounded).smallCaps())
+                .padding(.horizontal, horizontalPadding)
+                .frame(minHeight: 48)
+                .background(Color("dynamicGray"))
         }
-            .padding(.horizontal, horizontalPadding)
-            .padding(.vertical, verticalPadding)
-            .background(Color("dynamicGray"))
             .cornerRadius(8)
     }
 }
