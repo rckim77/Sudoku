@@ -89,15 +89,7 @@ struct ContentView: View {
                     .padding(.vertical, clearButtonVerticalPadding)
                     .background(Color("dynamicGray"))
                     .cornerRadius(8)
-                Button(action: {
-                    self.editState.isEditing.toggle()
-                }) {
-                    Image(systemName: self.editState.isEditing ? "pencil.circle.fill" : "pencil.circle")
-                        .font(.system(size: 36, weight: .bold))
-                        .foregroundColor(Color("dynamicBlack"))
-                }
-                    .padding(.horizontal, editButtonHorizontalPadding)
-                    .padding(.vertical, clearButtonVerticalPadding)
+                EditButton()
             }
             Spacer()
         }
