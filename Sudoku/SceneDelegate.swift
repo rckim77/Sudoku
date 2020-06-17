@@ -81,6 +81,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(workingGrid)
             .environmentObject(editState)
             .environmentObject(editGridValues)
+            .environmentObject(Difficulty(level: .easy))
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

@@ -13,6 +13,8 @@
 		94600FB8249846F600E605FD /* ButtonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB7249846F600E605FD /* ButtonExample.swift */; };
 		94600FBE2499C37300E605FD /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FBD2499C37300E605FD /* EditButton.swift */; };
 		94600FC02499C4A700E605FD /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FBF2499C4A700E605FD /* ClearButton.swift */; };
+		94600FC22499C73200E605FD /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FC12499C73200E605FD /* Difficulty.swift */; };
+		94600FC42499C87100E605FD /* DifficultyButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FC32499C87100E605FD /* DifficultyButtons.swift */; };
 		94677437248756CA00F636D4 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677436248756CA00F636D4 /* Row.swift */; };
 		946774392487572700F636D4 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946774382487572700F636D4 /* Square.swift */; };
 		9467743B2487579300F636D4 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743A2487579300F636D4 /* Grid.swift */; };
@@ -44,6 +46,8 @@
 		94600FB7249846F600E605FD /* ButtonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExample.swift; sourceTree = "<group>"; };
 		94600FBD2499C37300E605FD /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		94600FBF2499C4A700E605FD /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
+		94600FC12499C73200E605FD /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
+		94600FC32499C87100E605FD /* DifficultyButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyButtons.swift; sourceTree = "<group>"; };
 		94677436248756CA00F636D4 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		946774382487572700F636D4 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		9467743A2487579300F636D4 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				946774382487572700F636D4 /* Square.swift */,
 				94600FBD2499C37300E605FD /* EditButton.swift */,
 				94600FBF2499C4A700E605FD /* ClearButton.swift */,
+				94600FC32499C87100E605FD /* DifficultyButtons.swift */,
 				94677436248756CA00F636D4 /* Row.swift */,
 				94600FB124973BD600E605FD /* EditCellText.swift */,
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
@@ -145,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				9467743C24875D4E00F636D4 /* SelectedCell.swift */,
+				94600FC12499C73200E605FD /* Difficulty.swift */,
 				94E9F32E2494001100B1D003 /* CoordinateValue.swift */,
 				94600FB324973ECC00E605FD /* CoordinateEditValues.swift */,
 				94600FB524973EF300E605FD /* EditGridValues.swift */,
@@ -231,6 +237,8 @@
 				94A9CCB82488A96D008551B6 /* KeysRowButtonText.swift in Sources */,
 				94E9F3342494289A00B1D003 /* EditState.swift in Sources */,
 				946774392487572700F636D4 /* Square.swift in Sources */,
+				94600FC22499C73200E605FD /* Difficulty.swift in Sources */,
+				94600FC42499C87100E605FD /* DifficultyButtons.swift in Sources */,
 				94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */,
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,
 				94600FBE2499C37300E605FD /* EditButton.swift in Sources */,

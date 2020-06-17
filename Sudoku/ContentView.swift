@@ -22,6 +22,8 @@ struct ContentView: View {
     private var workingGrid: GridValues
     @EnvironmentObject
     private var editGrid: EditGridValues
+    @EnvironmentObject
+    private var difficulty: Difficulty
 
     @State
     private var workingGridIsComplete = false
@@ -57,8 +59,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: verticalSpacing) {
-            Text("Sudoku")
-                .font(.title)
+            DifficultyButtons()
             Grid()
             KeysRow(gridIsComplete: $workingGridIsComplete)
             HStack(spacing: 0) {
