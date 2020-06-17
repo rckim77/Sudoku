@@ -59,14 +59,13 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: verticalSpacing) {
-            DifficultyButtons()
             Grid()
-            KeysRow(gridIsComplete: $workingGridIsComplete)
-            HStack(spacing: 0) {
+            HStack(spacing: 4) {
                 ClearButton()
                 EditButton()
             }
-            Spacer()
+            KeysRow(gridIsComplete: $workingGridIsComplete)
+            DifficultyButtons()
         }
         .alert(isPresented: $workingGridIsComplete) {
             Alert(title: Text("Congratulations!"), message: Text("You've completed the sudoku!"), dismissButton: .default(Text("Dismiss")))

@@ -13,13 +13,13 @@ struct EditButton: View {
     @EnvironmentObject
     private var editState: EditState
 
-    private let editButtonHorizontalPadding: CGFloat = 18
+    private let editButtonHorizontalPadding: CGFloat = 14
     private var editButtonVerticalPadding: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
-            return 10
+            return 18
         } else { // 8 Plus, 8, SE (2nd gen)
-            return 8
+            return 16
         }
     }
 
@@ -28,16 +28,22 @@ struct EditButton: View {
             self.editState.isEditing.toggle()
         }) {
             Image(systemName: self.editState.isEditing ? "pencil.circle.fill" : "pencil.circle")
-                .font(.system(size: 36, weight: .bold))
+                .font(.system(size: 24, weight: .regular))
                 .foregroundColor(Color("dynamicBlack"))
         }
             .padding(.horizontal, editButtonHorizontalPadding)
             .padding(.vertical, editButtonVerticalPadding)
+            .background(Color("dynamicGray"))
+            .cornerRadius(8)
     }
 }
 
 struct EditButton_Previews: PreviewProvider {
     static var previews: some View {
-        EditButton()
+        HStack {
+            ClearButton()
+            EditButton()
+                .environmentObject(EditState())
+        }
     }
 }
