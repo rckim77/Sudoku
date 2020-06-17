@@ -27,13 +27,13 @@ struct EditButton: View {
         Button(action: {
             self.editState.isEditing.toggle()
         }) {
-            Image(systemName: self.editState.isEditing ? "pencil.circle.fill" : "pencil.circle")
+            Image(systemName: editState.isEditing ? "pencil.circle.fill" : "pencil.circle")
                 .font(.system(size: 24, weight: .regular))
-                .foregroundColor(Color("dynamicBlack"))
+                .foregroundColor(.black)
         }
             .padding(.horizontal, editButtonHorizontalPadding)
             .padding(.vertical, editButtonVerticalPadding)
-            .background(Color("dynamicGray"))
+            .background(editState.isEditing ? Color("dynamicDarkGray") : Color("dynamicGray"))
             .cornerRadius(8)
     }
 }
