@@ -17,13 +17,23 @@ final class EditGridValues: ObservableObject {
         self.grid = grid
     }
 
-    func values(for coordinate: Coordinate) -> Set<Int> {
-        /// Get edit values for coordinate if they're in grid.
-        guard let values = grid
-            .filter({ $0.r == coordinate.r && $0.c == coordinate.c && $0.s == coordinate.s })
-            .first else {
-            return []
+    // Note: this returns a copy because grid is an array of value types.
+    func guesses(for coordinate: Coordinate) -> CoordinateEditValues? {
+        return grid.first(where: { $0.r == coordinate.r && $0.c == coordinate.c && $0.s == coordinate.s })
+    }
+
+    func addGuess(value: Int, at coordinate: Coordinate) {
+        if let existingEditGrid = guesses(for: coordinate) {
+            var set = existingEditGrid.values
+            set.insert(value)
+            grid.removeAll(where: { $0.c == coordinate.c && $0.r == coordinate.r && $0.s == coordinate.s })
+            let editValues = CoordinateEditValues(r: coordinate.r, c: coordinate.c, s: coordinate.s, values: set)
+            grid.append(editValues)
+        } else {
+            var values = Set<Int>()
+            values.insert(value)
+            let editValues = CoordinateEditValues(r: coordinate.r, c: coordinate.c, s: coordinate.s, values: values)
+            grid.append(editValues)
         }
-        return Set(values.values)
     }
 }

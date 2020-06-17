@@ -20,6 +20,10 @@ struct KeysRow: View {
     private var workingGrid: GridValues
     @EnvironmentObject
     private var startingGrid: StartingGridValues
+    @EnvironmentObject
+    private var editGrid: EditGridValues
+    @EnvironmentObject
+    private var editState: EditState
     @Binding
     var gridIsComplete: Bool
 
@@ -91,8 +95,14 @@ struct KeysRow: View {
 
     private func updateForDigit(_ digit: Int) {
         userAction.action = .digit(digit)
-        if let selectedCoordinate = selectedCell.coordinate, !startingGrid.containsAValue(at: selectedCoordinate) {
-            let coordinateValue = CoordinateValue(r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
+        guard let selectedCoordinate = selectedCell.coordinate, !startingGrid.containsAValue(at: selectedCoordinate) else {
+            return
+        }
+
+        let coordinateValue = CoordinateValue(r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
+        if editState.isEditing {
+            editGrid.addGuess(value: digit, at: (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s))
+        } else {
             workingGrid.add(coordinateValue)
             gridIsComplete = workingGrid.isSolved
         }

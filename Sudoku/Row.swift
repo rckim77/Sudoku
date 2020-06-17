@@ -117,13 +117,13 @@ struct Row: View {
 
     // Note: Use AnyView to type erase View.
     private func renderCellText(columnIndex: Int) -> AnyView {
-        if let selectedCoordinate = selectedCell.coordinate, editState.isEditing && isSelected(columnIndex: columnIndex) {
-            print("show edit cell text with values: \(editGrid.values(for: selectedCoordinate))")
-            return AnyView(EditCellText(values: editGrid.values(for: selectedCoordinate)))
+        let currentCoordinate = (r: index, c: columnIndex, s: squareIndex)
+        if editState.isEditing && !startingGrid.containsAValue(at: currentCoordinate) {
+            let values = editGrid.guesses(for: currentCoordinate)?.values ?? Set<Int>()
+            return AnyView(EditCellText(values: values))
         } else {
             return AnyView(RowButtonText(text: setRowButtonText(columnIndex: columnIndex), foregroundColor: setForegroundColor(columnIndex: columnIndex)))
         }
-
     }
 }
 

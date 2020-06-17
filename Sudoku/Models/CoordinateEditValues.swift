@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct CoordinateEditValues {
+struct CoordinateEditValues: Equatable {
     let r: Int
     let c: Int
     let s: Int
-    let values: [Int]
+    var values: Set<Int>
 }
