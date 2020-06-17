@@ -70,12 +70,14 @@ struct ContentView: View {
 
                     guard let selectedCoordinate = self.selectedCell.coordinate,
                         !self.startingGrid.containsAValue(at: selectedCoordinate) else {
+                        // can't clear values that were part of starting board and unselected
                         return
                     }
 
-                    if self.editState.isEditing {
-                        self.editGrid.removeValues(at: selectedCoordinate)
-                    } else {
+                    // clear guesses regardless of editing mode
+                    self.editGrid.removeValues(at: selectedCoordinate)
+
+                    if !self.editState.isEditing {
                         self.workingGrid.removeValue(at: selectedCoordinate)
                     }
                 }) {
