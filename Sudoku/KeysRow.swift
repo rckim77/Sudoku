@@ -103,6 +103,7 @@ struct KeysRow: View {
         if editState.isEditing {
             editGrid.addGuess(value: digit, at: (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s))
         } else {
+            editGrid.removeValues(at: selectedCoordinate)
             workingGrid.add(coordinateValue)
             gridIsComplete = workingGrid.isSolved
         }

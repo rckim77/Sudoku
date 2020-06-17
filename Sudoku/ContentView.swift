@@ -20,6 +20,8 @@ struct ContentView: View {
     private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var workingGrid: GridValues
+    @EnvironmentObject
+    private var editGrid: EditGridValues
 
     @State
     private var workingGridIsComplete = false
@@ -65,7 +67,15 @@ struct ContentView: View {
             HStack(spacing: 0) {
                 Button(action: {
                     self.userAction.action = .clear
-                    if let selectedCoordinate = self.selectedCell.coordinate, !self.startingGrid.containsAValue(at: selectedCoordinate) {
+
+                    guard let selectedCoordinate = self.selectedCell.coordinate,
+                        !self.startingGrid.containsAValue(at: selectedCoordinate) else {
+                        return
+                    }
+
+                    if self.editState.isEditing {
+                        self.editGrid.removeValues(at: selectedCoordinate)
+                    } else {
                         self.workingGrid.removeValue(at: selectedCoordinate)
                     }
                 }) {

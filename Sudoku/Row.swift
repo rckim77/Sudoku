@@ -118,7 +118,7 @@ struct Row: View {
     // Note: Use AnyView to type erase View.
     private func renderCellText(columnIndex: Int) -> AnyView {
         let currentCoordinate = (r: index, c: columnIndex, s: squareIndex)
-        if editState.isEditing && !startingGrid.containsAValue(at: currentCoordinate) {
+        if !workingGrid.containsAValue(at: currentCoordinate) {
             let values = editGrid.guesses(for: currentCoordinate)?.values ?? Set<Int>()
             return AnyView(EditCellText(values: values))
         } else {

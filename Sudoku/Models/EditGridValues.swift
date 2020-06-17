@@ -36,4 +36,8 @@ final class EditGridValues: ObservableObject {
             grid.append(editValues)
         }
     }
+
+    func removeValues(at coordinate: Coordinate) {
+        grid.removeAll(where: { $0.r == coordinate.r && $0.c == coordinate.c && $0.s == coordinate.s })
+    }
 }
