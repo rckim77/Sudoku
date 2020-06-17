@@ -55,9 +55,6 @@ struct ContentView: View {
         }
     }
 
-    private let editButtonHorizontalPadding: CGFloat = 18
-    private let clearButtonFont = Font.system(.title, design:.rounded).smallCaps()
-
     var body: some View {
         VStack(spacing: verticalSpacing) {
             Text("Sudoku")
@@ -65,30 +62,7 @@ struct ContentView: View {
             Grid()
             KeysRow(gridIsComplete: $workingGridIsComplete)
             HStack(spacing: 0) {
-                Button(action: {
-                    self.userAction.action = .clear
-
-                    guard let selectedCoordinate = self.selectedCell.coordinate,
-                        !self.startingGrid.containsAValue(at: selectedCoordinate) else {
-                        // can't clear values that were part of starting board and unselected
-                        return
-                    }
-
-                    // clear guesses regardless of editing mode
-                    self.editGrid.removeValues(at: selectedCoordinate)
-
-                    if !self.editState.isEditing {
-                        self.workingGrid.removeValue(at: selectedCoordinate)
-                    }
-                }) {
-                    Text("Clear")
-                        .foregroundColor(.black)
-                        .font(clearButtonFont)
-                }
-                    .padding(.horizontal, clearButtonHorizontalPadding)
-                    .padding(.vertical, clearButtonVerticalPadding)
-                    .background(Color("dynamicGray"))
-                    .cornerRadius(8)
+                ClearButton()
                 EditButton()
             }
             Spacer()

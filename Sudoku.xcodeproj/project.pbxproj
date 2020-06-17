@@ -12,6 +12,7 @@
 		94600FB624973EF300E605FD /* EditGridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB524973EF300E605FD /* EditGridValues.swift */; };
 		94600FB8249846F600E605FD /* ButtonExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB7249846F600E605FD /* ButtonExample.swift */; };
 		94600FBE2499C37300E605FD /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FBD2499C37300E605FD /* EditButton.swift */; };
+		94600FC02499C4A700E605FD /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FBF2499C4A700E605FD /* ClearButton.swift */; };
 		94677437248756CA00F636D4 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677436248756CA00F636D4 /* Row.swift */; };
 		946774392487572700F636D4 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946774382487572700F636D4 /* Square.swift */; };
 		9467743B2487579300F636D4 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743A2487579300F636D4 /* Grid.swift */; };
@@ -43,6 +44,7 @@
 		94600FB524973EF300E605FD /* EditGridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGridValues.swift; sourceTree = "<group>"; };
 		94600FB7249846F600E605FD /* ButtonExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExample.swift; sourceTree = "<group>"; };
 		94600FBD2499C37300E605FD /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
+		94600FBF2499C4A700E605FD /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		94677436248756CA00F636D4 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		946774382487572700F636D4 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		9467743A2487579300F636D4 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				946774382487572700F636D4 /* Square.swift */,
 				9467743E248762EB00F636D4 /* RowButton.swift */,
 				94600FBD2499C37300E605FD /* EditButton.swift */,
+				94600FBF2499C4A700E605FD /* ClearButton.swift */,
 				94677436248756CA00F636D4 /* Row.swift */,
 				94600FB124973BD600E605FD /* EditCellText.swift */,
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
@@ -237,6 +240,7 @@
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
 				94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */,
 				94600FB624973EF300E605FD /* EditGridValues.swift in Sources */,
+				94600FC02499C4A700E605FD /* ClearButton.swift in Sources */,
 				94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,
 				94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */,
