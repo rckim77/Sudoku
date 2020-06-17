@@ -12,50 +12,65 @@ struct EditCellText: View {
     let values: Set<Int>
 
     var body: some View {
-        VStack(spacing: -4) {
-            HStack(spacing: 2) {
+        VStack(spacing: -2) {
+            HStack(spacing: 0) {
                 Text(text(for: 0))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
                 Text(text(for: 1))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
                 Text(text(for: 2))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
             }
-            HStack(spacing: 2) {
+            HStack(spacing: 0) {
                 Text(text(for: 3))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
                 Text(text(for: 4))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
                 Text(text(for: 5))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
             }
-            HStack(spacing: 2) {
+            HStack(spacing: 0) {
                 Text(text(for: 6))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
                 Text(text(for: 7))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
                 Text(text(for: 8))
                     .foregroundColor(Color("dynamicBlue"))
                     .font(.system(.footnote, design: .rounded))
+                    .frame(maxWidth: .infinity)
             }
-        }.frame(maxWidth: .infinity, minHeight: 45.5)
+        }
+        .frame(maxWidth: .infinity, minHeight: 45.5)
     }
 
     private func text(for editIndex: Int) -> String {
-        if values.contains(where: { $0 == editIndex }) {
-            print("\(editIndex)")
-            return "\(editIndex)"
+        if values.contains(where: { $0 == editIndex + 1 }) {
+            return "\(editIndex + 1)"
         } else {
-            print("blank")
             return ""
         }
+    }
+}
+
+struct EditCellText_Previews: PreviewProvider {
+    static var previews: some View {
+        EditCellText(values: Set(arrayLiteral: 1, 2, 3, 4, 7, 8, 9))
+            .frame(minWidth: 45.5)
     }
 }
