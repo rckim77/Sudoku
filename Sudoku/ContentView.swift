@@ -22,9 +22,6 @@ struct ContentView: View {
     private var workingGrid: GridValues
     @EnvironmentObject
     private var editGrid: EditGridValues
-    @EnvironmentObject
-    private var difficulty: Difficulty
-
     @State
     private var workingGridIsComplete = false
 
