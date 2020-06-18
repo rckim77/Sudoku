@@ -10,6 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
 
+    @Environment(\.horizontalSizeClass)
+    var horizontalClass
     @EnvironmentObject
     private var selectedCell: SelectedCell
     @EnvironmentObject
@@ -62,14 +64,20 @@ struct ContentView: View {
         }
     }
 
+    private var horizontalSizeClassPadding: CGFloat {
+        return horizontalClass == .regular ? 90 : 0
+    }
+
     var body: some View {
         VStack(spacing: verticalSpacing) {
             Grid()
+                .padding(.horizontal, horizontalSizeClassPadding)
             HStack(spacing: 12) {
                 ClearButton()
                 EditButton()
             }
             KeysRow(gridIsComplete: $workingGridIsComplete)
+                .padding(.horizontal, horizontalSizeClassPadding)
             DifficultyButtons(displayAlert: $displayAlertForDifficultyChange, lastTappedDifficulty: $lastTappedDifficultyLevel)
         }
         .alert(isPresented: $workingGridIsComplete) {
