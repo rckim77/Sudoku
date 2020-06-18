@@ -19,58 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let square0 = [CoordinateValue(r: 0, c: 0, s: 0, v: 8),
-                       CoordinateValue(r: 1, c: 1, s: 0, v: 9),
-                       CoordinateValue(r: 2, c: 0, s: 0, v: 5),
-                       CoordinateValue(r: 2, c: 1, s: 0, v: 7),
-                       CoordinateValue(r: 2, c: 2, s: 0, v: 1)]
-        let square1 = [CoordinateValue(r: 0, c: 0, s: 1, v: 9),
-                       CoordinateValue(r: 0, c: 1, s: 1, v: 5),
-                       CoordinateValue(r: 1, c: 0, s: 1, v: 2),
-                       CoordinateValue(r: 1, c: 2, s: 1, v: 8),
-                       CoordinateValue(r: 2, c: 0, s: 1, v: 3),
-                       CoordinateValue(r: 2, c: 2, s: 1, v: 6)]
-        let square2 = [CoordinateValue(r: 0, c: 0, s: 2, v: 4),
-                       CoordinateValue(r: 0, c: 1, s: 2, v: 6),
-                       CoordinateValue(r: 0, c: 2, s: 2, v: 1),
-                       CoordinateValue(r: 1, c: 0, s: 2, v: 5),
-                       CoordinateValue(r: 1, c: 1, s: 2, v: 3),
-                       CoordinateValue(r: 1, c: 2, s: 2, v: 7),
-                       CoordinateValue(r: 2, c: 0, s: 2, v: 2),
-                       CoordinateValue(r: 2, c: 1, s: 2, v: 9)]
-        let square3 = [CoordinateValue(r: 0, c: 0, s: 3, v: 1),
-                       CoordinateValue(r: 1, c: 1, s: 3, v: 6),
-                       CoordinateValue(r: 1, c: 2, s: 3, v: 2),
-                       CoordinateValue(r: 2, c: 0, s: 3, v: 9),
-                       CoordinateValue(r: 2, c: 2, s: 3, v: 5)]
-        let square4 = [CoordinateValue(r: 0, c: 0, s: 4, v: 6),
-                       CoordinateValue(r: 1, c: 0, s: 4, v: 5),
-                       CoordinateValue(r: 1, c: 2, s: 4, v: 9),
-                       CoordinateValue(r: 2, c: 1, s: 4, v: 7),
-                       CoordinateValue(r: 2, c: 2, s: 4, v: 1)]
-        let square5 = [CoordinateValue(r: 0, c: 0, s: 5, v: 9),
-                       CoordinateValue(r: 1, c: 1, s: 5, v: 7),
-                       CoordinateValue(r: 2, c: 2, s: 5, v: 3)]
-        let square6 = [CoordinateValue(r: 0, c: 0, s: 6, v: 2),
-                       CoordinateValue(r: 0, c: 2, s: 6, v: 8),
-                       CoordinateValue(r: 1, c: 2, s: 6, v: 4),
-                       CoordinateValue(r: 2, c: 0, s: 6, v: 7),
-                       CoordinateValue(r: 2, c: 1, s: 6, v: 3)]
-        let square7 = [CoordinateValue(r: 0, c: 0, s: 7, v: 7),
-                       CoordinateValue(r: 0, c: 2, s: 7, v: 5),
-                       CoordinateValue(r: 1, c: 0, s: 7, v: 8),
-                       CoordinateValue(r: 1, c: 2, s: 7, v: 3),
-                       CoordinateValue(r: 2, c: 0, s: 7, v: 1),
-                       CoordinateValue(r: 2, c: 2, s: 7, v: 4)]
-        let square8 = [CoordinateValue(r: 0, c: 0, s: 8, v: 3),
-                       CoordinateValue(r: 0, c: 2, s: 8, v: 6),
-                       CoordinateValue(r: 1, c: 1, s: 8, v: 1),
-                       CoordinateValue(r: 2, c: 1, s: 8, v: 5),
-                       CoordinateValue(r: 2, c: 2, s: 8, v: 2)]
-        let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
-        let coordinates = squares.flatMap { $0 }
-        let startingGrid = StartingGridValues(grid: coordinates)
-        let workingGrid = GridValues(grid: coordinates)
+        let startingGrid = StartingGridValues(grid: GridFactory.easyGrid)
+        let workingGrid = GridValues(grid: GridFactory.easyGrid)
         let editState = EditState()
         let editGridValues = EditGridValues(grid: [])
         
