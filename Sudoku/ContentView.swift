@@ -26,8 +26,8 @@ struct ContentView: View {
     private var difficulty: Difficulty
     @State
     private var workingGridIsComplete = false
-    /// Used to follow through on specific difficulty when a user sees action sheet to
-    /// confirm difficulty change.
+    /// Used to follow through on specific difficulty when a user taps confirm on action sheet to
+    /// change difficulty.
     @State
     private var lastTappedDifficultyLevel: Difficulty.Level = .easy
     @State
@@ -65,7 +65,7 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: verticalSpacing) {
             Grid()
-            HStack(spacing: 4) {
+            HStack(spacing: 12) {
                 ClearButton()
                 EditButton()
             }

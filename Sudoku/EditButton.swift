@@ -14,14 +14,7 @@ struct EditButton: View {
     private var editState: EditState
 
     private let editButtonHorizontalPadding: CGFloat = 14
-    private var editButtonVerticalPadding: CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
-        if screenHeight > 736 { // taller than 8 Plus
-            return 18
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 16
-        }
-    }
+    private var editButtonVerticalPadding: CGFloat = 16
 
     var body: some View {
         Button(action: {
