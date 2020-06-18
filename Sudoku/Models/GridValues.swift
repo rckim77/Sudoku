@@ -27,6 +27,10 @@ final class GridValues: ObservableObject {
         }
     }
 
+    func reset(newGrid: [CoordinateValue]) {
+        grid = newGrid
+    }
+
     func add(_ coordinateValue: CoordinateValue) {
         let coordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
         removeValue(at: coordinate)

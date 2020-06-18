@@ -12,12 +12,20 @@ struct DifficultyButton: View {
 
     @EnvironmentObject
     private var difficulty: Difficulty
+    @EnvironmentObject
+    private var startingGrid: StartingGridValues
+    @EnvironmentObject
+    private var workingGrid: GridValues
 
     let level: Difficulty.Level
 
     var body: some View {
         Button(action: {
             self.difficulty.level = self.level
+            let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
+            self.startingGrid.reset(newGrid: newGrid)
+            self.workingGrid.reset(newGrid: newGrid)
+
         }) {
             Text(level.rawValue)
                 .foregroundColor(level == difficulty.level ? .white : Color.blue)

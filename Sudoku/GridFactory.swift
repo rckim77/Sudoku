@@ -10,6 +10,18 @@ import Foundation
 
 enum GridFactory {
     typealias ShortCoordinate = (Int, Int, Int, Int)
+
+    static func gridForDifficulty(level: Difficulty.Level) -> [CoordinateValue] {
+        switch level {
+        case .easy:
+            return easyGrid
+        case .medium:
+            return mediumGrid
+        case .hard:
+            return hardGrid
+        }
+    }
+
     static var easyGrid: [CoordinateValue] {
         let square0 = [(0, 0, 0, 8), (1, 1, 0, 9), (2, 0, 0, 5), (2, 1, 0, 7), (2, 2, 0, 1)]
         let square1 = [(0, 0, 1, 9), (0, 1, 1, 5), (1, 0, 1, 2), (1, 2, 1, 8), (2, 0, 1, 3), (2, 2, 1, 6)]
