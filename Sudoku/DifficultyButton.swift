@@ -25,6 +25,14 @@ struct DifficultyButton: View {
 
     let level: Difficulty.Level
 
+    private var buttonVerticalPadding: CGFloat {
+        isIpad ? 20 : 10
+    }
+
+    private var buttonHorizontalPadding: CGFloat {
+        isIpad ? 32 : 16
+    }
+
     var body: some View {
         Button(action: {
             guard self.level != self.difficulty.level else {
@@ -44,8 +52,8 @@ struct DifficultyButton: View {
             Text(level.rawValue)
                 .foregroundColor(level == difficulty.level ? .white : Color.blue)
         }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 16)
+            .padding(.vertical, buttonVerticalPadding)
+            .padding(.horizontal, buttonHorizontalPadding)
             .background(level == difficulty.level ? Color.blue.opacity(0.9) : Color.blue.opacity(0.2))
             .cornerRadius(8)
     }

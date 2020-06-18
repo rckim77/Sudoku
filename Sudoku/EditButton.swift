@@ -13,8 +13,12 @@ struct EditButton: View {
     @EnvironmentObject
     private var editState: EditState
 
-    private let editButtonHorizontalPadding: CGFloat = 14
-    private var editButtonVerticalPadding: CGFloat = 16
+    private var editButtonHorizontalPadding: CGFloat {
+        isIpad ? 24 : 14
+    }
+    private var editButtonVerticalPadding: CGFloat {
+        isIpad ? 28 : 16
+    }
 
     var body: some View {
         Button(action: {

@@ -12,7 +12,9 @@ struct KeysRowButtonText: View {
 
     let text: String
 
-    private let textHeight: CGFloat = 48
+    private var textHeight: CGFloat {
+        isIpad ? 60 : 48
+    }
     private let textFont = Font.system(.title, design: .rounded)
 
     var body: some View {

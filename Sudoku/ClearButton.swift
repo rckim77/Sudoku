@@ -23,6 +23,9 @@ struct ClearButton: View {
     private var editState: EditState
 
     private var horizontalPadding: CGFloat {
+        guard !isIpad else {
+            return 28
+        }
         let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
             return 22
@@ -32,6 +35,9 @@ struct ClearButton: View {
     }
 
     private var verticalPadding: CGFloat {
+        guard !isIpad else {
+            return 20
+        }
         let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
             return 10
@@ -61,6 +67,7 @@ struct ClearButton: View {
                 .foregroundColor(.black)
                 .font(Font.system(.title, design:.rounded).smallCaps())
                 .padding(.horizontal, horizontalPadding)
+                .padding(.vertical, verticalPadding)
                 .frame(minHeight: 48)
                 .background(Color("dynamicGray"))
         }

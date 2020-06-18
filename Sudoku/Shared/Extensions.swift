@@ -12,6 +12,10 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         ModifiedContent(content: self, modifier: CornerRadiusStyle(radius: radius, corners: corners))
     }
+
+    var isIpad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
 }
 
 struct Extensions_Previews: PreviewProvider {

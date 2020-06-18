@@ -36,6 +36,10 @@ struct ContentView: View {
     private var displayAlertForDifficultyChange = false
 
     private var verticalSpacing: CGFloat {
+        guard !isIpad else {
+            return 72
+        }
+
         let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
             return 48
@@ -72,7 +76,7 @@ struct ContentView: View {
         VStack(spacing: verticalSpacing) {
             Grid()
                 .padding(.horizontal, horizontalSizeClassPadding)
-            HStack(spacing: 12) {
+            HStack(spacing: isIpad ? 36 : 12) {
                 ClearButton()
                 EditButton()
             }

@@ -15,7 +15,7 @@ struct DifficultyButtons: View {
     var lastTappedDifficulty: Difficulty.Level
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: isIpad ? 36 : 12) {
             DifficultyButton(displayAlert: $displayAlert, lastTappedDifficulty: $lastTappedDifficulty, level: .easy)
             DifficultyButton(displayAlert: $displayAlert, lastTappedDifficulty: $lastTappedDifficulty, level: .medium)
             DifficultyButton(displayAlert: $displayAlert, lastTappedDifficulty: $lastTappedDifficulty, level: .hard)
