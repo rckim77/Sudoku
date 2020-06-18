@@ -16,16 +16,27 @@ struct DifficultyButton: View {
     private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var workingGrid: GridValues
+    @Binding
+    var displayAlert: Bool
+    @Binding
+    var lastTappedDifficulty: Difficulty.Level
 
     let level: Difficulty.Level
 
     var body: some View {
         Button(action: {
-            self.difficulty.level = self.level
-            let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
-            self.startingGrid.reset(newGrid: newGrid)
-            self.workingGrid.reset(newGrid: newGrid)
-
+            guard self.level != self.difficulty.level else {
+                return
+            }
+            self.lastTappedDifficulty = self.level
+            if self.workingGrid.grid.count != self.startingGrid.grid.count {
+                self.displayAlert = true
+            } else {
+                self.difficulty.level = self.level
+                let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
+                self.startingGrid.reset(newGrid: newGrid)
+                self.workingGrid.reset(newGrid: newGrid)
+            }
         }) {
             Text(level.rawValue)
                 .foregroundColor(level == difficulty.level ? .white : Color.blue)
@@ -39,6 +50,6 @@ struct DifficultyButton: View {
 
 struct DifficultyButton_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultyButton(level: .easy)
+        DifficultyButton(displayAlert: .constant(false), lastTappedDifficulty: .constant(.easy), level: .easy)
     }
 }

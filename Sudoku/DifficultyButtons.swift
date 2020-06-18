@@ -9,17 +9,22 @@
 import SwiftUI
 
 struct DifficultyButtons: View {
+    @Binding
+    var displayAlert: Bool
+    @Binding
+    var lastTappedDifficulty: Difficulty.Level
+
     var body: some View {
         HStack(spacing: 12) {
-            DifficultyButton(level: .easy)
-            DifficultyButton(level: .medium)
-            DifficultyButton(level: .hard)
+            DifficultyButton(displayAlert: $displayAlert, lastTappedDifficulty: $lastTappedDifficulty, level: .easy)
+            DifficultyButton(displayAlert: $displayAlert, lastTappedDifficulty: $lastTappedDifficulty, level: .medium)
+            DifficultyButton(displayAlert: $displayAlert, lastTappedDifficulty: $lastTappedDifficulty, level: .hard)
         }
     }
 }
 
 struct DifficultyButtons_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultyButtons()
+        DifficultyButtons(displayAlert: .constant(false), lastTappedDifficulty: .constant(.easy))
     }
 }

@@ -22,8 +22,16 @@ struct ContentView: View {
     private var workingGrid: GridValues
     @EnvironmentObject
     private var editGrid: EditGridValues
+    @EnvironmentObject
+    private var difficulty: Difficulty
     @State
     private var workingGridIsComplete = false
+    /// Used to follow through on specific difficulty when a user sees action sheet to
+    /// confirm difficulty change.
+    @State
+    private var lastTappedDifficultyLevel: Difficulty.Level = .easy
+    @State
+    private var displayAlertForDifficultyChange = false
 
     private var verticalSpacing: CGFloat {
         let screenHeight = UIScreen.main.bounds.height
@@ -62,10 +70,26 @@ struct ContentView: View {
                 EditButton()
             }
             KeysRow(gridIsComplete: $workingGridIsComplete)
-            DifficultyButtons()
+            DifficultyButtons(displayAlert: $displayAlertForDifficultyChange, lastTappedDifficulty: $lastTappedDifficultyLevel)
         }
         .alert(isPresented: $workingGridIsComplete) {
-            Alert(title: Text("Congratulations!"), message: Text("You've completed the sudoku!"), dismissButton: .default(Text("Dismiss")))
+            Alert(title: Text("Congratulations!"),
+                  message: Text("You've completed the sudoku!"),
+                  dismissButton: .default(Text("Dismiss")))
+        }
+        .actionSheet(isPresented: $displayAlertForDifficultyChange) {
+            ActionSheet(title: Text("You're currently in progress"),
+                        message: Text("Are you sure you want to change difficulty? This will reset your progress on the current board."),
+                        buttons: [.cancel(), .destructive(Text("Confirm"),
+                        action: {
+                            guard self.lastTappedDifficultyLevel != self.difficulty.level else {
+                                return
+                            }
+                            self.difficulty.level = self.lastTappedDifficultyLevel
+                            let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
+                            self.startingGrid.reset(newGrid: newGrid)
+                            self.workingGrid.reset(newGrid: newGrid)
+            })])
         }
     }
 }
