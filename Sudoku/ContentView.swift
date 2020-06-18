@@ -89,6 +89,7 @@ struct ContentView: View {
                             let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
                             self.startingGrid.reset(newGrid: newGrid)
                             self.workingGrid.reset(newGrid: newGrid)
+                            self.selectedCell.coordinate = nil
             })])
         }
     }

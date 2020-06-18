@@ -16,6 +16,8 @@ struct DifficultyButton: View {
     private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var workingGrid: GridValues
+    @EnvironmentObject
+    private var selectedCell: SelectedCell
     @Binding
     var displayAlert: Bool
     @Binding
@@ -36,6 +38,7 @@ struct DifficultyButton: View {
                 let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
                 self.startingGrid.reset(newGrid: newGrid)
                 self.workingGrid.reset(newGrid: newGrid)
+                self.selectedCell.coordinate = nil
             }
         }) {
             Text(level.rawValue)
