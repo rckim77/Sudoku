@@ -130,5 +130,11 @@ struct Row: View {
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
         Row(index: 0, columns: [0, 1, 2], squareIndex: 0)
+            .environmentObject(SelectedCell())
+            .environmentObject(UserAction())
+            .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
+            .environmentObject(GridValues(grid: GridFactory.easyGrid))
+            .environmentObject(EditState())
+            .environmentObject(EditGridValues(grid: []))
     }
 }

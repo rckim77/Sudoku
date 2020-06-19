@@ -11,7 +11,12 @@ import SwiftUI
 struct RowButtonText: View {
 
     private let buttonTextFont = Font.system(.title, design: .rounded).bold()
-    private let buttonVerticalPadding: CGFloat = 6
+    private var buttonVerticalPadding: CGFloat {
+        isIpad ? 16 : 6
+    }
+    private var buttonMinHeight: CGFloat {
+        isIpad ? 65.5 : 45.5
+    }
     let text: String
     let foregroundColor: Color
 
@@ -20,7 +25,7 @@ struct RowButtonText: View {
             .foregroundColor(foregroundColor)
             .font(buttonTextFont)
             .padding(.vertical, buttonVerticalPadding)
-            .frame(maxWidth: .infinity, minHeight: 45.5)
+            .frame(maxWidth: .infinity, minHeight: buttonMinHeight)
     }
 }
 

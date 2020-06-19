@@ -11,6 +11,10 @@ import SwiftUI
 struct EditCellText: View {
     let values: Set<Int>
 
+    private var minHeight: CGFloat {
+        isIpad ? 65.5 : 45.5
+    }
+
     var body: some View {
         VStack(spacing: -2) {
             HStack(spacing: 0) {
@@ -56,7 +60,7 @@ struct EditCellText: View {
                     .frame(maxWidth: .infinity)
             }
         }
-        .frame(maxWidth: .infinity, minHeight: 45.5)
+        .frame(maxWidth: .infinity, minHeight: minHeight)
     }
 
     private func text(for editIndex: Int) -> String {
@@ -71,6 +75,5 @@ struct EditCellText: View {
 struct EditCellText_Previews: PreviewProvider {
     static var previews: some View {
         EditCellText(values: Set(arrayLiteral: 1, 2, 3, 4, 7, 8, 9))
-            .frame(minWidth: 45.5)
     }
 }
