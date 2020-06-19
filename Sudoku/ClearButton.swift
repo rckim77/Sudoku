@@ -38,12 +38,7 @@ struct ClearButton: View {
         guard !isIpad else {
             return 20
         }
-        let screenHeight = UIScreen.main.bounds.height
-        if screenHeight > 736 { // taller than 8 Plus
-            return 10
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 8
-        }
+        return 0
     }
 
     var body: some View {

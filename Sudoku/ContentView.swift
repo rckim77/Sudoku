@@ -37,7 +37,7 @@ struct ContentView: View {
 
     private var verticalSpacing: CGFloat {
         guard !isIpad else {
-            return 72
+            return 68
         }
 
         let screenHeight = UIScreen.main.bounds.height
@@ -69,7 +69,7 @@ struct ContentView: View {
     }
 
     private var horizontalSizeClassPadding: CGFloat {
-        return horizontalClass == .regular ? 90 : 0
+        return horizontalClass == .regular ? 80 : 0
     }
 
     var body: some View {
@@ -80,6 +80,7 @@ struct ContentView: View {
                 ClearButton()
                 EditButton()
             }
+                .padding(.bottom, isIpad ? 36 : 0)
             KeysRow(gridIsComplete: $workingGridIsComplete)
                 .padding(.horizontal, horizontalSizeClassPadding)
             DifficultyButtons(displayAlert: $displayAlertForDifficultyChange, lastTappedDifficulty: $lastTappedDifficultyLevel)
