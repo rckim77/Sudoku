@@ -15,12 +15,12 @@ struct EditCellText: View {
         if isIpad {
             return 65.5
         } else {
-            return 45.5
+            return 43.5
         }
     }
 
     var body: some View {
-        VStack(spacing: -2) {
+        VStack(spacing: -3) {
             HStack(spacing: 0) {
                 Text(text(for: 0))
                     .foregroundColor(Color("dynamicBlue"))
