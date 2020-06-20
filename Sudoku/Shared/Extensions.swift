@@ -17,6 +17,11 @@ extension View {
         UIDevice.current.userInterfaceIdiom == .pad
     }
 
+    /// E.g., 12.9-inch iPads
+    var isLargestIpad: Bool {
+        isIpad && screenWidth > 1023
+    }
+
     var screenHeight: CGFloat {
         UIScreen.main.bounds.height
     }
