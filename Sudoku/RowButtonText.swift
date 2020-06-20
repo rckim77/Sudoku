@@ -12,10 +12,24 @@ struct RowButtonText: View {
 
     private let buttonTextFont = Font.system(.title, design: .rounded).bold()
     private var buttonVerticalPadding: CGFloat {
-        isIpad ? 16 : 6
+         let screenHeight = UIScreen.main.bounds.height
+        if isIpad {
+            return 16
+        } else if screenHeight > 667 {
+            return 6
+        } else {
+            return 3
+        }
     }
     private var buttonMinHeight: CGFloat {
-        isIpad ? 65.5 : 45.5
+         let screenHeight = UIScreen.main.bounds.height
+        if isIpad {
+            return 65.5
+        } else if screenHeight > 667 {
+            return 45.5
+        } else {
+            return 39.5
+        }
     }
     let text: String
     let foregroundColor: Color

@@ -12,6 +12,9 @@ struct Square: View {
     let index: Int
 
     private let columns = [0, 1, 2]
+    private var borderWidth: CGFloat {
+        UIScreen.main.bounds.height > 667 ? 3 : 2
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,7 +22,7 @@ struct Square: View {
             Row(index: 1, columns: columns, squareIndex: index)
             Row(index: 2, columns: columns, squareIndex: index)
         }
-        .border(Color.black, width: 3)
+        .border(Color.black, width: borderWidth)
     }
 }
 

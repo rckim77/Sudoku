@@ -12,7 +12,14 @@ struct EditCellText: View {
     let values: Set<Int>
 
     private var minHeight: CGFloat {
-        isIpad ? 65.5 : 45.5
+        let screenHeight = UIScreen.main.bounds.height
+        if isIpad {
+            return 65.5
+        } else if screenHeight > 667 {
+            return 45.5
+        } else {
+            return 39.5
+        }
     }
 
     var body: some View {
