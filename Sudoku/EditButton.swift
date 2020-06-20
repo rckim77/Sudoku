@@ -14,10 +14,13 @@ struct EditButton: View {
     private var editState: EditState
 
     private var editButtonHorizontalPadding: CGFloat {
-        isIpad ? 24 : 14
+        isIpad ? 20 : 14
     }
     private var editButtonVerticalPadding: CGFloat {
-        isIpad ? 28 : 16
+        isIpad ? 26 : 16
+    }
+    private var imageSize: CGFloat {
+        isIpad ? 30 : 24
     }
 
     var body: some View {
@@ -25,7 +28,7 @@ struct EditButton: View {
             self.editState.isEditing.toggle()
         }) {
             Image(systemName: editState.isEditing ? "pencil.circle.fill" : "pencil.circle")
-                .font(.system(size: 24, weight: .regular))
+                .font(.system(size: imageSize, weight: .regular))
                 .foregroundColor(.black)
                 .padding(.horizontal, editButtonHorizontalPadding)
                 .padding(.vertical, editButtonVerticalPadding)
