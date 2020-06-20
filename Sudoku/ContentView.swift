@@ -68,6 +68,15 @@ struct ContentView: View {
         }
     }
 
+    private var gridHorizontalPadding: CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        if screenWidth > 1023 { // 12.9-inch iPads
+            return 170
+        } else {
+            return horizontalSizeClassPadding
+        }
+    }
+
     private var horizontalSizeClassPadding: CGFloat {
         return horizontalClass == .regular ? 80 : 0
     }
@@ -75,7 +84,7 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: verticalSpacing) {
             Grid()
-                .padding(.horizontal, horizontalSizeClassPadding)
+                .padding(.horizontal, gridHorizontalPadding)
             HStack(spacing: isIpad ? 36 : 12) {
                 ClearButton()
                 EditButton()
