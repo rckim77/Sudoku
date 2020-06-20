@@ -40,7 +40,6 @@ struct ContentView: View {
             return 50
         }
 
-        let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
             return 48
         } else if screenHeight > 667 { // 8 Plus
@@ -51,7 +50,6 @@ struct ContentView: View {
     }
 
     private var clearButtonHorizontalPadding: CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
             return 22
         } else { // 8 Plus, 8, SE (2nd gen)
@@ -60,7 +58,6 @@ struct ContentView: View {
     }
 
     private var clearButtonVerticalPadding: CGFloat {
-        let screenHeight = UIScreen.main.bounds.height
         if screenHeight > 736 { // taller than 8 Plus
             return 10
         } else { // 8 Plus, 8, SE (2nd gen)
@@ -69,7 +66,6 @@ struct ContentView: View {
     }
 
     private var gridHorizontalPadding: CGFloat {
-        let screenWidth = UIScreen.main.bounds.width
         if screenWidth > 1023 { // 12.9-inch iPads
             return 170
         } else {

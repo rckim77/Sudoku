@@ -13,7 +13,7 @@ struct Square: View {
 
     private let columns = [0, 1, 2]
     private var borderWidth: CGFloat {
-        UIScreen.main.bounds.height > 667 ? 3 : 2
+        screenHeight > 667 ? 3 : 2
     }
 
     var body: some View {

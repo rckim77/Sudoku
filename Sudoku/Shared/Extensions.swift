@@ -16,6 +16,14 @@ extension View {
     var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
+
+    var screenHeight: CGFloat {
+        UIScreen.main.bounds.height
+    }
+
+    var screenWidth: CGFloat {
+        UIScreen.main.bounds.width
+    }
 }
 
 struct Extensions_Previews: PreviewProvider {
