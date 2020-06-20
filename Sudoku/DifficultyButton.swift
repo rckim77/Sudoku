@@ -26,11 +26,23 @@ struct DifficultyButton: View {
     let level: Difficulty.Level
 
     private var buttonVerticalPadding: CGFloat {
-        isIpad ? 20 : 10
+        if isLargestIpad {
+            return 24
+        } else if isIpad {
+            return 20
+        } else {
+            return 10
+        }
     }
 
     private var buttonHorizontalPadding: CGFloat {
-        isIpad ? 32 : 16
+        if isLargestIpad {
+            return 38
+        } else if isIpad {
+            return 32
+        } else {
+            return 16
+        }
     }
 
     var body: some View {

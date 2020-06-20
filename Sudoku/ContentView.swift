@@ -67,7 +67,7 @@ struct ContentView: View {
 
     private var gridHorizontalPadding: CGFloat {
         if isLargestIpad {
-            return 170
+            return 175
         } else {
             return horizontalSizeClassPadding
         }
