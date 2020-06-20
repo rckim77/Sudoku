@@ -15,10 +15,8 @@ struct EditCellText: View {
         let screenHeight = UIScreen.main.bounds.height
         if isIpad {
             return 65.5
-        } else if screenHeight > 667 {
-            return 45.5
         } else {
-            return 39.5
+            return 45.5
         }
     }
 
