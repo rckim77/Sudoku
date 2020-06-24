@@ -35,6 +35,7 @@ final class GridValues: ObservableObject {
         let coordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
         removeValue(at: coordinate)
         grid.append(coordinateValue)
+        // todo: add invalid logic here and not in Row
     }
 
     func removeValue(at coordinate: Coordinate) {
