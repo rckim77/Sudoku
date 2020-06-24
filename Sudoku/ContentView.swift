@@ -115,5 +115,12 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(SelectedCell())
+            .environmentObject(UserAction())
+            .environmentObject(EditState())
+            .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
+            .environmentObject(GridValues(grid: GridFactory.easyGrid))
+            .environmentObject(EditGridValues(grid: []))
+            .environmentObject(Difficulty(level: .easy))
     }
 }
