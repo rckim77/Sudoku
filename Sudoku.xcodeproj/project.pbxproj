@@ -38,6 +38,7 @@
 		94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32E2494001100B1D003 /* CoordinateValue.swift */; };
 		94E9F332249406F500B1D003 /* AbsoluteCoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */; };
 		94E9F3342494289A00B1D003 /* EditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F3332494289A00B1D003 /* EditState.swift */; };
+		ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A324A41BC30075CE0E /* RowViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		94E9F32E2494001100B1D003 /* CoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateValue.swift; sourceTree = "<group>"; };
 		94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsoluteCoordinateValue.swift; sourceTree = "<group>"; };
 		94E9F3332494289A00B1D003 /* EditState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditState.swift; sourceTree = "<group>"; };
+		ECC830A324A41BC30075CE0E /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				9467743A2487579300F636D4 /* Grid.swift */,
 				946774382487572700F636D4 /* Square.swift */,
 				94677436248756CA00F636D4 /* Row.swift */,
+				ECC830A324A41BC30075CE0E /* RowViewModel.swift */,
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
 			);
 			path = GridComponents;
@@ -253,6 +256,7 @@
 				94600FC42499C87100E605FD /* DifficultyButtons.swift in Sources */,
 				94600FD9249B258900E605FD /* DifficultyButton.swift in Sources */,
 				94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */,
+				ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */,
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,
 				94600FBE2499C37300E605FD /* EditButton.swift in Sources */,
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,

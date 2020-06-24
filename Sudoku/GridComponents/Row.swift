@@ -8,13 +8,6 @@
 
 import SwiftUI
 
-struct RowViewModel {
-    let index: Int
-    let columns: [Int]
-    let squareIndex: Int
-    let selectedColumnIndex: Int?
-}
-
 struct Row: View {
 
     @EnvironmentObject
@@ -32,9 +25,6 @@ struct Row: View {
 
     let viewModel: RowViewModel
 
-    private let backgroundColor = Color("dynamicGridWhite")
-    private let selectedBackgroundColor = Color("dynamicGridSelection")
-
     var body: some View {
         HStack(spacing: 0) {
             Button(action: {
@@ -43,21 +33,21 @@ struct Row: View {
                 renderCellText(columnIndex: 0)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.selectedColumnIndex == 0 ? selectedBackgroundColor : backgroundColor)
+                .background(viewModel.backgroundColorFor(0))
             Button(action: {
                 self.updateSelectedButton(columnIndex: 1)
             }) {
                 renderCellText(columnIndex: 1)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.selectedColumnIndex == 1 ? selectedBackgroundColor : backgroundColor)
+                .background(viewModel.backgroundColorFor(1))
             Button(action: {
                 self.updateSelectedButton(columnIndex: 2)
             }) {
                 renderCellText(columnIndex: 2)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.selectedColumnIndex == 2 ? selectedBackgroundColor : backgroundColor)
+                .background(viewModel.backgroundColorFor(2))
         }
         .frame(maxWidth: .infinity)
     }
