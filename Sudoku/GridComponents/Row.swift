@@ -26,6 +26,7 @@ struct Row: View {
     let index: Int
     let columns: [Int]
     let squareIndex: Int
+    let selectedColumnIndex: Int?
 
     private let backgroundColor = Color("dynamicGridWhite")
     private let selectedBackgroundColor = Color("dynamicGridSelection")
@@ -38,21 +39,21 @@ struct Row: View {
                 renderCellText(columnIndex: 0)
             }
                 .border(Color.black, width: 1)
-                .background(isSelected(columnIndex: 0) ? selectedBackgroundColor : backgroundColor)
+                .background(selectedColumnIndex == 0 ? selectedBackgroundColor : backgroundColor)
             Button(action: {
                 self.updateSelectedButton(columnIndex: 1)
             }) {
                 renderCellText(columnIndex: 1)
             }
                 .border(Color.black, width: 1)
-                .background(isSelected(columnIndex: 1) ? selectedBackgroundColor : backgroundColor)
+                .background(selectedColumnIndex == 1 ? selectedBackgroundColor : backgroundColor)
             Button(action: {
                 self.updateSelectedButton(columnIndex: 2)
             }) {
                 renderCellText(columnIndex: 2)
             }
                 .border(Color.black, width: 1)
-                .background(isSelected(columnIndex: 2) ? selectedBackgroundColor : backgroundColor)
+                .background(selectedColumnIndex == 2 ? selectedBackgroundColor : backgroundColor)
         }
         .frame(maxWidth: .infinity)
     }
@@ -129,7 +130,7 @@ struct Row: View {
 
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
-        Row(index: 0, columns: [0, 1, 2], squareIndex: 0)
+        Row(index: 0, columns: [0, 1, 2], squareIndex: 0, selectedColumnIndex: nil)
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
