@@ -25,9 +25,18 @@ struct Square: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Row(index: 0, columns: columns, squareIndex: index, selectedColumnIndex: selectedRowColIndex?.row == 0 ? selectedRowColIndex?.col : nil)
-            Row(index: 1, columns: columns, squareIndex: index, selectedColumnIndex: selectedRowColIndex?.row == 1 ? selectedRowColIndex?.col : nil)
-            Row(index: 2, columns: columns, squareIndex: index, selectedColumnIndex: selectedRowColIndex?.row == 2 ? selectedRowColIndex?.col : nil)
+            Row(viewModel: RowViewModel(index: 0,
+                                        columns: columns,
+                                        squareIndex: index,
+                                        selectedColumnIndex: selectedRowColIndex?.row == 0 ? selectedRowColIndex?.col : nil))
+            Row(viewModel: RowViewModel(index: 1,
+                                        columns: columns,
+                                        squareIndex: index,
+                                        selectedColumnIndex: selectedRowColIndex?.row == 1 ? selectedRowColIndex?.col : nil))
+            Row(viewModel: RowViewModel(index: 2,
+                                        columns: columns,
+                                        squareIndex: index,
+                                        selectedColumnIndex: selectedRowColIndex?.row == 2 ? selectedRowColIndex?.col : nil))
         }
         .border(Color.black, width: borderWidth)
     }

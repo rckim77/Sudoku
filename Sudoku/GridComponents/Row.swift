@@ -8,6 +8,13 @@
 
 import SwiftUI
 
+struct RowViewModel {
+    let index: Int
+    let columns: [Int]
+    let squareIndex: Int
+    let selectedColumnIndex: Int?
+}
+
 struct Row: View {
 
     @EnvironmentObject
@@ -23,10 +30,7 @@ struct Row: View {
     @EnvironmentObject
     private var editGrid: EditGridValues
 
-    let index: Int
-    let columns: [Int]
-    let squareIndex: Int
-    let selectedColumnIndex: Int?
+    let viewModel: RowViewModel
 
     private let backgroundColor = Color("dynamicGridWhite")
     private let selectedBackgroundColor = Color("dynamicGridSelection")
@@ -39,33 +43,33 @@ struct Row: View {
                 renderCellText(columnIndex: 0)
             }
                 .border(Color.black, width: 1)
-                .background(selectedColumnIndex == 0 ? selectedBackgroundColor : backgroundColor)
+                .background(viewModel.selectedColumnIndex == 0 ? selectedBackgroundColor : backgroundColor)
             Button(action: {
                 self.updateSelectedButton(columnIndex: 1)
             }) {
                 renderCellText(columnIndex: 1)
             }
                 .border(Color.black, width: 1)
-                .background(selectedColumnIndex == 1 ? selectedBackgroundColor : backgroundColor)
+                .background(viewModel.selectedColumnIndex == 1 ? selectedBackgroundColor : backgroundColor)
             Button(action: {
                 self.updateSelectedButton(columnIndex: 2)
             }) {
                 renderCellText(columnIndex: 2)
             }
                 .border(Color.black, width: 1)
-                .background(selectedColumnIndex == 2 ? selectedBackgroundColor : backgroundColor)
+                .background(viewModel.selectedColumnIndex == 2 ? selectedBackgroundColor : backgroundColor)
         }
         .frame(maxWidth: .infinity)
     }
 
     private func isSelected(columnIndex: Int) -> Bool {
-        return selectedCell.coordinate?.r == index &&
+        return selectedCell.coordinate?.r == viewModel.index &&
             selectedCell.coordinate?.c == columnIndex &&
-            selectedCell.coordinate?.s == squareIndex
+            selectedCell.coordinate?.s == viewModel.squareIndex
     }
 
     private func setRowButtonText(columnIndex: Int) -> String {
-        let coordinate = (r: index, c: columnIndex, s: squareIndex)
+        let coordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
         if let buttonText = workingGrid.retrieveValue(at: coordinate) {
             return "\(buttonText)"
         } else {
@@ -74,7 +78,7 @@ struct Row: View {
     }
 
     private func setForegroundColor(columnIndex: Int) -> Color {
-        let currentCoordinate = (r: index, c: columnIndex, s: squareIndex)
+        let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
         let workingGridHasAValue = workingGrid.containsAValue(at: currentCoordinate)
         let startingGridHasAValue = startingGrid.containsAValue(at: currentCoordinate)
         if workingGridHasAValue && !startingGridHasAValue {
@@ -109,7 +113,7 @@ struct Row: View {
 
     private func updateSelectedButton(columnIndex: Int) {
         if !isSelected(columnIndex: columnIndex) {
-            selectedCell.coordinate = (r: index, c: columns[columnIndex], s: squareIndex)
+            selectedCell.coordinate = (r: viewModel.index, c: viewModel.columns[columnIndex], s: viewModel.squareIndex)
         } else {
             selectedCell.coordinate = nil
         }
@@ -118,7 +122,7 @@ struct Row: View {
 
     // Note: Use AnyView to type erase View.
     private func renderCellText(columnIndex: Int) -> AnyView {
-        let currentCoordinate = (r: index, c: columnIndex, s: squareIndex)
+        let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
         if !workingGrid.containsAValue(at: currentCoordinate) {
             let values = editGrid.guesses(for: currentCoordinate)?.values ?? Set<Int>()
             return AnyView(EditCellText(values: values))
@@ -130,7 +134,7 @@ struct Row: View {
 
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
-        Row(index: 0, columns: [0, 1, 2], squareIndex: 0, selectedColumnIndex: nil)
+        Row(viewModel: RowViewModel(index: 0, columns: [0, 1, 2], squareIndex: 0, selectedColumnIndex: nil))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
