@@ -11,25 +11,45 @@ import SwiftUI
 struct Grid: View {
     @EnvironmentObject
     var selectedCell: SelectedCell
+    
+    let startingGrid: [CoordinateValue]
 
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
             VStack {
                 HStack(spacing: 0) {
-                    Square(index: 0, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 0))
-                    Square(index: 1, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 1))
-                    Square(index: 2, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 2))
+                    Square(index: 0,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 0),
+                           startingGrid: startingGrid)
+                    Square(index: 1,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 1),
+                           startingGrid: startingGrid)
+                    Square(index: 2,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 2),
+                           startingGrid: startingGrid)
                 }
                 HStack(spacing: 0) {
-                    Square(index: 3, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 3))
-                    Square(index: 4, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 4))
-                    Square(index: 5, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 5))
+                    Square(index: 3,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 3),
+                           startingGrid: startingGrid)
+                    Square(index: 4,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 4),
+                           startingGrid: startingGrid)
+                    Square(index: 5,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 5),
+                           startingGrid: startingGrid)
                 }
                 HStack(spacing: 0) {
-                    Square(index: 6, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 6))
-                    Square(index: 7, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 7))
-                    Square(index: 8, selectedRowColIndex: transformSelectedCoordinate(squareIndex: 8))
+                    Square(index: 6,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 6),
+                           startingGrid: startingGrid)
+                    Square(index: 7,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 7),
+                           startingGrid: startingGrid)
+                    Square(index: 8,
+                           selectedRowColIndex: transformSelectedCoordinate(squareIndex: 8),
+                           startingGrid: startingGrid)
                 }
             }
             Spacer()
@@ -46,6 +66,6 @@ struct Grid: View {
 
 struct Grid_Previews: PreviewProvider {
     static var previews: some View {
-        Grid()
+        Grid(startingGrid: GridFactory.easyGrid)
     }
 }

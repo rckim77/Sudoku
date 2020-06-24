@@ -15,8 +15,6 @@ struct Row: View {
     @EnvironmentObject
     private var userAction: UserAction
     @EnvironmentObject
-    private var startingGrid: StartingGridValues
-    @EnvironmentObject
     private var workingGrid: GridValues
     @EnvironmentObject
     private var editState: EditState
@@ -70,17 +68,17 @@ struct Row: View {
     private func setForegroundColor(columnIndex: Int) -> Color {
         let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
         let workingGridHasAValue = workingGrid.containsAValue(at: currentCoordinate)
-        let startingGridHasAValue = startingGrid.containsAValue(at: currentCoordinate)
+        let startingGridHasAValue = viewModel.startingGridContainsAValue(at: currentCoordinate)
         if workingGridHasAValue && !startingGridHasAValue {
             if case let UserAction.ActionType.digit(digit) = userAction.action,
-                coordinate(currentCoordinate, withValue: digit, isInvalidFor: startingGrid) &&
+                coordinate(currentCoordinate, withValue: digit, isInvalidFor: viewModel.startingGrid) &&
                 isSelected(columnIndex: columnIndex) {
                 // user has just entered an invalid digit
                 return .red
             }
 
             if let retrievedValue = workingGrid.retrieveValue(at: currentCoordinate),
-                coordinate(currentCoordinate, withValue: retrievedValue, isInvalidFor: startingGrid) {
+                coordinate(currentCoordinate, withValue: retrievedValue, isInvalidFor: viewModel.startingGrid) {
                 // persist red text for other invalid digits in square that haven't been cleared
                 return .red
             }
@@ -95,10 +93,10 @@ struct Row: View {
 
     /// Encapsulates logic to check whether there are duplicates of the input value in the current
     /// coordinate's 3x3 square, grid row, or grid column.
-    private func coordinate(_ coordinate: Coordinate, withValue value: Int, isInvalidFor startingGrid: StartingGridValues) -> Bool {
-        return startingGrid.square(coordinate.s, contains: value) ||
-            startingGrid.fullRow(for: coordinate, contains: value) ||
-            startingGrid.fullColumn(for: coordinate, contains: value)
+    private func coordinate(_ coordinate: Coordinate, withValue value: Int, isInvalidFor startingGrid: [CoordinateValue]) -> Bool {
+        return viewModel.square(coordinate.s, contains: value) ||
+            viewModel.fullRow(for: coordinate, contains: value) ||
+            viewModel.fullColumn(for: coordinate, contains: value)
     }
 
     private func updateSelectedButton(columnIndex: Int) {
@@ -124,7 +122,7 @@ struct Row: View {
 
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
-        Row(viewModel: RowViewModel(index: 0, columns: [0, 1, 2], squareIndex: 0, selectedColumnIndex: nil))
+        Row(viewModel: RowViewModel(index: 0, columns: [0, 1, 2], squareIndex: 0, selectedColumnIndex: nil, startingGrid: GridFactory.easyGrid))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))

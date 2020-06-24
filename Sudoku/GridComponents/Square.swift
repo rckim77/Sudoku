@@ -17,6 +17,7 @@ struct Square: View {
     
     let index: Int
     let selectedRowColIndex: RowCol?
+    let startingGrid: [CoordinateValue]
 
     private let columns = [0, 1, 2]
     private var borderWidth: CGFloat {
@@ -28,15 +29,18 @@ struct Square: View {
             Row(viewModel: RowViewModel(index: 0,
                                         columns: columns,
                                         squareIndex: index,
-                                        selectedColumnIndex: selectedRowColIndex?.row == 0 ? selectedRowColIndex?.col : nil))
+                                        selectedColumnIndex: selectedRowColIndex?.row == 0 ? selectedRowColIndex?.col : nil,
+                                        startingGrid: startingGrid))
             Row(viewModel: RowViewModel(index: 1,
                                         columns: columns,
                                         squareIndex: index,
-                                        selectedColumnIndex: selectedRowColIndex?.row == 1 ? selectedRowColIndex?.col : nil))
+                                        selectedColumnIndex: selectedRowColIndex?.row == 1 ? selectedRowColIndex?.col : nil,
+                                        startingGrid: startingGrid))
             Row(viewModel: RowViewModel(index: 2,
                                         columns: columns,
                                         squareIndex: index,
-                                        selectedColumnIndex: selectedRowColIndex?.row == 2 ? selectedRowColIndex?.col : nil))
+                                        selectedColumnIndex: selectedRowColIndex?.row == 2 ? selectedRowColIndex?.col : nil,
+                                        startingGrid: startingGrid))
         }
         .border(Color.black, width: borderWidth)
     }
@@ -44,6 +48,6 @@ struct Square: View {
 
 struct Square_Previews: PreviewProvider {
     static var previews: some View {
-        Square(index: 0, selectedRowColIndex: nil)
+        Square(index: 0, selectedRowColIndex: nil, startingGrid: GridFactory.easyGrid)
     }
 }
