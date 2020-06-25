@@ -10,8 +10,6 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @Environment(\.horizontalSizeClass)
-    var horizontalClass
     @EnvironmentObject
     private var selectedCell: SelectedCell
     @EnvironmentObject
