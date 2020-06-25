@@ -73,7 +73,6 @@ struct DifficultyButton: View {
     }
 }
 
-// test
 struct DifficultyButton_Previews: PreviewProvider {
     static var previews: some View {
         DifficultyButton(displayAlert: .constant(false), lastTappedDifficulty: .constant(.easy), level: .easy)
