@@ -9,12 +9,11 @@
 import SwiftUI
 
 struct Grid: View {
-    @EnvironmentObject
-    var selectedCell: SelectedCell
     
     let startingGrid: [CoordinateValue]
     let workingGrid: [CoordinateValue]
     let editGrid: [CoordinateEditValues]
+    let selectedCell: Coordinate?
 
     var body: some View {
         HStack(spacing: 0) {
@@ -77,7 +76,7 @@ struct Grid: View {
     }
     
     private func transformSelectedCoordinate(squareIndex: Int) -> Square.RowCol? {
-        guard let coordinate = selectedCell.coordinate, coordinate.s == squareIndex else {
+        guard let coordinate = selectedCell, coordinate.s == squareIndex else {
             return nil
         }
         return Square.RowCol(row: coordinate.r, col: coordinate.c)
@@ -86,6 +85,6 @@ struct Grid: View {
 
 struct Grid_Previews: PreviewProvider {
     static var previews: some View {
-        Grid(startingGrid: GridFactory.easyGrid, workingGrid: GridFactory.easyGrid, editGrid: [])
+        Grid(startingGrid: GridFactory.easyGrid, workingGrid: GridFactory.easyGrid, editGrid: [], selectedCell: nil)
     }
 }
