@@ -12,8 +12,6 @@ struct KeysRow: View {
 
     @EnvironmentObject
     private var userAction: UserAction
-    @EnvironmentObject
-    private var selectedCell: SelectedCell
     // Note: startingGrid and workingGrid need to be different types in order for @EnvironmentObject to work properly
     // Reference: https://www.hackingwithswift.com/quick-start/swiftui/what-is-the-environmentobject-property-wrapper
     @EnvironmentObject
@@ -26,6 +24,8 @@ struct KeysRow: View {
     private var editState: EditState
     @Binding
     var gridIsComplete: Bool
+    
+    let selectedCoordinate: Coordinate?
 
     private let buttonCornerRadius: CGFloat = 5
 
@@ -95,7 +95,7 @@ struct KeysRow: View {
 
     private func updateForDigit(_ digit: Int) {
         userAction.action = .digit(digit)
-        guard let selectedCoordinate = selectedCell.coordinate, !startingGrid.containsAValue(at: selectedCoordinate) else {
+        guard let selectedCoordinate = selectedCoordinate, !startingGrid.containsAValue(at: selectedCoordinate) else {
             return
         }
 
@@ -112,6 +112,7 @@ struct KeysRow: View {
 
 struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
-        KeysRow(gridIsComplete: .constant(false))
+        KeysRow(gridIsComplete: .constant(false), selectedCoordinate: nil)
+            .environmentObject(UserAction())
     }
 }

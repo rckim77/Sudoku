@@ -85,7 +85,7 @@ struct ContentView: View {
                 ClearButton()
                 EditButton()
             }
-            KeysRow(gridIsComplete: $workingGridIsComplete)
+            KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate)
                 .padding(.horizontal, horizontalSizeClassPadding)
             DifficultyButtons(displayAlert: $displayAlertForDifficultyChange, lastTappedDifficulty: $lastTappedDifficultyLevel)
         }
