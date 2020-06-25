@@ -102,6 +102,5 @@ struct Row_Previews: PreviewProvider {
                                     guesses: []))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
-            .environmentObject(GridValues(grid: GridFactory.easyGrid))
     }
 }
