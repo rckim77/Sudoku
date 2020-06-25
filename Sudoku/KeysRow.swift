@@ -20,12 +20,11 @@ struct KeysRow: View {
     private var startingGrid: StartingGridValues
     @EnvironmentObject
     private var editGrid: EditGridValues
-    @EnvironmentObject
-    private var editState: EditState
     @Binding
     var gridIsComplete: Bool
     
     let selectedCoordinate: Coordinate?
+    let isEditing: Bool
 
     private let buttonCornerRadius: CGFloat = 5
 
@@ -100,7 +99,7 @@ struct KeysRow: View {
         }
 
         let coordinateValue = CoordinateValue(r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
-        if editState.isEditing {
+        if isEditing {
             editGrid.addGuess(value: digit, at: (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s))
         } else {
             editGrid.removeValues(at: selectedCoordinate)
@@ -112,7 +111,7 @@ struct KeysRow: View {
 
 struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
-        KeysRow(gridIsComplete: .constant(false), selectedCoordinate: nil)
+        KeysRow(gridIsComplete: .constant(false), selectedCoordinate: nil, isEditing: false)
             .environmentObject(UserAction())
     }
 }

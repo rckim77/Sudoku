@@ -85,7 +85,7 @@ struct ContentView: View {
                 ClearButton()
                 EditButton()
             }
-            KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate)
+            KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate, isEditing: editState.isEditing)
                 .padding(.horizontal, horizontalSizeClassPadding)
             DifficultyButtons(displayAlert: $displayAlertForDifficultyChange, lastTappedDifficulty: $lastTappedDifficultyLevel)
         }
@@ -106,6 +106,7 @@ struct ContentView: View {
                             let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
                             self.startingGrid.reset(newGrid: newGrid)
                             self.workingGrid.reset(newGrid: newGrid)
+                            self.editGrid.grid = []
                             self.selectedCell.coordinate = nil
             })])
         }
