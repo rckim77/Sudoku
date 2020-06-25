@@ -107,6 +107,26 @@ struct RowViewModel {
         return workingGridHasAValue && !startingGridHasAValue
     }
     
+    func foregroundColorFor(coordinate: Coordinate, digit: Int?) -> Color {
+        if onlyWorkingGridHasValue(at: coordinate) {
+            if let digit = digit, value(digit, wouldBeInvalidAt: coordinate) && selectedColumnIndex == coordinate.c {
+                // user has just entered an invalid digit
+                return .red
+            }
+            
+            if let retrievedValue = workingGridRetrieveValue(at: coordinate),
+                value(retrievedValue, wouldBeInvalidAt: coordinate) {
+                // persist red text for other invalid digits in square that haven't been cleared
+                return .red
+            }
+            
+            return Color("dynamicBlue")
+        } else {
+            // starting grid
+            return .black
+        }
+    }
+    
     // MARK: - Working grid methods
     
     func workingGridRetrieveValue(at coordinate: Coordinate) -> Int? {
@@ -131,5 +151,13 @@ struct RowViewModel {
             return gridCoordinate == coordinate
         }
         return result
+    }
+    
+    /// Checks whether there's already a coordinate with the input value in the
+    /// current coordinate's 3x3 square, starting grid row, or starting grid column.
+    private func value(_ value: Int, wouldBeInvalidAt coordinate: Coordinate) -> Bool {
+        return square(coordinate.s, contains: value) ||
+            fullRow(for: coordinate, contains: value) ||
+            fullColumn(for: coordinate, contains: value)
     }
 }

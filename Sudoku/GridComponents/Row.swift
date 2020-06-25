@@ -61,34 +61,13 @@ struct Row: View {
 
     private func setForegroundColor(columnIndex: Int) -> Color {
         let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
-        if viewModel.onlyWorkingGridHasValue(at: currentCoordinate) {
-            if case let UserAction.ActionType.digit(digit) = userAction.action,
-                coordinate(currentCoordinate, withValue: digit, isInvalidFor: viewModel.startingGrid) &&
-                isSelected(columnIndex: columnIndex) {
-                // user has just entered an invalid digit
-                return .red
-            }
-
-            if let retrievedValue = viewModel.workingGridRetrieveValue(at: currentCoordinate),
-                coordinate(currentCoordinate, withValue: retrievedValue, isInvalidFor: viewModel.startingGrid) {
-                // persist red text for other invalid digits in square that haven't been cleared
-                return .red
-            }
-
-            // in working grid but not starting grid
-            return Color("dynamicBlue")
+        let digit: Int?
+        if case let UserAction.ActionType.digit(inputDigit) = userAction.action {
+            digit = inputDigit
         } else {
-            // starting grid
-            return .black
+            digit = nil
         }
-    }
-
-    /// Encapsulates logic to check whether there are duplicates of the input value in the current
-    /// coordinate's 3x3 square, grid row, or grid column.
-    private func coordinate(_ coordinate: Coordinate, withValue value: Int, isInvalidFor startingGrid: [CoordinateValue]) -> Bool {
-        return viewModel.square(coordinate.s, contains: value) ||
-            viewModel.fullRow(for: coordinate, contains: value) ||
-            viewModel.fullColumn(for: coordinate, contains: value)
+        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit)
     }
 
     private func updateSelectedButton(columnIndex: Int) {
