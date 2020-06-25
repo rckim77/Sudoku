@@ -39,6 +39,7 @@
 		94E9F332249406F500B1D003 /* AbsoluteCoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */; };
 		94E9F3342494289A00B1D003 /* EditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F3332494289A00B1D003 /* EditState.swift */; };
 		ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A324A41BC30075CE0E /* RowViewModel.swift */; };
+		ECC830A624A5567C0075CE0E /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A524A5567C0075CE0E /* ContentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsoluteCoordinateValue.swift; sourceTree = "<group>"; };
 		94E9F3332494289A00B1D003 /* EditState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditState.swift; sourceTree = "<group>"; };
 		ECC830A324A41BC30075CE0E /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
+		ECC830A524A5567C0075CE0E /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				94E108842487333B0091D043 /* SceneDelegate.swift */,
 				94600FD6249B1E8400E605FD /* GridFactory.swift */,
 				94E108862487333B0091D043 /* ContentView.swift */,
+				ECC830A524A5567C0075CE0E /* ContentViewModel.swift */,
 				ECC830A224A3F8C70075CE0E /* GridComponents */,
 				94600FBD2499C37300E605FD /* EditButton.swift */,
 				94600FBF2499C4A700E605FD /* ClearButton.swift */,
@@ -262,6 +265,7 @@
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
 				94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */,
 				94600FB624973EF300E605FD /* EditGridValues.swift in Sources */,
+				ECC830A624A5567C0075CE0E /* ContentViewModel.swift in Sources */,
 				94600FC02499C4A700E605FD /* ClearButton.swift in Sources */,
 				94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,

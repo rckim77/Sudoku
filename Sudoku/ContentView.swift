@@ -34,59 +34,19 @@ struct ContentView: View {
     private var lastTappedDifficultyLevel: Difficulty.Level = .easy
     @State
     private var displayAlertForDifficultyChange = false
-
-    private var verticalSpacing: CGFloat {
-        guard !isIpad else {
-            return 50
-        }
-
-        if screenHeight > 736 { // taller than 8 Plus
-            return 48
-        } else if screenHeight > 667 { // 8 Plus
-            return 26
-        } else { // 8, SE (2nd gen)
-            return 20
-        }
-    }
-
-    private var clearButtonHorizontalPadding: CGFloat {
-        if screenHeight > 736 { // taller than 8 Plus
-            return 22
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 14
-        }
-    }
-
-    private var clearButtonVerticalPadding: CGFloat {
-        if screenHeight > 736 { // taller than 8 Plus
-            return 10
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 8
-        }
-    }
-
-    private var gridHorizontalPadding: CGFloat {
-        if isLargestIpad {
-            return 175
-        } else {
-            return horizontalSizeClassPadding
-        }
-    }
-
-    private var horizontalSizeClassPadding: CGFloat {
-        return horizontalClass == .regular ? 80 : 0
-    }
+    
+    let viewModel: ContentViewModel
 
     var body: some View {
-        VStack(spacing: verticalSpacing) {
+        VStack(spacing: viewModel.verticalSpacing) {
             Grid(startingGrid: startingGrid.grid, workingGrid: workingGrid.grid, editGrid: editGrid.grid)
-                .padding(.horizontal, gridHorizontalPadding)
+                .padding(.horizontal, viewModel.gridHorizontalPadding)
             HStack(spacing: isIpad ? 36 : 12) {
                 ClearButton()
                 EditButton()
             }
             KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate, isEditing: editState.isEditing)
-                .padding(.horizontal, horizontalSizeClassPadding)
+                .padding(.horizontal, viewModel.horizontalSizeClassPadding)
             DifficultyButtons(displayAlert: $displayAlertForDifficultyChange,
                               lastTappedDifficulty: $lastTappedDifficultyLevel,
                               editGridIsEmpty: editGrid.grid.isEmpty)
@@ -117,7 +77,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewModel: ContentViewModel())
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(EditState())

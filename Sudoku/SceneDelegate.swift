@@ -23,8 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let workingGrid = GridValues(grid: GridFactory.easyGrid)
         let editState = EditState()
         let editGridValues = EditGridValues(grid: [])
+        let viewModel = ContentViewModel()
         
-        let contentView = ContentView()
+        let contentView = ContentView(viewModel: viewModel)
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(startingGrid)
