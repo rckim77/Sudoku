@@ -49,6 +49,10 @@ struct ContentViewModel {
             return horizontalSizeClassPadding
         }
     }
+    
+    var modifierButtonsHorizontalSpacing: CGFloat {
+        isIpad ? 36 : 12
+    }
 
     var horizontalSizeClassPadding: CGFloat {
         return horizontalClass == .regular ? 80 : 0
