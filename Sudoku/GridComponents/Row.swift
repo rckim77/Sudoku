@@ -16,8 +16,6 @@ struct Row: View {
     private var userAction: UserAction
     @EnvironmentObject
     private var workingGrid: GridValues
-    @EnvironmentObject
-    private var editState: EditState
 
     let viewModel: RowViewModel
 
@@ -130,6 +128,5 @@ struct Row_Previews: PreviewProvider {
             .environmentObject(UserAction())
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
             .environmentObject(GridValues(grid: GridFactory.easyGrid))
-            .environmentObject(EditState())
     }
 }
