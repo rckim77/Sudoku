@@ -17,8 +17,6 @@ struct DifficultyButton: View {
     @EnvironmentObject
     private var workingGrid: GridValues
     @EnvironmentObject
-    private var editGrid: EditGridValues
-    @EnvironmentObject
     private var selectedCell: SelectedCell
     @Binding
     var displayAlert: Bool
@@ -26,6 +24,7 @@ struct DifficultyButton: View {
     var lastTappedDifficulty: Difficulty.Level
 
     let level: Difficulty.Level
+    let editGridIsEmpty: Bool
 
     private var buttonVerticalPadding: CGFloat {
         if isLargestIpad {
@@ -53,7 +52,7 @@ struct DifficultyButton: View {
                 return
             }
             self.lastTappedDifficulty = self.level
-            if self.workingGrid.grid.count != self.startingGrid.grid.count || !self.editGrid.grid.isEmpty {
+            if self.workingGrid.grid.count != self.startingGrid.grid.count || !self.editGridIsEmpty {
                 self.displayAlert = true
             } else {
                 self.difficulty.level = self.level
@@ -75,6 +74,9 @@ struct DifficultyButton: View {
 
 struct DifficultyButton_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultyButton(displayAlert: .constant(false), lastTappedDifficulty: .constant(.easy), level: .easy)
+        DifficultyButton(displayAlert: .constant(false),
+                         lastTappedDifficulty: .constant(.easy),
+                         level: .easy,
+                         editGridIsEmpty: true)
     }
 }

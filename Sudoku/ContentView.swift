@@ -87,7 +87,9 @@ struct ContentView: View {
             }
             KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate, isEditing: editState.isEditing)
                 .padding(.horizontal, horizontalSizeClassPadding)
-            DifficultyButtons(displayAlert: $displayAlertForDifficultyChange, lastTappedDifficulty: $lastTappedDifficultyLevel)
+            DifficultyButtons(displayAlert: $displayAlertForDifficultyChange,
+                              lastTappedDifficulty: $lastTappedDifficultyLevel,
+                              editGridIsEmpty: editGrid.grid.isEmpty)
         }
         .alert(isPresented: $workingGridIsComplete) {
             Alert(title: Text("Congratulations!"),
