@@ -79,7 +79,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: verticalSpacing) {
-            Grid(startingGrid: startingGrid.grid, editGrid: editGrid.grid)
+            Grid(startingGrid: startingGrid.grid, workingGrid: workingGrid.grid, editGrid: editGrid.grid)
                 .padding(.horizontal, gridHorizontalPadding)
             HStack(spacing: isIpad ? 36 : 12) {
                 ClearButton()

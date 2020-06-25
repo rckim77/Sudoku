@@ -14,8 +14,6 @@ struct Row: View {
     private var selectedCell: SelectedCell
     @EnvironmentObject
     private var userAction: UserAction
-    @EnvironmentObject
-    private var workingGrid: GridValues
 
     let viewModel: RowViewModel
 
@@ -54,8 +52,8 @@ struct Row: View {
 
     private func setRowButtonText(columnIndex: Int) -> String {
         let coordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
-        if let buttonText = workingGrid.retrieveValue(at: coordinate) {
-            return "\(buttonText)"
+        if let value = viewModel.workingGridRetrieveValue(at: coordinate) {
+            return "\(value)"
         } else {
             return ""
         }
@@ -63,9 +61,7 @@ struct Row: View {
 
     private func setForegroundColor(columnIndex: Int) -> Color {
         let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
-        let workingGridHasAValue = workingGrid.containsAValue(at: currentCoordinate)
-        let startingGridHasAValue = viewModel.startingGridContainsAValue(at: currentCoordinate)
-        if workingGridHasAValue && !startingGridHasAValue {
+        if viewModel.onlyWorkingGridHasValue(at: currentCoordinate) {
             if case let UserAction.ActionType.digit(digit) = userAction.action,
                 coordinate(currentCoordinate, withValue: digit, isInvalidFor: viewModel.startingGrid) &&
                 isSelected(columnIndex: columnIndex) {
@@ -73,7 +69,7 @@ struct Row: View {
                 return .red
             }
 
-            if let retrievedValue = workingGrid.retrieveValue(at: currentCoordinate),
+            if let retrievedValue = viewModel.workingGridRetrieveValue(at: currentCoordinate),
                 coordinate(currentCoordinate, withValue: retrievedValue, isInvalidFor: viewModel.startingGrid) {
                 // persist red text for other invalid digits in square that haven't been cleared
                 return .red
@@ -107,7 +103,7 @@ struct Row: View {
     // Note: Use AnyView to type erase View.
     private func renderCellText(columnIndex: Int) -> AnyView {
         let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
-        if !workingGrid.containsAValue(at: currentCoordinate) {
+        if !viewModel.workingGridContainsAValue(at: currentCoordinate) {
             let guess = viewModel.guessFor(columnIndex)
             return AnyView(EditCellText(values: guess))
         } else {
@@ -123,6 +119,7 @@ struct Row_Previews: PreviewProvider {
                                     squareIndex: 0,
                                     selectedColumnIndex: nil,
                                     startingGrid: GridFactory.easyGrid,
+                                    workingGrid: GridFactory.easyGrid,
                                     guesses: []))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())

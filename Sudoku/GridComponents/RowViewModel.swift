@@ -14,6 +14,7 @@ struct RowViewModel {
     let squareIndex: Int
     let selectedColumnIndex: Int?
     let startingGrid: [CoordinateValue]
+    let workingGrid: [CoordinateValue]
     let guesses: [CoordinateEditValues]
     
     private let backgroundColor = Color("dynamicGridWhite")
@@ -23,16 +24,13 @@ struct RowViewModel {
         return selectedColumnIndex == columnIndex ? selectedBackgroundColor : backgroundColor
     }
     
-    func startingGridContainsAValue(at coordinate: Coordinate) -> Bool {
-        let result = startingGrid.contains { coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
-            return gridCoordinate == coordinate
-        }
-        return result
+    func workingGridContainsAValue(at coordinate: Coordinate) -> Bool {
+        return grid(workingGrid, containsAValueAt: coordinate)
     }
+
     
     func square(_ squareIndex: Int, contains value: Int) -> Bool {
-        let squareValues = values(in: squareIndex)
+        let squareValues = values(in: squareIndex, grid: startingGrid)
         return squareValues.contains { coordinateValue -> Bool in
             return coordinateValue.v == value
         }
@@ -101,11 +99,37 @@ struct RowViewModel {
         })?.values ?? Set<Int>()
     }
     
+    /// Compares working grid and starting grid and returns whether there's a value at the
+    /// specified coordinate only in the working grid.
+    func onlyWorkingGridHasValue(at coordinate: Coordinate) -> Bool {
+        let workingGridHasAValue = grid(workingGrid, containsAValueAt: coordinate)
+        let startingGridHasAValue = grid(startingGrid, containsAValueAt: coordinate)
+        return workingGridHasAValue && !startingGridHasAValue
+    }
+    
+    // MARK: - Working grid methods
+    
+    func workingGridRetrieveValue(at coordinate: Coordinate) -> Int? {
+        let squareValues = values(in: coordinate.s, grid: workingGrid)
+        return squareValues.filter({ coordinateValue -> Bool in
+            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            return gridCoordinate == coordinate
+        }).first?.v
+    }
+    
     // MARK: - Private helpers
     
-    private func values(in squareIndex: Int) -> [CoordinateValue] {
-        startingGrid.filter { coordinateValue -> Bool in
+    private func values(in squareIndex: Int, grid: [CoordinateValue]) -> [CoordinateValue] {
+        grid.filter { coordinateValue -> Bool in
             coordinateValue.s == squareIndex
         }
+    }
+    
+    private func grid(_ grid: [CoordinateValue], containsAValueAt coordinate: Coordinate) -> Bool {
+        let result = grid.contains { coordinateValue -> Bool in
+            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            return gridCoordinate == coordinate
+        }
+        return result
     }
 }

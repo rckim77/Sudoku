@@ -13,6 +13,7 @@ struct Grid: View {
     var selectedCell: SelectedCell
     
     let startingGrid: [CoordinateValue]
+    let workingGrid: [CoordinateValue]
     let editGrid: [CoordinateEditValues]
 
     var body: some View {
@@ -23,42 +24,51 @@ struct Grid: View {
                     Square(index: 0,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 0),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 0 })
                     Square(index: 1,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 1),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 1 })
                     Square(index: 2,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 2),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 2 })
                 }
                 HStack(spacing: 0) {
                     Square(index: 3,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 3),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 3 })
                     Square(index: 4,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 4),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 4 })
                     Square(index: 5,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 5),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 5 })
                 }
                 HStack(spacing: 0) {
                     Square(index: 6,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 6),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 6 })
                     Square(index: 7,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 7),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 7 })
                     Square(index: 8,
                            selectedRowColIndex: transformSelectedCoordinate(squareIndex: 8),
                            startingGrid: startingGrid,
+                           workingGrid: workingGrid,
                            editGridSlice: editGrid.filter { $0.s == 8 })
                 }
             }
@@ -76,6 +86,6 @@ struct Grid: View {
 
 struct Grid_Previews: PreviewProvider {
     static var previews: some View {
-        Grid(startingGrid: GridFactory.easyGrid, editGrid: [])
+        Grid(startingGrid: GridFactory.easyGrid, workingGrid: GridFactory.easyGrid, editGrid: [])
     }
 }
