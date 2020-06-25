@@ -23,8 +23,7 @@ struct DifficultyButton: View {
     @Binding
     var lastTappedDifficulty: Difficulty.Level
 
-    let level: Difficulty.Level
-    let editGridIsEmpty: Bool
+    let viewModel: DifficultyButtonViewModel
 
     private var buttonVerticalPadding: CGFloat {
         if isLargestIpad {
@@ -48,26 +47,26 @@ struct DifficultyButton: View {
 
     var body: some View {
         Button(action: {
-            guard self.level != self.difficulty.level else {
+            guard self.viewModel.level != self.difficulty.level else {
                 return
             }
-            self.lastTappedDifficulty = self.level
-            if self.workingGrid.grid.count != self.startingGrid.grid.count || !self.editGridIsEmpty {
+            self.lastTappedDifficulty = self.viewModel.level
+            if self.workingGrid.grid.count != self.startingGrid.grid.count || !self.viewModel.editGridIsEmpty {
                 self.displayAlert = true
             } else {
-                self.difficulty.level = self.level
+                self.difficulty.level = self.viewModel.level
                 let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
                 self.startingGrid.reset(newGrid: newGrid)
                 self.workingGrid.reset(newGrid: newGrid)
                 self.selectedCell.coordinate = nil
             }
         }) {
-            Text(level.rawValue)
-                .foregroundColor(level == difficulty.level ? .white : Color.blue)
+            Text(viewModel.level.rawValue)
+                .foregroundColor(viewModel.level == difficulty.level ? .white : Color.blue)
         }
             .padding(.vertical, buttonVerticalPadding)
             .padding(.horizontal, buttonHorizontalPadding)
-            .background(level == difficulty.level ? Color.blue.opacity(0.9) : Color.blue.opacity(0.2))
+        .background(viewModel.level == difficulty.level ? Color.blue.opacity(0.9) : Color.blue.opacity(0.2))
             .cornerRadius(8)
     }
 }
@@ -76,7 +75,6 @@ struct DifficultyButton_Previews: PreviewProvider {
     static var previews: some View {
         DifficultyButton(displayAlert: .constant(false),
                          lastTappedDifficulty: .constant(.easy),
-                         level: .easy,
-                         editGridIsEmpty: true)
+                         viewModel: DifficultyButtonViewModel(level: .easy, editGridIsEmpty: false))
     }
 }

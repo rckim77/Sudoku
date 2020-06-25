@@ -19,16 +19,16 @@ struct DifficultyButtons: View {
         HStack(spacing: isIpad ? 36 : 12) {
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
-                             level: .easy,
-                             editGridIsEmpty: editGridIsEmpty)
+                             viewModel: DifficultyButtonViewModel(level: .easy,
+                             editGridIsEmpty: editGridIsEmpty))
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
-                             level: .medium,
-                             editGridIsEmpty: editGridIsEmpty)
+                             viewModel: DifficultyButtonViewModel(level: .medium,
+                             editGridIsEmpty: editGridIsEmpty))
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
-                             level: .hard,
-                             editGridIsEmpty: editGridIsEmpty)
+                             viewModel: DifficultyButtonViewModel(level: .hard,
+                             editGridIsEmpty: editGridIsEmpty))
         }
     }
 }
