@@ -14,6 +14,7 @@ struct RowViewModel {
     let squareIndex: Int
     let selectedColumnIndex: Int?
     let startingGrid: [CoordinateValue]
+    let guesses: [CoordinateEditValues]
     
     private let backgroundColor = Color("dynamicGridWhite")
     private let selectedBackgroundColor = Color("dynamicGridSelection")
@@ -28,12 +29,6 @@ struct RowViewModel {
             return gridCoordinate == coordinate
         }
         return result
-    }
-    
-    private func values(in squareIndex: Int) -> [CoordinateValue] {
-        startingGrid.filter { coordinateValue -> Bool in
-            coordinateValue.s == squareIndex
-        }
     }
     
     func square(_ squareIndex: Int, contains value: Int) -> Bool {
@@ -95,5 +90,22 @@ struct RowViewModel {
             }
         }
         return containsValueInCol
+    }
+    
+    func guessFor(_ columnIndex: Int) -> Set<Int> {
+        let coordinate = (r: index, c: columnIndex, s: squareIndex)
+        return guesses.first(where: {
+            $0.r == coordinate.r &&
+            $0.c == coordinate.c &&
+            $0.s == coordinate.s
+        })?.values ?? Set<Int>()
+    }
+    
+    // MARK: - Private helpers
+    
+    private func values(in squareIndex: Int) -> [CoordinateValue] {
+        startingGrid.filter { coordinateValue -> Bool in
+            coordinateValue.s == squareIndex
+        }
     }
 }

@@ -18,8 +18,6 @@ struct Row: View {
     private var workingGrid: GridValues
     @EnvironmentObject
     private var editState: EditState
-    @EnvironmentObject
-    private var editGrid: EditGridValues
 
     let viewModel: RowViewModel
 
@@ -112,8 +110,8 @@ struct Row: View {
     private func renderCellText(columnIndex: Int) -> AnyView {
         let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
         if !workingGrid.containsAValue(at: currentCoordinate) {
-            let values = editGrid.guesses(for: currentCoordinate)?.values ?? Set<Int>()
-            return AnyView(EditCellText(values: values))
+            let guess = viewModel.guessFor(columnIndex)
+            return AnyView(EditCellText(values: guess))
         } else {
             return AnyView(RowButtonText(text: setRowButtonText(columnIndex: columnIndex), foregroundColor: setForegroundColor(columnIndex: columnIndex)))
         }
@@ -122,12 +120,16 @@ struct Row: View {
 
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
-        Row(viewModel: RowViewModel(index: 0, columns: [0, 1, 2], squareIndex: 0, selectedColumnIndex: nil, startingGrid: GridFactory.easyGrid))
+        Row(viewModel: RowViewModel(index: 0,
+                                    columns: [0, 1, 2],
+                                    squareIndex: 0,
+                                    selectedColumnIndex: nil,
+                                    startingGrid: GridFactory.easyGrid,
+                                    guesses: []))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
             .environmentObject(GridValues(grid: GridFactory.easyGrid))
             .environmentObject(EditState())
-            .environmentObject(EditGridValues(grid: []))
     }
 }

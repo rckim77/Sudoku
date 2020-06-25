@@ -18,6 +18,7 @@ struct Square: View {
     let index: Int
     let selectedRowColIndex: RowCol?
     let startingGrid: [CoordinateValue]
+    let editGridSlice: [CoordinateEditValues]
 
     private let columns = [0, 1, 2]
     private var borderWidth: CGFloat {
@@ -30,17 +31,20 @@ struct Square: View {
                                         columns: columns,
                                         squareIndex: index,
                                         selectedColumnIndex: selectedRowColIndex?.row == 0 ? selectedRowColIndex?.col : nil,
-                                        startingGrid: startingGrid))
+                                        startingGrid: startingGrid,
+                                        guesses: editGridSlice.filter { $0.r == 0 }))
             Row(viewModel: RowViewModel(index: 1,
                                         columns: columns,
                                         squareIndex: index,
                                         selectedColumnIndex: selectedRowColIndex?.row == 1 ? selectedRowColIndex?.col : nil,
-                                        startingGrid: startingGrid))
+                                        startingGrid: startingGrid,
+                                        guesses: editGridSlice.filter { $0.r == 1 }))
             Row(viewModel: RowViewModel(index: 2,
                                         columns: columns,
                                         squareIndex: index,
                                         selectedColumnIndex: selectedRowColIndex?.row == 2 ? selectedRowColIndex?.col : nil,
-                                        startingGrid: startingGrid))
+                                        startingGrid: startingGrid,
+                                        guesses: editGridSlice.filter { $0.r == 2 }))
         }
         .border(Color.black, width: borderWidth)
     }
@@ -48,6 +52,6 @@ struct Square: View {
 
 struct Square_Previews: PreviewProvider {
     static var previews: some View {
-        Square(index: 0, selectedRowColIndex: nil, startingGrid: GridFactory.easyGrid)
+        Square(index: 0, selectedRowColIndex: nil, startingGrid: GridFactory.easyGrid, editGridSlice: [])
     }
 }
