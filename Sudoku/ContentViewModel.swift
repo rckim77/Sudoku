@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentViewModel {
+struct ContentViewModel: ViewModel {
     @Environment(\.horizontalSizeClass)
     var horizontalClass
 
@@ -56,24 +56,5 @@ struct ContentViewModel {
 
     var horizontalSizeClassPadding: CGFloat {
         return horizontalClass == .regular ? 80 : 0
-    }
-    
-    // MARK: - Helper vars
-
-    private var isIpad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
-    
-    /// E.g., 12.9-inch iPads
-    private var isLargestIpad: Bool {
-        isIpad && screenWidth > 1023
-    }
-
-    private var screenHeight: CGFloat {
-        UIScreen.main.bounds.height
-    }
-
-    private var screenWidth: CGFloat {
-        UIScreen.main.bounds.width
     }
 }
