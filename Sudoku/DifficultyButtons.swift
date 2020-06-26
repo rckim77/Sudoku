@@ -14,27 +14,28 @@ struct DifficultyButtons: View {
     @Binding
     var lastTappedDifficulty: Difficulty.Level
     let editGridIsEmpty: Bool
+    let workingGridHasMoreValues: Bool
 
     var body: some View {
         HStack(spacing: isIpad ? 36 : 12) {
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
                              viewModel: DifficultyButtonViewModel(level: .easy,
-                             editGridIsEmpty: editGridIsEmpty))
+                             editGridIsEmpty: editGridIsEmpty, workingGridHasMoreValues: workingGridHasMoreValues))
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
                              viewModel: DifficultyButtonViewModel(level: .medium,
-                             editGridIsEmpty: editGridIsEmpty))
+                             editGridIsEmpty: editGridIsEmpty, workingGridHasMoreValues: workingGridHasMoreValues))
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
                              viewModel: DifficultyButtonViewModel(level: .hard,
-                             editGridIsEmpty: editGridIsEmpty))
+                             editGridIsEmpty: editGridIsEmpty, workingGridHasMoreValues: workingGridHasMoreValues))
         }
     }
 }
 
 struct DifficultyButtons_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultyButtons(displayAlert: .constant(false), lastTappedDifficulty: .constant(.easy), editGridIsEmpty: true)
+        DifficultyButtons(displayAlert: .constant(false), lastTappedDifficulty: .constant(.easy), editGridIsEmpty: true, workingGridHasMoreValues: true)
     }
 }

@@ -50,7 +50,8 @@ struct ContentView: View {
                 .padding(.horizontal, viewModel.horizontalSizeClassPadding)
             DifficultyButtons(displayAlert: $displayAlertForDifficultyChange,
                               lastTappedDifficulty: $lastTappedDifficultyLevel,
-                              editGridIsEmpty: editGrid.grid.isEmpty)
+                              editGridIsEmpty: editGrid.grid.isEmpty,
+                              workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count)
         }
         .alert(isPresented: $workingGridIsComplete) {
             Alert(title: Text("Congratulations!"),

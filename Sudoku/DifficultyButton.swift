@@ -51,7 +51,7 @@ struct DifficultyButton: View {
                 return
             }
             self.lastTappedDifficulty = self.viewModel.level
-            if self.workingGrid.grid.count != self.startingGrid.grid.count || !self.viewModel.editGridIsEmpty {
+            if self.viewModel.shouldDisplayAlert {
                 self.displayAlert = true
             } else {
                 self.difficulty.level = self.viewModel.level
@@ -75,6 +75,8 @@ struct DifficultyButton_Previews: PreviewProvider {
     static var previews: some View {
         DifficultyButton(displayAlert: .constant(false),
                          lastTappedDifficulty: .constant(.easy),
-                         viewModel: DifficultyButtonViewModel(level: .easy, editGridIsEmpty: false))
+                         viewModel: DifficultyButtonViewModel(level: .easy,
+                                                              editGridIsEmpty: false,
+                                                              workingGridHasMoreValues: true))
     }
 }

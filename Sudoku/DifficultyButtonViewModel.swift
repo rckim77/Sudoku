@@ -9,6 +9,12 @@
 import SwiftUI
 
 struct DifficultyButtonViewModel {
+
     let level: Difficulty.Level
     let editGridIsEmpty: Bool
+    let workingGridHasMoreValues: Bool
+
+    var shouldDisplayAlert: Bool {
+        workingGridHasMoreValues || !editGridIsEmpty
+    }
 }
