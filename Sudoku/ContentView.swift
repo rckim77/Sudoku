@@ -51,7 +51,8 @@ struct ContentView: View {
             DifficultyButtons(displayAlert: $displayAlertForDifficultyChange,
                               lastTappedDifficulty: $lastTappedDifficultyLevel,
                               editGridIsEmpty: editGrid.grid.isEmpty,
-                              workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count)
+                              workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count,
+                              currentLevel: difficulty.level)
         }
         .alert(isPresented: $workingGridIsComplete) {
             Alert(title: Text("Congratulations!"),

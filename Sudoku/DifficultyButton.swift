@@ -27,26 +27,26 @@ struct DifficultyButton: View {
 
     var body: some View {
         Button(action: {
-            guard self.viewModel.level != self.difficulty.level else {
+            guard self.viewModel.buttonLevel != self.difficulty.level else {
                 return
             }
-            self.lastTappedDifficulty = self.viewModel.level
+            self.lastTappedDifficulty = self.viewModel.buttonLevel
             if self.viewModel.shouldDisplayAlert {
                 self.displayAlert = true
             } else {
-                self.difficulty.level = self.viewModel.level
+                self.difficulty.level = self.viewModel.buttonLevel
                 let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
                 self.startingGrid.reset(newGrid: newGrid)
                 self.workingGrid.reset(newGrid: newGrid)
                 self.selectedCell.coordinate = nil
             }
         }) {
-            Text(viewModel.level.rawValue)
-                .foregroundColor(viewModel.level == difficulty.level ? .white : Color.blue)
+            Text(viewModel.buttonLevel.rawValue)
+                .foregroundColor(viewModel.backgroundTextColor)
         }
         .padding(.vertical, viewModel.buttonVerticalPadding)
         .padding(.horizontal, viewModel.buttonHorizontalPadding)
-        .background(viewModel.level == difficulty.level ? Color.blue.opacity(0.9) : Color.blue.opacity(0.2))
+        .background(viewModel.backgroundColor)
             .cornerRadius(8)
     }
 }
@@ -55,7 +55,8 @@ struct DifficultyButton_Previews: PreviewProvider {
     static var previews: some View {
         DifficultyButton(displayAlert: .constant(false),
                          lastTappedDifficulty: .constant(.easy),
-                         viewModel: DifficultyButtonViewModel(level: .easy,
+                         viewModel: DifficultyButtonViewModel(buttonLevel: .easy,
+                                                              currentLevel: .easy,
                                                               editGridIsEmpty: false,
                                                               workingGridHasMoreValues: true))
     }

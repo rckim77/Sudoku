@@ -10,9 +10,19 @@ import SwiftUI
 
 struct DifficultyButtonViewModel: ViewModel {
 
-    let level: Difficulty.Level
+    let buttonLevel: Difficulty.Level
+    /// derived from Difficulty env object
+    let currentLevel: Difficulty.Level
     let editGridIsEmpty: Bool
     let workingGridHasMoreValues: Bool
+    
+    var backgroundTextColor: Color {
+        buttonLevel == currentLevel ? .white : .blue
+    }
+    
+    var backgroundColor: Color {
+        buttonLevel == currentLevel ? Color.blue.opacity(0.9) : Color.blue.opacity(0.2)
+    }
     
     var buttonVerticalPadding: CGFloat {
         if isLargestIpad {

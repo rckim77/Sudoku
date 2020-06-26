@@ -15,20 +15,24 @@ struct DifficultyButtons: View {
     var lastTappedDifficulty: Difficulty.Level
     let editGridIsEmpty: Bool
     let workingGridHasMoreValues: Bool
+    let currentLevel: Difficulty.Level
 
     var body: some View {
         HStack(spacing: isIpad ? 36 : 12) {
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
-                             viewModel: DifficultyButtonViewModel(level: .easy,
+                             viewModel: DifficultyButtonViewModel(buttonLevel: .easy,
+                                                                  currentLevel: currentLevel,
                              editGridIsEmpty: editGridIsEmpty, workingGridHasMoreValues: workingGridHasMoreValues))
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
-                             viewModel: DifficultyButtonViewModel(level: .medium,
+                             viewModel: DifficultyButtonViewModel(buttonLevel: .medium,
+                                                                  currentLevel: currentLevel,
                              editGridIsEmpty: editGridIsEmpty, workingGridHasMoreValues: workingGridHasMoreValues))
             DifficultyButton(displayAlert: $displayAlert,
                              lastTappedDifficulty: $lastTappedDifficulty,
-                             viewModel: DifficultyButtonViewModel(level: .hard,
+                             viewModel: DifficultyButtonViewModel(buttonLevel: .hard,
+                                                                  currentLevel: currentLevel,
                              editGridIsEmpty: editGridIsEmpty, workingGridHasMoreValues: workingGridHasMoreValues))
         }
     }
@@ -36,6 +40,10 @@ struct DifficultyButtons: View {
 
 struct DifficultyButtons_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultyButtons(displayAlert: .constant(false), lastTappedDifficulty: .constant(.easy), editGridIsEmpty: true, workingGridHasMoreValues: true)
+        DifficultyButtons(displayAlert: .constant(false),
+                          lastTappedDifficulty: .constant(.easy),
+                          editGridIsEmpty: true,
+                          workingGridHasMoreValues: true,
+                          currentLevel: .easy)
     }
 }
