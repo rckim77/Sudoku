@@ -44,9 +44,9 @@ struct DifficultyButton: View {
             Text(viewModel.buttonLevel.rawValue)
                 .foregroundColor(viewModel.backgroundTextColor)
         }
-        .padding(.vertical, viewModel.buttonVerticalPadding)
-        .padding(.horizontal, viewModel.buttonHorizontalPadding)
-        .background(viewModel.backgroundColor)
+            .padding(.vertical, viewModel.buttonVerticalPadding)
+            .padding(.horizontal, viewModel.buttonHorizontalPadding)
+            .background(viewModel.backgroundColor)
             .cornerRadius(8)
     }
 }
