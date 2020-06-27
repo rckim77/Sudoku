@@ -59,21 +59,21 @@ struct ContentView: View {
                   message: Text("You've completed the sudoku!"),
                   dismissButton: .default(Text("Dismiss")))
         }
-        .actionSheet(isPresented: $displayAlertForDifficultyChange) {
-            ActionSheet(title: Text("You're currently in progress"),
-                        message: Text("Are you sure you want to change difficulty? This will reset your progress on the current board."),
-                        buttons: [.cancel(), .destructive(Text("Confirm"),
-                        action: {
-                            guard self.lastTappedDifficultyLevel != self.difficulty.level else {
-                                return
-                            }
-                            self.difficulty.level = self.lastTappedDifficultyLevel
-                            let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
-                            self.startingGrid.reset(newGrid: newGrid)
-                            self.workingGrid.reset(newGrid: newGrid)
-                            self.editGrid.grid = []
-                            self.selectedCell.coordinate = nil
-            })])
+        .alert(isPresented: $displayAlertForDifficultyChange) {
+            Alert(title: Text("You're currently in progress"),
+                  message: Text("Are you sure you want to change difficulty? This will reset your progress on the current board."),
+                  primaryButton: .default(Text("Confirm"), action: {
+                    guard self.lastTappedDifficultyLevel != self.difficulty.level else {
+                        return
+                    }
+                    self.difficulty.level = self.lastTappedDifficultyLevel
+                    let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
+                    self.startingGrid.reset(newGrid: newGrid)
+                    self.workingGrid.reset(newGrid: newGrid)
+                    self.editGrid.grid = []
+                    self.selectedCell.coordinate = nil
+                  }),
+                  secondaryButton: .cancel())
         }
     }
 }
