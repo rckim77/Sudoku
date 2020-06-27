@@ -23,11 +23,11 @@ struct RowViewModel {
     func backgroundColorFor(_ columnIndex: Int) -> Color {
         return selectedColumnIndex == columnIndex ? selectedBackgroundColor : backgroundColor
     }
-    
-    func workingGridContainsAValue(at coordinate: Coordinate) -> Bool {
-        return grid(workingGrid, containsAValueAt: coordinate)
-    }
 
+    func hasGuessesAndNoValue(at columnIndex: Int) -> Bool {
+        let coordinate = (r: index, c: columnIndex, s: squareIndex)
+        return !grid(workingGrid, containsAValueAt: coordinate) && !guessFor(columnIndex).isEmpty
+    }
     
     func square(_ squareIndex: Int, contains value: Int) -> Bool {
         let squareValues = values(in: squareIndex, grid: startingGrid)
