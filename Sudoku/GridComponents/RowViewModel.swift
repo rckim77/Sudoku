@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct RowViewModel {
+
     let index: Int
     let columns: [Int]
     let squareIndex: Int
-    let selectedColumnIndex: Int?
     let startingGrid: [CoordinateValue]
     let workingGrid: [CoordinateValue]
     let guesses: [CoordinateEditValues]
@@ -20,8 +20,23 @@ struct RowViewModel {
     private let backgroundColor = Color("dynamicGridWhite")
     private let selectedBackgroundColor = Color("dynamicGridSelection")
     
-    func backgroundColorFor(_ columnIndex: Int) -> Color {
-        return selectedColumnIndex == columnIndex ? selectedBackgroundColor : backgroundColor
+    func backgroundColorFor(_ columnIndex: Int, selectedCell: Coordinate?) -> Color {
+        guard let selectedCell = selectedCell else {
+            return backgroundColor
+        }
+        
+        let isinSameSquare = squareIndex == selectedCell.s
+        let isInSameColumn = coordinateAt(columnIndex, isInSameColumnAs: selectedCell)
+        let isInSameRow = coordinateAt(columnIndex, isInSameRowAs: selectedCell)
+        
+        // exact same coordinate
+        if selectedCell.r == index && selectedCell.c == columnIndex && selectedCell.s == squareIndex {
+            return Color("dynamicBlueSelection")
+        } else if isinSameSquare || isInSameColumn || isInSameRow {
+            return selectedBackgroundColor
+        } else {
+            return backgroundColor
+        }
     }
 
     func hasGuessesAndNoValue(at columnIndex: Int) -> Bool {
@@ -107,7 +122,7 @@ struct RowViewModel {
         return workingGridHasAValue && !startingGridHasAValue
     }
     
-    func foregroundColorFor(coordinate: Coordinate, digit: Int?) -> Color {
+    func foregroundColorFor(coordinate: Coordinate, digit: Int?, selectedColumnIndex: Int?) -> Color {
         if onlyWorkingGridHasValue(at: coordinate) {
             if let digit = digit, value(digit, wouldBeInvalidAt: coordinate) && selectedColumnIndex == coordinate.c {
                 // user has just entered an invalid digit
@@ -159,5 +174,37 @@ struct RowViewModel {
         return square(coordinate.s, contains: value) ||
             fullRow(for: coordinate, contains: value) ||
             fullColumn(for: coordinate, contains: value)
+    }
+    
+    private func coordinateAt(_ columnIndex: Int, isInSameColumnAs selectedCoordinate: Coordinate) -> Bool {
+        let leftSquareIndices = [0, 3, 6]
+        let midSquareIndices = [1, 4, 7]
+        let rightSquareIndices = [2, 5, 8]
+
+        var isInSameColumn = false
+
+        if leftSquareIndices.contains(squareIndex) && leftSquareIndices.contains(selectedCoordinate.s) && columnIndex == selectedCoordinate.c ||
+            midSquareIndices.contains(squareIndex) && midSquareIndices.contains(selectedCoordinate.s) && columnIndex == selectedCoordinate.c ||
+            rightSquareIndices.contains(squareIndex) && rightSquareIndices.contains(selectedCoordinate.s) && columnIndex == selectedCoordinate.c {
+            isInSameColumn = true
+        }
+
+        return isInSameColumn
+    }
+    
+    private func coordinateAt(_ columnIndex: Int, isInSameRowAs selectedCoordinate: Coordinate) -> Bool {
+        let topSquareRowIndices = [0, 1, 2]
+        let midSquareRowIndices = [3, 4, 5]
+        let bottomSquareRowIndices = [6, 7, 8]
+
+        var isInSameRow = false
+
+        if topSquareRowIndices.contains(squareIndex) && topSquareRowIndices.contains(selectedCoordinate.s) && index == selectedCoordinate.r ||
+            midSquareRowIndices.contains(squareIndex) && midSquareRowIndices.contains(selectedCoordinate.s) && index == selectedCoordinate.r ||
+            bottomSquareRowIndices.contains(squareIndex) && bottomSquareRowIndices.contains(selectedCoordinate.s) && index == selectedCoordinate.r {
+            isInSameRow = true
+        }
+
+        return isInSameRow
     }
 }

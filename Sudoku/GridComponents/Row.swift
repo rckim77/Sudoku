@@ -25,21 +25,21 @@ struct Row: View {
                 renderCellText(columnIndex: 0)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(0))
+                .background(viewModel.backgroundColorFor(0, selectedCell: selectedCell.coordinate))
             Button(action: {
                 self.updateSelectedButton(columnIndex: 1)
             }) {
                 renderCellText(columnIndex: 1)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(1))
+                .background(viewModel.backgroundColorFor(1, selectedCell: selectedCell.coordinate))
             Button(action: {
                 self.updateSelectedButton(columnIndex: 2)
             }) {
                 renderCellText(columnIndex: 2)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(2))
+                .background(viewModel.backgroundColorFor(2, selectedCell: selectedCell.coordinate))
         }
         .frame(maxWidth: .infinity)
     }
@@ -67,7 +67,7 @@ struct Row: View {
         } else {
             digit = nil
         }
-        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit)
+        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit, selectedColumnIndex: selectedCell.coordinate?.c)
     }
 
     private func updateSelectedButton(columnIndex: Int) {
@@ -95,7 +95,6 @@ struct Row_Previews: PreviewProvider {
         Row(viewModel: RowViewModel(index: 0,
                                     columns: [0, 1, 2],
                                     squareIndex: 0,
-                                    selectedColumnIndex: nil,
                                     startingGrid: GridFactory.easyGrid,
                                     workingGrid: GridFactory.easyGrid,
                                     guesses: []))
