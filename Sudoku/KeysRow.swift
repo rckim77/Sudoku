@@ -27,10 +27,14 @@ struct KeysRow: View {
     let isEditing: Bool
 
     private let buttonCornerRadius: CGFloat = 5
+    private var horizontalSpacing: CGFloat {
+        isIpad ? 80 : 8
+    }
 
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
+                .frame(width: horizontalSpacing)
             HStack(spacing: 2) {
                 Button(action: {
                     self.updateForDigit(1)
@@ -89,6 +93,7 @@ struct KeysRow: View {
             }
             .frame(maxWidth: .infinity)
             Spacer()
+                .frame(width: horizontalSpacing)
         }
     }
 

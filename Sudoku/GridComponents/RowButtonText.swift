@@ -9,15 +9,15 @@
 import SwiftUI
 
 struct RowButtonText: View {
+    
+    let text: String
+    let foregroundColor: Color
 
     private let buttonTextFont = Font.system(.title, design: .rounded).bold()
 
     private var buttonMinHeight: CGFloat {
         (screenWidth - (2 * Grid.spacerWidth)) / 9
     }
-
-    let text: String
-    let foregroundColor: Color
 
     var body: some View {
         Text(text)
