@@ -40,7 +40,7 @@ struct ContentView: View {
             Grid(startingGrid: startingGrid.grid,
                  workingGrid: workingGrid.grid,
                  editGrid: editGrid.grid,
-                 selectedCell: selectedCell.coordinate)
+                 colorGrid: workingGrid.colorGrid)
                 .padding(.horizontal, viewModel.gridHorizontalPadding)
             HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
                 ClearButton()
@@ -85,7 +85,7 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(UserAction())
             .environmentObject(EditState())
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
-            .environmentObject(GridValues(grid: GridFactory.easyGrid))
+            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
             .environmentObject(EditGridValues(grid: []))
             .environmentObject(Difficulty(level: .easy))
     }

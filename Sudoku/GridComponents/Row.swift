@@ -25,21 +25,21 @@ struct Row: View {
                 renderCellText(columnIndex: 0)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(0))
+                .background(viewModel.backgroundColorFor(0, selectedCell: selectedCell.coordinate))
             Button(action: {
                 self.updateSelectedButton(columnIndex: 1)
             }) {
                 renderCellText(columnIndex: 1)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(1))
+                .background(viewModel.backgroundColorFor(1, selectedCell: selectedCell.coordinate))
             Button(action: {
                 self.updateSelectedButton(columnIndex: 2)
             }) {
                 renderCellText(columnIndex: 2)
             }
                 .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(2))
+                .background(viewModel.backgroundColorFor(2, selectedCell: selectedCell.coordinate))
         }
         .frame(maxWidth: .infinity)
     }
@@ -59,16 +59,16 @@ struct Row: View {
         }
     }
 
-    private func setForegroundColor(columnIndex: Int) -> Color {
-        let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
-        let digit: Int?
-        if case let UserAction.ActionType.digit(inputDigit) = userAction.action {
-            digit = inputDigit
-        } else {
-            digit = nil
-        }
-        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit)
-    }
+//    private func setForegroundColor(columnIndex: Int) -> Color {
+//        let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
+//        let digit: Int?
+//        if case let UserAction.ActionType.digit(inputDigit) = userAction.action {
+//            digit = inputDigit
+//        } else {
+//            digit = nil
+//        }
+//        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit, selectedCell: selectedCell.coordinate)
+//    }
 
     private func updateSelectedButton(columnIndex: Int) {
         if !isSelected(columnIndex: columnIndex) {
@@ -85,7 +85,9 @@ struct Row: View {
             let guess = viewModel.guessFor(columnIndex)
             return AnyView(EditCellText(values: guess))
         } else {
-            return AnyView(RowButtonText(text: setRowButtonText(columnIndex: columnIndex), foregroundColor: setForegroundColor(columnIndex: columnIndex)))
+            let text = setRowButtonText(columnIndex: columnIndex)
+            let foregroundColor = viewModel.foregroundColorFor(columnIndex) ?? .black
+            return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor))
         }
     }
 }
@@ -95,9 +97,9 @@ struct Row_Previews: PreviewProvider {
         Row(viewModel: RowViewModel(index: 0,
                                     columns: [0, 1, 2],
                                     squareIndex: 0,
-                                    selectedColumnIndex: nil,
                                     startingGrid: GridFactory.easyGrid,
                                     workingGrid: GridFactory.easyGrid,
+                                    colorGrid: [],
                                     guesses: []))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())

@@ -19,7 +19,7 @@ struct SudokuSolver {
 
         // check each 3x3 square
         for squareIndex in indexRange {
-            let squareValues = gridValues.values(in: squareIndex)
+            let squareValues = gridValues.values(in: squareIndex, grid: gridValues.grid)
             if SudokuSolver.validate(values: squareValues) == false {
                 return false
             }
