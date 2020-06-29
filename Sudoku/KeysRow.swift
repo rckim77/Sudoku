@@ -113,7 +113,7 @@ struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
         KeysRow(gridIsComplete: .constant(false), selectedCoordinate: nil, isEditing: false)
             .environmentObject(UserAction())
-            .environmentObject(GridValues(grid: GridFactory.easyGrid))
+            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
             .environmentObject(EditGridValues(grid: []))
     }

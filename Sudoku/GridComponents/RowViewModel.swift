@@ -15,6 +15,7 @@ struct RowViewModel {
     let squareIndex: Int
     let startingGrid: [CoordinateValue]
     let workingGrid: [CoordinateValue]
+    let colorGrid: [CoordinateColor]
     let guesses: [CoordinateEditValues]
     
     private let backgroundColor = Color("dynamicGridWhite")
@@ -38,71 +39,14 @@ struct RowViewModel {
             return backgroundColor
         }
     }
+    
+    func foregroundColorFor(_ columnIndex: Int) -> Color? {
+        colorGrid.filter({ $0.r == index && $0.c == columnIndex }).first?.color
+    }
 
     func hasGuessesAndNoValue(at columnIndex: Int) -> Bool {
         let coordinate = (r: index, c: columnIndex, s: squareIndex)
         return !grid(workingGrid, containsAValueAt: coordinate) && !guessFor(columnIndex).isEmpty
-    }
-    
-    func square(_ squareIndex: Int, contains value: Int) -> Bool {
-        let squareValues = values(in: squareIndex, grid: startingGrid)
-        return squareValues.contains { coordinateValue -> Bool in
-            return coordinateValue.v == value
-        }
-    }
-    
-    func fullRow(for coordinate: Coordinate, contains value: Int) -> Bool {
-        var rowCoordinates = [CoordinateValue]()
-
-        if (0...2).contains(coordinate.s) {
-            rowCoordinates = startingGrid.filter { coordinateValue -> Bool in
-                return coordinateValue.r == coordinate.r && (0...2).contains(coordinateValue.s)
-            }
-        } else if (3...5).contains(coordinate.s) {
-            rowCoordinates = startingGrid.filter { coordinateValue -> Bool in
-                return coordinateValue.r == coordinate.r && (3...5).contains(coordinateValue.s)
-            }
-        } else if (6...8).contains(coordinate.s) {
-            rowCoordinates = startingGrid.filter { coordinateValue -> Bool in
-                return coordinateValue.r == coordinate.r && (6...8).contains(coordinateValue.s)
-            }
-        }
-
-        var containsValueInRow = false
-        for coordinate in rowCoordinates {
-            if coordinate.v == value {
-                containsValueInRow = true
-                break
-            }
-        }
-        return containsValueInRow
-    }
-    
-    func fullColumn(for coordinate: Coordinate, contains value: Int) -> Bool {
-        var colCoordinates = [CoordinateValue]()
-
-        if [0, 3, 6].contains(coordinate.s) {
-            colCoordinates = startingGrid.filter { coordinateValue -> Bool in
-                return coordinateValue.c == coordinate.c && [0, 3, 6].contains(coordinateValue.s)
-            }
-        } else if [1, 4, 7].contains(coordinate.s) {
-            colCoordinates = startingGrid.filter { coordinateValue -> Bool in
-                return coordinateValue.c == coordinate.c && [1, 4, 7].contains(coordinateValue.s)
-            }
-        } else if [2, 5, 8].contains(coordinate.s) {
-            colCoordinates = startingGrid.filter { coordinateValue -> Bool in
-                return coordinateValue.c == coordinate.c && [2, 5, 8].contains(coordinateValue.s)
-            }
-        }
-
-        var containsValueInCol = false
-        for coordinate in colCoordinates {
-            if coordinate.v == value {
-                containsValueInCol = true
-                break
-            }
-        }
-        return containsValueInCol
     }
     
     func guessFor(_ columnIndex: Int) -> Set<Int> {
@@ -112,37 +56,6 @@ struct RowViewModel {
             $0.c == coordinate.c &&
             $0.s == coordinate.s
         })?.values ?? Set<Int>()
-    }
-    
-    /// Compares working grid and starting grid and returns whether there's a value at the
-    /// specified coordinate only in the working grid.
-    func onlyWorkingGridHasValue(at coordinate: Coordinate) -> Bool {
-        let workingGridHasAValue = grid(workingGrid, containsAValueAt: coordinate)
-        let startingGridHasAValue = grid(startingGrid, containsAValueAt: coordinate)
-        return workingGridHasAValue && !startingGridHasAValue
-    }
-    
-    func foregroundColorFor(coordinate: Coordinate, digit: Int?, selectedCell: Coordinate?) -> Color {
-        guard onlyWorkingGridHasValue(at: coordinate) else {
-            // starting grid
-            return .black
-        }
-        
-        if let digit = digit,
-            let selectedCell = selectedCell,
-            value(digit, wouldBeInvalidAt: coordinate) &&
-            selectedCell == coordinate {
-            // user has just entered an invalid digit
-            return .red
-        }
-        
-        if let retrievedValue = workingGridRetrieveValue(at: coordinate),
-            value(retrievedValue, wouldBeInvalidAt: coordinate) {
-            // persist red text for other invalid digits in square that haven't been cleared
-            return .red
-        }
-        
-        return Color("dynamicBlue")
     }
     
     // MARK: - Working grid methods
@@ -169,14 +82,6 @@ struct RowViewModel {
             return gridCoordinate == coordinate
         }
         return result
-    }
-    
-    /// Checks whether there's already a coordinate with the input value in the
-    /// current coordinate's 3x3 square, starting grid row, or starting grid column.
-    private func value(_ value: Int, wouldBeInvalidAt coordinate: Coordinate) -> Bool {
-        return square(coordinate.s, contains: value) ||
-            fullRow(for: coordinate, contains: value) ||
-            fullColumn(for: coordinate, contains: value)
     }
     
     private func coordinateAt(_ columnIndex: Int, isInSameColumnAs selectedCoordinate: Coordinate) -> Bool {

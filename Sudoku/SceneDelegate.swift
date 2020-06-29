@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let startingGrid = StartingGridValues(grid: GridFactory.easyGrid)
-        let workingGrid = GridValues(grid: GridFactory.easyGrid)
+        let workingGrid = GridValues(grid: GridFactory.easyGrid, startingGrid: startingGrid.grid)
         let editState = EditState()
         let editGridValues = EditGridValues(grid: [])
         let viewModel = ContentViewModel()

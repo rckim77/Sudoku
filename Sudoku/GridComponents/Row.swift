@@ -59,16 +59,16 @@ struct Row: View {
         }
     }
 
-    private func setForegroundColor(columnIndex: Int) -> Color {
-        let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
-        let digit: Int?
-        if case let UserAction.ActionType.digit(inputDigit) = userAction.action {
-            digit = inputDigit
-        } else {
-            digit = nil
-        }
-        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit, selectedCell: selectedCell.coordinate)
-    }
+//    private func setForegroundColor(columnIndex: Int) -> Color {
+//        let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
+//        let digit: Int?
+//        if case let UserAction.ActionType.digit(inputDigit) = userAction.action {
+//            digit = inputDigit
+//        } else {
+//            digit = nil
+//        }
+//        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit, selectedCell: selectedCell.coordinate)
+//    }
 
     private func updateSelectedButton(columnIndex: Int) {
         if !isSelected(columnIndex: columnIndex) {
@@ -85,7 +85,9 @@ struct Row: View {
             let guess = viewModel.guessFor(columnIndex)
             return AnyView(EditCellText(values: guess))
         } else {
-            return AnyView(RowButtonText(text: setRowButtonText(columnIndex: columnIndex), foregroundColor: setForegroundColor(columnIndex: columnIndex)))
+            let text = setRowButtonText(columnIndex: columnIndex)
+            let foregroundColor = viewModel.foregroundColorFor(columnIndex) ?? .black
+            return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor))
         }
     }
 }
@@ -97,6 +99,7 @@ struct Row_Previews: PreviewProvider {
                                     squareIndex: 0,
                                     startingGrid: GridFactory.easyGrid,
                                     workingGrid: GridFactory.easyGrid,
+                                    colorGrid: [],
                                     guesses: []))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
