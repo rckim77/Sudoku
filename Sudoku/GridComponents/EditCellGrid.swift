@@ -9,9 +9,8 @@
 import SwiftUI
 
 struct EditCellGrid: View {
+
     let values: Set<Int>
-    
-    private let foregroundColor = Color("dynamicBlue")
 
     private var minHeight: CGFloat {
         if isIpad {
@@ -24,46 +23,19 @@ struct EditCellGrid: View {
     var body: some View {
         VStack(spacing: -3) {
             HStack(spacing: 0) {
-                Text(text(for: 0))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
-                Text(text(for: 1))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
-                Text(text(for: 2))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
+                EditCellGridText(digitText: text(for: 0))
+                EditCellGridText(digitText: text(for: 1))
+                EditCellGridText(digitText: text(for: 2))
             }
             HStack(spacing: 0) {
-                Text(text(for: 3))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
-                Text(text(for: 4))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
-                Text(text(for: 5))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
+                EditCellGridText(digitText: text(for: 3))
+                EditCellGridText(digitText: text(for: 4))
+                EditCellGridText(digitText: text(for: 5))
             }
             HStack(spacing: 0) {
-                Text(text(for: 6))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
-                Text(text(for: 7))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
-                Text(text(for: 8))
-                    .foregroundColor(foregroundColor)
-                    .font(.system(.footnote, design: .rounded))
-                    .frame(maxWidth: .infinity)
+                EditCellGridText(digitText: text(for: 6))
+                EditCellGridText(digitText: text(for: 7))
+                EditCellGridText(digitText: text(for: 8))
             }
         }
         .frame(maxWidth: .infinity, minHeight: minHeight)
