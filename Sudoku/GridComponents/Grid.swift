@@ -14,10 +14,15 @@ struct Grid: View {
     let workingGrid: [CoordinateValue]
     let editGrid: [CoordinateEditValues]
     let colorGrid: [CoordinateColor]
+    
+    static var spacerWidth: CGFloat {
+        8
+    }
 
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
+                .frame(width: Grid.spacerWidth)
             VStack {
                 HStack(spacing: 0) {
                     Square(index: 0,
@@ -72,6 +77,7 @@ struct Grid: View {
                 }
             }
             Spacer()
+                .frame(width: Grid.spacerWidth)
         }
     }
 }

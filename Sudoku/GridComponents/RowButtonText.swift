@@ -15,14 +15,14 @@ struct RowButtonText: View {
         if isIpad {
             return 16
         } else {
-            return 5
+            return 0
         }
     }
     private var buttonMinHeight: CGFloat {
         if isIpad {
             return 65.5
         } else {
-            return 43.5
+            return (screenWidth - Grid.spacerWidth) / 9
         }
     }
     let text: String
