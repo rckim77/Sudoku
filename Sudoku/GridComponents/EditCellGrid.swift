@@ -13,11 +13,7 @@ struct EditCellGrid: View {
     let values: Set<Int>
 
     private var minHeight: CGFloat {
-        if isIpad {
-            return 65.5
-        } else {
-            return (screenWidth - Grid.spacerWidth) / 9
-        }
+        (screenWidth - (2 * Grid.spacerWidth)) / 9
     }
 
     var body: some View {

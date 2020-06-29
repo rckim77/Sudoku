@@ -16,7 +16,11 @@ struct Grid: View {
     let colorGrid: [CoordinateColor]
     
     static var spacerWidth: CGFloat {
-        8
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 80
+        } else {
+            return 8
+        }
     }
 
     var body: some View {
