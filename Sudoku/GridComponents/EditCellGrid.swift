@@ -16,8 +16,12 @@ struct EditCellGrid: View {
         (screenWidth - (2 * Grid.spacerWidth)) / 9
     }
 
+    private var verticalSpacing: CGFloat {
+        isIpad ? 2 : -4
+    }
+
     var body: some View {
-        VStack(spacing: -4) {
+        VStack(spacing: verticalSpacing) {
             HStack(spacing: 0) {
                 EditCellGridText(digitText: text(for: 0))
                 EditCellGridText(digitText: text(for: 1))
