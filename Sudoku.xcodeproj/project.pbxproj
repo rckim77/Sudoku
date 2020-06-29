@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		94600FB224973BD600E605FD /* EditCellText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB124973BD600E605FD /* EditCellText.swift */; };
+		94600FB224973BD600E605FD /* EditCellGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB124973BD600E605FD /* EditCellGrid.swift */; };
 		94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB324973ECC00E605FD /* CoordinateEditValues.swift */; };
 		94600FB624973EF300E605FD /* EditGridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB524973EF300E605FD /* EditGridValues.swift */; };
 		94600FBE2499C37300E605FD /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FBD2499C37300E605FD /* EditButton.swift */; };
@@ -46,7 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		94600FB124973BD600E605FD /* EditCellText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellText.swift; sourceTree = "<group>"; };
+		94600FB124973BD600E605FD /* EditCellGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellGrid.swift; sourceTree = "<group>"; };
 		94600FB324973ECC00E605FD /* CoordinateEditValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateEditValues.swift; sourceTree = "<group>"; };
 		94600FB524973EF300E605FD /* EditGridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGridValues.swift; sourceTree = "<group>"; };
 		94600FBD2499C37300E605FD /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
@@ -137,7 +137,6 @@
 				94600FC32499C87100E605FD /* DifficultyButtons.swift */,
 				94600FD8249B258900E605FD /* DifficultyButton.swift */,
 				EC8435D924A5671A00D311FF /* DifficultyButtonViewModel.swift */,
-				94600FB124973BD600E605FD /* EditCellText.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
 				94E9F330249402C800B1D003 /* Models */,
@@ -185,6 +184,7 @@
 				94677436248756CA00F636D4 /* Row.swift */,
 				ECC830A324A41BC30075CE0E /* RowViewModel.swift */,
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
+				94600FB124973BD600E605FD /* EditCellGrid.swift */,
 			);
 			path = GridComponents;
 			sourceTree = "<group>";
@@ -282,7 +282,7 @@
 				EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */,
 				EC8435DA24A5671A00D311FF /* DifficultyButtonViewModel.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
-				94600FB224973BD600E605FD /* EditCellText.swift in Sources */,
+				94600FB224973BD600E605FD /* EditCellGrid.swift in Sources */,
 				EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */,
 				94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */,
 				9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */,

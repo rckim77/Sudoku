@@ -1,5 +1,5 @@
 //
-//  EditCellText.swift
+//  EditCellGrid.swift
 //  Sudoku
 //
 //  Created by Raymond Kim on 6/15/20.
@@ -8,8 +8,10 @@
 
 import SwiftUI
 
-struct EditCellText: View {
+struct EditCellGrid: View {
     let values: Set<Int>
+    
+    private let foregroundColor = Color("dynamicBlue")
 
     private var minHeight: CGFloat {
         if isIpad {
@@ -23,43 +25,43 @@ struct EditCellText: View {
         VStack(spacing: -3) {
             HStack(spacing: 0) {
                 Text(text(for: 0))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
                 Text(text(for: 1))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
                 Text(text(for: 2))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
             }
             HStack(spacing: 0) {
                 Text(text(for: 3))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
                 Text(text(for: 4))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
                 Text(text(for: 5))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
             }
             HStack(spacing: 0) {
                 Text(text(for: 6))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
                 Text(text(for: 7))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
                 Text(text(for: 8))
-                    .foregroundColor(Color("dynamicBlue"))
+                    .foregroundColor(foregroundColor)
                     .font(.system(.footnote, design: .rounded))
                     .frame(maxWidth: .infinity)
             }
@@ -76,8 +78,8 @@ struct EditCellText: View {
     }
 }
 
-struct EditCellText_Previews: PreviewProvider {
+struct EditCellGrid_Previews: PreviewProvider {
     static var previews: some View {
-        EditCellText(values: Set(arrayLiteral: 1, 2, 3, 4, 7, 8, 9))
+        EditCellGrid(values: Set(arrayLiteral: 1, 2, 3, 4, 7, 8, 9))
     }
 }

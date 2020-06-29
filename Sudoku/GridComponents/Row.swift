@@ -83,7 +83,7 @@ struct Row: View {
     private func renderCellText(columnIndex: Int) -> AnyView {
         if viewModel.hasGuessesAndNoValue(at: columnIndex) {
             let guess = viewModel.guessFor(columnIndex)
-            return AnyView(EditCellText(values: guess))
+            return AnyView(EditCellGrid(values: guess))
         } else {
             let text = setRowButtonText(columnIndex: columnIndex)
             let foregroundColor = viewModel.foregroundColorFor(columnIndex) ?? .black
