@@ -67,7 +67,7 @@ struct Row: View {
         } else {
             digit = nil
         }
-        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit, selectedColumnIndex: selectedCell.coordinate?.c)
+        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit, selectedCell: selectedCell.coordinate)
     }
 
     private func updateSelectedButton(columnIndex: Int) {
