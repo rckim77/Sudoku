@@ -105,7 +105,7 @@ struct KeysRow: View {
 
         let coordinateValue = CoordinateValue(r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
         if isEditing {
-            editGrid.addGuess(value: digit, at: (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s))
+            editGrid.updateGuesses(value: digit, at: (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s))
         } else {
             editGrid.removeValues(at: selectedCoordinate)
             workingGrid.add(coordinateValue)
