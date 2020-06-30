@@ -3,7 +3,6 @@
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Sensitive Files
-Daydream/Shared/apiKeys.plist
 
 ## Build generated
 build/
