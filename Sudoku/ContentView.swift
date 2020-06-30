@@ -41,7 +41,7 @@ struct ContentView: View {
                  workingGrid: workingGrid.grid,
                  editGrid: editGrid.grid,
                  colorGrid: workingGrid.colorGrid)
-                .padding(.horizontal, viewModel.gridHorizontalPadding)
+                .padding(.horizontal, viewModel.horizontalSizeClassPadding)
             HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
                 ClearButton()
                 EditButton()

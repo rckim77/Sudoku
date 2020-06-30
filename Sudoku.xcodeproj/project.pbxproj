@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		94600FB224973BD600E605FD /* EditCellText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB124973BD600E605FD /* EditCellText.swift */; };
+		94600FB224973BD600E605FD /* EditCellGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB124973BD600E605FD /* EditCellGrid.swift */; };
 		94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB324973ECC00E605FD /* CoordinateEditValues.swift */; };
 		94600FB624973EF300E605FD /* EditGridValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FB524973EF300E605FD /* EditGridValues.swift */; };
 		94600FBE2499C37300E605FD /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FBD2499C37300E605FD /* EditButton.swift */; };
@@ -41,12 +41,13 @@
 		EC8435DA24A5671A00D311FF /* DifficultyButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435D924A5671A00D311FF /* DifficultyButtonViewModel.swift */; };
 		EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435DB24A58F4400D311FF /* ViewModel.swift */; };
 		EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E124A9A53A00D311FF /* CoordinateColor.swift */; };
+		EC8435E424AA9B8300D311FF /* EditCellGridText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E324AA9B8300D311FF /* EditCellGridText.swift */; };
 		ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A324A41BC30075CE0E /* RowViewModel.swift */; };
 		ECC830A624A5567C0075CE0E /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A524A5567C0075CE0E /* ContentViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		94600FB124973BD600E605FD /* EditCellText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellText.swift; sourceTree = "<group>"; };
+		94600FB124973BD600E605FD /* EditCellGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellGrid.swift; sourceTree = "<group>"; };
 		94600FB324973ECC00E605FD /* CoordinateEditValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateEditValues.swift; sourceTree = "<group>"; };
 		94600FB524973EF300E605FD /* EditGridValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGridValues.swift; sourceTree = "<group>"; };
 		94600FBD2499C37300E605FD /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
@@ -82,6 +83,7 @@
 		EC8435D924A5671A00D311FF /* DifficultyButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyButtonViewModel.swift; sourceTree = "<group>"; };
 		EC8435DB24A58F4400D311FF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		EC8435E124A9A53A00D311FF /* CoordinateColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateColor.swift; sourceTree = "<group>"; };
+		EC8435E324AA9B8300D311FF /* EditCellGridText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellGridText.swift; sourceTree = "<group>"; };
 		ECC830A324A41BC30075CE0E /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
 		ECC830A524A5567C0075CE0E /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,7 +139,6 @@
 				94600FC32499C87100E605FD /* DifficultyButtons.swift */,
 				94600FD8249B258900E605FD /* DifficultyButton.swift */,
 				EC8435D924A5671A00D311FF /* DifficultyButtonViewModel.swift */,
-				94600FB124973BD600E605FD /* EditCellText.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
 				94E9F330249402C800B1D003 /* Models */,
@@ -185,6 +186,8 @@
 				94677436248756CA00F636D4 /* Row.swift */,
 				ECC830A324A41BC30075CE0E /* RowViewModel.swift */,
 				94A9CCB52488A394008551B6 /* RowButtonText.swift */,
+				94600FB124973BD600E605FD /* EditCellGrid.swift */,
+				EC8435E324AA9B8300D311FF /* EditCellGridText.swift */,
 			);
 			path = GridComponents;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */,
 				ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */,
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,
+				EC8435E424AA9B8300D311FF /* EditCellGridText.swift in Sources */,
 				94600FBE2499C37300E605FD /* EditButton.swift in Sources */,
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
 				94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */,
@@ -282,7 +286,7 @@
 				EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */,
 				EC8435DA24A5671A00D311FF /* DifficultyButtonViewModel.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
-				94600FB224973BD600E605FD /* EditCellText.swift in Sources */,
+				94600FB224973BD600E605FD /* EditCellGrid.swift in Sources */,
 				EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */,
 				94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */,
 				9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */,
@@ -429,7 +433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
 				DEVELOPMENT_TEAM = 49BZEB79BF;
 				ENABLE_PREVIEWS = YES;
@@ -438,7 +442,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rckim.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -451,7 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
 				DEVELOPMENT_TEAM = 49BZEB79BF;
 				ENABLE_PREVIEWS = YES;
@@ -460,7 +464,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rckim.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

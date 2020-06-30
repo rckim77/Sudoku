@@ -42,14 +42,6 @@ struct ContentViewModel: ViewModel {
         }
     }
 
-    var gridHorizontalPadding: CGFloat {
-        if isLargestIpad {
-            return 175
-        } else {
-            return horizontalSizeClassPadding
-        }
-    }
-    
     var modifierButtonsHorizontalSpacing: CGFloat {
         isIpad ? 36 : 12
     }
