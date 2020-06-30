@@ -1,5 +1,5 @@
 //
-//  ContentViewModel.swift
+//  GameViewModel.swift
 //  Sudoku
 //
 //  Created by Ray Kim on 6/25/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentViewModel: ViewModel {
+struct GameViewModel: ViewModel {
     @Environment(\.horizontalSizeClass)
     var horizontalClass
 

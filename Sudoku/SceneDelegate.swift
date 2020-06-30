@@ -19,20 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let startingGrid = StartingGridValues(grid: GridFactory.easyGrid)
-        let workingGrid = GridValues(grid: GridFactory.easyGrid, startingGrid: startingGrid.grid)
-        let editState = EditState()
-        let editGridValues = EditGridValues(grid: [])
-        let viewModel = ContentViewModel()
-        
-        let contentView = ContentView(viewModel: viewModel)
-            .environmentObject(SelectedCell())
-            .environmentObject(UserAction())
-            .environmentObject(startingGrid)
-            .environmentObject(workingGrid)
-            .environmentObject(editState)
-            .environmentObject(editGridValues)
-            .environmentObject(Difficulty(level: .easy))
+        let contentView = ContentView()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

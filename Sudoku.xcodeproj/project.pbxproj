@@ -42,8 +42,9 @@
 		EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435DB24A58F4400D311FF /* ViewModel.swift */; };
 		EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E124A9A53A00D311FF /* CoordinateColor.swift */; };
 		EC8435E424AA9B8300D311FF /* EditCellGridText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E324AA9B8300D311FF /* EditCellGridText.swift */; };
+		EC8435E624ABE61500D311FF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E524ABE61500D311FF /* GameView.swift */; };
 		ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A324A41BC30075CE0E /* RowViewModel.swift */; };
-		ECC830A624A5567C0075CE0E /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A524A5567C0075CE0E /* ContentViewModel.swift */; };
+		ECC830A624A5567C0075CE0E /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A524A5567C0075CE0E /* GameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,8 +85,9 @@
 		EC8435DB24A58F4400D311FF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		EC8435E124A9A53A00D311FF /* CoordinateColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateColor.swift; sourceTree = "<group>"; };
 		EC8435E324AA9B8300D311FF /* EditCellGridText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellGridText.swift; sourceTree = "<group>"; };
+		EC8435E524ABE61500D311FF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		ECC830A324A41BC30075CE0E /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
-		ECC830A524A5567C0075CE0E /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		ECC830A524A5567C0075CE0E /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +134,8 @@
 				94E108842487333B0091D043 /* SceneDelegate.swift */,
 				94600FD6249B1E8400E605FD /* GridFactory.swift */,
 				94E108862487333B0091D043 /* ContentView.swift */,
-				ECC830A524A5567C0075CE0E /* ContentViewModel.swift */,
+				ECC830A524A5567C0075CE0E /* GameViewModel.swift */,
+				EC8435E524ABE61500D311FF /* GameView.swift */,
 				ECC830A224A3F8C70075CE0E /* GridComponents */,
 				94600FBD2499C37300E605FD /* EditButton.swift */,
 				94600FBF2499C4A700E605FD /* ClearButton.swift */,
@@ -278,7 +281,7 @@
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
 				94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */,
 				94600FB624973EF300E605FD /* EditGridValues.swift in Sources */,
-				ECC830A624A5567C0075CE0E /* ContentViewModel.swift in Sources */,
+				ECC830A624A5567C0075CE0E /* GameViewModel.swift in Sources */,
 				94600FC02499C4A700E605FD /* ClearButton.swift in Sources */,
 				94E9F3252491F10C00B1D003 /* StartingGridValues.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,
@@ -297,6 +300,7 @@
 				94A9CCBB2488AAFE008551B6 /* UserAction.swift in Sources */,
 				94E9F332249406F500B1D003 /* AbsoluteCoordinateValue.swift in Sources */,
 				94A9CCB62488A394008551B6 /* RowButtonText.swift in Sources */,
+				EC8435E624ABE61500D311FF /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
