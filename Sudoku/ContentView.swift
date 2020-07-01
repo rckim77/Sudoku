@@ -21,10 +21,46 @@ struct ContentView: View {
         workingGrid.grid.count > startingGrid.grid.count || !editGrid.grid.isEmpty
     }
 
+    var buttonVerticalPadding: CGFloat {
+        if isLargestIpad {
+            return 24
+        } else if isIpad {
+            return 20
+        } else {
+            return 10
+        }
+    }
+
+    var buttonHorizontalPadding: CGFloat {
+        if isLargestIpad {
+            return 38
+        } else if isIpad {
+            return 32
+        } else {
+            return 16
+        }
+    }
+    
     var body: some View {
         NavigationView {
-            NavigationLink(destination: GameView(viewModel: GameViewModel())) {
-                Text(gameInProgress ? "Resume Game" : "New Game")
+            VStack(spacing: 40) {
+                Text("Sudoku Classic")
+                    .font(.system(.largeTitle, design: .rounded))
+                    .bold()
+                NavigationLink(destination: GameView(viewModel: GameViewModel())) {
+                    Text(gameInProgress ? "Resume Game" : "New Game")
+                }
+                .padding(.vertical, buttonVerticalPadding)
+                .padding(.horizontal, buttonHorizontalPadding)
+                .background(Color.blue.opacity(0.2))
+                .cornerRadius(8)
+                NavigationLink(destination: SettingsView()) {
+                    Text("Settings")
+                }
+                .padding(.vertical, buttonVerticalPadding)
+                .padding(.horizontal, buttonHorizontalPadding)
+                .background(Color.blue.opacity(0.2))
+                .cornerRadius(8)
             }
         }
         .environmentObject(SelectedCell())
@@ -37,12 +73,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(SelectedCell())
-            .environmentObject(UserAction())
-            .environmentObject(EditState())
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
             .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
             .environmentObject(EditGridValues(grid: []))
-            .environmentObject(Difficulty(level: .easy))
     }
 }
