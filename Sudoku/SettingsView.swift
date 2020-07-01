@@ -21,12 +21,15 @@ struct SettingsView: View {
                     Text("Sudoku Classic")
                         .font(Font.system(.largeTitle, design: .rounded).bold())
                     Text("Version \(appVersion)")
-                    Text("Made by Ray Kim")
+                        .font(Font.system(.title, design: .rounded))
+                    Text("© 2020 Ray Kim")
+                        .font(Font.system(.title, design: .rounded))
                     Button(action: {
                         let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!
                         UIApplication.shared.open(url)
                     }) {
                         Text("Website")
+                            .font(Font.system(.title, design: .rounded))
                     }
                     Spacer()
                 }
@@ -41,8 +44,6 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             SettingsView()
-            SettingsView()
-                .environment(\.colorScheme, .dark)
         }
     }
 }
