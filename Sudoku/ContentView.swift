@@ -43,24 +43,28 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 40) {
-                Text("Sudoku Classic")
-                    .font(.system(.largeTitle, design: .rounded))
-                    .bold()
-                NavigationLink(destination: GameView(viewModel: GameViewModel())) {
-                    Text(gameInProgress ? "Resume Game" : "New Game")
+            ZStack {
+                Color("dynamicBackground")
+                    .edgesIgnoringSafeArea(.all)
+                VStack(spacing: 40) {
+                    Text("Sudoku Classic")
+                        .font(.system(.largeTitle, design: .rounded))
+                        .bold()
+                    NavigationLink(destination: GameView(viewModel: GameViewModel())) {
+                        Text(gameInProgress ? "Resume Game" : "New Game")
+                    }
+                        .padding(.vertical, buttonVerticalPadding)
+                        .padding(.horizontal, buttonHorizontalPadding)
+                        .background(Color.blue.opacity(0.2))
+                        .cornerRadius(8)
+                    NavigationLink(destination: SettingsView()) {
+                        Text("Settings")
+                    }
+                        .padding(.vertical, buttonVerticalPadding)
+                        .padding(.horizontal, buttonHorizontalPadding)
+                        .background(Color.blue.opacity(0.2))
+                        .cornerRadius(8)
                 }
-                    .padding(.vertical, buttonVerticalPadding)
-                    .padding(.horizontal, buttonHorizontalPadding)
-                    .background(Color.blue.opacity(0.2))
-                    .cornerRadius(8)
-                NavigationLink(destination: SettingsView()) {
-                    Text("Settings")
-                }
-                    .padding(.vertical, buttonVerticalPadding)
-                    .padding(.horizontal, buttonHorizontalPadding)
-                    .background(Color.blue.opacity(0.2))
-                    .cornerRadius(8)
             }
         }
         .environmentObject(SelectedCell())
@@ -72,9 +76,16 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
-            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
-            .environmentObject(EditGridValues(grid: []))
+        Group {
+            ContentView()
+                .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
+                .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
+                .environmentObject(EditGridValues(grid: []))
+            ContentView()
+                .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
+                .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
+                .environmentObject(EditGridValues(grid: []))
+                .environment(\.colorScheme, .dark)
+        }
     }
 }

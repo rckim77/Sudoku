@@ -35,44 +35,48 @@ struct GameView: View {
     let viewModel: GameViewModel
     
     var body: some View {
-        VStack(spacing: viewModel.verticalSpacing) {
-            Grid(startingGrid: startingGrid.grid,
-                 workingGrid: workingGrid.grid,
-                 editGrid: editGrid.grid,
-                 colorGrid: workingGrid.colorGrid)
-                .padding(.horizontal, viewModel.horizontalSizeClassPadding)
-            HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
-                ClearButton()
-                EditButton()
+        ZStack {
+            Color("dynamicBackground")
+                .edgesIgnoringSafeArea(.all)
+            VStack(spacing: viewModel.verticalSpacing) {
+                Grid(startingGrid: startingGrid.grid,
+                     workingGrid: workingGrid.grid,
+                     editGrid: editGrid.grid,
+                     colorGrid: workingGrid.colorGrid)
+                    .padding(.horizontal, viewModel.horizontalSizeClassPadding)
+                HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
+                    ClearButton()
+                    EditButton()
+                }
+                KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate, isEditing: editState.isEditing)
+                    .padding(.horizontal, viewModel.horizontalSizeClassPadding)
+                DifficultyButtons(displayAlert: $displayAlertForDifficultyChange,
+                                  lastTappedDifficulty: $lastTappedDifficultyLevel,
+                                  editGridIsEmpty: editGrid.grid.isEmpty,
+                                  workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count,
+                                  currentLevel: difficulty.level)
             }
-            KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate, isEditing: editState.isEditing)
-                .padding(.horizontal, viewModel.horizontalSizeClassPadding)
-            DifficultyButtons(displayAlert: $displayAlertForDifficultyChange,
-                              lastTappedDifficulty: $lastTappedDifficultyLevel,
-                              editGridIsEmpty: editGrid.grid.isEmpty,
-                              workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count,
-                              currentLevel: difficulty.level)
-        }
-        .alert(isPresented: $workingGridIsComplete) {
-            Alert(title: Text("Congratulations!"),
-                  message: Text("You've completed the sudoku!"),
-                  dismissButton: .default(Text("Dismiss")))
-        }
-        .alert(isPresented: $displayAlertForDifficultyChange) {
-            Alert(title: Text("You're currently in progress"),
-                  message: Text("Are you sure you want to change difficulty? This will reset your progress on the current board."),
-                  primaryButton: .default(Text("Confirm"), action: {
-                    guard self.lastTappedDifficultyLevel != self.difficulty.level else {
-                        return
-                    }
-                    self.difficulty.level = self.lastTappedDifficultyLevel
-                    let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
-                    self.startingGrid.reset(newGrid: newGrid)
-                    self.workingGrid.reset(newGrid: newGrid)
-                    self.editGrid.grid = []
-                    self.selectedCell.coordinate = nil
-                  }),
-                  secondaryButton: .cancel())
+            .alert(isPresented: $workingGridIsComplete) {
+                Alert(title: Text("Congratulations!"),
+                      message: Text("You've completed the sudoku!"),
+                      dismissButton: .default(Text("Dismiss")))
+            }
+            .alert(isPresented: $displayAlertForDifficultyChange) {
+                Alert(title: Text("You're currently in progress"),
+                      message: Text("Are you sure you want to change difficulty? This will reset your progress on the current board."),
+                      primaryButton: .default(Text("Confirm"), action: {
+                        guard self.lastTappedDifficultyLevel != self.difficulty.level else {
+                            return
+                        }
+                        self.difficulty.level = self.lastTappedDifficultyLevel
+                        let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
+                        self.startingGrid.reset(newGrid: newGrid)
+                        self.workingGrid.reset(newGrid: newGrid)
+                        self.editGrid.grid = []
+                        self.selectedCell.coordinate = nil
+                      }),
+                      secondaryButton: .cancel())
+            }
         }
     }
 }
@@ -80,5 +84,12 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView(viewModel: GameViewModel())
+            .environmentObject(SelectedCell())
+            .environmentObject(UserAction())
+            .environmentObject(EditState())
+            .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
+            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
+            .environmentObject(EditGridValues(grid: []))
+            .environmentObject(Difficulty(level: .easy))
     }
 }
