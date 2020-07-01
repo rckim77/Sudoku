@@ -17,7 +17,7 @@ struct SettingsView: View {
                 Text("Sudoku Classic")
                     .font(Font.system(.largeTitle, design: .rounded).bold())
                 Text("Version \(appVersion)")
-                    .navigationBarTitle("Settings", displayMode: .inline)
+                    .navigationBarHidden(true)
                 Text("Made by Ray Kim")
                 Button(action: {
                     let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!

@@ -50,17 +50,17 @@ struct ContentView: View {
                 NavigationLink(destination: GameView(viewModel: GameViewModel())) {
                     Text(gameInProgress ? "Resume Game" : "New Game")
                 }
-                .padding(.vertical, buttonVerticalPadding)
-                .padding(.horizontal, buttonHorizontalPadding)
-                .background(Color.blue.opacity(0.2))
-                .cornerRadius(8)
+                    .padding(.vertical, buttonVerticalPadding)
+                    .padding(.horizontal, buttonHorizontalPadding)
+                    .background(Color.blue.opacity(0.2))
+                    .cornerRadius(8)
                 NavigationLink(destination: SettingsView()) {
                     Text("Settings")
                 }
-                .padding(.vertical, buttonVerticalPadding)
-                .padding(.horizontal, buttonHorizontalPadding)
-                .background(Color.blue.opacity(0.2))
-                .cornerRadius(8)
+                    .padding(.vertical, buttonVerticalPadding)
+                    .padding(.horizontal, buttonHorizontalPadding)
+                    .background(Color.blue.opacity(0.2))
+                    .cornerRadius(8)
             }
         }
         .environmentObject(SelectedCell())
