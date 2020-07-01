@@ -67,6 +67,7 @@ struct ContentView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .environmentObject(SelectedCell())
         .environmentObject(UserAction())
         .environmentObject(EditState())
