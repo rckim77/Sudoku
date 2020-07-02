@@ -32,43 +32,46 @@ struct GameView: View {
     let viewModel: GameViewModel
     
     var body: some View {
-        VStack(spacing: viewModel.verticalSpacing) {
-            Grid(startingGrid: startingGrid.grid,
-                 workingGrid: workingGrid.grid,
-                 editGrid: editGrid.grid,
-                 colorGrid: workingGrid.colorGrid)
-                .padding(.horizontal, viewModel.horizontalSizeClassPadding)
-            HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
-                ClearButton()
-                EditButton()
+        ZStack {
+            Color("dynamicBackground")
+                    .edgesIgnoringSafeArea(.all)
+            VStack(spacing: viewModel.verticalSpacing) {
+                Grid(startingGrid: startingGrid.grid,
+                     workingGrid: workingGrid.grid,
+                     editGrid: editGrid.grid,
+                     colorGrid: workingGrid.colorGrid)
+                    .padding(.horizontal, viewModel.horizontalSizeClassPadding)
+                HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
+                    ClearButton()
+                    EditButton()
+                }
+                KeysRow(alert: $alertItem,
+                        selectedCoordinate: selectedCell.coordinate,
+                        isEditing: editState.isEditing)
+                    .padding(.horizontal, viewModel.horizontalSizeClassPadding)
+                NewGameButton(alert: $alertItem,
+                              editGrid: editGrid.grid,
+                              startingGrid: startingGrid.grid,
+                              workingGrid: workingGrid.grid)
+                Spacer()
             }
-            KeysRow(alert: $alertItem,
-                    selectedCoordinate: selectedCell.coordinate,
-                    isEditing: editState.isEditing)
-                .padding(.horizontal, viewModel.horizontalSizeClassPadding)
-            NewGameButton(alert: $alertItem,
-                          editGrid: editGrid.grid,
-                          startingGrid: startingGrid.grid,
-                          workingGrid: workingGrid.grid)
-            Spacer()
+            .alert(item: $alertItem, content: { item in
+                switch item.id {
+                case .newGame:
+                    return Alert(title: Text("You're currently in progress"),
+                                 message: Text("Are you sure you want to start a new game? You will lose your current progress."),
+                                 primaryButton: .default(Text("Confirm"), action: {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                    self.resetGrids(for: self.difficulty.level)
+                                 }),
+                                 secondaryButton: .cancel())
+                case .finishedGame:
+                    return Alert(title: Text("Congratulations!"),
+                                 message: Text("You've completed the sudoku!"),
+                                 dismissButton: .default(Text("Dismiss")))
+                }
+            })
         }
-        .fullBackgroundStyle()
-        .alert(item: $alertItem, content: { item in
-            switch item.id {
-            case .newGame:
-                return Alert(title: Text("You're currently in progress"),
-                             message: Text("Are you sure you want to start a new game? You will lose your current progress."),
-                             primaryButton: .default(Text("Confirm"), action: {
-                                self.presentationMode.wrappedValue.dismiss()
-                                self.resetGrids(for: self.difficulty.level)
-                             }),
-                             secondaryButton: .cancel())
-            case .finishedGame:
-                return Alert(title: Text("Congratulations!"),
-                             message: Text("You've completed the sudoku!"),
-                             dismissButton: .default(Text("Dismiss")))
-            }
-        })
         .navigationBarBackButtonHidden(true)
     }
     
