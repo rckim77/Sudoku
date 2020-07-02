@@ -14,7 +14,7 @@ struct EditButton: View {
     private var editState: EditState
 
     private var editButtonHorizontalPadding: CGFloat {
-        isIpad ? 20 : 14
+        isIpad ? 24 : 14
     }
     private var editButtonVerticalPadding: CGFloat {
         isIpad ? 26 : 16

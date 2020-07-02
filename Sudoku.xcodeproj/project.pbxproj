@@ -185,7 +185,7 @@
 				94600FBF2499C4A700E605FD /* ClearButton.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
-				ECC830A224A3F8C70075CE0E /* GridComponents */,
+				ECC830A224A3F8C70075CE0E /* Grid */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 			path = "View Modifiers";
 			sourceTree = "<group>";
 		};
-		ECC830A224A3F8C70075CE0E /* GridComponents */ = {
+		ECC830A224A3F8C70075CE0E /* Grid */ = {
 			isa = PBXGroup;
 			children = (
 				9467743A2487579300F636D4 /* Grid.swift */,
@@ -211,7 +211,7 @@
 				94600FB124973BD600E605FD /* EditCellGrid.swift */,
 				EC8435E324AA9B8300D311FF /* EditCellGridText.swift */,
 			);
-			path = GridComponents;
+			path = Grid;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

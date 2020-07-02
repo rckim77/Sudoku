@@ -21,7 +21,10 @@ struct KeysRowButtonText: View {
             return 48
         }
     }
-    private let textFont = Font.system(.title, design: .rounded)
+    private var textFont: Font {
+        let textStyle: Font.TextStyle = isIpad ? .largeTitle : .title
+        return Font.system(textStyle, design: .rounded)
+    }
 
     var body: some View {
         Text(text)

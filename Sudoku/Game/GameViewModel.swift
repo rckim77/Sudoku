@@ -16,7 +16,7 @@ struct GameViewModel: ViewModel {
 
     var verticalSpacing: CGFloat {
         guard !isIpad else {
-            return 50
+            return 40
         }
 
         if screenHeight > 736 { // taller than 8 Plus
