@@ -45,9 +45,13 @@ struct ContentView: View {
                     }
                 }
                 NavigationLink(destination: SettingsView()) {
-                    Text("Settings")
+                    HStack {
+                        Image(systemName: "gear")
+                        Text("Settings")
+                    }
                 }
-                .menuButtonStyle()
+                .accentColor(Color("dynamicDarkGray"))
+                
             }
             .fullBackgroundStyle()
         }
@@ -58,5 +62,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        .previewDevice(PreviewDevice(rawValue: "iPad (7th generation)"))
+            .environment(\.colorScheme, .dark)
     }
 }
