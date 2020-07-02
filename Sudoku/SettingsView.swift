@@ -15,7 +15,7 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 36) {
+            VStack(spacing: 24) {
                 Text("Sudoku Classic")
                     .font(Font.system(.largeTitle, design: .rounded).bold())
                 Text("Version \(appVersion) (\(buildVersion))")
