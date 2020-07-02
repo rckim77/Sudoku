@@ -10,17 +10,6 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject
-    private var startingGrid: StartingGridValues
-    @EnvironmentObject
-    private var workingGrid: GridValues
-    @EnvironmentObject
-    private var editGrid: EditGridValues
-    
-    private var gameInProgress: Bool {
-        workingGrid.grid.count > startingGrid.grid.count || !editGrid.grid.isEmpty
-    }
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -79,20 +68,11 @@ struct ContentView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .environmentObject(SelectedCell())
-        .environmentObject(UserAction())
-        .environmentObject(EditState())
-        .environmentObject(Difficulty(level: .easy))
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            ContentView()
-                .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
-                .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
-                .environmentObject(EditGridValues(grid: []))
-        }
+        ContentView()
     }
 }

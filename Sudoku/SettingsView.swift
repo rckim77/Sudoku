@@ -11,25 +11,26 @@ import SwiftUI
 struct SettingsView: View {
     
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+    private let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
 
     var body: some View {
         NavigationView {
             ZStack {
                 Color("dynamicBackground")
                     .edgesIgnoringSafeArea(.all)
-                VStack(spacing: 40) {
+                VStack(spacing: 36) {
                     Text("Sudoku Classic")
                         .font(Font.system(.largeTitle, design: .rounded).bold())
-                    Text("Version \(appVersion)")
-                        .font(Font.system(.title, design: .rounded))
+                    Text("Version \(appVersion) (\(buildVersion))")
+                        .font(Font.system(.headline, design: .rounded))
                     Text("© 2020 Ray Kim")
-                        .font(Font.system(.title, design: .rounded))
+                        .font(Font.system(.headline, design: .rounded))
                     Button(action: {
                         let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!
                         UIApplication.shared.open(url)
                     }) {
                         Text("Website")
-                            .font(Font.system(.title, design: .rounded))
+                            .font(Font.system(.headline, design: .rounded))
                     }
                     Spacer()
                 }
