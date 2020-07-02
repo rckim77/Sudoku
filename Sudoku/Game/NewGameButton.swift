@@ -28,6 +28,7 @@ struct NewGameButton: View {
             }
         }) {
             Text("New game")
+                .font(.system(.headline, design: .rounded))
         }
             .menuButtonStyle()
     }
