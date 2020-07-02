@@ -59,17 +59,6 @@ struct Row: View {
         }
     }
 
-//    private func setForegroundColor(columnIndex: Int) -> Color {
-//        let currentCoordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
-//        let digit: Int?
-//        if case let UserAction.ActionType.digit(inputDigit) = userAction.action {
-//            digit = inputDigit
-//        } else {
-//            digit = nil
-//        }
-//        return viewModel.foregroundColorFor(coordinate: currentCoordinate, digit: digit, selectedCell: selectedCell.coordinate)
-//    }
-
     private func updateSelectedButton(columnIndex: Int) {
         if !isSelected(columnIndex: columnIndex) {
             selectedCell.coordinate = (r: viewModel.index, c: viewModel.columns[columnIndex], s: viewModel.squareIndex)

@@ -27,13 +27,7 @@ struct GameView: View {
     @EnvironmentObject
     private var difficulty: Difficulty
     @State
-    private var workingGridIsComplete = false
-    /// Used to follow through on specific difficulty when a user taps confirm on action sheet to
-    /// change difficulty.
-    @State
-    private var lastTappedDifficultyLevel: Difficulty.Level = .easy
-    @State
-    private var displayAlertForNewGame = false
+    private var alertItem: AlertItem?
     
     let viewModel: GameViewModel
     
@@ -48,28 +42,32 @@ struct GameView: View {
                 ClearButton()
                 EditButton()
             }
-            KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate, isEditing: editState.isEditing)
+            KeysRow(alert: $alertItem,
+                    selectedCoordinate: selectedCell.coordinate,
+                    isEditing: editState.isEditing)
                 .padding(.horizontal, viewModel.horizontalSizeClassPadding)
-            NewGameButton(displayAlert: $displayAlertForNewGame,
+            NewGameButton(alert: $alertItem,
                           editGridIsEmpty: editGrid.isEmpty,
                           workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count)
             Spacer()
         }
         .fullBackgroundStyle()
-        .alert(isPresented: $workingGridIsComplete) {
-            Alert(title: Text("Congratulations!"),
-                  message: Text("You've completed the sudoku!"),
-                  dismissButton: .default(Text("Dismiss")))
-        }
-        .alert(isPresented: $displayAlertForNewGame) {
-            Alert(title: Text("You're currently in progress"),
-                  message: Text("Are you sure you want to start a new game? You will lose your current progress."),
-                  primaryButton: .default(Text("Confirm"), action: {
-                    self.presentationMode.wrappedValue.dismiss()
-                    self.resetGrids(for: self.difficulty.level)
-                  }),
-                  secondaryButton: .cancel())
-        }
+        .alert(item: $alertItem, content: { item in
+            switch item.id {
+            case .newGame:
+                return Alert(title: Text("You're currently in progress"),
+                             message: Text("Are you sure you want to start a new game? You will lose your current progress."),
+                             primaryButton: .default(Text("Confirm"), action: {
+                                self.presentationMode.wrappedValue.dismiss()
+                                self.resetGrids(for: self.difficulty.level)
+                             }),
+                             secondaryButton: .cancel())
+            case .finishedGame:
+                return Alert(title: Text("Congratulations!"),
+                             message: Text("You've completed the sudoku!"),
+                             dismissButton: .default(Text("Dismiss")))
+            }
+        })
         .navigationBarBackButtonHidden(true)
     }
     

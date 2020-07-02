@@ -13,7 +13,7 @@ struct NewGameButton: View {
     private var presentationMode: Binding<PresentationMode>
 
     @Binding
-    var displayAlert: Bool
+    var alert: AlertItem?
 
     let editGridIsEmpty: Bool
     let workingGridHasMoreValues: Bool
@@ -21,7 +21,7 @@ struct NewGameButton: View {
     var body: some View {
         Button(action: {
             if self.workingGridHasMoreValues || !self.editGridIsEmpty {
-                self.displayAlert = true
+                self.alert = AlertItem(id: .newGame)
             } else {
                 self.presentationMode.wrappedValue.dismiss()
             }
@@ -34,6 +34,6 @@ struct NewGameButton: View {
 
 struct NewGameButton_Previews: PreviewProvider {
     static var previews: some View {
-        NewGameButton(displayAlert: .constant(true), editGridIsEmpty: true, workingGridHasMoreValues: true)
+        NewGameButton(alert: .constant(AlertItem(id: .newGame)), editGridIsEmpty: true, workingGridHasMoreValues: true)
     }
 }

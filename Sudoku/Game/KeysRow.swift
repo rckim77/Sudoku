@@ -21,7 +21,7 @@ struct KeysRow: View {
     @EnvironmentObject
     private var editGrid: EditGridValues
     @Binding
-    var gridIsComplete: Bool
+    var alert: AlertItem?
     
     let selectedCoordinate: Coordinate?
     let isEditing: Bool
@@ -63,14 +63,18 @@ struct KeysRow: View {
         } else {
             editGrid.removeValues(at: selectedCoordinate)
             workingGrid.add(coordinateValue)
-            gridIsComplete = workingGrid.isSolved
+            if workingGrid.isSolved {
+                alert = AlertItem(id: .finishedGame)
+            } else {
+                alert = nil
+            }
         }
     }
 }
 
 struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
-        KeysRow(gridIsComplete: .constant(false), selectedCoordinate: nil, isEditing: false)
+        KeysRow(alert: .constant(AlertItem(id: .finishedGame)), selectedCoordinate: nil, isEditing: false)
             .environmentObject(UserAction())
             .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
