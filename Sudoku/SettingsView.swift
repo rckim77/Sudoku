@@ -15,26 +15,23 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationView {
-            ZStack {
-                Color("dynamicBackground")
-                    .edgesIgnoringSafeArea(.all)
-                VStack(spacing: 36) {
-                    Text("Sudoku Classic")
-                        .font(Font.system(.largeTitle, design: .rounded).bold())
-                    Text("Version \(appVersion) (\(buildVersion))")
+            VStack(spacing: 36) {
+                Text("Sudoku Classic")
+                    .font(Font.system(.largeTitle, design: .rounded).bold())
+                Text("Version \(appVersion) (\(buildVersion))")
+                    .font(Font.system(.headline, design: .rounded))
+                Text("© 2020 Ray Kim")
+                    .font(Font.system(.headline, design: .rounded))
+                Button(action: {
+                    let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!
+                    UIApplication.shared.open(url)
+                }) {
+                    Text("Website")
                         .font(Font.system(.headline, design: .rounded))
-                    Text("© 2020 Ray Kim")
-                        .font(Font.system(.headline, design: .rounded))
-                    Button(action: {
-                        let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!
-                        UIApplication.shared.open(url)
-                    }) {
-                        Text("Website")
-                            .font(Font.system(.headline, design: .rounded))
-                    }
-                    Spacer()
                 }
+                Spacer()
             }
+            .fullBackgroundStyle()
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarTitle("Settings", displayMode: .automatic)
