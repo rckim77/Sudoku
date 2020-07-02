@@ -15,7 +15,7 @@ struct ContentView: View {
     }
     
     private var buttonsVSpacing: CGFloat {
-        40 * (isIpad ? 1.5 : 1)
+        40 * (isIpad ? 2 : 1)
     }
     
     private let difficultyLevels: [Difficulty.Level] = [.easy, .medium, .hard]
@@ -40,6 +40,7 @@ struct ContentView: View {
                                 .environmentObject(Difficulty(level: level))
                         ) {
                             Text(level.rawValue)
+                                .font(.system(.headline, design: .rounded))
                         }
                         .menuButtonStyle()
                     }
@@ -50,6 +51,7 @@ struct ContentView: View {
                         Text("Settings")
                     }
                 }
+                .font(.system(.headline, design: .rounded))
                 .accentColor(Color("dynamicDarkGray"))
                 
             }
