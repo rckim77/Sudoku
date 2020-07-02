@@ -16,7 +16,6 @@ struct Square: View {
     let editGridSlice: [CoordinateEditValues]
     let colorGridSlice: [CoordinateColor]
 
-    private let columns = [0, 1, 2]
     private var borderWidth: CGFloat {
         screenHeight > 667 ? 3 : 2
     }
@@ -24,21 +23,18 @@ struct Square: View {
     var body: some View {
         VStack(alignment: .leading) {
             Row(viewModel: RowViewModel(index: 0,
-                                        columns: columns,
                                         squareIndex: index,
                                         startingGrid: startingGrid,
                                         workingGrid: workingGridSlice.filter { $0.r == 0 },
                                         colorGrid: colorGridSlice.filter { $0.r == 0 },
                                         guesses: editGridSlice.filter { $0.r == 0 }))
             Row(viewModel: RowViewModel(index: 1,
-                                        columns: columns,
                                         squareIndex: index,
                                         startingGrid: startingGrid,
                                         workingGrid: workingGridSlice.filter { $0.r == 1 },
                                         colorGrid: colorGridSlice.filter { $0.r == 1 },
                                         guesses: editGridSlice.filter { $0.r == 1 }))
             Row(viewModel: RowViewModel(index: 2,
-                                        columns: columns,
                                         squareIndex: index,
                                         startingGrid: startingGrid,
                                         workingGrid: workingGridSlice.filter { $0.r == 2 },

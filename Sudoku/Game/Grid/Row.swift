@@ -19,27 +19,15 @@ struct Row: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            Button(action: {
-                self.updateSelectedButton(columnIndex: 0)
-            }) {
-                renderCellText(columnIndex: 0)
+            ForEach(viewModel.columns, id: \.self) { columnIndex in
+                Button(action: {
+                    self.updateSelectedButton(columnIndex: columnIndex)
+                }) {
+                    self.renderCellText(columnIndex: columnIndex)
+                }
+                    .border(Color.black, width: 1)
+                .background(self.viewModel.backgroundColorFor(columnIndex, selectedCell: self.selectedCell.coordinate))
             }
-                .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(0, selectedCell: selectedCell.coordinate))
-            Button(action: {
-                self.updateSelectedButton(columnIndex: 1)
-            }) {
-                renderCellText(columnIndex: 1)
-            }
-                .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(1, selectedCell: selectedCell.coordinate))
-            Button(action: {
-                self.updateSelectedButton(columnIndex: 2)
-            }) {
-                renderCellText(columnIndex: 2)
-            }
-                .border(Color.black, width: 1)
-                .background(viewModel.backgroundColorFor(2, selectedCell: selectedCell.coordinate))
         }
         .frame(maxWidth: .infinity)
     }
@@ -84,7 +72,6 @@ struct Row: View {
 struct Row_Previews: PreviewProvider {
     static var previews: some View {
         Row(viewModel: RowViewModel(index: 0,
-                                    columns: [0, 1, 2],
                                     squareIndex: 0,
                                     startingGrid: GridFactory.easyGrid,
                                     workingGrid: GridFactory.easyGrid,
