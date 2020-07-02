@@ -10,24 +10,16 @@ import SwiftUI
 
 struct ContentView: View {
     
-    private var difficultyButtonHSpacing: CGFloat {
-        16 * (isIpad ? 2.5 : 1)
-    }
-    
-    private var buttonsVSpacing: CGFloat {
-        40 * (isIpad ? 2 : 1)
-    }
-    
-    private let difficultyLevels: [Difficulty.Level] = [.easy, .medium, .hard]
+    private let viewModel = ContentViewModel()
     
     var body: some View {
         NavigationView {
-            VStack(spacing: buttonsVSpacing) {
+            VStack(spacing: viewModel.buttonsVSpacing) {
                 Text("Sudoku Classic")
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
-                HStack(spacing: difficultyButtonHSpacing) {
-                    ForEach(difficultyLevels, id: \.self) { level in
+                HStack(spacing: viewModel.difficultyButtonHSpacing) {
+                    ForEach(viewModel.difficultyLevels, id: \.self) { level in
                         NavigationLink(destination:
                             GameView(viewModel: GameViewModel(difficulty: level))
                                 .environmentObject(SelectedCell())
