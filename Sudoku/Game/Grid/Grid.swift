@@ -22,62 +22,23 @@ struct Grid: View {
             return 8
         }
     }
+    private let squareRowRanges = [(0...2), (3...5), (6...8)]
 
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
                 .frame(width: Grid.spacerWidth)
             VStack {
-                HStack(spacing: 0) {
-                    Square(index: 0,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 0 },
-                           editGridSlice: editGrid.filter { $0.s == 0 },
-                           colorGridSlice: colorGrid.filter { $0.s == 0 })
-                    Square(index: 1,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 1 },
-                           editGridSlice: editGrid.filter { $0.s == 1 },
-                           colorGridSlice: colorGrid.filter { $0.s == 1 })
-                    Square(index: 2,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 2 },
-                           editGridSlice: editGrid.filter { $0.s == 2 },
-                           colorGridSlice: colorGrid.filter { $0.s == 2 })
-                }
-                HStack(spacing: 0) {
-                    Square(index: 3,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 3 },
-                           editGridSlice: editGrid.filter { $0.s == 3 },
-                           colorGridSlice: colorGrid.filter { $0.s == 3 })
-                    Square(index: 4,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 4 },
-                           editGridSlice: editGrid.filter { $0.s == 4 },
-                           colorGridSlice: colorGrid.filter { $0.s == 4 })
-                    Square(index: 5,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 5 },
-                           editGridSlice: editGrid.filter { $0.s == 5 },
-                           colorGridSlice: colorGrid.filter { $0.s == 5 })
-                }
-                HStack(spacing: 0) {
-                    Square(index: 6,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 6 },
-                           editGridSlice: editGrid.filter { $0.s == 6 },
-                           colorGridSlice: colorGrid.filter { $0.s == 6 })
-                    Square(index: 7,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 7 },
-                           editGridSlice: editGrid.filter { $0.s == 7 },
-                           colorGridSlice: colorGrid.filter { $0.s == 7 })
-                    Square(index: 8,
-                           startingGrid: startingGrid,
-                           workingGridSlice: workingGrid.filter { $0.s == 8 },
-                           editGridSlice: editGrid.filter { $0.s == 8 },
-                           colorGridSlice: colorGrid.filter { $0.s == 8 })
+                ForEach(squareRowRanges, id: \.self) { squareRowRange in
+                    HStack(spacing: 0) {
+                        ForEach(squareRowRange, id: \.self) { squareIndex in
+                            Square(index: squareIndex,
+                                   startingGrid: self.startingGrid,
+                                   workingGridSlice: self.workingGrid.filter { $0.s == squareIndex },
+                                   editGridSlice: self.editGrid.filter { $0.s == squareIndex },
+                                   colorGridSlice: self.colorGrid.filter { $0.s == squareIndex })
+                        }
+                    }
                 }
             }
             Spacer()
