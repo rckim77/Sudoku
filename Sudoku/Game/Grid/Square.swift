@@ -15,33 +15,21 @@ struct Square: View {
     let workingGridSlice: [CoordinateValue]
     let editGridSlice: [CoordinateEditValues]
     let colorGridSlice: [CoordinateColor]
-
-    private var borderWidth: CGFloat {
-        screenHeight > 667 ? 3 : 2
-    }
+    
+    private let viewModel = SquareViewModel()
 
     var body: some View {
         VStack(alignment: .leading) {
-            Row(viewModel: RowViewModel(index: 0,
-                                        squareIndex: index,
-                                        startingGrid: startingGrid,
-                                        workingGrid: workingGridSlice.filter { $0.r == 0 },
-                                        colorGrid: colorGridSlice.filter { $0.r == 0 },
-                                        guesses: editGridSlice.filter { $0.r == 0 }))
-            Row(viewModel: RowViewModel(index: 1,
-                                        squareIndex: index,
-                                        startingGrid: startingGrid,
-                                        workingGrid: workingGridSlice.filter { $0.r == 1 },
-                                        colorGrid: colorGridSlice.filter { $0.r == 1 },
-                                        guesses: editGridSlice.filter { $0.r == 1 }))
-            Row(viewModel: RowViewModel(index: 2,
-                                        squareIndex: index,
-                                        startingGrid: startingGrid,
-                                        workingGrid: workingGridSlice.filter { $0.r == 2 },
-                                        colorGrid: colorGridSlice.filter { $0.r == 2 },
-                                        guesses: editGridSlice.filter { $0.r == 2 }))
+            ForEach(viewModel.rowIndices, id: \.self) { rowIndex in
+                Row(viewModel: RowViewModel(index: rowIndex,
+                                            squareIndex: self.index,
+                                            startingGrid: self.startingGrid,
+                                            workingGrid: self.workingGridSlice.filter { $0.r == rowIndex },
+                                            colorGrid: self.colorGridSlice.filter { $0.r == rowIndex },
+                                            guesses: self.editGridSlice.filter { $0.r == rowIndex }))
+            }
         }
-        .border(Color.black, width: borderWidth)
+        .border(Color.black, width: viewModel.borderWidth)
     }
 }
 
