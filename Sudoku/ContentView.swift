@@ -18,6 +18,8 @@ struct ContentView: View {
         40 * (isIpad ? 1.5 : 1)
     }
     
+    private let difficultyLevels: [Difficulty.Level] = [.easy, .medium, .hard]
+    
     var body: some View {
         NavigationView {
             VStack(spacing: buttonsVSpacing) {
@@ -25,50 +27,27 @@ struct ContentView: View {
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
                 HStack(spacing: difficultyButtonHSpacing) {
-                    NavigationLink(destination:
-                        GameView(viewModel: GameViewModel(difficulty: .easy))
-                            .environmentObject(SelectedCell())
-                            .environmentObject(UserAction())
-                            .environmentObject(EditState())
-                            .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
-                            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
-                            .environmentObject(EditGridValues(grid: []))
-                            .environmentObject(Difficulty(level: .easy))
-                    ) {
-                        Text("Easy")
-                    }
+                    ForEach(difficultyLevels, id: \.self) { level in
+                        NavigationLink(destination:
+                            GameView(viewModel: GameViewModel(difficulty: level))
+                                .environmentObject(SelectedCell())
+                                .environmentObject(UserAction())
+                                .environmentObject(EditState())
+                                .environmentObject(StartingGridValues(grid: GridFactory.gridForDifficulty(level: level)))
+                                .environmentObject(GridValues(grid: GridFactory.gridForDifficulty(level: level),
+                                                              startingGrid: GridFactory.gridForDifficulty(level: level)))
+                                .environmentObject(EditGridValues(grid: []))
+                                .environmentObject(Difficulty(level: level))
+                        ) {
+                            Text(level.rawValue)
+                        }
                         .menuButtonStyle()
-                    NavigationLink(destination:
-                        GameView(viewModel: GameViewModel(difficulty: .medium))
-                            .environmentObject(SelectedCell())
-                            .environmentObject(UserAction())
-                            .environmentObject(EditState())
-                            .environmentObject(StartingGridValues(grid: GridFactory.mediumGrid))
-                            .environmentObject(GridValues(grid: GridFactory.mediumGrid, startingGrid: GridFactory.mediumGrid))
-                            .environmentObject(EditGridValues(grid: []))
-                            .environmentObject(Difficulty(level: .medium))
-                    ) {
-                        Text("Medium")
                     }
-                        .menuButtonStyle()
-                    NavigationLink(destination:
-                        GameView(viewModel: GameViewModel(difficulty: .hard))
-                            .environmentObject(SelectedCell())
-                            .environmentObject(UserAction())
-                            .environmentObject(EditState())
-                            .environmentObject(StartingGridValues(grid: GridFactory.hardGrid))
-                            .environmentObject(GridValues(grid: GridFactory.hardGrid, startingGrid: GridFactory.hardGrid))
-                            .environmentObject(EditGridValues(grid: []))
-                            .environmentObject(Difficulty(level: .hard))
-                    ) {
-                        Text("Hard")
-                    }
-                        .menuButtonStyle()
                 }
                 NavigationLink(destination: SettingsView()) {
                     Text("Settings")
                 }
-                    .menuButtonStyle()
+                .menuButtonStyle()
             }
             .fullBackgroundStyle()
         }
