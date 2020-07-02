@@ -47,8 +47,9 @@ struct GameView: View {
                     isEditing: editState.isEditing)
                 .padding(.horizontal, viewModel.horizontalSizeClassPadding)
             NewGameButton(alert: $alertItem,
-                          editGridIsEmpty: editGrid.isEmpty,
-                          workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count)
+                          editGrid: editGrid.grid,
+                          startingGrid: startingGrid.grid,
+                          workingGrid: workingGrid.grid)
             Spacer()
         }
         .fullBackgroundStyle()
