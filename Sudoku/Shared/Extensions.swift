@@ -31,13 +31,17 @@ extension View {
     }
 }
 
-struct Extensions_Previews: PreviewProvider {
-    static var previews: some View {
-        HStack {
-            Text("Test")
-                .padding()
-                .cornerRadius(8, corners: [.topLeft, .bottomLeft])
-                .border(Color.black, width: 2)
-        }
+extension ViewModifier {
+    var isIpad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    var screenWidth: CGFloat {
+        UIScreen.main.bounds.width
+    }
+
+    /// E.g., 12.9-inch iPads
+    var isLargestIpad: Bool {
+        isIpad && screenWidth > 1023
     }
 }

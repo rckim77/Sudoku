@@ -16,6 +16,10 @@ final class EditGridValues: ObservableObject {
     init(grid: [CoordinateEditValues]) {
         self.grid = grid
     }
+    
+    var isEmpty: Bool {
+        grid.isEmpty
+    }
 
     // Note: this returns a copy because grid is an array of value types.
     func guesses(for coordinate: Coordinate) -> CoordinateEditValues? {

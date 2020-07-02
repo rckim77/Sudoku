@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct GameView: View {
+
+    @Environment(\.presentationMode)
+    private var presentationMode: Binding<PresentationMode>
     @EnvironmentObject
     private var selectedCell: SelectedCell
     @EnvironmentObject
@@ -30,7 +33,7 @@ struct GameView: View {
     @State
     private var lastTappedDifficultyLevel: Difficulty.Level = .easy
     @State
-    private var displayAlertForDifficultyChange = false
+    private var displayAlertForNewGame = false
     
     let viewModel: GameViewModel
     
@@ -50,40 +53,42 @@ struct GameView: View {
                 }
                 KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate, isEditing: editState.isEditing)
                     .padding(.horizontal, viewModel.horizontalSizeClassPadding)
-                DifficultyButtons(displayAlert: $displayAlertForDifficultyChange,
-                                  lastTappedDifficulty: $lastTappedDifficultyLevel,
-                                  editGridIsEmpty: editGrid.grid.isEmpty,
-                                  workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count,
-                                  currentLevel: difficulty.level)
+                NewGameButton(displayAlert: $displayAlertForNewGame,
+                              editGridIsEmpty: editGrid.isEmpty,
+                              workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count)
+                Spacer()
             }
             .alert(isPresented: $workingGridIsComplete) {
                 Alert(title: Text("Congratulations!"),
                       message: Text("You've completed the sudoku!"),
                       dismissButton: .default(Text("Dismiss")))
             }
-            .alert(isPresented: $displayAlertForDifficultyChange) {
+            .alert(isPresented: $displayAlertForNewGame) {
                 Alert(title: Text("You're currently in progress"),
-                      message: Text("Are you sure you want to change difficulty? This will reset your progress on the current board."),
+                      message: Text("Are you sure you want to start a new game? You will lose your current progress."),
                       primaryButton: .default(Text("Confirm"), action: {
-                        guard self.lastTappedDifficultyLevel != self.difficulty.level else {
-                            return
-                        }
-                        self.difficulty.level = self.lastTappedDifficultyLevel
-                        let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
-                        self.startingGrid.reset(newGrid: newGrid)
-                        self.workingGrid.reset(newGrid: newGrid)
-                        self.editGrid.grid = []
-                        self.selectedCell.coordinate = nil
+                        self.presentationMode.wrappedValue.dismiss()
+                        self.resetGrids(for: self.difficulty.level)
                       }),
                       secondaryButton: .cancel())
             }
         }
+        .navigationBarBackButtonHidden(true)
+    }
+    
+    private func resetGrids(for level: Difficulty.Level) {
+        startingGrid.reset(newGrid: GridFactory.gridForDifficulty(level: level))
+        workingGrid.reset(newGrid: GridFactory.gridForDifficulty(level: level))
+        selectedCell.coordinate = nil
+        userAction.action = .none
+        editState.isEditing = false
+        editGrid.grid = []
     }
 }
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(viewModel: GameViewModel())
+        GameView(viewModel: GameViewModel(difficulty: .easy))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(EditState())

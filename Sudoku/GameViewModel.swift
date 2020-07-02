@@ -11,6 +11,8 @@ import SwiftUI
 struct GameViewModel: ViewModel {
     @Environment(\.horizontalSizeClass)
     var horizontalClass
+    
+    let difficulty: Difficulty.Level
 
     var verticalSpacing: CGFloat {
         guard !isIpad else {
@@ -18,11 +20,11 @@ struct GameViewModel: ViewModel {
         }
 
         if screenHeight > 736 { // taller than 8 Plus
-            return 48
+            return 46
         } else if screenHeight > 667 { // 8 Plus
-            return 26
+            return 24
         } else { // 8, SE (2nd gen)
-            return 20
+            return 18
         }
     }
 

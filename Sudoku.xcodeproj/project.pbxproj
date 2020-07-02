@@ -44,6 +44,8 @@
 		EC8435E424AA9B8300D311FF /* EditCellGridText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E324AA9B8300D311FF /* EditCellGridText.swift */; };
 		EC8435E624ABE61500D311FF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E524ABE61500D311FF /* GameView.swift */; };
 		EC8435E824ABEBD300D311FF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E724ABEBD300D311FF /* SettingsView.swift */; };
+		EC8435EC24AD913A00D311FF /* NewGameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435EB24AD913A00D311FF /* NewGameButton.swift */; };
+		EC8435EE24AE4D7100D311FF /* MenuButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435ED24AE4D7100D311FF /* MenuButtonStyle.swift */; };
 		ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A324A41BC30075CE0E /* RowViewModel.swift */; };
 		ECC830A624A5567C0075CE0E /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A524A5567C0075CE0E /* GameViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -88,6 +90,8 @@
 		EC8435E324AA9B8300D311FF /* EditCellGridText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellGridText.swift; sourceTree = "<group>"; };
 		EC8435E524ABE61500D311FF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		EC8435E724ABEBD300D311FF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EC8435EB24AD913A00D311FF /* NewGameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameButton.swift; sourceTree = "<group>"; };
+		EC8435ED24AE4D7100D311FF /* MenuButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonStyle.swift; sourceTree = "<group>"; };
 		ECC830A324A41BC30075CE0E /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
 		ECC830A524A5567C0075CE0E /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +112,7 @@
 			children = (
 				94E1089824874AFB0091D043 /* Extensions.swift */,
 				EC8435DB24A58F4400D311FF /* ViewModel.swift */,
+				EC8435ED24AE4D7100D311FF /* MenuButtonStyle.swift */,
 				94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */,
 			);
 			path = Shared;
@@ -134,7 +139,6 @@
 			children = (
 				94E108822487333A0091D043 /* AppDelegate.swift */,
 				94E108842487333B0091D043 /* SceneDelegate.swift */,
-				94600FD6249B1E8400E605FD /* GridFactory.swift */,
 				94E108862487333B0091D043 /* ContentView.swift */,
 				EC8435E524ABE61500D311FF /* GameView.swift */,
 				ECC830A524A5567C0075CE0E /* GameViewModel.swift */,
@@ -144,6 +148,7 @@
 				94600FBF2499C4A700E605FD /* ClearButton.swift */,
 				94600FC32499C87100E605FD /* DifficultyButtons.swift */,
 				94600FD8249B258900E605FD /* DifficultyButton.swift */,
+				EC8435EB24AD913A00D311FF /* NewGameButton.swift */,
 				EC8435D924A5671A00D311FF /* DifficultyButtonViewModel.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
@@ -180,6 +185,7 @@
 				94E9F3242491F10C00B1D003 /* StartingGridValues.swift */,
 				94A9CCBA2488AAFE008551B6 /* UserAction.swift */,
 				94E9F3332494289A00B1D003 /* EditState.swift */,
+				94600FD6249B1E8400E605FD /* GridFactory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,10 +298,12 @@
 				EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */,
 				EC8435E824ABEBD300D311FF /* SettingsView.swift in Sources */,
 				EC8435DA24A5671A00D311FF /* DifficultyButtonViewModel.swift in Sources */,
+				EC8435EC24AD913A00D311FF /* NewGameButton.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
 				94600FB224973BD600E605FD /* EditCellGrid.swift in Sources */,
 				EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */,
 				94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */,
+				EC8435EE24AE4D7100D311FF /* MenuButtonStyle.swift in Sources */,
 				9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */,
 				94677437248756CA00F636D4 /* Row.swift in Sources */,
 				94E9F32D2493FC3300B1D003 /* SudokuSolver.swift in Sources */,
