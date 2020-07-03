@@ -9,84 +9,54 @@
 import SwiftUI
 
 struct ContentView: View {
-
-    @EnvironmentObject
-    private var selectedCell: SelectedCell
-    @EnvironmentObject
-    private var userAction: UserAction
-    @EnvironmentObject
-    private var editState: EditState
-    @EnvironmentObject
-    private var startingGrid: StartingGridValues
-    @EnvironmentObject
-    private var workingGrid: GridValues
-    @EnvironmentObject
-    private var editGrid: EditGridValues
-    @EnvironmentObject
-    private var difficulty: Difficulty
-    @State
-    private var workingGridIsComplete = false
-    /// Used to follow through on specific difficulty when a user taps confirm on action sheet to
-    /// change difficulty.
-    @State
-    private var lastTappedDifficultyLevel: Difficulty.Level = .easy
-    @State
-    private var displayAlertForDifficultyChange = false
     
-    let viewModel: ContentViewModel
-
+    private let viewModel = ContentViewModel()
+    
     var body: some View {
-        VStack(spacing: viewModel.verticalSpacing) {
-            Grid(startingGrid: startingGrid.grid,
-                 workingGrid: workingGrid.grid,
-                 editGrid: editGrid.grid,
-                 colorGrid: workingGrid.colorGrid)
-                .padding(.horizontal, viewModel.horizontalSizeClassPadding)
-            HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
-                ClearButton()
-                EditButton()
-            }
-            KeysRow(gridIsComplete: $workingGridIsComplete, selectedCoordinate: selectedCell.coordinate, isEditing: editState.isEditing)
-                .padding(.horizontal, viewModel.horizontalSizeClassPadding)
-            DifficultyButtons(displayAlert: $displayAlertForDifficultyChange,
-                              lastTappedDifficulty: $lastTappedDifficultyLevel,
-                              editGridIsEmpty: editGrid.grid.isEmpty,
-                              workingGridHasMoreValues: workingGrid.grid.count > startingGrid.grid.count,
-                              currentLevel: difficulty.level)
-        }
-        .alert(isPresented: $workingGridIsComplete) {
-            Alert(title: Text("Congratulations!"),
-                  message: Text("You've completed the sudoku!"),
-                  dismissButton: .default(Text("Dismiss")))
-        }
-        .alert(isPresented: $displayAlertForDifficultyChange) {
-            Alert(title: Text("You're currently in progress"),
-                  message: Text("Are you sure you want to change difficulty? This will reset your progress on the current board."),
-                  primaryButton: .default(Text("Confirm"), action: {
-                    guard self.lastTappedDifficultyLevel != self.difficulty.level else {
-                        return
+        NavigationView {
+            VStack(spacing: viewModel.buttonsVSpacing) {
+                Text("Sudoku Classic")
+                    .font(.system(.largeTitle, design: .rounded))
+                    .bold()
+                HStack(spacing: viewModel.difficultyButtonHSpacing) {
+                    ForEach(viewModel.difficultyLevels, id: \.self) { level in
+                        NavigationLink(destination:
+                            GameView(viewModel: GameViewModel(difficulty: level))
+                                .environmentObject(SelectedCell())
+                                .environmentObject(UserAction())
+                                .environmentObject(EditState())
+                                .environmentObject(StartingGridValues(grid: GridFactory.gridForDifficulty(level: level)))
+                                .environmentObject(GridValues(grid: GridFactory.gridForDifficulty(level: level),
+                                                              startingGrid: GridFactory.gridForDifficulty(level: level)))
+                                .environmentObject(EditGridValues(grid: []))
+                                .environmentObject(Difficulty(level: level))
+                        ) {
+                            Text(level.rawValue)
+                                .font(.system(.headline, design: .rounded))
+                        }
+                        .menuButtonStyle()
                     }
-                    self.difficulty.level = self.lastTappedDifficultyLevel
-                    let newGrid = GridFactory.gridForDifficulty(level: self.difficulty.level)
-                    self.startingGrid.reset(newGrid: newGrid)
-                    self.workingGrid.reset(newGrid: newGrid)
-                    self.editGrid.grid = []
-                    self.selectedCell.coordinate = nil
-                  }),
-                  secondaryButton: .cancel())
+                }
+                NavigationLink(destination: SettingsView()) {
+                    HStack {
+                        Image(systemName: "gear")
+                        Text("Settings")
+                    }
+                }
+                .font(.system(.headline, design: .rounded))
+                .accentColor(Color("dynamicDarkGray"))
+                
+            }
+            .fullBackgroundStyle()
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: ContentViewModel())
-            .environmentObject(SelectedCell())
-            .environmentObject(UserAction())
-            .environmentObject(EditState())
-            .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
-            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
-            .environmentObject(EditGridValues(grid: []))
-            .environmentObject(Difficulty(level: .easy))
+        ContentView()
+        .previewDevice(PreviewDevice(rawValue: "iPad (7th generation)"))
+            .environment(\.colorScheme, .dark)
     }
 }

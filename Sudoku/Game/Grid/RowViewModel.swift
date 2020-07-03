@@ -11,7 +11,7 @@ import SwiftUI
 struct RowViewModel {
 
     let index: Int
-    let columns: [Int]
+    let columns = [0, 1, 2]
     let squareIndex: Int
     let startingGrid: [CoordinateValue]
     let workingGrid: [CoordinateValue]

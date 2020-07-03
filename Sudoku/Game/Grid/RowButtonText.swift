@@ -13,7 +13,10 @@ struct RowButtonText: View {
     let text: String
     let foregroundColor: Color
 
-    private let buttonTextFont = Font.system(.title, design: .rounded).bold()
+    private var buttonTextFont: Font {
+        let textStyle: Font.TextStyle = isIpad ? .largeTitle : .title
+        return Font.system(textStyle, design: .rounded).bold()
+    }
 
     private var buttonMinHeight: CGFloat {
         (screenWidth - (2 * Grid.spacerWidth)) / 9

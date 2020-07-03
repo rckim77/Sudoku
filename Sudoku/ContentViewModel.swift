@@ -2,51 +2,20 @@
 //  ContentViewModel.swift
 //  Sudoku
 //
-//  Created by Ray Kim on 6/25/20.
+//  Created by Ray Kim on 7/2/20.
 //  Copyright © 2020 Self. All rights reserved.
 //
 
 import SwiftUI
 
 struct ContentViewModel: ViewModel {
-    @Environment(\.horizontalSizeClass)
-    var horizontalClass
-
-    var verticalSpacing: CGFloat {
-        guard !isIpad else {
-            return 50
-        }
-
-        if screenHeight > 736 { // taller than 8 Plus
-            return 48
-        } else if screenHeight > 667 { // 8 Plus
-            return 26
-        } else { // 8, SE (2nd gen)
-            return 20
-        }
+    var difficultyButtonHSpacing: CGFloat {
+        16 * (isIpad ? 2.5 : 1)
     }
-
-    var clearButtonHorizontalPadding: CGFloat {
-        if screenHeight > 736 { // taller than 8 Plus
-            return 22
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 14
-        }
+    
+    var buttonsVSpacing: CGFloat {
+        40 * (isIpad ? 2 : 1)
     }
-
-    var clearButtonVerticalPadding: CGFloat {
-        if screenHeight > 736 { // taller than 8 Plus
-            return 10
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 8
-        }
-    }
-
-    var modifierButtonsHorizontalSpacing: CGFloat {
-        isIpad ? 36 : 12
-    }
-
-    var horizontalSizeClassPadding: CGFloat {
-        return horizontalClass == .regular ? 80 : 0
-    }
+    
+    let difficultyLevels: [Difficulty.Level] = [.easy, .medium, .hard]
 }

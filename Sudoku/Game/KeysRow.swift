@@ -21,7 +21,7 @@ struct KeysRow: View {
     @EnvironmentObject
     private var editGrid: EditGridValues
     @Binding
-    var gridIsComplete: Bool
+    var alert: AlertItem?
     
     let selectedCoordinate: Coordinate?
     let isEditing: Bool
@@ -36,60 +36,14 @@ struct KeysRow: View {
             Spacer()
                 .frame(width: horizontalSpacing)
             HStack(spacing: 2) {
-                Button(action: {
-                    self.updateForDigit(1)
-                }) {
-                    KeysRowButtonText(text: "1")
+                ForEach((1...9), id: \.self) { digit in
+                    Button(action: {
+                        self.updateForDigit(digit)
+                    }) {
+                        KeysRowButtonText(text: "\(digit)")
+                    }
+                    .cornerRadius(self.buttonCornerRadius)
                 }
-                    .cornerRadius(buttonCornerRadius)
-                Button(action: {
-                    self.updateForDigit(2)
-                }) {
-                    KeysRowButtonText(text: "2")
-                }
-                    .cornerRadius(buttonCornerRadius)
-                Button(action: {
-                    self.updateForDigit(3)
-                }) {
-                    KeysRowButtonText(text: "3")
-                }
-                    .cornerRadius(buttonCornerRadius)
-                Button(action: {
-                    self.updateForDigit(4)
-                }) {
-                    KeysRowButtonText(text: "4")
-                }
-                    .cornerRadius(buttonCornerRadius)
-                Button(action: {
-                    self.updateForDigit(5)
-                }) {
-                    KeysRowButtonText(text: "5")
-                }
-                    .cornerRadius(buttonCornerRadius)
-                Button(action: {
-                    self.updateForDigit(6)
-                }) {
-                    KeysRowButtonText(text: "6")
-                }
-                    .cornerRadius(buttonCornerRadius)
-                Button(action: {
-                    self.updateForDigit(7)
-                }) {
-                    KeysRowButtonText(text: "7")
-                }
-                    .cornerRadius(buttonCornerRadius)
-                Button(action: {
-                    self.updateForDigit(8)
-                }) {
-                    KeysRowButtonText(text: "8")
-                }
-                    .cornerRadius(buttonCornerRadius)
-                Button(action: {
-                    self.updateForDigit(9)
-                }) {
-                    KeysRowButtonText(text: "9")
-                }
-                    .cornerRadius(buttonCornerRadius)
             }
             .frame(maxWidth: .infinity)
             Spacer()
@@ -109,14 +63,18 @@ struct KeysRow: View {
         } else {
             editGrid.removeValues(at: selectedCoordinate)
             workingGrid.add(coordinateValue)
-            gridIsComplete = workingGrid.isSolved
+            if workingGrid.isSolved {
+                alert = AlertItem(id: .finishedGame)
+            } else {
+                alert = nil
+            }
         }
     }
 }
 
 struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
-        KeysRow(gridIsComplete: .constant(false), selectedCoordinate: nil, isEditing: false)
+        KeysRow(alert: .constant(AlertItem(id: .finishedGame)), selectedCoordinate: nil, isEditing: false)
             .environmentObject(UserAction())
             .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
             .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
