@@ -14,10 +14,16 @@ struct EditButton: View {
     private var editState: EditState
 
     private var editButtonHorizontalPadding: CGFloat {
-        isIpad ? 24 : 14
+        if #available(iOS 14.0, *) {
+            return isIpad ? 20 : 10
+        }
+        return isIpad ? 24 : 14
     }
     private var editButtonVerticalPadding: CGFloat {
-        isIpad ? 26 : 16
+        if #available(iOS 14.0, *) {
+            return isIpad ? 20 : 10
+        }
+        return isIpad ? 26 : 16
     }
     private var imageSize: CGFloat {
         isIpad ? 30 : 24
@@ -44,6 +50,7 @@ struct EditButton_Previews: PreviewProvider {
             ClearButton()
             EditButton()
                 .environmentObject(EditState())
+                .previewDevice(PreviewDevice(rawValue: "iPad (7th generation)"))
         }
     }
 }
