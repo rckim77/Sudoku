@@ -58,8 +58,8 @@ struct GameView: View {
             .alert(item: $alertItem, content: { item in
                 switch item.id {
                 case .newGame:
-                    return Alert(title: Text("You're currently in progress"),
-                                 message: Text("Are you sure you want to start a new game? You will lose your current progress."),
+                    return Alert(title: Text("Are you sure?"),
+                                 message: Text("If you go back, you will lose your current progress."),
                                  primaryButton: .default(Text("Confirm"), action: {
                                     self.presentationMode.wrappedValue.dismiss()
                                     self.resetGrids(for: self.difficulty.level)

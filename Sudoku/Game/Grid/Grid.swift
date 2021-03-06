@@ -22,6 +22,10 @@ struct Grid: View {
             return 8
         }
     }
+    
+    private var borderWidth: CGFloat {
+        screenHeight > 667 ? 3 : 2
+    }
     private let squareRowRanges = [(0...2), (3...5), (6...8)]
 
     var body: some View {
@@ -41,6 +45,8 @@ struct Grid: View {
                     }
                 }
             }
+            .padding(borderWidth)
+            .border(Color.black, width: borderWidth)
             Spacer()
                 .frame(width: Grid.spacerWidth)
         }
