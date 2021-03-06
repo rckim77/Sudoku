@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 
+/// Maintains state for working grid `grid`. `startingGrid` contains the initial grid.
 final class GridValues: ObservableObject {
     @Published
     private(set) var grid: [CoordinateValue]
@@ -54,7 +55,7 @@ final class GridValues: ObservableObject {
         }
     }
 
-    func containsAValue(at coordinate: Coordinate) -> Bool {
+    func containsAValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Bool {
         let result = grid.contains { coordinateValue -> Bool in
             let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
