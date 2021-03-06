@@ -10,10 +10,9 @@ import SwiftUI
 
 struct Grid: View {
     
-    let startingGrid: [CoordinateValue]
-    let workingGrid: [CoordinateValue]
+    @EnvironmentObject
+    private var workingGrid: GridValues
     let editGrid: [CoordinateEditValues]
-    let colorGrid: [CoordinateColor]
     
     static var spacerWidth: CGFloat {
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -37,10 +36,10 @@ struct Grid: View {
                     HStack(spacing: 0) {
                         ForEach(squareRowRange, id: \.self) { squareIndex in
                             Square(index: squareIndex,
-                                   startingGrid: self.startingGrid,
-                                   workingGridSlice: self.workingGrid.filter { $0.s == squareIndex },
+                                   startingGrid: self.workingGrid.startingGrid,
+                                   workingGridSlice: self.workingGrid.grid.filter { $0.s == squareIndex },
                                    editGridSlice: self.editGrid.filter { $0.s == squareIndex },
-                                   colorGridSlice: self.colorGrid.filter { $0.s == squareIndex })
+                                   colorGridSlice: self.workingGrid.colorGrid.filter { $0.s == squareIndex })
                         }
                     }
                 }
@@ -55,9 +54,7 @@ struct Grid: View {
 
 struct Grid_Previews: PreviewProvider {
     static var previews: some View {
-        Grid(startingGrid: GridFactory.easyGrid,
-             workingGrid: GridFactory.easyGrid,
-             editGrid: [],
-             colorGrid: [])
+        Grid(editGrid: [])
+            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
     }
 }

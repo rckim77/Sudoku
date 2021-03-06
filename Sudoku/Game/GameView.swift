@@ -34,10 +34,7 @@ struct GameView: View {
             Color("dynamicBackground")
                     .edgesIgnoringSafeArea(.all)
             VStack(spacing: viewModel.verticalSpacing) {
-                Grid(startingGrid: workingGrid.startingGrid,
-                     workingGrid: workingGrid.grid,
-                     editGrid: editGrid.grid,
-                     colorGrid: workingGrid.colorGrid)
+                Grid(editGrid: editGrid.grid)
                     .padding(.horizontal, viewModel.horizontalSizeClassPadding)
                 HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
                     ClearButton()
@@ -90,7 +87,7 @@ struct GameView_Previews: PreviewProvider {
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(EditState())
-            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
+            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
             .environmentObject(EditGridValues(grid: []))
             .environmentObject(Difficulty(level: .easy))
     }

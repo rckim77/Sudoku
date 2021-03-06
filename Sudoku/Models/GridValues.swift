@@ -23,8 +23,9 @@ final class GridValues: ObservableObject {
         return SudokuSolver.gridIsSolved(self)
     }
 
-    init(grid: [CoordinateValue], startingGrid: [CoordinateValue]) {
-        self.grid = grid
+    /// When initialized, both the working and starting grids are identical.
+    init(startingGrid: [CoordinateValue]) {
+        self.grid = startingGrid
         self.startingGrid = startingGrid
         self.colorGrid = []
         self.initColorGrid(grid)
