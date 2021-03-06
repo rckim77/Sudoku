@@ -15,7 +15,6 @@ struct RowViewModel {
     let squareIndex: Int
     let startingGrid: [CoordinateValue]
     let workingGrid: [CoordinateValue]
-    let colorGrid: [CoordinateColor]
     let guesses: [CoordinateEditValues]
     
     private let backgroundColor = Color("dynamicGridWhite")
@@ -40,10 +39,15 @@ struct RowViewModel {
         }
     }
     
-    func foregroundColorFor(_ columnIndex: Int) -> Color? {
-        colorGrid.filter({ $0.r == index && $0.c == columnIndex }).first?.color
+    func createCoordinateValue(c: Int) -> CoordinateValue? {
+        let coordinate = Coordinate(r: index, c: c, s: squareIndex)
+        guard let value = workingGridRetrieveValue(at: coordinate) else {
+            return nil
+        }
+        
+        return CoordinateValue(r: index, c: c, s: squareIndex, v: value)
     }
-
+    
     func hasGuessesAndNoValue(at columnIndex: Int) -> Bool {
         let coordinate = (r: index, c: columnIndex, s: squareIndex)
         return !grid(workingGrid, containsAValueAt: coordinate) && !guessFor(columnIndex).isEmpty

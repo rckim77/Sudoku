@@ -38,8 +38,7 @@ struct Grid: View {
                             Square(index: squareIndex,
                                    startingGrid: self.workingGrid.startingGrid,
                                    workingGridSlice: self.workingGrid.grid.filter { $0.s == squareIndex },
-                                   editGridSlice: self.editGrid.filter { $0.s == squareIndex },
-                                   colorGridSlice: self.workingGrid.colorGrid.filter { $0.s == squareIndex })
+                                   editGridSlice: self.editGrid.filter { $0.s == squareIndex })
                         }
                     }
                 }

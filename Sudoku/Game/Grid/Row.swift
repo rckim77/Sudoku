@@ -14,6 +14,8 @@ struct Row: View {
     private var selectedCell: SelectedCell
     @EnvironmentObject
     private var userAction: UserAction
+    @EnvironmentObject
+    private var grid: GridValues
 
     let viewModel: RowViewModel
 
@@ -63,8 +65,12 @@ struct Row: View {
             return AnyView(EditCellGrid(values: guess))
         } else {
             let text = setRowButtonText(columnIndex: columnIndex)
-            let foregroundColor = viewModel.foregroundColorFor(columnIndex) ?? .black
-            return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor))
+            if let coordinateValue = viewModel.createCoordinateValue(c: columnIndex) {
+                let foregroundColor = grid.foregroundColorFor(coordinateValue) ?? .black
+                return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor))
+            } else {
+                return AnyView(RowButtonText(text: text, foregroundColor: .black))
+            }
         }
     }
 }
@@ -75,7 +81,6 @@ struct Row_Previews: PreviewProvider {
                                     squareIndex: 0,
                                     startingGrid: GridFactory.easyGrid,
                                     workingGrid: GridFactory.easyGrid,
-                                    colorGrid: [],
                                     guesses: []))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())

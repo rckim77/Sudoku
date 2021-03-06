@@ -15,7 +15,7 @@ final class GridValues: ObservableObject {
     private(set) var grid: [CoordinateValue]
     
     @Published
-    private(set) var colorGrid: [CoordinateColor]
+    private(set) var colorGrid: Set<CoordinateColor>
     
     private(set) var startingGrid: [CoordinateValue]
 
@@ -27,7 +27,7 @@ final class GridValues: ObservableObject {
     init(startingGrid: [CoordinateValue]) {
         self.grid = startingGrid
         self.startingGrid = startingGrid
-        self.colorGrid = []
+        self.colorGrid = Set<CoordinateColor>()
         self.initColorGrid(grid)
     }
 
@@ -79,6 +79,10 @@ final class GridValues: ObservableObject {
             return gridCoordinate == coordinate
         }).first?.v
     }
+    
+    func foregroundColorFor(_ coordinate: CoordinateValue) -> Color? {
+        colorGrid.first(where: { $0.coordinate == coordinate })?.color
+    }
 
     // MARK: - Private methods
 
@@ -101,17 +105,17 @@ final class GridValues: ObservableObject {
         guard onlyWorkingGridHasValue(at: coordinateValue.coordinate) else {
             // starting grid
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: .black)
-            colorGrid.append(coordinateColor)
+            colorGrid.update(with: coordinateColor)
             return
         }
         
         if value(coordinateValue.v, wouldBeInvalidAt: coordinateValue.coordinate) {
             // user has just entered an invalid digit
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: .red)
-            colorGrid.append(coordinateColor)
+            colorGrid.update(with: coordinateColor)
         } else {
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: Color("dynamicBlue"))
-            colorGrid.append(coordinateColor)
+            colorGrid.update(with: coordinateColor)
         }
     }
     
@@ -193,8 +197,10 @@ final class GridValues: ObservableObject {
     }
     
     private func initColorGrid(_ grid: [CoordinateValue]) {
-        colorGrid = grid.map { coordinateValue -> CoordinateColor in
-            CoordinateColor(coordinate: coordinateValue, color: .black)
+        colorGrid = Set<CoordinateColor>()
+        grid.forEach { coordinateValue in
+            let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: .black)
+            colorGrid.update(with: coordinateColor)
         }
     }
 }
