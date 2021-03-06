@@ -30,7 +30,7 @@ struct NewGameButton: View {
             Text("New game")
                 .font(.system(.headline, design: .rounded))
         }
-            .menuButtonStyle()
+        .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
     }
 }
 

@@ -26,21 +26,23 @@ struct EditButton: View {
         return isIpad ? 26 : 16
     }
     private var imageSize: CGFloat {
-        isIpad ? 30 : 24
+        isIpad ? 24 : 18
+    }
+    private var backgroundColor: Color {
+        editState.isEditing ? Color("dynamicDarkGray") : Color("dynamicGray")
+    }
+    private var imageName: String {
+        editState.isEditing ? "pencil.circle.fill" : "pencil.circle"
     }
 
     var body: some View {
         Button(action: {
             self.editState.isEditing.toggle()
         }) {
-            Image(systemName: editState.isEditing ? "pencil.circle.fill" : "pencil.circle")
+            Image(systemName: imageName)
                 .font(.system(size: imageSize, weight: .regular))
-                .foregroundColor(.black)
-                .padding(.horizontal, editButtonHorizontalPadding)
-                .padding(.vertical, editButtonVerticalPadding)
-                .background(editState.isEditing ? Color("dynamicDarkGray") : Color("dynamicGray"))
         }
-            .cornerRadius(8)
+        .dynamicButtonImageStyle(textColor: .black, backgroundColor: backgroundColor)
     }
 }
 

@@ -58,14 +58,9 @@ struct ClearButton: View {
             }
         }) {
             Text("Clear")
-                .foregroundColor(.black)
-                .font(Font.system(.title, design:.rounded).smallCaps())
-                .padding(.horizontal, horizontalPadding)
-                .padding(.vertical, verticalPadding)
-                .frame(minHeight: 48)
-                .background(Color("dynamicGray"))
+                .font(.system(.headline, design: .rounded))
         }
-            .cornerRadius(8)
+        .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
     }
 }
 

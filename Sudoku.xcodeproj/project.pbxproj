@@ -42,7 +42,7 @@
 		EC8435E624ABE61500D311FF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E524ABE61500D311FF /* GameView.swift */; };
 		EC8435E824ABEBD300D311FF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E724ABEBD300D311FF /* SettingsView.swift */; };
 		EC8435EC24AD913A00D311FF /* NewGameButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435EB24AD913A00D311FF /* NewGameButton.swift */; };
-		EC8435EE24AE4D7100D311FF /* MenuButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435ED24AE4D7100D311FF /* MenuButtonStyle.swift */; };
+		EC8435EE24AE4D7100D311FF /* DynamicButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435ED24AE4D7100D311FF /* DynamicButtonStyle.swift */; };
 		EC8435F224AE519100D311FF /* FullBackgroundStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435F124AE519100D311FF /* FullBackgroundStyle.swift */; };
 		EC8435F424AE5F0800D311FF /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435F324AE5F0800D311FF /* AlertItem.swift */; };
 		EC8435F624AE717500D311FF /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435F524AE717500D311FF /* ContentViewModel.swift */; };
@@ -89,7 +89,7 @@
 		EC8435E524ABE61500D311FF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		EC8435E724ABEBD300D311FF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EC8435EB24AD913A00D311FF /* NewGameButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameButton.swift; sourceTree = "<group>"; };
-		EC8435ED24AE4D7100D311FF /* MenuButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonStyle.swift; sourceTree = "<group>"; };
+		EC8435ED24AE4D7100D311FF /* DynamicButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicButtonStyle.swift; sourceTree = "<group>"; };
 		EC8435F124AE519100D311FF /* FullBackgroundStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullBackgroundStyle.swift; sourceTree = "<group>"; };
 		EC8435F324AE5F0800D311FF /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		EC8435F524AE717500D311FF /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		EC8435F024AE517C00D311FF /* View Modifiers */ = {
 			isa = PBXGroup;
 			children = (
-				EC8435ED24AE4D7100D311FF /* MenuButtonStyle.swift */,
+				EC8435ED24AE4D7100D311FF /* DynamicButtonStyle.swift */,
 				94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */,
 				EC8435F124AE519100D311FF /* FullBackgroundStyle.swift */,
 			);
@@ -322,7 +322,7 @@
 				94600FB224973BD600E605FD /* EditCellGrid.swift in Sources */,
 				EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */,
 				94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */,
-				EC8435EE24AE4D7100D311FF /* MenuButtonStyle.swift in Sources */,
+				EC8435EE24AE4D7100D311FF /* DynamicButtonStyle.swift in Sources */,
 				9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */,
 				94677437248756CA00F636D4 /* Row.swift in Sources */,
 				94E9F32D2493FC3300B1D003 /* SudokuSolver.swift in Sources */,

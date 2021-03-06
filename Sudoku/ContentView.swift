@@ -34,7 +34,7 @@ struct ContentView: View {
                             Text(level.rawValue)
                                 .font(.system(.headline, design: .rounded))
                         }
-                        .menuButtonStyle()
+                        .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
                     }
                 }
                 NavigationLink(destination: SettingsView()) {
