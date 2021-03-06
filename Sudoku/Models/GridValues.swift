@@ -64,14 +64,6 @@ final class GridValues: ObservableObject {
         return result
     }
 
-    func contains(value: Int, at coordinate: Coordinate) -> Bool {
-        let result = grid.contains { coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
-            return gridCoordinate == coordinate && coordinateValue.v == value
-        }
-        return result
-    }
-
     func getValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Int? {
         let squareValues = values(in: coordinate.s, grid: grid)
         return squareValues.filter({ coordinateValue -> Bool in
@@ -92,19 +84,12 @@ final class GridValues: ObservableObject {
     }
 
     // MARK: - Private methods
-
-    private func contains(_ coordinateValue: CoordinateValue, grid: [CoordinateValue]) -> Bool {
-        let squareValues = values(in: coordinateValue.s, grid: grid)
-        return squareValues.first { coordinateVal -> Bool in
-            coordinateVal == coordinateValue
-        } != nil
-    }
     
     /// Compares working grid and starting grid and returns whether there's a value at the
     /// specified coordinate only in the working grid.
     private func onlyWorkingGridHasValue(at coordinate: Coordinate) -> Bool {
-        let workingGridHasAValue = grid(grid, containsAValueAt: coordinate)
-        let startingGridHasAValue = grid(startingGrid, containsAValueAt: coordinate)
+        let workingGridHasAValue = containsAValue(at: coordinate, grid: grid)
+        let startingGridHasAValue = containsAValue(at: coordinate, grid: startingGrid)
         return workingGridHasAValue && !startingGridHasAValue
     }
     
@@ -124,14 +109,6 @@ final class GridValues: ObservableObject {
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: Color("dynamicBlue"))
             colorGrid.update(with: coordinateColor)
         }
-    }
-    
-    private func grid(_ grid: [CoordinateValue], containsAValueAt coordinate: Coordinate) -> Bool {
-        let result = grid.contains { coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
-            return gridCoordinate == coordinate
-        }
-        return result
     }
     
     /// Checks whether there's already a coordinate with the input value in the
