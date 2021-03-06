@@ -25,7 +25,6 @@ struct ContentView: View {
                                 .environmentObject(SelectedCell())
                                 .environmentObject(UserAction())
                                 .environmentObject(EditState())
-                                .environmentObject(StartingGridValues(grid: GridFactory.gridForDifficulty(level: level)))
                                 .environmentObject(GridValues(grid: GridFactory.gridForDifficulty(level: level),
                                                               startingGrid: GridFactory.gridForDifficulty(level: level)))
                                 .environmentObject(EditGridValues(grid: []))

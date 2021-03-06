@@ -16,7 +16,7 @@ final class GridValues: ObservableObject {
     @Published
     private(set) var colorGrid: [CoordinateColor]
     
-    private let startingGrid: [CoordinateValue]
+    private(set) var startingGrid: [CoordinateValue]
 
     var isSolved: Bool {
         return SudokuSolver.gridIsSolved(self)
@@ -37,6 +37,7 @@ final class GridValues: ObservableObject {
 
     func reset(newGrid: [CoordinateValue]) {
         grid = newGrid
+        startingGrid = newGrid
         initColorGrid(grid)
     }
 
