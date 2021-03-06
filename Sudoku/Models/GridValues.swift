@@ -72,12 +72,19 @@ final class GridValues: ObservableObject {
         return result
     }
 
-    func retrieveValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Int? {
+    func getValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Int? {
         let squareValues = values(in: coordinate.s, grid: grid)
         return squareValues.filter({ coordinateValue -> Bool in
             let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }).first?.v
+    }
+    
+    func getCoordinateValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> CoordinateValue? {
+        return grid.filter({ coordinateValue -> Bool in
+            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            return gridCoordinate == coordinate
+        }).first
     }
     
     func foregroundColorFor(_ coordinate: CoordinateValue) -> Color? {

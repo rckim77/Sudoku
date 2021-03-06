@@ -36,8 +36,6 @@ struct Grid: View {
                     HStack(spacing: 0) {
                         ForEach(squareRowRange, id: \.self) { squareIndex in
                             Square(index: squareIndex,
-                                   startingGrid: self.workingGrid.startingGrid,
-                                   workingGridSlice: self.workingGrid.grid.filter { $0.s == squareIndex },
                                    editGridSlice: self.editGrid.filter { $0.s == squareIndex })
                         }
                     }

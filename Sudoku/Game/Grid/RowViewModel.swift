@@ -13,8 +13,6 @@ struct RowViewModel {
     let index: Int
     let columns = [0, 1, 2]
     let squareIndex: Int
-    let startingGrid: [CoordinateValue]
-    let workingGrid: [CoordinateValue]
     let guesses: [CoordinateEditValues]
     
     private let backgroundColor = Color("dynamicGridWhite")
@@ -38,38 +36,14 @@ struct RowViewModel {
             return backgroundColor
         }
     }
-    
-    func createCoordinateValue(c: Int) -> CoordinateValue? {
-        let coordinate = Coordinate(r: index, c: c, s: squareIndex)
-        guard let value = workingGridRetrieveValue(at: coordinate) else {
-            return nil
-        }
-        
-        return CoordinateValue(r: index, c: c, s: squareIndex, v: value)
-    }
-    
-    func hasGuessesAndNoValue(at columnIndex: Int) -> Bool {
-        let coordinate = (r: index, c: columnIndex, s: squareIndex)
-        return !grid(workingGrid, containsAValueAt: coordinate) && !guessFor(columnIndex).isEmpty
-    }
-    
-    func guessFor(_ columnIndex: Int) -> Set<Int> {
+
+    func guessesFor(_ columnIndex: Int) -> Set<Int> {
         let coordinate = (r: index, c: columnIndex, s: squareIndex)
         return guesses.first(where: {
             $0.r == coordinate.r &&
             $0.c == coordinate.c &&
             $0.s == coordinate.s
         })?.values ?? Set<Int>()
-    }
-    
-    // MARK: - Working grid methods
-    
-    func workingGridRetrieveValue(at coordinate: Coordinate) -> Int? {
-        let squareValues = values(in: coordinate.s, grid: workingGrid)
-        return squareValues.filter({ coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
-            return gridCoordinate == coordinate
-        }).first?.v
     }
     
     // MARK: - Private helpers
