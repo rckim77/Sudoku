@@ -19,8 +19,6 @@ struct GameView: View {
     @EnvironmentObject
     private var editState: EditState
     @EnvironmentObject
-    private var startingGrid: StartingGridValues
-    @EnvironmentObject
     private var workingGrid: GridValues
     @EnvironmentObject
     private var editGrid: EditGridValues
@@ -36,10 +34,7 @@ struct GameView: View {
             Color("dynamicBackground")
                     .edgesIgnoringSafeArea(.all)
             VStack(spacing: viewModel.verticalSpacing) {
-                Grid(startingGrid: startingGrid.grid,
-                     workingGrid: workingGrid.grid,
-                     editGrid: editGrid.grid,
-                     colorGrid: workingGrid.colorGrid)
+                Grid(editGrid: editGrid.grid)
                     .padding(.horizontal, viewModel.horizontalSizeClassPadding)
                 HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
                     ClearButton()
@@ -51,18 +46,17 @@ struct GameView: View {
                     .padding(.horizontal, viewModel.horizontalSizeClassPadding)
                 NewGameButton(alert: $alertItem,
                               editGrid: editGrid.grid,
-                              startingGrid: startingGrid.grid,
+                              startingGrid: workingGrid.startingGrid,
                               workingGrid: workingGrid.grid)
                 Spacer()
             }
             .alert(item: $alertItem, content: { item in
                 switch item.id {
                 case .newGame:
-                    return Alert(title: Text("You're currently in progress"),
-                                 message: Text("Are you sure you want to start a new game? You will lose your current progress."),
+                    return Alert(title: Text("Are you sure?"),
+                                 message: Text("If you go back, you will lose your current progress."),
                                  primaryButton: .default(Text("Confirm"), action: {
                                     self.presentationMode.wrappedValue.dismiss()
-                                    self.resetGrids(for: self.difficulty.level)
                                  }),
                                  secondaryButton: .cancel())
                 case .finishedGame:
@@ -73,10 +67,12 @@ struct GameView: View {
             })
         }
         .navigationBarBackButtonHidden(true)
+        .onDisappear() {
+            self.resetGrids(for: self.difficulty.level)
+        }
     }
     
     private func resetGrids(for level: Difficulty.Level) {
-        startingGrid.reset(newGrid: GridFactory.gridForDifficulty(level: level))
         workingGrid.reset(newGrid: GridFactory.gridForDifficulty(level: level))
         selectedCell.coordinate = nil
         userAction.action = .none
@@ -91,8 +87,7 @@ struct GameView_Previews: PreviewProvider {
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
             .environmentObject(EditState())
-            .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
-            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
+            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
             .environmentObject(EditGridValues(grid: []))
             .environmentObject(Difficulty(level: .easy))
     }

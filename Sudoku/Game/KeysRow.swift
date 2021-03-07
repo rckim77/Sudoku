@@ -17,8 +17,6 @@ struct KeysRow: View {
     @EnvironmentObject
     private var workingGrid: GridValues
     @EnvironmentObject
-    private var startingGrid: StartingGridValues
-    @EnvironmentObject
     private var editGrid: EditGridValues
     @Binding
     var alert: AlertItem?
@@ -53,7 +51,7 @@ struct KeysRow: View {
 
     private func updateForDigit(_ digit: Int) {
         userAction.action = .digit(digit)
-        guard let selectedCoordinate = selectedCoordinate, !startingGrid.containsAValue(at: selectedCoordinate) else {
+        guard let selectedCoordinate = selectedCoordinate, !workingGrid.containsAValue(at: selectedCoordinate, grid: workingGrid.startingGrid) else {
             return
         }
 
@@ -76,8 +74,7 @@ struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
         KeysRow(alert: .constant(AlertItem(id: .finishedGame)), selectedCoordinate: nil, isEditing: false)
             .environmentObject(UserAction())
-            .environmentObject(GridValues(grid: GridFactory.easyGrid, startingGrid: GridFactory.easyGrid))
-            .environmentObject(StartingGridValues(grid: GridFactory.easyGrid))
+            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
             .environmentObject(EditGridValues(grid: []))
     }
 }

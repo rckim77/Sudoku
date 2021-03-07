@@ -9,23 +9,25 @@
 import SwiftUI
 import Combine
 
+/// Maintains state for working grid `grid`. `startingGrid` contains the initial grid.
 final class GridValues: ObservableObject {
     @Published
     private(set) var grid: [CoordinateValue]
     
     @Published
-    private(set) var colorGrid: [CoordinateColor]
+    private(set) var colorGrid: Set<CoordinateColor>
     
-    private let startingGrid: [CoordinateValue]
+    private(set) var startingGrid: [CoordinateValue]
 
     var isSolved: Bool {
         return SudokuSolver.gridIsSolved(self)
     }
 
-    init(grid: [CoordinateValue], startingGrid: [CoordinateValue]) {
-        self.grid = grid
+    /// When initialized, both the working and starting grids are identical.
+    init(startingGrid: [CoordinateValue]) {
+        self.grid = startingGrid
         self.startingGrid = startingGrid
-        self.colorGrid = []
+        self.colorGrid = Set<CoordinateColor>()
         self.initColorGrid(grid)
     }
 
@@ -37,6 +39,7 @@ final class GridValues: ObservableObject {
 
     func reset(newGrid: [CoordinateValue]) {
         grid = newGrid
+        startingGrid = newGrid
         initColorGrid(grid)
     }
 
@@ -53,7 +56,7 @@ final class GridValues: ObservableObject {
         }
     }
 
-    func containsAValue(at coordinate: Coordinate) -> Bool {
+    func containsAValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Bool {
         let result = grid.contains { coordinateValue -> Bool in
             let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
@@ -61,36 +64,32 @@ final class GridValues: ObservableObject {
         return result
     }
 
-    func contains(value: Int, at coordinate: Coordinate) -> Bool {
-        let result = grid.contains { coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
-            return gridCoordinate == coordinate && coordinateValue.v == value
-        }
-        return result
-    }
-
-    func retrieveValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Int? {
+    func getValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Int? {
         let squareValues = values(in: coordinate.s, grid: grid)
         return squareValues.filter({ coordinateValue -> Bool in
             let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }).first?.v
     }
+    
+    func getCoordinateValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> CoordinateValue? {
+        return grid.filter({ coordinateValue -> Bool in
+            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            return gridCoordinate == coordinate
+        }).first
+    }
+    
+    func foregroundColorFor(_ coordinate: CoordinateValue) -> Color? {
+        colorGrid.first(where: { $0.coordinate == coordinate })?.color
+    }
 
     // MARK: - Private methods
-
-    private func contains(_ coordinateValue: CoordinateValue, grid: [CoordinateValue]) -> Bool {
-        let squareValues = values(in: coordinateValue.s, grid: grid)
-        return squareValues.first { coordinateVal -> Bool in
-            coordinateVal == coordinateValue
-        } != nil
-    }
     
     /// Compares working grid and starting grid and returns whether there's a value at the
     /// specified coordinate only in the working grid.
     private func onlyWorkingGridHasValue(at coordinate: Coordinate) -> Bool {
-        let workingGridHasAValue = grid(grid, containsAValueAt: coordinate)
-        let startingGridHasAValue = grid(startingGrid, containsAValueAt: coordinate)
+        let workingGridHasAValue = containsAValue(at: coordinate, grid: grid)
+        let startingGridHasAValue = containsAValue(at: coordinate, grid: startingGrid)
         return workingGridHasAValue && !startingGridHasAValue
     }
     
@@ -98,26 +97,18 @@ final class GridValues: ObservableObject {
         guard onlyWorkingGridHasValue(at: coordinateValue.coordinate) else {
             // starting grid
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: .black)
-            colorGrid.append(coordinateColor)
+            colorGrid.update(with: coordinateColor)
             return
         }
         
         if value(coordinateValue.v, wouldBeInvalidAt: coordinateValue.coordinate) {
             // user has just entered an invalid digit
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: .red)
-            colorGrid.append(coordinateColor)
+            colorGrid.update(with: coordinateColor)
         } else {
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: Color("dynamicBlue"))
-            colorGrid.append(coordinateColor)
+            colorGrid.update(with: coordinateColor)
         }
-    }
-    
-    private func grid(_ grid: [CoordinateValue], containsAValueAt coordinate: Coordinate) -> Bool {
-        let result = grid.contains { coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
-            return gridCoordinate == coordinate
-        }
-        return result
     }
     
     /// Checks whether there's already a coordinate with the input value in the
@@ -190,8 +181,10 @@ final class GridValues: ObservableObject {
     }
     
     private func initColorGrid(_ grid: [CoordinateValue]) {
-        colorGrid = grid.map { coordinateValue -> CoordinateColor in
-            CoordinateColor(coordinate: coordinateValue, color: .black)
+        colorGrid = Set<CoordinateColor>()
+        grid.forEach { coordinateValue in
+            let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: .black)
+            colorGrid.update(with: coordinateColor)
         }
     }
 }

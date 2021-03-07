@@ -14,8 +14,6 @@ struct ClearButton: View {
     @EnvironmentObject
     private var selectedCell: SelectedCell
     @EnvironmentObject
-    private var startingGrid: StartingGridValues
-    @EnvironmentObject
     private var workingGrid: GridValues
     @EnvironmentObject
     private var editGrid: EditGridValues
@@ -45,7 +43,7 @@ struct ClearButton: View {
             self.userAction.action = .clear
 
             guard let selectedCoordinate = self.selectedCell.coordinate,
-                !self.startingGrid.containsAValue(at: selectedCoordinate) else {
+                  !self.workingGrid.containsAValue(at: selectedCoordinate, grid: workingGrid.startingGrid) else {
                 // can't clear values that were part of starting board and unselected
                 return
             }
@@ -58,14 +56,9 @@ struct ClearButton: View {
             }
         }) {
             Text("Clear")
-                .foregroundColor(.black)
-                .font(Font.system(.title, design:.rounded).smallCaps())
-                .padding(.horizontal, horizontalPadding)
-                .padding(.vertical, verticalPadding)
-                .frame(minHeight: 48)
-                .background(Color("dynamicGray"))
+                .font(.system(.headline, design: .rounded))
         }
-            .cornerRadius(8)
+        .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
     }
 }
 

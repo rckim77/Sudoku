@@ -14,6 +14,8 @@ struct Row: View {
     private var selectedCell: SelectedCell
     @EnvironmentObject
     private var userAction: UserAction
+    @EnvironmentObject
+    private var workingGrid: GridValues
 
     let viewModel: RowViewModel
 
@@ -40,7 +42,7 @@ struct Row: View {
 
     private func setRowButtonText(columnIndex: Int) -> String {
         let coordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
-        if let value = viewModel.workingGridRetrieveValue(at: coordinate) {
+        if let value = workingGrid.getValue(at: coordinate, grid: workingGrid.grid) {
             return "\(value)"
         } else {
             return ""
@@ -58,13 +60,19 @@ struct Row: View {
 
     // Note: Use AnyView to type erase View.
     private func renderCellText(columnIndex: Int) -> AnyView {
-        if viewModel.hasGuessesAndNoValue(at: columnIndex) {
-            let guess = viewModel.guessFor(columnIndex)
-            return AnyView(EditCellGrid(values: guess))
+        let coordinate = Coordinate(r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
+        let guesses = viewModel.guessesFor(columnIndex)
+
+        if !workingGrid.containsAValue(at: coordinate, grid: workingGrid.grid) && !guesses.isEmpty {
+            return AnyView(EditCellGrid(values: guesses))
         } else {
             let text = setRowButtonText(columnIndex: columnIndex)
-            let foregroundColor = viewModel.foregroundColorFor(columnIndex) ?? .black
-            return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor))
+            if let coordinateValue = workingGrid.getCoordinateValue(at: coordinate, grid: workingGrid.grid) {
+                let foregroundColor = workingGrid.foregroundColorFor(coordinateValue) ?? .black
+                return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor))
+            } else {
+                return AnyView(RowButtonText(text: text, foregroundColor: .black))
+            }
         }
     }
 }
@@ -73,11 +81,9 @@ struct Row_Previews: PreviewProvider {
     static var previews: some View {
         Row(viewModel: RowViewModel(index: 0,
                                     squareIndex: 0,
-                                    startingGrid: GridFactory.easyGrid,
-                                    workingGrid: GridFactory.easyGrid,
-                                    colorGrid: [],
                                     guesses: []))
             .environmentObject(SelectedCell())
             .environmentObject(UserAction())
+            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
     }
 }

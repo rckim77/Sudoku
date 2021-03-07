@@ -11,10 +11,7 @@ import SwiftUI
 struct Square: View {
     
     let index: Int
-    let startingGrid: [CoordinateValue]
-    let workingGridSlice: [CoordinateValue]
     let editGridSlice: [CoordinateEditValues]
-    let colorGridSlice: [CoordinateColor]
     
     private let viewModel = SquareViewModel()
 
@@ -23,9 +20,6 @@ struct Square: View {
             ForEach(viewModel.rowIndices, id: \.self) { rowIndex in
                 Row(viewModel: RowViewModel(index: rowIndex,
                                             squareIndex: self.index,
-                                            startingGrid: self.startingGrid,
-                                            workingGrid: self.workingGridSlice.filter { $0.r == rowIndex },
-                                            colorGrid: self.colorGridSlice.filter { $0.r == rowIndex },
                                             guesses: self.editGridSlice.filter { $0.r == rowIndex }))
             }
         }
@@ -36,9 +30,6 @@ struct Square: View {
 struct Square_Previews: PreviewProvider {
     static var previews: some View {
         Square(index: 0,
-               startingGrid: GridFactory.easyGrid,
-               workingGridSlice: GridFactory.easyGrid.filter { $0.s == 0 },
-               editGridSlice: [],
-               colorGridSlice: [])
+               editGridSlice: [])
     }
 }

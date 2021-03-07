@@ -25,16 +25,14 @@ struct ContentView: View {
                                 .environmentObject(SelectedCell())
                                 .environmentObject(UserAction())
                                 .environmentObject(EditState())
-                                .environmentObject(StartingGridValues(grid: GridFactory.gridForDifficulty(level: level)))
-                                .environmentObject(GridValues(grid: GridFactory.gridForDifficulty(level: level),
-                                                              startingGrid: GridFactory.gridForDifficulty(level: level)))
+                                .environmentObject(GridValues(startingGrid: GridFactory.gridForDifficulty(level: level)))
                                 .environmentObject(EditGridValues(grid: []))
                                 .environmentObject(Difficulty(level: level))
                         ) {
                             Text(level.rawValue)
                                 .font(.system(.headline, design: .rounded))
                         }
-                        .menuButtonStyle()
+                        .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
                     }
                 }
                 NavigationLink(destination: SettingsView()) {
