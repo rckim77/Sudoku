@@ -10,7 +10,7 @@ import Foundation
 
 struct AlertItem: Identifiable {
     enum AlertItemType {
-        case newGame, finishedGame
+        case newGame, completedCorrectly, completedIncorrectly
     }
     
     let id: AlertItemType
