@@ -62,7 +62,9 @@ struct GameView: View {
                 case .finishedGame:
                     return Alert(title: Text("Congratulations!"),
                                  message: Text("You've completed the sudoku!"),
-                                 dismissButton: .default(Text("Dismiss")))
+                                 dismissButton: .default(Text("Go back"), action: {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                 }))
                 }
             })
         }
