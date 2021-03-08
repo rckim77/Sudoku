@@ -61,10 +61,13 @@ struct KeysRow: View {
         } else {
             editGrid.removeValues(at: selectedCoordinate)
             workingGrid.add(coordinateValue)
-            if workingGrid.isSolved {
-                alert = AlertItem(id: .finishedGame)
-            } else {
-                alert = nil
+            
+            if workingGrid.grid.count == 81 {
+                if workingGrid.isSolved {
+                    alert = AlertItem(id: .completedCorrectly)
+                } else {
+                    alert = AlertItem(id: .completedIncorrectly)
+                }
             }
         }
     }
@@ -72,7 +75,7 @@ struct KeysRow: View {
 
 struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
-        KeysRow(alert: .constant(AlertItem(id: .finishedGame)), selectedCoordinate: nil, isEditing: false)
+        KeysRow(alert: .constant(AlertItem(id: .completedCorrectly)), selectedCoordinate: nil, isEditing: false)
             .environmentObject(UserAction())
             .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
             .environmentObject(EditGridValues(grid: []))
