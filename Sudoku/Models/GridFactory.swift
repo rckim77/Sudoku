@@ -71,15 +71,15 @@ enum GridFactory {
     }
     
     static var easyGrid2: [CoordinateValue] {
-        let square0 = [(0, 2, 1), (1, 0, 9), (1, 2, 8), (2, 1, 4), (2, 2, 3)]
-        let square1 = [(0, 0, 5), (1, 1, 6), (2, 0, 1), (2, 1, 7)]
-        let square2 = [(1, 1, 7), (2, 0, 2), (2, 1, 9)]
-        let square3 = [(0, 1, 3), (1, 1, 9), (2, 2, 2)]
-        let square4 = [(0, 2, 7), (1, 1, 2), (2, 0, 4)]
-        let square5 = [(0, 0, 1), (1, 1, 5), (2, 1, 8)]
-        let square6 = [(0, 1, 6), (0, 2, 9), (1, 1, 8)]
-        let square7 = [(0, 1, 8), (0, 2, 3), (1, 1, 5), (2, 2, 4)]
-        let square8 = [(0, 0, 5), (0, 1, 1), (1, 0, 3), (1, 2, 4), (2, 0, 8)]
+        let square0 = [(0, 0, 6), (1, 0, 7), (1, 2, 4), (2, 0, 2), (2, 1, 1)]
+        let square1 = [(0, 0, 4), (0, 1, 7), (1, 1, 6), (1, 2, 2), (2, 0, 5)]
+        let square2 = [(0, 0, 3), (0, 2, 1), (1, 1, 8), (1, 2, 5), (2, 2, 7)]
+        let square3 = [(0, 1, 2), (0, 2, 6), (1, 2, 3), (2, 0, 8), (2, 2, 1)]
+        let square4 = [(0, 0, 3), (0, 1, 4), (1, 1, 9), (1, 2, 1)]
+        let square5 = [(1, 0, 5), (1, 2, 2), (2, 0, 4)]
+        let square6 = [(0, 0, 5), (0, 2, 8), (1, 1, 4), (2, 0, 1), (2, 1, 9)]
+        let square7 = [(0, 1, 1), (1, 0, 6), (2, 0, 2)]
+        let square8 = [(1, 2, 9), (2, 0, 8), (2, 1, 3)]
         let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
         return GridFactory.convertToCoordinateValues(squares: squares)
     }
