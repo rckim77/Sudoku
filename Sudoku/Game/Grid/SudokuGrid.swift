@@ -31,9 +31,9 @@ struct SudokuGrid: View {
         HStack(spacing: 0) {
             Spacer()
                 .frame(width: SudokuGrid.spacerWidth)
-            VStack(spacing: 0) {
+            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                 ForEach(squareRowRanges, id: \.self) { squareRowRange in
-                    HStack(spacing: 0) {
+                    GridRow {
                         ForEach(squareRowRange, id: \.self) { squareIndex in
                             Square(index: squareIndex,
                                    editGridSlice: self.editGrid.filter { $0.s == squareIndex })
