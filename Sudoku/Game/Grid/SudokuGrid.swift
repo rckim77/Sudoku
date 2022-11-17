@@ -31,7 +31,7 @@ struct SudokuGrid: View {
         HStack(spacing: 0) {
             Spacer()
                 .frame(width: SudokuGrid.spacerWidth)
-            VStack {
+            VStack(spacing: 0) {
                 ForEach(squareRowRanges, id: \.self) { squareRowRange in
                     HStack(spacing: 0) {
                         ForEach(squareRowRange, id: \.self) { squareIndex in

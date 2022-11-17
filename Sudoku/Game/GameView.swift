@@ -35,7 +35,6 @@ struct GameView: View {
                     .edgesIgnoringSafeArea(.all)
             VStack(spacing: viewModel.verticalSpacing) {
                 SudokuGrid(editGrid: editGrid.grid)
-                    .padding(.horizontal, viewModel.horizontalSizeClassPadding)
                 HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
                     ClearButton()
                     EditButton()
@@ -43,7 +42,6 @@ struct GameView: View {
                 KeysRow(alert: $alertItem,
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
-                    .padding(.horizontal, viewModel.horizontalSizeClassPadding)
                 NewGameButton(alert: $alertItem,
                               editGrid: editGrid.grid,
                               startingGrid: workingGrid.startingGrid,
