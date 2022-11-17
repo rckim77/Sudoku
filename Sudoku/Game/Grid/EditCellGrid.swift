@@ -13,7 +13,7 @@ struct EditCellGrid: View {
     let values: Set<Int>
 
     private var minHeight: CGFloat {
-        (screenWidth - (2 * Grid.spacerWidth)) / 9
+        (screenWidth - (2 * SudokuGrid.spacerWidth)) / 9
     }
 
     private var verticalSpacing: CGFloat {

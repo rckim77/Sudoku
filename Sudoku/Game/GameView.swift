@@ -34,7 +34,7 @@ struct GameView: View {
             Color("dynamicBackground")
                     .edgesIgnoringSafeArea(.all)
             VStack(spacing: viewModel.verticalSpacing) {
-                Grid(editGrid: editGrid.grid)
+                SudokuGrid(editGrid: editGrid.grid)
                     .padding(.horizontal, viewModel.horizontalSizeClassPadding)
                 HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
                     ClearButton()

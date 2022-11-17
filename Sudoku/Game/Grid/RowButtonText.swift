@@ -19,7 +19,7 @@ struct RowButtonText: View {
     }
 
     private var buttonMinHeight: CGFloat {
-        (screenWidth - (2 * Grid.spacerWidth)) / 9
+        (screenWidth - (2 * SudokuGrid.spacerWidth)) / 9
     }
 
     var body: some View {
