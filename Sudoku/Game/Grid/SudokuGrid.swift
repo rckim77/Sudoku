@@ -1,5 +1,5 @@
 //
-//  Grid.swift
+//  SudokuGrid.swift
 //  Sudoku
 //
 //  Created by Raymond Kim on 6/2/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Grid: View {
+struct SudokuGrid: View {
     
     @EnvironmentObject
     private var workingGrid: GridValues
@@ -30,10 +30,10 @@ struct Grid: View {
     var body: some View {
         HStack(spacing: 0) {
             Spacer()
-                .frame(width: Grid.spacerWidth)
-            VStack {
+                .frame(width: SudokuGrid.spacerWidth)
+            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
                 ForEach(squareRowRanges, id: \.self) { squareRowRange in
-                    HStack(spacing: 0) {
+                    GridRow {
                         ForEach(squareRowRange, id: \.self) { squareIndex in
                             Square(index: squareIndex,
                                    editGridSlice: self.editGrid.filter { $0.s == squareIndex })
@@ -44,14 +44,14 @@ struct Grid: View {
             .padding(borderWidth)
             .border(Color.black, width: borderWidth)
             Spacer()
-                .frame(width: Grid.spacerWidth)
+                .frame(width: SudokuGrid.spacerWidth)
         }
     }
 }
 
-struct Grid_Previews: PreviewProvider {
+struct SudokuGrid_Previews: PreviewProvider {
     static var previews: some View {
-        Grid(editGrid: [])
+        SudokuGrid(editGrid: [])
             .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
     }
 }

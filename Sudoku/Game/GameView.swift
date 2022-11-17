@@ -34,8 +34,7 @@ struct GameView: View {
             Color("dynamicBackground")
                     .edgesIgnoringSafeArea(.all)
             VStack(spacing: viewModel.verticalSpacing) {
-                Grid(editGrid: editGrid.grid)
-                    .padding(.horizontal, viewModel.horizontalSizeClassPadding)
+                SudokuGrid(editGrid: editGrid.grid)
                 HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
                     ClearButton()
                     EditButton()
@@ -43,7 +42,6 @@ struct GameView: View {
                 KeysRow(alert: $alertItem,
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
-                    .padding(.horizontal, viewModel.horizontalSizeClassPadding)
                 NewGameButton(alert: $alertItem,
                               editGrid: editGrid.grid,
                               startingGrid: workingGrid.startingGrid,
@@ -59,9 +57,15 @@ struct GameView: View {
                                     self.presentationMode.wrappedValue.dismiss()
                                  }),
                                  secondaryButton: .cancel())
-                case .finishedGame:
+                case .completedCorrectly:
                     return Alert(title: Text("Congratulations!"),
                                  message: Text("You've completed the sudoku!"),
+                                 dismissButton: .default(Text("Go back"), action: {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                 }))
+                case .completedIncorrectly:
+                    return Alert(title: Text("Almost!"),
+                                 message: Text("Sorry but that's not quite right."),
                                  dismissButton: .default(Text("Dismiss")))
                 }
             })

@@ -16,7 +16,7 @@ struct Square: View {
     private let viewModel = SquareViewModel()
 
     var body: some View {
-        VStack(alignment: .leading) {
+        Grid(alignment: .leading, horizontalSpacing: 0, verticalSpacing: 0) {
             ForEach(viewModel.rowIndices, id: \.self) { rowIndex in
                 Row(viewModel: RowViewModel(index: rowIndex,
                                             squareIndex: self.index,

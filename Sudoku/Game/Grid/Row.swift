@@ -20,18 +20,17 @@ struct Row: View {
     let viewModel: RowViewModel
 
     var body: some View {
-        HStack(spacing: 0) {
+        GridRow {
             ForEach(viewModel.columns, id: \.self) { columnIndex in
                 Button(action: {
                     self.updateSelectedButton(columnIndex: columnIndex)
                 }) {
                     self.renderCellText(columnIndex: columnIndex)
                 }
-                    .border(Color.black, width: 1)
+                .border(Color.black, width: 1)
                 .background(self.viewModel.backgroundColorFor(columnIndex, selectedCell: self.selectedCell.coordinate))
             }
         }
-        .frame(maxWidth: .infinity)
     }
 
     private func isSelected(columnIndex: Int) -> Bool {

@@ -16,7 +16,7 @@
 		94600FD7249B1E8400E605FD /* GridFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94600FD6249B1E8400E605FD /* GridFactory.swift */; };
 		94677437248756CA00F636D4 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94677436248756CA00F636D4 /* Row.swift */; };
 		946774392487572700F636D4 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946774382487572700F636D4 /* Square.swift */; };
-		9467743B2487579300F636D4 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743A2487579300F636D4 /* Grid.swift */; };
+		9467743B2487579300F636D4 /* SudokuGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743A2487579300F636D4 /* SudokuGrid.swift */; };
 		9467743D24875D4E00F636D4 /* SelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9467743C24875D4E00F636D4 /* SelectedCell.swift */; };
 		94A9CCB62488A394008551B6 /* RowButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCB52488A394008551B6 /* RowButtonText.swift */; };
 		94A9CCB82488A96D008551B6 /* KeysRowButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */; };
@@ -33,7 +33,6 @@
 		94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */; };
 		94E9F32D2493FC3300B1D003 /* SudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */; };
 		94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32E2494001100B1D003 /* CoordinateValue.swift */; };
-		94E9F332249406F500B1D003 /* AbsoluteCoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */; };
 		94E9F3342494289A00B1D003 /* EditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F3332494289A00B1D003 /* EditState.swift */; };
 		EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435DB24A58F4400D311FF /* ViewModel.swift */; };
 		EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E124A9A53A00D311FF /* CoordinateColor.swift */; };
@@ -60,7 +59,7 @@
 		94600FD6249B1E8400E605FD /* GridFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridFactory.swift; sourceTree = "<group>"; };
 		94677436248756CA00F636D4 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		946774382487572700F636D4 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
-		9467743A2487579300F636D4 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		9467743A2487579300F636D4 /* SudokuGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuGrid.swift; sourceTree = "<group>"; };
 		9467743C24875D4E00F636D4 /* SelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCell.swift; sourceTree = "<group>"; };
 		94A9CCB52488A394008551B6 /* RowButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowButtonText.swift; sourceTree = "<group>"; };
 		94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysRowButtonText.swift; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		94E1089A24874B9D0091D043 /* CornerRadiusStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusStyle.swift; sourceTree = "<group>"; };
 		94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuSolver.swift; sourceTree = "<group>"; };
 		94E9F32E2494001100B1D003 /* CoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateValue.swift; sourceTree = "<group>"; };
-		94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsoluteCoordinateValue.swift; sourceTree = "<group>"; };
 		94E9F3332494289A00B1D003 /* EditState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditState.swift; sourceTree = "<group>"; };
 		EC8435DB24A58F4400D311FF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		EC8435E124A9A53A00D311FF /* CoordinateColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateColor.swift; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 				EC8435E124A9A53A00D311FF /* CoordinateColor.swift */,
 				94600FB324973ECC00E605FD /* CoordinateEditValues.swift */,
 				94600FB524973EF300E605FD /* EditGridValues.swift */,
-				94E9F331249406F500B1D003 /* AbsoluteCoordinateValue.swift */,
 				94A9CCC9248DD7A4008551B6 /* GridValues.swift */,
 				94A9CCBA2488AAFE008551B6 /* UserAction.swift */,
 				94E9F3332494289A00B1D003 /* EditState.swift */,
@@ -208,7 +205,7 @@
 		ECC830A224A3F8C70075CE0E /* Grid */ = {
 			isa = PBXGroup;
 			children = (
-				9467743A2487579300F636D4 /* Grid.swift */,
+				9467743A2487579300F636D4 /* SudokuGrid.swift */,
 				946774382487572700F636D4 /* Square.swift */,
 				EC8435F724AE728700D311FF /* SquareViewModel.swift */,
 				94677436248756CA00F636D4 /* Row.swift */,
@@ -247,7 +244,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = Self;
 				TargetAttributes = {
 					94E1087E2487333A0091D043 = {
@@ -323,10 +320,9 @@
 				94677437248756CA00F636D4 /* Row.swift in Sources */,
 				94E9F32D2493FC3300B1D003 /* SudokuSolver.swift in Sources */,
 				94E108872487333B0091D043 /* ContentView.swift in Sources */,
-				9467743B2487579300F636D4 /* Grid.swift in Sources */,
+				9467743B2487579300F636D4 /* SudokuGrid.swift in Sources */,
 				94A9CCBB2488AAFE008551B6 /* UserAction.swift in Sources */,
 				EC8435F824AE728700D311FF /* SquareViewModel.swift in Sources */,
-				94E9F332249406F500B1D003 /* AbsoluteCoordinateValue.swift in Sources */,
 				94A9CCB62488A394008551B6 /* RowButtonText.swift in Sources */,
 				EC8435E624ABE61500D311FF /* GameView.swift in Sources */,
 			);
@@ -372,6 +368,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -396,7 +393,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -432,6 +429,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -450,7 +448,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -465,7 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
 				DEVELOPMENT_TEAM = 49BZEB79BF;
 				ENABLE_PREVIEWS = YES;
@@ -487,7 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
 				DEVELOPMENT_TEAM = 49BZEB79BF;
 				ENABLE_PREVIEWS = YES;
