@@ -20,7 +20,7 @@ struct SettingsView: View {
                     .font(Font.system(.largeTitle, design: .rounded).bold())
                 Text("Version \(appVersion) (\(buildVersion))")
                     .font(Font.system(.headline, design: .rounded))
-                Text("© 2020 Ray Kim")
+                Text("© 2023 Ray Kim")
                     .font(Font.system(.headline, design: .rounded))
                 Button(action: {
                     let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!
