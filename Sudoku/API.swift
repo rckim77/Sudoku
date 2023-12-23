@@ -10,6 +10,9 @@ import Foundation
 
 struct API {
     static func getHint(grid: [CoordinateValue]) async throws -> ChatResponse? {
+        
+        // set to your ChatGPT API secret key (otherwise hint functionality won't work)
+        let bearerToken = ""
 
         guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
             return nil

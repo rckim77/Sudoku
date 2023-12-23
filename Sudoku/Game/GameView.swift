@@ -49,12 +49,15 @@ struct GameView: View {
                         Task {
                             do {
                                 if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
-//                                    alertItem = AlertItem(id: .hintSuccess(message: hintMessage))
+                                    alertItem = .hintSuccess(hint: hintMessage)
+                                    alertIsPresented = true
                                 } else {
                                     alertItem = .hintError
+                                    alertIsPresented = true
                                 }
                             } catch {
-                                // show alert .hintError
+                                alertItem = .hintError
+                                alertIsPresented = true
                             }
                         }
                     }
@@ -85,7 +88,9 @@ struct GameView: View {
                     Button("Go back") {
                         dismiss()
                     }
-                case .completedIncorrectly, .hintError: 
+                case .hintSuccess(let hint):
+                    Button("Thanks") {}
+                case .completedIncorrectly, .hintError:
                     Button("Dismiss") {}
                 }
             } message: { item in
