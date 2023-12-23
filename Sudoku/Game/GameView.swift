@@ -27,6 +27,8 @@ struct GameView: View {
     private var alertItem: AlertItem?
     @State
     private var alertIsPresented: Bool = false
+    @State
+    private var hintButtonIsLoading: Bool = false
     
     let viewModel: GameViewModel
     
@@ -45,9 +47,10 @@ struct GameView: View {
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
                 HStack(content: {
-                    HintButton {
+                    HintButton(isLoading: $hintButtonIsLoading) {
                         Task {
                             do {
+                                hintButtonIsLoading = true
                                 if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
                                     alertItem = .hintSuccess(hint: hintMessage)
                                     alertIsPresented = true
@@ -55,12 +58,15 @@ struct GameView: View {
                                     alertItem = .hintError
                                     alertIsPresented = true
                                 }
+                                hintButtonIsLoading = false
                             } catch {
+                                hintButtonIsLoading = false
                                 alertItem = .hintError
                                 alertIsPresented = true
                             }
                         }
                     }
+                    .disabled(hintButtonIsLoading)
                     NewGameButton(alert: $alertItem,
                                   alertIsPresented: $alertIsPresented,
                                   editGrid: editGrid.grid,

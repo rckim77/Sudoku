@@ -10,15 +10,23 @@ import SwiftUI
 
 struct HintButton: View {
 
+    @Binding
+    var isLoading: Bool
     var action: () -> Void
     
     var body: some View {
         Button(action: {
             action()
         }) {
-            Text("Hint")
-                .font(.system(.headline, design: .rounded))
+            if isLoading {
+                ProgressView()
+                    .tint(Color.blue)
+            } else {
+                Text("Hint")
+                    .font(.system(.headline, design: .rounded))
+            }
         }
         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
+        .animation(.default, value: isLoading)
     }
 }
