@@ -9,11 +9,13 @@
 import SwiftUI
 
 struct NewGameButton: View {
-    @Environment(\.presentationMode)
-    private var presentationMode: Binding<PresentationMode>
+
+    @Environment(\.dismiss) private var dismiss
 
     @Binding
     var alert: AlertItem?
+    @Binding
+    var alertIsPresented: Bool
 
     let editGrid: [CoordinateEditValues]
     let startingGrid: [CoordinateValue]
@@ -22,9 +24,10 @@ struct NewGameButton: View {
     var body: some View {
         Button(action: {
             if self.workingGrid.count > self.startingGrid.count || !self.editGrid.isEmpty {
-                self.alert = AlertItem(id: .newGame)
+                self.alert = .newGame
+                self.alertIsPresented = true
             } else {
-                self.presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
         }) {
             Text("New game")
@@ -36,7 +39,8 @@ struct NewGameButton: View {
 
 struct NewGameButton_Previews: PreviewProvider {
     static var previews: some View {
-        NewGameButton(alert: .constant(AlertItem(id: .newGame)),
+        NewGameButton(alert: .constant(.newGame),
+                      alertIsPresented: .constant(false),
                       editGrid: [],
                       startingGrid: GridFactory.easyGrid,
                       workingGrid: GridFactory.easyGrid)

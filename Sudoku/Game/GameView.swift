@@ -10,8 +10,7 @@ import SwiftUI
 
 struct GameView: View {
 
-    @Environment(\.presentationMode)
-    private var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject
     private var selectedCell: SelectedCell
     @EnvironmentObject
@@ -26,6 +25,10 @@ struct GameView: View {
     private var difficulty: Difficulty
     @State
     private var alertItem: AlertItem?
+    @State
+    private var alertIsPresented: Bool = false
+    @State
+    private var hintButtonIsLoading: Bool = false
     
     let viewModel: GameViewModel
     
@@ -40,35 +43,65 @@ struct GameView: View {
                     EditButton()
                 }
                 KeysRow(alert: $alertItem,
+                        alertIsPresented: $alertIsPresented,
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
-                NewGameButton(alert: $alertItem,
-                              editGrid: editGrid.grid,
-                              startingGrid: workingGrid.startingGrid,
-                              workingGrid: workingGrid.grid)
+                HStack(content: {
+                    HintButton(isLoading: $hintButtonIsLoading) {
+                        Task {
+                            do {
+                                hintButtonIsLoading = true
+                                if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
+                                    alertItem = .hintSuccess(hint: hintMessage)
+                                    alertIsPresented = true
+                                } else {
+                                    alertItem = .hintError
+                                    alertIsPresented = true
+                                }
+                                hintButtonIsLoading = false
+                            } catch {
+                                hintButtonIsLoading = false
+                                alertItem = .hintError
+                                alertIsPresented = true
+                            }
+                        }
+                    }
+                    .disabled(hintButtonIsLoading)
+                    NewGameButton(alert: $alertItem,
+                                  alertIsPresented: $alertIsPresented,
+                                  editGrid: editGrid.grid,
+                                  startingGrid: workingGrid.startingGrid,
+                                  workingGrid: workingGrid.grid)
+                })
                 Spacer()
             }
-            .alert(item: $alertItem, content: { item in
-                switch item.id {
+            .alert(alertItem?.title ?? "Alert",
+                   isPresented: $alertIsPresented,
+                   presenting: alertItem
+            ) { item in
+                switch item {
                 case .newGame:
-                    return Alert(title: Text("Are you sure?"),
-                                 message: Text("If you go back, you will lose your current progress."),
-                                 primaryButton: .default(Text("Confirm"), action: {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                 }),
-                                 secondaryButton: .cancel())
+                    Button(role: .destructive) {
+                        dismiss()
+                    } label: {
+                        Text("Confirm")
+                    }
+                    Button(role: .cancel) {} label: {
+                        Text("Cancel")
+                    }
+
                 case .completedCorrectly:
-                    return Alert(title: Text("Congratulations!"),
-                                 message: Text("You've completed the sudoku!"),
-                                 dismissButton: .default(Text("Go back"), action: {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                 }))
-                case .completedIncorrectly:
-                    return Alert(title: Text("Almost!"),
-                                 message: Text("Sorry but that's not quite right."),
-                                 dismissButton: .default(Text("Dismiss")))
+                    Button("Go back") {
+                        dismiss()
+                    }
+                case .hintSuccess(let hint):
+                    Button("Thanks") {}
+                case .completedIncorrectly, .hintError:
+                    Button("Dismiss") {}
                 }
-            })
+            } message: { item in
+                Text(item.message)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .onDisappear() {
@@ -77,7 +110,7 @@ struct GameView: View {
     }
     
     private func resetGrids(for level: Difficulty.Level) {
-        workingGrid.reset(newGrid: GridFactory.gridForDifficulty(level: level))
+        workingGrid.reset(newGrid: GridFactory.randomGridForDifficulty(level: level))
         selectedCell.coordinate = nil
         userAction.action = .none
         editState.isEditing = false
