@@ -45,4 +45,16 @@ struct GameViewModel: ViewModel {
     var modifierButtonsHorizontalSpacing: CGFloat {
         isIpad ? 36 : 12
     }
+    
+    func getHint(grid: [CoordinateValue]) async throws -> String? {
+        do {
+            guard let response = try await API.getHint(grid: grid), let first = response.choices.first else {
+                return nil
+            }
+            return first.message.content
+        } catch {
+            print("error: \(error)")
+            return nil
+        }
+    }
 }

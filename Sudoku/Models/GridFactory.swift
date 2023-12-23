@@ -12,7 +12,7 @@ enum GridFactory {
     /// (row, column, value)–square is implied by order of square arrays in array
     typealias ShortCoordinate = (Int, Int, Int)
 
-    static func gridForDifficulty(level: Difficulty.Level) -> [CoordinateValue] {
+    static func randomGridForDifficulty(level: Difficulty.Level) -> [CoordinateValue] {
         let randomNumber = Int.random(in: 0...2)
         switch level {
         case .easy:
@@ -26,6 +26,8 @@ enum GridFactory {
             return hardGrids[randomNumber]
         }
     }
+    
+    // MARK: - grids
     
     /// FOR TESTING
     static var superEasyGrid: [CoordinateValue] {
@@ -167,6 +169,8 @@ enum GridFactory {
         let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
         return GridFactory.convertToCoordinateValues(squares: squares)
     }
+    
+    // MARK: - Conversion methods
 
     static func convertToCoordinateValues(squares: [[ShortCoordinate]]) -> [CoordinateValue] {
         return squares.enumerated().map { squareIndex, square -> [CoordinateValue] in
@@ -174,5 +178,55 @@ enum GridFactory {
                 return CoordinateValue(r: coordinate.0, c: coordinate.1, s: squareIndex, v: coordinate.2)
             }
         }.flatMap { $0 }
+    }
+    
+    static func convertToShortCoordinates(grid: [CoordinateValue]) -> [[ShortCoordinate]] {
+        var convertedGrid = [[ShortCoordinate]]()
+
+        let sortedGrid = grid.sorted { a, b in
+            a.s < b.s
+        }
+
+        for coordinateValue in sortedGrid {
+            let shortCoordinate = (coordinateValue.r, coordinateValue.c, coordinateValue.v)
+            
+            if coordinateValue.s >= 0 && coordinateValue.s < convertedGrid.count {
+                convertedGrid[coordinateValue.s].append(shortCoordinate)
+            } else {
+                convertedGrid.append([shortCoordinate])
+            }
+        }
+        
+        return convertedGrid
+    }
+    
+    static func stringGridFor(grid: [CoordinateValue]) -> String {
+        var stringGrid = [[Int]]()
+        
+        for _ in 0..<9 {
+            let row = [Int](repeating: 0, count: 9)
+            stringGrid.append(row)
+        }
+        
+        for coordinate in grid {
+            var adjustedRowIndex = coordinate.r
+            var adjustedColIndex = coordinate.c
+            
+            if [3, 4, 5].contains(coordinate.s) {
+                adjustedRowIndex += 3
+            } else if [6, 7, 8].contains(coordinate.s) {
+                adjustedRowIndex += 6
+            }
+            
+            if [1, 4, 7].contains(coordinate.s) {
+                adjustedColIndex += 3
+            } else if [2, 5, 8].contains(coordinate.s) {
+                adjustedColIndex += 6
+            }
+            
+            stringGrid[adjustedRowIndex][adjustedColIndex] = coordinate.v
+        }
+        
+        return String(describing: stringGrid)
     }
 }

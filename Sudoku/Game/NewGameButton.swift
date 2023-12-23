@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct NewGameButton: View {
-    @Environment(\.presentationMode)
-    private var presentationMode: Binding<PresentationMode>
+
+    @Environment(\.dismiss) private var dismiss
 
     @Binding
     var alert: AlertItem?
@@ -24,7 +24,7 @@ struct NewGameButton: View {
             if self.workingGrid.count > self.startingGrid.count || !self.editGrid.isEmpty {
                 self.alert = AlertItem(id: .newGame)
             } else {
-                self.presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
         }) {
             Text("New game")

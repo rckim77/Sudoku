@@ -9,8 +9,12 @@
 import Foundation
 
 struct AlertItem: Identifiable {
+    
     enum AlertItemType {
-        case newGame, completedCorrectly, completedIncorrectly
+        case newGame
+        case completedCorrectly
+        case completedIncorrectly
+        case hintError
     }
     
     let id: AlertItemType

@@ -34,6 +34,9 @@
 		94E9F32D2493FC3300B1D003 /* SudokuSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */; };
 		94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F32E2494001100B1D003 /* CoordinateValue.swift */; };
 		94E9F3342494289A00B1D003 /* EditState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E9F3332494289A00B1D003 /* EditState.swift */; };
+		EC2148A92B366588005D5610 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2148A82B366588005D5610 /* API.swift */; };
+		EC2148AB2B3665A2005D5610 /* ChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2148AA2B3665A2005D5610 /* ChatResponse.swift */; };
+		EC2148AD2B366A3E005D5610 /* HintButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2148AC2B366A3E005D5610 /* HintButton.swift */; };
 		EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435DB24A58F4400D311FF /* ViewModel.swift */; };
 		EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E124A9A53A00D311FF /* CoordinateColor.swift */; };
 		EC8435E424AA9B8300D311FF /* EditCellGridText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E324AA9B8300D311FF /* EditCellGridText.swift */; };
@@ -79,6 +82,9 @@
 		94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuSolver.swift; sourceTree = "<group>"; };
 		94E9F32E2494001100B1D003 /* CoordinateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateValue.swift; sourceTree = "<group>"; };
 		94E9F3332494289A00B1D003 /* EditState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditState.swift; sourceTree = "<group>"; };
+		EC2148A82B366588005D5610 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		EC2148AA2B3665A2005D5610 /* ChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponse.swift; sourceTree = "<group>"; };
+		EC2148AC2B366A3E005D5610 /* HintButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintButton.swift; sourceTree = "<group>"; };
 		EC8435DB24A58F4400D311FF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		EC8435E124A9A53A00D311FF /* CoordinateColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateColor.swift; sourceTree = "<group>"; };
 		EC8435E324AA9B8300D311FF /* EditCellGridText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCellGridText.swift; sourceTree = "<group>"; };
@@ -136,6 +142,7 @@
 			children = (
 				94E108822487333A0091D043 /* AppDelegate.swift */,
 				94E108842487333B0091D043 /* SceneDelegate.swift */,
+				EC2148A82B366588005D5610 /* API.swift */,
 				94E108862487333B0091D043 /* ContentView.swift */,
 				EC8435F524AE717500D311FF /* ContentViewModel.swift */,
 				EC8435E724ABEBD300D311FF /* SettingsView.swift */,
@@ -173,6 +180,7 @@
 				94E9F3332494289A00B1D003 /* EditState.swift */,
 				94600FD6249B1E8400E605FD /* GridFactory.swift */,
 				EC8435F324AE5F0800D311FF /* AlertItem.swift */,
+				EC2148AA2B3665A2005D5610 /* ChatResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,6 +191,7 @@
 				EC8435E524ABE61500D311FF /* GameView.swift */,
 				ECC830A524A5567C0075CE0E /* GameViewModel.swift */,
 				EC8435EB24AD913A00D311FF /* NewGameButton.swift */,
+				EC2148AC2B366A3E005D5610 /* HintButton.swift */,
 				94600FBD2499C37300E605FD /* EditButton.swift */,
 				94600FBF2499C4A700E605FD /* ClearButton.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
@@ -303,16 +312,19 @@
 				94E10897248740890091D043 /* KeysRow.swift in Sources */,
 				EC8435F624AE717500D311FF /* ContentViewModel.swift in Sources */,
 				94E9F32F2494001100B1D003 /* CoordinateValue.swift in Sources */,
+				EC2148AB2B3665A2005D5610 /* ChatResponse.swift in Sources */,
 				94600FB624973EF300E605FD /* EditGridValues.swift in Sources */,
 				ECC830A624A5567C0075CE0E /* GameViewModel.swift in Sources */,
 				EC8435F424AE5F0800D311FF /* AlertItem.swift in Sources */,
 				94600FC02499C4A700E605FD /* ClearButton.swift in Sources */,
 				94E108832487333B0091D043 /* AppDelegate.swift in Sources */,
 				94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */,
+				EC2148A92B366588005D5610 /* API.swift in Sources */,
 				EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */,
 				EC8435E824ABEBD300D311FF /* SettingsView.swift in Sources */,
 				EC8435EC24AD913A00D311FF /* NewGameButton.swift in Sources */,
 				94E108852487333B0091D043 /* SceneDelegate.swift in Sources */,
+				EC2148AD2B366A3E005D5610 /* HintButton.swift in Sources */,
 				94600FB224973BD600E605FD /* EditCellGrid.swift in Sources */,
 				EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */,
 				94A9CCCA248DD7A4008551B6 /* GridValues.swift in Sources */,

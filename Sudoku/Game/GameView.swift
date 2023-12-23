@@ -10,8 +10,7 @@ import SwiftUI
 
 struct GameView: View {
 
-    @Environment(\.presentationMode)
-    private var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject
     private var selectedCell: SelectedCell
     @EnvironmentObject
@@ -42,10 +41,25 @@ struct GameView: View {
                 KeysRow(alert: $alertItem,
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
-                NewGameButton(alert: $alertItem,
-                              editGrid: editGrid.grid,
-                              startingGrid: workingGrid.startingGrid,
-                              workingGrid: workingGrid.grid)
+                HStack(content: {
+                    HintButton {
+                        Task {
+                            do {
+                                if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
+//                                    alertItem = AlertItem(id: .hintSuccess(message: hintMessage))
+                                } else {
+                                    alertItem = AlertItem(id: .hintError)
+                                }
+                            } catch {
+                                // show alert .hintError
+                            }
+                        }
+                    }
+                    NewGameButton(alert: $alertItem,
+                                  editGrid: editGrid.grid,
+                                  startingGrid: workingGrid.startingGrid,
+                                  workingGrid: workingGrid.grid)
+                })
                 Spacer()
             }
             .alert(item: $alertItem, content: { item in
@@ -54,18 +68,22 @@ struct GameView: View {
                     return Alert(title: Text("Are you sure?"),
                                  message: Text("If you go back, you will lose your current progress."),
                                  primaryButton: .default(Text("Confirm"), action: {
-                                    self.presentationMode.wrappedValue.dismiss()
+                                    dismiss()
                                  }),
                                  secondaryButton: .cancel())
                 case .completedCorrectly:
                     return Alert(title: Text("Congratulations!"),
                                  message: Text("You've completed the sudoku!"),
                                  dismissButton: .default(Text("Go back"), action: {
-                                    self.presentationMode.wrappedValue.dismiss()
+                                    dismiss()
                                  }))
                 case .completedIncorrectly:
                     return Alert(title: Text("Almost!"),
                                  message: Text("Sorry but that's not quite right."),
+                                 dismissButton: .default(Text("Dismiss")))
+                case .hintError:
+                    return Alert(title: Text("Hint"),
+                                 message: Text("Oops! Something went wrong. Try again later."),
                                  dismissButton: .default(Text("Dismiss")))
                 }
             })
@@ -77,7 +95,7 @@ struct GameView: View {
     }
     
     private func resetGrids(for level: Difficulty.Level) {
-        workingGrid.reset(newGrid: GridFactory.gridForDifficulty(level: level))
+        workingGrid.reset(newGrid: GridFactory.randomGridForDifficulty(level: level))
         selectedCell.coordinate = nil
         userAction.action = .none
         editState.isEditing = false
