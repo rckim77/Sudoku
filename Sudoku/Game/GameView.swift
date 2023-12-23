@@ -25,6 +25,8 @@ struct GameView: View {
     private var difficulty: Difficulty
     @State
     private var alertItem: AlertItem?
+    @State
+    private var alertIsPresented: Bool = false
     
     let viewModel: GameViewModel
     
@@ -39,6 +41,7 @@ struct GameView: View {
                     EditButton()
                 }
                 KeysRow(alert: $alertItem,
+                        alertIsPresented: $alertIsPresented,
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
                 HStack(content: {
@@ -48,7 +51,7 @@ struct GameView: View {
                                 if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
 //                                    alertItem = AlertItem(id: .hintSuccess(message: hintMessage))
                                 } else {
-                                    alertItem = AlertItem(id: .hintError)
+                                    alertItem = .hintError
                                 }
                             } catch {
                                 // show alert .hintError
@@ -56,37 +59,38 @@ struct GameView: View {
                         }
                     }
                     NewGameButton(alert: $alertItem,
+                                  alertIsPresented: $alertIsPresented,
                                   editGrid: editGrid.grid,
                                   startingGrid: workingGrid.startingGrid,
                                   workingGrid: workingGrid.grid)
                 })
                 Spacer()
             }
-            .alert(item: $alertItem, content: { item in
-                switch item.id {
+            .alert(alertItem?.title ?? "Alert",
+                   isPresented: $alertIsPresented,
+                   presenting: alertItem
+            ) { item in
+                switch item {
                 case .newGame:
-                    return Alert(title: Text("Are you sure?"),
-                                 message: Text("If you go back, you will lose your current progress."),
-                                 primaryButton: .default(Text("Confirm"), action: {
-                                    dismiss()
-                                 }),
-                                 secondaryButton: .cancel())
+                    Button(role: .destructive) {
+                        dismiss()
+                    } label: {
+                        Text("Confirm")
+                    }
+                    Button(role: .cancel) {} label: {
+                        Text("Cancel")
+                    }
+
                 case .completedCorrectly:
-                    return Alert(title: Text("Congratulations!"),
-                                 message: Text("You've completed the sudoku!"),
-                                 dismissButton: .default(Text("Go back"), action: {
-                                    dismiss()
-                                 }))
-                case .completedIncorrectly:
-                    return Alert(title: Text("Almost!"),
-                                 message: Text("Sorry but that's not quite right."),
-                                 dismissButton: .default(Text("Dismiss")))
-                case .hintError:
-                    return Alert(title: Text("Hint"),
-                                 message: Text("Oops! Something went wrong. Try again later."),
-                                 dismissButton: .default(Text("Dismiss")))
+                    Button("Go back") {
+                        dismiss()
+                    }
+                case .completedIncorrectly, .hintError: 
+                    Button("Dismiss") {}
                 }
-            })
+            } message: { item in
+                Text(item.message)
+            }
         }
         .navigationBarBackButtonHidden(true)
         .onDisappear() {

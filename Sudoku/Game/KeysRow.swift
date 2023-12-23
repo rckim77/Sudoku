@@ -20,6 +20,8 @@ struct KeysRow: View {
     private var editGrid: EditGridValues
     @Binding
     var alert: AlertItem?
+    @Binding
+    var alertIsPresented: Bool
     
     let selectedCoordinate: Coordinate?
     let isEditing: Bool
@@ -64,9 +66,11 @@ struct KeysRow: View {
             
             if workingGrid.grid.count == 81 {
                 if workingGrid.isSolved {
-                    alert = AlertItem(id: .completedCorrectly)
+                    alert = .completedCorrectly
+                    alertIsPresented = true
                 } else {
-                    alert = AlertItem(id: .completedIncorrectly)
+                    alert = .completedIncorrectly
+                    alertIsPresented = true
                 }
             }
         }
@@ -75,7 +79,7 @@ struct KeysRow: View {
 
 struct KeysRow_Previews: PreviewProvider {
     static var previews: some View {
-        KeysRow(alert: .constant(AlertItem(id: .completedCorrectly)), selectedCoordinate: nil, isEditing: false)
+        KeysRow(alert: .constant(.completedCorrectly), alertIsPresented: .constant(false), selectedCoordinate: nil, isEditing: false)
             .environmentObject(UserAction())
             .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
             .environmentObject(EditGridValues(grid: []))
