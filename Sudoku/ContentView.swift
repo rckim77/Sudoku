@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: viewModel.buttonsVSpacing) {
-                Text("Sudoku Classic")
+                Text("Sudoku AI")
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
                 HStack(spacing: viewModel.difficultyButtonHSpacing) {

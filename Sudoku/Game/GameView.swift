@@ -94,7 +94,7 @@ struct GameView: View {
                     Button("Go back") {
                         dismiss()
                     }
-                case .hintSuccess(let hint):
+                case .hintSuccess(_):
                     Button("Thanks") {}
                 case .completedIncorrectly, .hintError:
                     Button("Dismiss") {}
