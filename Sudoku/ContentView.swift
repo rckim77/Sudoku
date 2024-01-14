@@ -20,7 +20,7 @@ struct ContentView: View {
                     .bold()
                 HStack(spacing: viewModel.difficultyButtonHSpacing) {
                     ForEach(viewModel.difficultyLevels, id: \.self) { level in
-                        NavigationLink(destination:
+                        NavigationLink {
                             GameView(viewModel: GameViewModel(difficulty: level))
                                 .environmentObject(SelectedCell())
                                 .environmentObject(UserAction())
@@ -28,22 +28,23 @@ struct ContentView: View {
                                 .environmentObject(GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)))
                                 .environmentObject(EditGridValues(grid: []))
                                 .environmentObject(Difficulty(level: level))
-                        ) {
+                        } label: {
                             Text(level.rawValue)
                                 .font(.system(.headline, design: .rounded))
                         }
                         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
                     }
                 }
-                NavigationLink(destination: SettingsView()) {
+                NavigationLink {
+                    SettingsView()
+                } label: {
                     HStack {
                         Image(systemName: "gear")
                         Text("Settings")
                     }
                 }
                 .font(.system(.headline, design: .rounded))
-                .accentColor(Color("dynamicDarkGray"))
-                
+                .tint(Color("dynamicDarkGray"))
             }
             .fullBackgroundStyle()
         }
