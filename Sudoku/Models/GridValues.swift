@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Combine
 
 /// Maintains state for working grid `grid`. `startingGrid` contains the initial grid.
 final class GridValues: ObservableObject {
