@@ -14,9 +14,11 @@ struct SudokuGrid: View {
     private var workingGrid: GridValues
     let editGrid: [CoordinateEditValues]
     
+    /// This width value determines how much space there is padded on the sides of
+    /// the sudoku grid. The grid will resize and scale accordingly.
     static var spacerWidth: CGFloat {
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return 80
+            return 160
         } else {
             return 8
         }

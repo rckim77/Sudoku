@@ -37,8 +37,11 @@ struct GameView: View {
             Color("dynamicBackground")
                     .edgesIgnoringSafeArea(.all)
             VStack(spacing: viewModel.verticalSpacing) {
+                if isIpad {
+                    Spacer()
+                }
                 SudokuGrid(editGrid: editGrid.grid)
-                HStack(spacing: viewModel.modifierButtonsHorizontalSpacing) {
+                HStack(spacing: viewModel.actionButtonsHorizontalSpacing) {
                     ClearButton()
                     EditButton()
                 }
@@ -46,7 +49,7 @@ struct GameView: View {
                         alertIsPresented: $alertIsPresented,
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
-                HStack(content: {
+                HStack(spacing: viewModel.actionButtonsHorizontalSpacing, content: {
                     HintButton(isLoading: $hintButtonIsLoading) {
                         Task {
                             do {
