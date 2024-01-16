@@ -14,7 +14,7 @@ struct GameViewModel: ViewModel {
 
     var verticalSpacing: CGFloat {
         guard !isIpad else {
-            return 40
+            return 60
         }
 
         if screenHeight > 736 { // taller than 8 Plus
@@ -42,9 +42,7 @@ struct GameViewModel: ViewModel {
         }
     }
 
-    var modifierButtonsHorizontalSpacing: CGFloat {
-        isIpad ? 36 : 12
-    }
+    let actionButtonsHorizontalSpacing: CGFloat = 12
     
     func getHint(grid: [CoordinateValue]) async throws -> String? {
         do {
@@ -53,7 +51,6 @@ struct GameViewModel: ViewModel {
             }
             return first.message.content
         } catch {
-            print("error: \(error)")
             return nil
         }
     }
