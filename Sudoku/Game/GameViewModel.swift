@@ -53,7 +53,6 @@ struct GameViewModel: ViewModel {
             }
             return first.message.content
         } catch {
-            print("error: \(error)")
             return nil
         }
     }
