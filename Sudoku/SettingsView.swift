@@ -14,27 +14,24 @@ struct SettingsView: View {
     private let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 24) {
-                Text("Sudoku AI")
-                    .font(Font.system(.largeTitle, design: .rounded).bold())
-                Text("Version \(appVersion) (\(buildVersion))")
+        VStack(spacing: 24) {
+            Text("Sudoku AI")
+                .font(Font.system(.largeTitle, design: .rounded).bold())
+            Text("Version \(appVersion) (\(buildVersion))")
+                .font(Font.system(.headline, design: .rounded))
+            Text("© 2023 Ray Kim")
+                .font(Font.system(.headline, design: .rounded))
+            Button(action: {
+                let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!
+                UIApplication.shared.open(url)
+            }) {
+                Text("Website")
                     .font(Font.system(.headline, design: .rounded))
-                Text("© 2023 Ray Kim")
-                    .font(Font.system(.headline, design: .rounded))
-                Button(action: {
-                    let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!
-                    UIApplication.shared.open(url)
-                }) {
-                    Text("Website")
-                        .font(Font.system(.headline, design: .rounded))
-                }
-                Spacer()
             }
-            .fullBackgroundStyle()
+            Spacer()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .navigationBarTitle("Settings", displayMode: .automatic)
+        .fullBackgroundStyle()
+        .navigationTitle("Settings")
     }
 }
 

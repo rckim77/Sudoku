@@ -13,7 +13,7 @@ struct ContentView: View {
     private let viewModel = ContentViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: viewModel.buttonsVSpacing) {
                 Text("Sudoku AI")
                     .font(.system(.largeTitle, design: .rounded))
@@ -48,7 +48,6 @@ struct ContentView: View {
             }
             .fullBackgroundStyle()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
