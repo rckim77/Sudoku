@@ -22,26 +22,22 @@ struct StaticGridView: View {
     }
 
     var body: some View {
-        HStack {
-            Spacer()
-            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-                ForEach(squareRowRanges, id: \.self) { squareRowRange in
-                    GridRow {
-                        ForEach(squareRowRange, id: \.self) { squareIndex in
-                            if squareIndex == 0 && highlightSection == .square {
-                                StaticSquareView(index: squareIndex, highlightSection: highlightSection)
-                                    .background(.yellow)
-                            } else {
-                                StaticSquareView(index: squareIndex, highlightSection: highlightSection)
-                            }
+        Grid(horizontalSpacing: 0, verticalSpacing: 0) {
+            ForEach(squareRowRanges, id: \.self) { squareRowRange in
+                GridRow {
+                    ForEach(squareRowRange, id: \.self) { squareIndex in
+                        if squareIndex == 0 && highlightSection == .square {
+                            StaticSquareView(index: squareIndex, highlightSection: highlightSection)
+                                .background(.yellow)
+                        } else {
+                            StaticSquareView(index: squareIndex, highlightSection: highlightSection)
                         }
                     }
                 }
             }
-            .padding(borderWidth)
-            .border(.black, width: borderWidth)
-            Spacer()
         }
+        .padding(borderWidth)
+        .border(.black, width: borderWidth)
     }
 }
 

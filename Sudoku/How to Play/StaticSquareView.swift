@@ -17,25 +17,6 @@ struct StaticSquareView: View {
         screenHeight > 667 ? 3 : 2
     }
     
-    private var row: some View {
-        GridRow {
-            ForEach(0..<3) { colIndex in
-                if colIndex == 0 && highlightSection == .column {
-                    Text("\(colIndex)")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .border(.black, width: 1)
-                        .background(.yellow)
-                } else {
-                    Text("\(colIndex)")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .border(.black, width: 1)
-                }
-            }
-        }
-    }
-    
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             ForEach(0..<3) { index in
@@ -57,4 +38,5 @@ struct StaticSquareView: View {
         StaticSquareView(index: 1, highlightSection: .row)
         StaticSquareView(index: 2, highlightSection: .column)
     }
+    .padding(.horizontal, 132)
 }

@@ -17,15 +17,15 @@ struct StaticRowView: View {
         GridRow {
             ForEach(0..<3) { colIndex in
                 if colIndex == 0 && highlightSection == .column {
-                    Text("\(colIndex)")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .border(.black, width: 1)
+                    RowButtonText(text: "\(colIndex)", foregroundColor: .black)
+                        .padding(.horizontal, 6)
+                        .frame(maxWidth: .infinity)
                         .background(.yellow)
+                        .border(.black, width: 1)
                 } else {
-                    Text("\(colIndex)")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
+                    RowButtonText(text: "\(rowIndex)", foregroundColor: .black)
+                        .padding(.horizontal, 6)
+                        .frame(maxWidth: .infinity)
                         .border(.black, width: 1)
                 }
             }
