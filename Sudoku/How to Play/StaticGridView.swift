@@ -20,40 +20,6 @@ struct StaticGridView: View {
     private var borderWidth: CGFloat {
         screenHeight > 667 ? 3 : 2
     }
-    
-    private var row: some View {
-        GridRow {
-            ForEach([0, 1, 2], id: \.self) { colIndex in
-                if colIndex == 0 && highlightSection == .column {
-                    Text("\(colIndex)")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .border(.black, width: 1)
-                        .background(.yellow)
-                } else {
-                    Text("\(colIndex)")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .border(.black, width: 1)
-                }
-            }
-        }
-    }
-    
-    private var square: some View {
-        Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-            ForEach([0, 1, 2], id: \.self) { index in
-                if index == 0 && highlightSection == .row {
-                    row
-                        .background(.yellow)
-                } else {
-                    row
-                }
-            }
-        }
-        .border(.black, width: borderWidth)
-    }
-    
 
     var body: some View {
         HStack {
@@ -63,10 +29,10 @@ struct StaticGridView: View {
                     GridRow {
                         ForEach(squareRowRange, id: \.self) { squareIndex in
                             if squareIndex == 0 && highlightSection == .square {
-                                square
+                                StaticSquareView(index: squareIndex, highlightSection: highlightSection)
                                     .background(.yellow)
                             } else {
-                                square
+                                StaticSquareView(index: squareIndex, highlightSection: highlightSection)
                             }
                         }
                     }

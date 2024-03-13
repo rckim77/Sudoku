@@ -48,6 +48,8 @@
 		EC8435F824AE728700D311FF /* SquareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435F724AE728700D311FF /* SquareViewModel.swift */; };
 		EC8638C52BA1222400CDC5E4 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638C42BA1222400CDC5E4 /* HowToPlayView.swift */; };
 		EC8638C72BA12CE800CDC5E4 /* StaticGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638C62BA12CE800CDC5E4 /* StaticGridView.swift */; };
+		EC8638CA2BA1311700CDC5E4 /* StaticSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638C92BA1311700CDC5E4 /* StaticSquareView.swift */; };
+		EC8638CC2BA1326F00CDC5E4 /* StaticRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638CB2BA1326F00CDC5E4 /* StaticRowView.swift */; };
 		ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A324A41BC30075CE0E /* RowViewModel.swift */; };
 		ECC830A624A5567C0075CE0E /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A524A5567C0075CE0E /* GameViewModel.swift */; };
 		ECE447ED2B4F514C003D0BC8 /* SudokuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE447EC2B4F514C003D0BC8 /* SudokuApp.swift */; };
@@ -97,6 +99,8 @@
 		EC8435F724AE728700D311FF /* SquareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareViewModel.swift; sourceTree = "<group>"; };
 		EC8638C42BA1222400CDC5E4 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		EC8638C62BA12CE800CDC5E4 /* StaticGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticGridView.swift; sourceTree = "<group>"; };
+		EC8638C92BA1311700CDC5E4 /* StaticSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSquareView.swift; sourceTree = "<group>"; };
+		EC8638CB2BA1326F00CDC5E4 /* StaticRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticRowView.swift; sourceTree = "<group>"; };
 		ECC830A324A41BC30075CE0E /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
 		ECC830A524A5567C0075CE0E /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		ECE447EC2B4F514C003D0BC8 /* SudokuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuApp.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 			children = (
 				EC8638C42BA1222400CDC5E4 /* HowToPlayView.swift */,
 				EC8638C62BA12CE800CDC5E4 /* StaticGridView.swift */,
+				EC8638C92BA1311700CDC5E4 /* StaticSquareView.swift */,
+				EC8638CB2BA1326F00CDC5E4 /* StaticRowView.swift */,
 			);
 			path = "How to Play";
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 				94600FC02499C4A700E605FD /* ClearButton.swift in Sources */,
 				94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */,
 				EC2148A92B366588005D5610 /* API.swift in Sources */,
+				EC8638CA2BA1311700CDC5E4 /* StaticSquareView.swift in Sources */,
 				EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */,
 				EC8435E824ABEBD300D311FF /* SettingsView.swift in Sources */,
 				EC8435EC24AD913A00D311FF /* NewGameButton.swift in Sources */,
@@ -350,6 +357,7 @@
 				EC8435F824AE728700D311FF /* SquareViewModel.swift in Sources */,
 				94A9CCB62488A394008551B6 /* RowButtonText.swift in Sources */,
 				EC8435E624ABE61500D311FF /* GameView.swift in Sources */,
+				EC8638CC2BA1326F00CDC5E4 /* StaticRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
