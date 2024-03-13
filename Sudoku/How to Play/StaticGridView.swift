@@ -15,6 +15,7 @@ enum HighlightSection {
 struct StaticGridView: View {
     
     let highlightSection: HighlightSection
+    let grid: [CoordinateValue]
     
     private let squareRowRanges = [(0...2), (3...5), (6...8)]
     private var borderWidth: CGFloat {
@@ -27,10 +28,10 @@ struct StaticGridView: View {
                 GridRow {
                     ForEach(squareRowRange, id: \.self) { squareIndex in
                         if squareIndex == 0 && highlightSection == .square {
-                            StaticSquareView(index: squareIndex, highlightSection: highlightSection)
+                            StaticSquareView(index: squareIndex, highlightSection: highlightSection, grid: grid)
                                 .background(.yellow)
                         } else {
-                            StaticSquareView(index: squareIndex, highlightSection: highlightSection)
+                            StaticSquareView(index: squareIndex, highlightSection: highlightSection, grid: grid)
                         }
                     }
                 }
@@ -43,8 +44,8 @@ struct StaticGridView: View {
 
 #Preview {
     VStack {
-        StaticGridView(highlightSection: .square)
-        StaticGridView(highlightSection: .column)
-        StaticGridView(highlightSection: .row)
+        StaticGridView(highlightSection: .column, grid: GridFactory.easyGrid)
+        StaticGridView(highlightSection: .row, grid: GridFactory.easyGrid)
+        StaticGridView(highlightSection: .square, grid: GridFactory.easyGrid)
     }
 }

@@ -12,6 +12,7 @@ struct StaticSquareView: View {
     
     let index: Int
     let highlightSection: HighlightSection
+    let grid: [CoordinateValue]
     
     private var borderWidth: CGFloat {
         screenHeight > 667 ? 3 : 2
@@ -19,12 +20,12 @@ struct StaticSquareView: View {
     
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-            ForEach(0..<3) { index in
-                if index == 0 && highlightSection == .row {
-                    StaticRowView(rowIndex: index, highlightSection: highlightSection)
+            ForEach(0..<3) { rowIndex in
+                if rowIndex == 0 && highlightSection == .row {
+                    StaticRowView(rowIndex: rowIndex, squareIndex: index, highlightSection: highlightSection, grid: grid)
                         .background(.yellow)
                 } else {
-                    StaticRowView(rowIndex: index, highlightSection: highlightSection)
+                    StaticRowView(rowIndex: rowIndex, squareIndex: index, highlightSection: highlightSection, grid: grid)
                 }
             }
         }
@@ -34,9 +35,9 @@ struct StaticSquareView: View {
 
 #Preview {
     VStack {
-        StaticSquareView(index: 0, highlightSection: .square)
-        StaticSquareView(index: 1, highlightSection: .row)
-        StaticSquareView(index: 2, highlightSection: .column)
+        StaticSquareView(index: 0, highlightSection: .square, grid: GridFactory.easyGrid)
+        StaticSquareView(index: 1, highlightSection: .row, grid: GridFactory.easyGrid)
+        StaticSquareView(index: 2, highlightSection: .column, grid: GridFactory.easyGrid)
     }
     .padding(.horizontal, 132)
 }

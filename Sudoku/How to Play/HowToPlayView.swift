@@ -18,13 +18,13 @@ struct HowToPlayView: View {
                     Text("First, every row in the grid must include the numbers 1 to 9. Each digit can only appear once.")
                 }
                 .padding(.horizontal, 12)
-                StaticGridView(highlightSection: .row)
+                StaticGridView(highlightSection: .row, grid: GridFactory.easyGrid)
                 Text("Second, every column in the grid must also include the numbers 1 to 9 exactly once.")
                     .padding(.horizontal, 12)
-                StaticGridView(highlightSection: .column)
+                StaticGridView(highlightSection: .column, grid: GridFactory.easyGrid)
                 Text("Third, you'll notice that a Sudoku grid contains 9 squares within it. Each square must also only contain the numbers 1 to 9, once per digit.")
                     .padding(.horizontal, 12)
-                StaticGridView(highlightSection: .square)
+                StaticGridView(highlightSection: .square, grid: GridFactory.easyGrid)
                 VStack(alignment: .leading, spacing: 12) {
                     Text("If all three conditions are met, then the Sudoku grid has been solved.")
                     Text("The difficulty of a Sudoku puzzle can range depending on how many digits are already filled out at the beginning of the puzzle. Good luck and have fun solving them!")
