@@ -8,9 +8,10 @@
 
 import Foundation
 
+/// (row, column, value)–square is implied by order of square arrays in array
+typealias ShortCoordinate = (Int, Int, Int)
+
 enum GridFactory {
-    /// (row, column, value)–square is implied by order of square arrays in array
-    typealias ShortCoordinate = (Int, Int, Int)
 
     static func randomGridForDifficulty(level: Difficulty.Level) -> [CoordinateValue] {
         let randomNumber = Int.random(in: 0...2)

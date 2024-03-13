@@ -13,7 +13,7 @@ struct ContentView: View {
     private let viewModel = ContentViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: viewModel.buttonsVSpacing) {
                 Text("Sudoku AI")
                     .font(.system(.largeTitle, design: .rounded))
@@ -35,27 +35,28 @@ struct ContentView: View {
                         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
                     }
                 }
-                NavigationLink {
-                    SettingsView()
-                } label: {
-                    HStack {
-                        Image(systemName: "gear")
-                        Text("Settings")
+                VStack(spacing: 18) {
+                    NavigationLink {
+                        HowToPlayView()
+                    } label: {
+                        Label("How to play", systemImage: "questionmark.circle")
+                            .font(.system(.headline, design: .rounded))
+                            .tint(Color("dynamicDarkGray"))
+                    }
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Label("Settings", systemImage: "gear")
+                            .font(.system(.headline, design: .rounded))
+                            .tint(Color("dynamicDarkGray"))
                     }
                 }
-                .font(.system(.headline, design: .rounded))
-                .tint(Color("dynamicDarkGray"))
             }
             .fullBackgroundStyle()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-        .previewDevice(PreviewDevice(rawValue: "iPad (7th generation)"))
-            .environment(\.colorScheme, .dark)
-    }
+#Preview {
+    ContentView()
 }
