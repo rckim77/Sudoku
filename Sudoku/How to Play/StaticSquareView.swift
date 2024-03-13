@@ -18,10 +18,14 @@ struct StaticSquareView: View {
         screenHeight > 667 ? 3 : 2
     }
     
+    private var isValidSquare: Bool {
+        return index == 0 || index == 1 || index == 2
+    }
+    
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             ForEach(0..<3) { rowIndex in
-                if rowIndex == 0 && highlightSection == .row {
+                if rowIndex == 0 && isValidSquare && highlightSection == .row {
                     StaticRowView(rowIndex: rowIndex, squareIndex: index, highlightSection: highlightSection, grid: grid)
                         .background(.yellow)
                 } else {

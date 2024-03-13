@@ -22,12 +22,12 @@ struct HowToPlayView: View {
                 Text("Second, every column in the grid must also include the numbers 1 to 9 exactly once.")
                     .padding(.horizontal, 12)
                 StaticGridView(highlightSection: .column, grid: GridFactory.easyGrid)
-                Text("Third, you'll notice that a Sudoku grid contains 9 squares within it. Each square must also only contain the numbers 1 to 9, once per digit.")
+                Text("You'll notice that within the grid there are nine squares shown with bold borders. Below is one square highlighted in yellow. The third requirement is that each of these squares must also only contain the numbers 1 through 9, once per digit.")
                     .padding(.horizontal, 12)
                 StaticGridView(highlightSection: .square, grid: GridFactory.easyGrid)
                 VStack(alignment: .leading, spacing: 12) {
                     Text("If all three conditions are met, then the Sudoku grid has been solved.")
-                    Text("The difficulty of a Sudoku puzzle can range depending on how many digits are already filled out at the beginning of the puzzle. Good luck and have fun solving them!")
+                    Text("The difficulty of a Sudoku puzzle can range depending on how many digits are already filled in at the beginning. Good luck and have fun solving them!")
                 }
                 .padding(.horizontal, 12)
             }
