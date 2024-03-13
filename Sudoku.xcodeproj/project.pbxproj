@@ -146,11 +146,10 @@
 				EC2148A82B366588005D5610 /* API.swift */,
 				94E108862487333B0091D043 /* ContentView.swift */,
 				EC8435F524AE717500D311FF /* ContentViewModel.swift */,
-				EC8638C42BA1222400CDC5E4 /* HowToPlayView.swift */,
-				EC8638C62BA12CE800CDC5E4 /* StaticGridView.swift */,
 				EC8435E724ABEBD300D311FF /* SettingsView.swift */,
 				94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */,
 				EC8435EF24AE4E9900D311FF /* Game */,
+				EC8638C82BA130EA00CDC5E4 /* How to Play */,
 				94E9F330249402C800B1D003 /* Models */,
 				94A9CCB92488AA1B008551B6 /* Shared */,
 				94E108882487333E0091D043 /* Assets.xcassets */,
@@ -212,6 +211,15 @@
 				EC8435F124AE519100D311FF /* FullBackgroundStyle.swift */,
 			);
 			path = "View Modifiers";
+			sourceTree = "<group>";
+		};
+		EC8638C82BA130EA00CDC5E4 /* How to Play */ = {
+			isa = PBXGroup;
+			children = (
+				EC8638C42BA1222400CDC5E4 /* HowToPlayView.swift */,
+				EC8638C62BA12CE800CDC5E4 /* StaticGridView.swift */,
+			);
+			path = "How to Play";
 			sourceTree = "<group>";
 		};
 		ECC830A224A3F8C70075CE0E /* Grid */ = {
