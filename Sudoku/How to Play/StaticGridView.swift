@@ -32,6 +32,7 @@ struct StaticGridView: View {
                                 .background(.yellow)
                         } else {
                             StaticSquareView(index: squareIndex, highlightSection: highlightSection, grid: grid)
+                                .background(Color("dynamicGridWhite"))
                         }
                     }
                 }

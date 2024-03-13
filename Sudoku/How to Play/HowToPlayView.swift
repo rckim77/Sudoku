@@ -33,6 +33,8 @@ struct HowToPlayView: View {
             }
             .padding(4)
         }
+        .font(Font.system(.headline, design: .rounded))
+        .fullBackgroundStyle()
         .navigationTitle("How to play")
         .navigationBarTitleDisplayMode(.large)
     }
