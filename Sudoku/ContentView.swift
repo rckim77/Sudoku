@@ -18,21 +18,38 @@ struct ContentView: View {
                 Text("Sudoku AI")
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
-                HStack(spacing: viewModel.difficultyButtonHSpacing) {
-                    ForEach(viewModel.difficultyLevels, id: \.self) { level in
+                VStack(spacing: 16) {
+                    if let savedGrid = getSavedGame(), let savedUserAction = getSavedUserAction() {
                         NavigationLink {
-                            GameView(viewModel: GameViewModel(difficulty: level))
+                            GameView(viewModel: GameViewModel(difficulty: .easy))
                                 .environmentObject(SelectedCell())
-                                .environmentObject(UserAction())
+                                .environmentObject(UserAction(action: savedUserAction))
                                 .environmentObject(EditState())
-                                .environmentObject(GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)))
+                                .environmentObject(GridValues(startingGrid: savedGrid))
                                 .environmentObject(EditGridValues(grid: []))
-                                .environmentObject(Difficulty(level: level))
+                                .environmentObject(Difficulty(level: .easy))
                         } label: {
-                            Text(level.rawValue)
+                            Text("Continue game")
                                 .font(.system(.headline, design: .rounded))
                         }
                         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
+                    }
+                    HStack(spacing: viewModel.difficultyButtonHSpacing) {
+                        ForEach(viewModel.difficultyLevels, id: \.self) { level in
+                            NavigationLink {
+                                GameView(viewModel: GameViewModel(difficulty: level))
+                                    .environmentObject(SelectedCell())
+                                    .environmentObject(UserAction())
+                                    .environmentObject(EditState())
+                                    .environmentObject(GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)))
+                                    .environmentObject(EditGridValues(grid: []))
+                                    .environmentObject(Difficulty(level: level))
+                            } label: {
+                                Text(level.rawValue)
+                                    .font(.system(.headline, design: .rounded))
+                            }
+                            .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
+                        }
                     }
                 }
                 VStack(spacing: 18) {
@@ -54,6 +71,22 @@ struct ContentView: View {
             }
             .fullBackgroundStyle()
         }
+    }
+    
+    private func getSavedGame() -> [CoordinateValue]? {
+        guard let data = UserDefaults.standard.data(forKey: "workingGrid"),
+              let workingGrid = try? JSONDecoder().decode([CoordinateValue].self, from: data) else {
+            return nil
+        }
+        return workingGrid
+    }
+    
+    private func getSavedUserAction() -> UserAction.ActionType? {
+        guard let data = UserDefaults.standard.data(forKey: "userAction"),
+              let userAction = try? JSONDecoder().decode(UserAction.ActionType.self, from: data) else {
+            return nil
+        }
+        return userAction
     }
 }
 

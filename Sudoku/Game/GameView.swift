@@ -44,6 +44,13 @@ struct GameView: View {
                 HStack(spacing: viewModel.actionButtonsHorizontalSpacing) {
                     ClearButton()
                     EditButton()
+                    Button(action: {
+                        save()
+                    }) {
+                        Text("Save")
+                            .font(.system(.headline, design: .rounded))
+                    }
+                    .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
                 }
                 KeysRow(alert: $alertItem,
                         alertIsPresented: $alertIsPresented,
@@ -118,6 +125,15 @@ struct GameView: View {
         userAction.action = .none
         editState.isEditing = false
         editGrid.grid = []
+    }
+    
+    private func save() {
+        if let encodedWorkingGridCoordinateVals = try? JSONEncoder().encode(workingGrid.grid) {
+            UserDefaults.standard.set(encodedWorkingGridCoordinateVals, forKey: "workingGrid")
+        }
+        if let encodedUserAction = try? JSONEncoder().encode(userAction.action) {
+            UserDefaults.standard.set(encodedUserAction, forKey: "userAction")
+        }
     }
 }
 
