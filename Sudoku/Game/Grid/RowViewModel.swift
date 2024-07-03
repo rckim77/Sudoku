@@ -56,7 +56,7 @@ struct RowViewModel {
     
     private func grid(_ grid: [CoordinateValue], containsAValueAt coordinate: Coordinate) -> Bool {
         let result = grid.contains { coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            let gridCoordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }
         return result

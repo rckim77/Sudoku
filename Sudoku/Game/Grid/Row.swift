@@ -40,7 +40,7 @@ struct Row: View {
     }
 
     private func setRowButtonText(columnIndex: Int) -> String {
-        let coordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
+        let coordinate = Coordinate(r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
         if let value = workingGrid.getValue(at: coordinate, grid: workingGrid.grid) {
             return "\(value)"
         } else {
@@ -50,7 +50,7 @@ struct Row: View {
 
     private func updateSelectedButton(columnIndex: Int) {
         if !isSelected(columnIndex: columnIndex) {
-            selectedCell.coordinate = (r: viewModel.index, c: viewModel.columns[columnIndex], s: viewModel.squareIndex)
+            selectedCell.coordinate = Coordinate(r: viewModel.index, c: viewModel.columns[columnIndex], s: viewModel.squareIndex)
         } else {
             selectedCell.coordinate = nil
         }

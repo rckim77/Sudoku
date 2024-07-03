@@ -19,10 +19,10 @@ struct ContentView: View {
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
                 VStack(spacing: 16) {
-                    if let savedGrid = getSavedGame(), let savedUserAction = getSavedUserAction() {
+                    if let savedGrid = getSavedGame(), let savedUserAction = getSavedUserAction(), let selectedCell = getSavedSelectedCell() {
                         NavigationLink {
                             GameView(viewModel: GameViewModel(difficulty: .easy))
-                                .environmentObject(SelectedCell())
+                                .environmentObject(SelectedCell(coordinate: selectedCell))
                                 .environmentObject(UserAction(action: savedUserAction))
                                 .environmentObject(EditState())
                                 .environmentObject(GridValues(startingGrid: savedGrid))
@@ -87,6 +87,14 @@ struct ContentView: View {
             return nil
         }
         return userAction
+    }
+    
+    private func getSavedSelectedCell() -> Coordinate? {
+        guard let data = UserDefaults.standard.data(forKey: "selectedCell"),
+              let selectedCell = try? JSONDecoder().decode(Coordinate.self, from: data) else {
+            return nil
+        }
+        return selectedCell
     }
 }
 

@@ -134,6 +134,9 @@ struct GameView: View {
         if let encodedUserAction = try? JSONEncoder().encode(userAction.action) {
             UserDefaults.standard.set(encodedUserAction, forKey: "userAction")
         }
+        if let encodedSelectedCell = try? JSONEncoder().encode(selectedCell.coordinate) {
+            UserDefaults.standard.set(encodedSelectedCell, forKey: "selectedCell")
+        }
     }
 }
 

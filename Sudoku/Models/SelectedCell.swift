@@ -11,4 +11,8 @@ import SwiftUI
 final class SelectedCell: ObservableObject {
     @Published
     var coordinate: Coordinate?
+    
+    init(coordinate: Coordinate? = nil) {
+        self.coordinate = coordinate
+    }
 }

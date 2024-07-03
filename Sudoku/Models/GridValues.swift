@@ -43,7 +43,7 @@ final class GridValues: ObservableObject {
     }
 
     func add(_ coordinateValue: CoordinateValue) {
-        let coordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+        let coordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
         removeValue(at: coordinate)
         grid.append(coordinateValue)
         updateColorGrid(coordinateValue)
@@ -57,7 +57,7 @@ final class GridValues: ObservableObject {
 
     func containsAValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Bool {
         let result = grid.contains { coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            let gridCoordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }
         return result
@@ -66,14 +66,14 @@ final class GridValues: ObservableObject {
     func getValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Int? {
         let squareValues = values(in: coordinate.s, grid: grid)
         return squareValues.filter({ coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            let gridCoordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }).first?.v
     }
     
     func getCoordinateValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> CoordinateValue? {
         return grid.filter({ coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            let gridCoordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }).first
     }
