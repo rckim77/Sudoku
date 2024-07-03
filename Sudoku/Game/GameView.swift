@@ -128,14 +128,10 @@ struct GameView: View {
     }
     
     private func save() {
-        if let encodedWorkingGridCoordinateVals = try? JSONEncoder().encode(workingGrid.grid) {
-            UserDefaults.standard.set(encodedWorkingGridCoordinateVals, forKey: "workingGrid")
-        }
-        if let encodedUserAction = try? JSONEncoder().encode(userAction.action) {
-            UserDefaults.standard.set(encodedUserAction, forKey: "userAction")
-        }
-        if let encodedSelectedCell = try? JSONEncoder().encode(selectedCell.coordinate) {
-            UserDefaults.standard.set(encodedSelectedCell, forKey: "selectedCell")
+        let gameState = SavedGameState(workingGrid: workingGrid.grid, userAction: userAction.action, selectedCell: selectedCell.coordinate)
+        
+        if let encodedGameState = try? JSONEncoder().encode(gameState) {
+            UserDefaults.standard.set(encodedGameState, forKey: SavedGameState.persistenceKey)
         }
     }
 }

@@ -19,13 +19,13 @@ struct ContentView: View {
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
                 VStack(spacing: 16) {
-                    if let savedGrid = getSavedGame(), let savedUserAction = getSavedUserAction(), let selectedCell = getSavedSelectedCell() {
+                    if let savedGameState = getSavedGameState() {
                         NavigationLink {
                             GameView(viewModel: GameViewModel(difficulty: .easy))
-                                .environmentObject(SelectedCell(coordinate: selectedCell))
-                                .environmentObject(UserAction(action: savedUserAction))
+                                .environmentObject(SelectedCell(coordinate: savedGameState.selectedCell))
+                                .environmentObject(UserAction(action: savedGameState.userAction ?? .none))
                                 .environmentObject(EditState())
-                                .environmentObject(GridValues(startingGrid: savedGrid))
+                                .environmentObject(GridValues(startingGrid: savedGameState.workingGrid))
                                 .environmentObject(EditGridValues(grid: []))
                                 .environmentObject(Difficulty(level: .easy))
                         } label: {
@@ -73,28 +73,12 @@ struct ContentView: View {
         }
     }
     
-    private func getSavedGame() -> [CoordinateValue]? {
-        guard let data = UserDefaults.standard.data(forKey: "workingGrid"),
-              let workingGrid = try? JSONDecoder().decode([CoordinateValue].self, from: data) else {
+    private func getSavedGameState() -> SavedGameState? {
+        guard let data = UserDefaults.standard.data(forKey: SavedGameState.persistenceKey),
+              let gameState = try? JSONDecoder().decode(SavedGameState.self, from: data) else {
             return nil
         }
-        return workingGrid
-    }
-    
-    private func getSavedUserAction() -> UserAction.ActionType? {
-        guard let data = UserDefaults.standard.data(forKey: "userAction"),
-              let userAction = try? JSONDecoder().decode(UserAction.ActionType.self, from: data) else {
-            return nil
-        }
-        return userAction
-    }
-    
-    private func getSavedSelectedCell() -> Coordinate? {
-        guard let data = UserDefaults.standard.data(forKey: "selectedCell"),
-              let selectedCell = try? JSONDecoder().decode(Coordinate.self, from: data) else {
-            return nil
-        }
-        return selectedCell
+        return gameState
     }
 }
 
