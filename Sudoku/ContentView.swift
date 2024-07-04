@@ -24,10 +24,10 @@ struct ContentView: View {
                             GameView(viewModel: GameViewModel(difficulty: .easy))
                                 .environmentObject(SelectedCell(coordinate: savedGameState.selectedCell))
                                 .environmentObject(UserAction(action: savedGameState.userAction ?? .none))
-                                .environmentObject(EditState())
+                                .environmentObject(EditState(isEditing: savedGameState.isEditing))
                                 .environmentObject(GridValues(startingGrid: savedGameState.workingGrid))
-                                .environmentObject(EditGridValues(grid: []))
-                                .environmentObject(Difficulty(level: .easy))
+                                .environmentObject(EditGridValues(grid: savedGameState.editValues))
+                                .environmentObject(Difficulty(level: savedGameState.difficulty))
                         } label: {
                             Text("Continue game")
                                 .font(.system(.headline, design: .rounded))

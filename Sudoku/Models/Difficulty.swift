@@ -10,7 +10,7 @@ import Foundation
 
 final class Difficulty: ObservableObject {
 
-    enum Level: String {
+    enum Level: String, Codable {
         case easy = "Easy"
         case medium = "Medium"
         case hard = "Hard"

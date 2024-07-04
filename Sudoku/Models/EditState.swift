@@ -11,4 +11,8 @@ import Foundation
 final class EditState: ObservableObject {
     @Published
     var isEditing: Bool = false
+    
+    init(isEditing: Bool = false) {
+        self.isEditing = isEditing
+    }
 }

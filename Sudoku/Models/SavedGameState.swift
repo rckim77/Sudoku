@@ -15,4 +15,8 @@ struct SavedGameState: Codable {
     let workingGrid: [CoordinateValue]
     let userAction: UserAction.ActionType?
     let selectedCell: Coordinate?
+    let isEditing: Bool
+    let editValues: [CoordinateEditValues]
+    let difficulty: Difficulty.Level
+
 }

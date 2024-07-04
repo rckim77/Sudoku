@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CoordinateEditValues: Equatable {
+struct CoordinateEditValues: Equatable, Codable {
     let r: Int
     let c: Int
     let s: Int
