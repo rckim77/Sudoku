@@ -21,7 +21,7 @@ struct ContentView: View {
                 VStack(spacing: 16) {
                     if let savedGameState = getSavedGameState() {
                         NavigationLink {
-                            GameView(viewModel: GameViewModel(difficulty: .easy))
+                            GameView(viewModel: GameViewModel(difficulty: savedGameState.difficulty))
                                 .environmentObject(SelectedCell(coordinate: savedGameState.selectedCell))
                                 .environmentObject(UserAction(action: savedGameState.userAction ?? .none))
                                 .environmentObject(EditState(isEditing: savedGameState.isEditing))
