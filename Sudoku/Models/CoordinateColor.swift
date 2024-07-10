@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CoordinateColor: Hashable {
+struct CoordinateColor: Hashable, Codable {
     let coordinate: CoordinateValue
     let color: Color
     

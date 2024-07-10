@@ -13,6 +13,8 @@ struct SavedGameState: Codable {
     static let persistenceKey = "savedGameState"
     
     let workingGrid: [CoordinateValue]
+    let startingGrid: [CoordinateValue]
+    let colorGrid: Set<CoordinateColor>
     let userAction: UserAction.ActionType?
     let selectedCell: Coordinate?
     let isEditing: Bool

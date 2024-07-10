@@ -128,8 +128,8 @@ struct GameView: View {
     }
     
     private func save() {
-        let gameState = SavedGameState(workingGrid: workingGrid.grid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: difficulty.level)
-        
+        let gameState = SavedGameState(workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: difficulty.level)
+
         if let encodedGameState = try? JSONEncoder().encode(gameState) {
             UserDefaults.standard.set(encodedGameState, forKey: SavedGameState.persistenceKey)
         }

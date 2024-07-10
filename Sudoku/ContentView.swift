@@ -25,7 +25,7 @@ struct ContentView: View {
                                 .environmentObject(SelectedCell(coordinate: savedGameState.selectedCell))
                                 .environmentObject(UserAction(action: savedGameState.userAction ?? .none))
                                 .environmentObject(EditState(isEditing: savedGameState.isEditing))
-                                .environmentObject(GridValues(startingGrid: savedGameState.workingGrid))
+                                .environmentObject(GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid))
                                 .environmentObject(EditGridValues(grid: savedGameState.editValues))
                                 .environmentObject(Difficulty(level: savedGameState.difficulty))
                         } label: {
