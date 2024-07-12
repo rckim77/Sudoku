@@ -6,10 +6,9 @@
 //  Copyright © 2020 Self. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
-final class EditState: ObservableObject {
-    @Published
+@Observable final class EditState {
     var isEditing: Bool = false
     
     init(isEditing: Bool = false) {

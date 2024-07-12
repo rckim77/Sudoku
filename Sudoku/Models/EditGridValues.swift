@@ -8,9 +8,8 @@
 
 import SwiftUI
 
-final class EditGridValues: ObservableObject {
+@Observable final class EditGridValues {
     /// Note: Only includes coordinates that contain more than 0 edited values.
-    @Published
     var grid: [CoordinateEditValues]
 
     init(grid: [CoordinateEditValues]) {

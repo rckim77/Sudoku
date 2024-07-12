@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-final class UserAction: ObservableObject {
+@Observable final class UserAction {
     enum ActionType: Equatable, Codable {
         case none
         case clear
         case digit(_ digit: Int)
     }
-    @Published
+
     var action: ActionType = .none
     
     init(action: ActionType = .none) {

@@ -8,8 +8,7 @@
 
 import SwiftUI
 
-final class SelectedCell: ObservableObject {
-    @Published
+@Observable final class SelectedCell {
     var coordinate: Coordinate?
     
     init(coordinate: Coordinate? = nil) {

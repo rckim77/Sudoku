@@ -9,13 +9,10 @@
 import SwiftUI
 
 /// Maintains state for working grid `grid`. `startingGrid` contains the initial grid.
-final class GridValues: ObservableObject {
-    @Published
+@Observable final class GridValues {
+
     private(set) var grid: [CoordinateValue]
-    
-    @Published
     private(set) var colorGrid: Set<CoordinateColor>
-    
     private(set) var startingGrid: [CoordinateValue]
 
     var isSolved: Bool {

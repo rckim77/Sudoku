@@ -11,18 +11,12 @@ import SwiftUI
 struct GameView: View {
 
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject
-    private var selectedCell: SelectedCell
-    @EnvironmentObject
-    private var userAction: UserAction
-    @EnvironmentObject
-    private var editState: EditState
-    @EnvironmentObject
-    private var workingGrid: GridValues
-    @EnvironmentObject
-    private var editGrid: EditGridValues
-    @EnvironmentObject
-    private var difficulty: Difficulty
+    @Environment(SelectedCell.self) private var selectedCell: SelectedCell
+    @Environment(UserAction.self) private var userAction: UserAction
+    @Environment(EditState.self) private var editState: EditState
+    @Environment(GridValues.self) private var workingGrid: GridValues
+    @Environment(EditGridValues.self) private var editGrid: EditGridValues
+    @Environment(Difficulty.self) private var difficulty: Difficulty
     @State
     private var alertItem: AlertItem?
     @State
@@ -139,11 +133,11 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         GameView(viewModel: GameViewModel(difficulty: .easy))
-            .environmentObject(SelectedCell())
-            .environmentObject(UserAction())
-            .environmentObject(EditState())
-            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
-            .environmentObject(EditGridValues(grid: []))
-            .environmentObject(Difficulty(level: .easy))
+            .environment(SelectedCell())
+            .environment(UserAction())
+            .environment(EditState())
+            .environment(GridValues(startingGrid: GridFactory.easyGrid))
+            .environment(EditGridValues(grid: []))
+            .environment(Difficulty(level: .easy))
     }
 }

@@ -8,6 +8,35 @@
 
 import SwiftUI
 
+struct GameLevelNavigationLink: View {
+    
+    let level: Difficulty.Level
+    /// By using a State property wrapper to persist the grid once we create it in the init function,
+    /// we avoid a bug where the grid keeps refreshing to a random grid for each user action.
+    @State private var grid: GridValues
+    
+    init(level: Difficulty.Level) {
+        _grid = State(wrappedValue: GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)))
+        self.level = level
+    }
+    
+    var body: some View {
+        NavigationLink {
+            GameView(viewModel: GameViewModel(difficulty: level))
+                .environment(SelectedCell())
+                .environment(UserAction())
+                .environment(EditState())
+                .environment(grid)
+                .environment(EditGridValues(grid: []))
+                .environment(Difficulty(level: level))
+        } label: {
+            Text(level.rawValue)
+                .font(.system(.headline, design: .rounded))
+        }
+        .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
+    }
+}
+
 struct ContentView: View {
     
     private let viewModel = ContentViewModel()
@@ -22,12 +51,12 @@ struct ContentView: View {
                     if let savedGameState = getSavedGameState() {
                         NavigationLink {
                             GameView(viewModel: GameViewModel(difficulty: savedGameState.difficulty))
-                                .environmentObject(SelectedCell(coordinate: savedGameState.selectedCell))
-                                .environmentObject(UserAction(action: savedGameState.userAction ?? .none))
-                                .environmentObject(EditState(isEditing: savedGameState.isEditing))
-                                .environmentObject(GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid))
-                                .environmentObject(EditGridValues(grid: savedGameState.editValues))
-                                .environmentObject(Difficulty(level: savedGameState.difficulty))
+                                .environment(SelectedCell(coordinate: savedGameState.selectedCell))
+                                .environment(UserAction(action: savedGameState.userAction ?? .none))
+                                .environment(EditState(isEditing: savedGameState.isEditing))
+                                .environment(GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid))
+                                .environment(EditGridValues(grid: savedGameState.editValues))
+                                .environment(Difficulty(level: savedGameState.difficulty))
                         } label: {
                             Text("Continue game")
                                 .font(.system(.headline, design: .rounded))
@@ -36,19 +65,7 @@ struct ContentView: View {
                     }
                     HStack(spacing: viewModel.difficultyButtonHSpacing) {
                         ForEach(viewModel.difficultyLevels, id: \.self) { level in
-                            NavigationLink {
-                                GameView(viewModel: GameViewModel(difficulty: level))
-                                    .environmentObject(SelectedCell())
-                                    .environmentObject(UserAction())
-                                    .environmentObject(EditState())
-                                    .environmentObject(GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)))
-                                    .environmentObject(EditGridValues(grid: []))
-                                    .environmentObject(Difficulty(level: level))
-                            } label: {
-                                Text(level.rawValue)
-                                    .font(.system(.headline, design: .rounded))
-                            }
-                            .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
+                            GameLevelNavigationLink(level: level)
                         }
                     }
                 }

@@ -10,8 +10,7 @@ import SwiftUI
 
 struct SudokuGrid: View {
     
-    @EnvironmentObject
-    private var workingGrid: GridValues
+    @Environment(GridValues.self) private var workingGrid: GridValues
     let editGrid: [CoordinateEditValues]
     
     /// This width value determines how much space there is padded on the sides of
@@ -54,6 +53,6 @@ struct SudokuGrid: View {
 struct SudokuGrid_Previews: PreviewProvider {
     static var previews: some View {
         SudokuGrid(editGrid: [])
-            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
+            .environment(GridValues(startingGrid: GridFactory.easyGrid))
     }
 }
