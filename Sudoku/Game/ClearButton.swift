@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct ClearButton: View {
-    @Environment(SelectedCell.self) private var selectedCell: SelectedCell
     @Environment(GridValues.self) private var workingGrid: GridValues
     @Environment(EditGridValues.self) private var editGrid: EditGridValues
+    let selectedCoordinate: Coordinate?
     var editState: EditState
     var userAction: UserAction
 
@@ -37,7 +37,7 @@ struct ClearButton: View {
         Button(action: {
             self.userAction.action = .clear
 
-            guard let selectedCoordinate = self.selectedCell.coordinate,
+            guard let selectedCoordinate = self.selectedCoordinate,
                   !self.workingGrid.containsAValue(at: selectedCoordinate, grid: workingGrid.startingGrid) else {
                 // can't clear values that were part of starting board and unselected
                 return

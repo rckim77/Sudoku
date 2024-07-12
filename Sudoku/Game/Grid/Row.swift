@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Row: View {
 
-    @Environment(SelectedCell.self) private var selectedCell: SelectedCell
+    var selectedCell: SelectedCell
     var userAction: UserAction
     @Environment(GridValues.self) private var workingGrid: GridValues
 
@@ -74,9 +74,10 @@ struct Row: View {
 }
 
 #Preview {
-    Row(userAction: UserAction(), viewModel: RowViewModel(index: 0,
+    Row(selectedCell: SelectedCell(),
+        userAction: UserAction(),
+        viewModel: RowViewModel(index: 0,
                                 squareIndex: 0,
                                 guesses: []))
-        .environment(SelectedCell())
         .environment(GridValues(startingGrid: GridFactory.easyGrid))
 }

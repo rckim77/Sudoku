@@ -11,7 +11,7 @@ import SwiftUI
 struct GameView: View {
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(SelectedCell.self) private var selectedCell: SelectedCell
+    @State private(set) var selectedCell = SelectedCell()
     @State private(set) var userAction = UserAction()
     @State private(set) var editState = EditState(isEditing: false)
     @Environment(GridValues.self) private var workingGrid: GridValues
@@ -33,9 +33,9 @@ struct GameView: View {
                 if isIpad {
                     Spacer()
                 }
-                SudokuGrid(userAction: userAction, editGrid: editGrid.grid)
+                SudokuGrid(selectedCell: selectedCell, userAction: userAction, editGrid: editGrid.grid)
                 HStack(spacing: viewModel.actionButtonsHorizontalSpacing) {
-                    ClearButton(editState: editState, userAction: userAction)
+                    ClearButton(selectedCoordinate: selectedCell.coordinate, editState: editState, userAction: userAction)
                     EditButton(editState: editState)
                     Button(action: {
                         save()

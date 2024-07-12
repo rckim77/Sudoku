@@ -23,7 +23,6 @@ struct GameLevelNavigationLink: View {
     var body: some View {
         NavigationLink {
             GameView(viewModel: GameViewModel(difficulty: level))
-                .environment(SelectedCell())
                 .environment(grid)
                 .environment(EditGridValues(grid: []))
         } label: {
@@ -47,10 +46,10 @@ struct ContentView: View {
                 VStack(spacing: 16) {
                     if let savedGameState = getSavedGameState() {
                         NavigationLink {
-                            GameView(userAction: UserAction(action: savedGameState.userAction ?? .none),
+                            GameView(selectedCell: SelectedCell(coordinate: savedGameState.selectedCell),
+                                     userAction: UserAction(action: savedGameState.userAction ?? .none),
                                      editState: EditState(isEditing: savedGameState.isEditing),
                                      viewModel: GameViewModel(difficulty: savedGameState.difficulty))
-                                .environment(SelectedCell(coordinate: savedGameState.selectedCell))
                                 .environment(GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid))
                                 .environment(EditGridValues(grid: savedGameState.editValues))
                         } label: {

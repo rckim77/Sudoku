@@ -11,6 +11,7 @@ import SwiftUI
 struct SudokuGrid: View {
     
     @Environment(GridValues.self) private var workingGrid: GridValues
+    var selectedCell: SelectedCell
     var userAction: UserAction
     let editGrid: [CoordinateEditValues]
     
@@ -38,7 +39,8 @@ struct SudokuGrid: View {
                     GridRow {
                         ForEach(squareRowRange, id: \.self) { squareIndex in
                             Square(index: squareIndex,
-                                   editGridSlice: self.editGrid.filter { $0.s == squareIndex }, 
+                                   editGridSlice: self.editGrid.filter { $0.s == squareIndex },
+                                   selectedCell: selectedCell,
                                    userAction: userAction)
                         }
                     }
@@ -53,6 +55,6 @@ struct SudokuGrid: View {
 }
 
 #Preview {
-    SudokuGrid(userAction: UserAction(), editGrid: [])
+    SudokuGrid(selectedCell: SelectedCell(), userAction: UserAction(), editGrid: [])
         .environment(GridValues(startingGrid: GridFactory.easyGrid))
 }
