@@ -23,7 +23,7 @@ final class RowViewModelTests: XCTestCase {
     
     func testBackgroundColorForColumnIndexSelectedCellSameCoordinate() {
         let viewModel = RowViewModel(index: 0, squareIndex: 0, guesses: [])
-        let selectedCell = (r: 0, c: 0, s: 0)
+        let selectedCell = Coordinate(r: 0, c: 0, s: 0)
         let color = viewModel.backgroundColorFor(0, selectedCell: selectedCell)
         let expectedColor = Color("dynamicBlueSelection")
 
@@ -32,7 +32,7 @@ final class RowViewModelTests: XCTestCase {
     
     func testBackgroundColorForColumnIndexSelectedCellSameSquare() {
         let viewModel = RowViewModel(index: 0, squareIndex: 0, guesses: [])
-        let selectedCell = (r: 1, c: 2, s: 0)
+        let selectedCell = Coordinate(r: 1, c: 2, s: 0)
         let color = viewModel.backgroundColorFor(0, selectedCell: selectedCell)
         let expectedColor = Color("dynamicGridSelection")
 
@@ -41,7 +41,7 @@ final class RowViewModelTests: XCTestCase {
     
     func testBackgroundColorForColumnIndexSelectedCellDifferent() {
         let viewModel = RowViewModel(index: 0, squareIndex: 0, guesses: [])
-        let selectedCell = (r: 1, c: 2, s: 3)
+        let selectedCell = Coordinate(r: 1, c: 2, s: 3)
         let color = viewModel.backgroundColorFor(0, selectedCell: selectedCell)
         let expectedColor = Color("dynamicGridWhite")
 
