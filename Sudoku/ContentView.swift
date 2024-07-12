@@ -24,7 +24,6 @@ struct GameLevelNavigationLink: View {
         NavigationLink {
             GameView(viewModel: GameViewModel(difficulty: level))
                 .environment(grid)
-                .environment(EditGridValues(grid: []))
         } label: {
             Text(level.rawValue)
                 .font(.system(.headline, design: .rounded))
@@ -49,9 +48,9 @@ struct ContentView: View {
                             GameView(selectedCell: SelectedCell(coordinate: savedGameState.selectedCell),
                                      userAction: UserAction(action: savedGameState.userAction ?? .none),
                                      editState: EditState(isEditing: savedGameState.isEditing),
+                                     editGrid: EditGridValues(grid: savedGameState.editValues),
                                      viewModel: GameViewModel(difficulty: savedGameState.difficulty))
                                 .environment(GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid))
-                                .environment(EditGridValues(grid: savedGameState.editValues))
                         } label: {
                             Text("Continue game")
                                 .font(.system(.headline, design: .rounded))

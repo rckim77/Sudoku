@@ -15,7 +15,7 @@ struct GameView: View {
     @State private(set) var userAction = UserAction()
     @State private(set) var editState = EditState(isEditing: false)
     @Environment(GridValues.self) private var workingGrid: GridValues
-    @Environment(EditGridValues.self) private var editGrid: EditGridValues
+    @State var editGrid = EditGridValues(grid: [])
     @State
     private var alertItem: AlertItem?
     @State
@@ -35,7 +35,10 @@ struct GameView: View {
                 }
                 SudokuGrid(selectedCell: selectedCell, userAction: userAction, editGrid: editGrid.grid)
                 HStack(spacing: viewModel.actionButtonsHorizontalSpacing) {
-                    ClearButton(selectedCoordinate: selectedCell.coordinate, editState: editState, userAction: userAction)
+                    ClearButton(selectedCoordinate: selectedCell.coordinate,
+                                editGrid: editGrid,
+                                editState: editState,
+                                userAction: userAction)
                     EditButton(editState: editState)
                     Button(action: {
                         save()
@@ -45,7 +48,8 @@ struct GameView: View {
                     }
                     .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
                 }
-                KeysRow(userAction: userAction,
+                KeysRow(editGrid: editGrid,
+                        userAction: userAction,
                         alert: $alertItem,
                         alertIsPresented: $alertIsPresented,
                         selectedCoordinate: selectedCell.coordinate,

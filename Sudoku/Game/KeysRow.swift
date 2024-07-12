@@ -11,7 +11,7 @@ import SwiftUI
 struct KeysRow: View {
 
     @Environment(GridValues.self) private var workingGrid: GridValues
-    @Environment(EditGridValues.self) private var editGrid: EditGridValues
+    var editGrid: EditGridValues
     var userAction: UserAction
     @Binding
     var alert: AlertItem?
@@ -73,7 +73,6 @@ struct KeysRow: View {
 }
 
 #Preview {
-    KeysRow(userAction: UserAction(), alert: .constant(.completedCorrectly), alertIsPresented: .constant(false), selectedCoordinate: nil, isEditing: false)
+    KeysRow(editGrid: EditGridValues(grid: []), userAction: UserAction(), alert: .constant(.completedCorrectly), alertIsPresented: .constant(false), selectedCoordinate: nil, isEditing: false)
         .environment(GridValues(startingGrid: GridFactory.easyGrid))
-        .environment(EditGridValues(grid: []))
 }

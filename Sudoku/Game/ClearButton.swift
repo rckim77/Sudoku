@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ClearButton: View {
     @Environment(GridValues.self) private var workingGrid: GridValues
-    @Environment(EditGridValues.self) private var editGrid: EditGridValues
     let selectedCoordinate: Coordinate?
+    var editGrid: EditGridValues
     var editState: EditState
     var userAction: UserAction
 
