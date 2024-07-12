@@ -10,9 +10,9 @@ import SwiftUI
 
 struct KeysRow: View {
 
-    @Environment(UserAction.self) private var userAction: UserAction
     @Environment(GridValues.self) private var workingGrid: GridValues
     @Environment(EditGridValues.self) private var editGrid: EditGridValues
+    var userAction: UserAction
     @Binding
     var alert: AlertItem?
     @Binding
@@ -72,11 +72,8 @@ struct KeysRow: View {
     }
 }
 
-struct KeysRow_Previews: PreviewProvider {
-    static var previews: some View {
-        KeysRow(alert: .constant(.completedCorrectly), alertIsPresented: .constant(false), selectedCoordinate: nil, isEditing: false)
-            .environment(UserAction())
-            .environment(GridValues(startingGrid: GridFactory.easyGrid))
-            .environment(EditGridValues(grid: []))
-    }
+#Preview {
+    KeysRow(userAction: UserAction(), alert: .constant(.completedCorrectly), alertIsPresented: .constant(false), selectedCoordinate: nil, isEditing: false)
+        .environment(GridValues(startingGrid: GridFactory.easyGrid))
+        .environment(EditGridValues(grid: []))
 }

@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct ClearButton: View {
-    @Environment(UserAction.self) private var userAction: UserAction
     @Environment(SelectedCell.self) private var selectedCell: SelectedCell
     @Environment(GridValues.self) private var workingGrid: GridValues
     @Environment(EditGridValues.self) private var editGrid: EditGridValues
-    @Binding var editState: EditState
+    var editState: EditState
+    var userAction: UserAction
 
     private var horizontalPadding: CGFloat {
         guard !isIpad else {

@@ -11,7 +11,7 @@ import SwiftUI
 struct Row: View {
 
     @Environment(SelectedCell.self) private var selectedCell: SelectedCell
-    @Environment(UserAction.self) private var userAction: UserAction
+    var userAction: UserAction
     @Environment(GridValues.self) private var workingGrid: GridValues
 
     let viewModel: RowViewModel
@@ -73,13 +73,10 @@ struct Row: View {
     }
 }
 
-struct Row_Previews: PreviewProvider {
-    static var previews: some View {
-        Row(viewModel: RowViewModel(index: 0,
-                                    squareIndex: 0,
-                                    guesses: []))
-            .environment(SelectedCell())
-            .environment(UserAction())
-            .environment(GridValues(startingGrid: GridFactory.easyGrid))
-    }
+#Preview {
+    Row(userAction: UserAction(), viewModel: RowViewModel(index: 0,
+                                squareIndex: 0,
+                                guesses: []))
+        .environment(SelectedCell())
+        .environment(GridValues(startingGrid: GridFactory.easyGrid))
 }

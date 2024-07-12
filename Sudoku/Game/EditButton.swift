@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EditButton: View {
 
-    @Binding var editState: EditState
+    var editState: EditState
 
     private var editButtonHorizontalPadding: CGFloat {
         if #available(iOS 14.0, *) {

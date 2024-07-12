@@ -12,7 +12,7 @@ struct GameView: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(SelectedCell.self) private var selectedCell: SelectedCell
-    @Environment(UserAction.self) private var userAction: UserAction
+    @State private(set) var userAction = UserAction()
     @State private(set) var editState = EditState(isEditing: false)
     @Environment(GridValues.self) private var workingGrid: GridValues
     @Environment(EditGridValues.self) private var editGrid: EditGridValues
@@ -33,10 +33,10 @@ struct GameView: View {
                 if isIpad {
                     Spacer()
                 }
-                SudokuGrid(editGrid: editGrid.grid)
+                SudokuGrid(userAction: userAction, editGrid: editGrid.grid)
                 HStack(spacing: viewModel.actionButtonsHorizontalSpacing) {
-                    ClearButton(editState: $editState)
-                    EditButton(editState: $editState)
+                    ClearButton(editState: editState, userAction: userAction)
+                    EditButton(editState: editState)
                     Button(action: {
                         save()
                     }) {
@@ -45,7 +45,8 @@ struct GameView: View {
                     }
                     .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
                 }
-                KeysRow(alert: $alertItem,
+                KeysRow(userAction: userAction,
+                        alert: $alertItem,
                         alertIsPresented: $alertIsPresented,
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
