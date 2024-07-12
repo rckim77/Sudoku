@@ -13,7 +13,7 @@ struct ClearButton: View {
     @Environment(SelectedCell.self) private var selectedCell: SelectedCell
     @Environment(GridValues.self) private var workingGrid: GridValues
     @Environment(EditGridValues.self) private var editGrid: EditGridValues
-    @Environment(EditState.self) private var editState: EditState
+    @Binding var editState: EditState
 
     private var horizontalPadding: CGFloat {
         guard !isIpad else {
@@ -54,11 +54,5 @@ struct ClearButton: View {
                 .font(.system(.headline, design: .rounded))
         }
         .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
-    }
-}
-
-struct ClearButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ClearButton()
     }
 }

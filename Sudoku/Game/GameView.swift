@@ -13,7 +13,7 @@ struct GameView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(SelectedCell.self) private var selectedCell: SelectedCell
     @Environment(UserAction.self) private var userAction: UserAction
-    @Environment(EditState.self) private var editState: EditState
+    @State private(set) var editState = EditState(isEditing: false)
     @Environment(GridValues.self) private var workingGrid: GridValues
     @Environment(EditGridValues.self) private var editGrid: EditGridValues
     @State
@@ -28,15 +28,15 @@ struct GameView: View {
     var body: some View {
         ZStack {
             Color("dynamicBackground")
-                    .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)
             VStack(spacing: viewModel.verticalSpacing) {
                 if isIpad {
                     Spacer()
                 }
                 SudokuGrid(editGrid: editGrid.grid)
                 HStack(spacing: viewModel.actionButtonsHorizontalSpacing) {
-                    ClearButton()
-                    EditButton()
+                    ClearButton(editState: $editState)
+                    EditButton(editState: $editState)
                     Button(action: {
                         save()
                     }) {
@@ -92,7 +92,7 @@ struct GameView: View {
                     Button(role: .cancel) {} label: {
                         Text("Cancel")
                     }
-
+                    
                 case .completedCorrectly:
                     Button("Go back") {
                         dismiss()
@@ -122,20 +122,9 @@ struct GameView: View {
     
     private func save() {
         let gameState = SavedGameState(workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty)
-
+        
         if let encodedGameState = try? JSONEncoder().encode(gameState) {
             UserDefaults.standard.set(encodedGameState, forKey: SavedGameState.persistenceKey)
         }
-    }
-}
-
-struct GameView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameView(viewModel: GameViewModel(difficulty: .easy))
-            .environment(SelectedCell())
-            .environment(UserAction())
-            .environment(EditState())
-            .environment(GridValues(startingGrid: GridFactory.easyGrid))
-            .environment(EditGridValues(grid: []))
     }
 }
