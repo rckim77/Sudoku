@@ -16,7 +16,6 @@ struct GameView: View {
     @Environment(EditState.self) private var editState: EditState
     @Environment(GridValues.self) private var workingGrid: GridValues
     @Environment(EditGridValues.self) private var editGrid: EditGridValues
-    @Environment(Difficulty.self) private var difficulty: Difficulty
     @State
     private var alertItem: AlertItem?
     @State
@@ -109,7 +108,7 @@ struct GameView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onDisappear() {
-            self.resetGrids(for: self.difficulty.level)
+            self.resetGrids(for: viewModel.difficulty)
         }
     }
     
@@ -122,7 +121,7 @@ struct GameView: View {
     }
     
     private func save() {
-        let gameState = SavedGameState(workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: difficulty.level)
+        let gameState = SavedGameState(workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty)
 
         if let encodedGameState = try? JSONEncoder().encode(gameState) {
             UserDefaults.standard.set(encodedGameState, forKey: SavedGameState.persistenceKey)
@@ -138,6 +137,5 @@ struct GameView_Previews: PreviewProvider {
             .environment(EditState())
             .environment(GridValues(startingGrid: GridFactory.easyGrid))
             .environment(EditGridValues(grid: []))
-            .environment(Difficulty(level: .easy))
     }
 }

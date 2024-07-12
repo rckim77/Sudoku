@@ -28,7 +28,6 @@ struct GameLevelNavigationLink: View {
                 .environment(EditState())
                 .environment(grid)
                 .environment(EditGridValues(grid: []))
-                .environment(Difficulty(level: level))
         } label: {
             Text(level.rawValue)
                 .font(.system(.headline, design: .rounded))
@@ -56,7 +55,6 @@ struct ContentView: View {
                                 .environment(EditState(isEditing: savedGameState.isEditing))
                                 .environment(GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid))
                                 .environment(EditGridValues(grid: savedGameState.editValues))
-                                .environment(Difficulty(level: savedGameState.difficulty))
                         } label: {
                             Text("Continue game")
                                 .font(.system(.headline, design: .rounded))
