@@ -12,7 +12,7 @@ struct Row: View {
 
     var selectedCell: SelectedCell
     var userAction: UserAction
-    @Environment(GridValues.self) private var workingGrid: GridValues
+    let workingGrid: GridValues
 
     let viewModel: RowViewModel
 
@@ -76,8 +76,8 @@ struct Row: View {
 #Preview {
     Row(selectedCell: SelectedCell(),
         userAction: UserAction(),
+        workingGrid: GridValues(startingGrid: GridFactory.easyGrid),
         viewModel: RowViewModel(index: 0,
                                 squareIndex: 0,
                                 guesses: []))
-        .environment(GridValues(startingGrid: GridFactory.easyGrid))
 }

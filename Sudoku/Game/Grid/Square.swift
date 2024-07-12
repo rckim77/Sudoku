@@ -14,6 +14,7 @@ struct Square: View {
     let editGridSlice: [CoordinateEditValues]
     var selectedCell: SelectedCell
     var userAction: UserAction
+    let workingGrid: GridValues
     
     private let viewModel = SquareViewModel()
 
@@ -22,6 +23,7 @@ struct Square: View {
             ForEach(viewModel.rowIndices, id: \.self) { rowIndex in
                 Row(selectedCell: selectedCell,
                     userAction: userAction,
+                    workingGrid: workingGrid,
                     viewModel: RowViewModel(index: rowIndex,
                                             squareIndex: self.index,
                                             guesses: self.editGridSlice.filter { $0.r == rowIndex }))
@@ -32,5 +34,9 @@ struct Square: View {
 }
 
 #Preview {
-    Square(index: 0, editGridSlice: [], selectedCell: SelectedCell(), userAction: UserAction())
+    Square(index: 0,
+           editGridSlice: [],
+           selectedCell: SelectedCell(),
+           userAction: UserAction(),
+           workingGrid: GridValues(startingGrid: GridFactory.easyGrid))
 }

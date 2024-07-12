@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct SudokuGrid: View {
-    
-    @Environment(GridValues.self) private var workingGrid: GridValues
+
     var selectedCell: SelectedCell
     var userAction: UserAction
     let editGrid: [CoordinateEditValues]
+    let workingGrid: GridValues
     
     /// This width value determines how much space there is padded on the sides of
     /// the sudoku grid. The grid will resize and scale accordingly.
@@ -41,7 +41,8 @@ struct SudokuGrid: View {
                             Square(index: squareIndex,
                                    editGridSlice: self.editGrid.filter { $0.s == squareIndex },
                                    selectedCell: selectedCell,
-                                   userAction: userAction)
+                                   userAction: userAction,
+                                   workingGrid: workingGrid)
                         }
                     }
                 }
@@ -55,6 +56,8 @@ struct SudokuGrid: View {
 }
 
 #Preview {
-    SudokuGrid(selectedCell: SelectedCell(), userAction: UserAction(), editGrid: [])
-        .environment(GridValues(startingGrid: GridFactory.easyGrid))
+    SudokuGrid(selectedCell: SelectedCell(),
+               userAction: UserAction(),
+               editGrid: [],
+               workingGrid: GridValues.init(startingGrid: GridFactory.easyGrid))
 }

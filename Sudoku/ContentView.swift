@@ -11,19 +11,11 @@ import SwiftUI
 struct GameLevelNavigationLink: View {
     
     let level: Difficulty.Level
-    /// By using a State property wrapper to persist the grid once we create it in the init function,
-    /// we avoid a bug where the grid keeps refreshing to a random grid for each user action.
-    @State private var grid: GridValues
-    
-    init(level: Difficulty.Level) {
-        _grid = State(wrappedValue: GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)))
-        self.level = level
-    }
     
     var body: some View {
         NavigationLink {
-            GameView(viewModel: GameViewModel(difficulty: level))
-                .environment(grid)
+            GameView(workingGrid: GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)), 
+                     viewModel: GameViewModel(difficulty: level))
         } label: {
             Text(level.rawValue)
                 .font(.system(.headline, design: .rounded))
@@ -48,9 +40,9 @@ struct ContentView: View {
                             GameView(selectedCell: SelectedCell(coordinate: savedGameState.selectedCell),
                                      userAction: UserAction(action: savedGameState.userAction ?? .none),
                                      editState: EditState(isEditing: savedGameState.isEditing),
+                                     workingGrid: GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid),
                                      editGrid: EditGridValues(grid: savedGameState.editValues),
                                      viewModel: GameViewModel(difficulty: savedGameState.difficulty))
-                                .environment(GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid))
                         } label: {
                             Text("Continue game")
                                 .font(.system(.headline, design: .rounded))
