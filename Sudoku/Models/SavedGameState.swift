@@ -7,11 +7,11 @@
 //
 
 import Foundation
+import SwiftData
 
-struct SavedGameState: Codable {
-    
-    static let persistenceKey = "savedGameState"
-    
+@Model
+final class SavedGameState {
+
     let workingGrid: [CoordinateValue]
     let startingGrid: [CoordinateValue]
     let colorGrid: Set<CoordinateColor>
@@ -20,5 +20,15 @@ struct SavedGameState: Codable {
     let isEditing: Bool
     let editValues: [CoordinateEditValues]
     let difficulty: Difficulty.Level
-
+    
+    init(workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor>, userAction: UserAction.ActionType?, selectedCell: Coordinate?, isEditing: Bool, editValues: [CoordinateEditValues], difficulty: Difficulty.Level) {
+        self.workingGrid = workingGrid
+        self.startingGrid = startingGrid
+        self.colorGrid = colorGrid
+        self.userAction = userAction
+        self.selectedCell = selectedCell
+        self.isEditing = isEditing
+        self.editValues = editValues
+        self.difficulty = difficulty
+    }
 }

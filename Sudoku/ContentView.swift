@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     
     private let viewModel = ContentViewModel()
+    @Query var savedGameState: [SavedGameState]
     
     var body: some View {
         NavigationStack {
@@ -19,7 +21,7 @@ struct ContentView: View {
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
                 VStack(spacing: 16) {
-                    if let savedGameState = getSavedGameState() {
+                    if let savedGameState = savedGameState.first {
                         NavigationLink {
                             GameView(selectedCell: SelectedCell(coordinate: savedGameState.selectedCell),
                                      userAction: UserAction(action: savedGameState.userAction ?? .none),
@@ -58,14 +60,6 @@ struct ContentView: View {
             }
             .fullBackgroundStyle()
         }
-    }
-    
-    private func getSavedGameState() -> SavedGameState? {
-        guard let data = UserDefaults.standard.data(forKey: SavedGameState.persistenceKey),
-              let gameState = try? JSONDecoder().decode(SavedGameState.self, from: data) else {
-            return nil
-        }
-        return gameState
     }
 }
 

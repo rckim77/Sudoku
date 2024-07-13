@@ -11,6 +11,7 @@ import SwiftUI
 struct GameView: View {
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @State private(set) var selectedCell = SelectedCell()
     @State private(set) var userAction = UserAction()
     @State private(set) var editState = EditState(isEditing: false)
@@ -133,8 +134,6 @@ struct GameView: View {
     private func save() {
         let gameState = SavedGameState(workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty)
         
-        if let encodedGameState = try? JSONEncoder().encode(gameState) {
-            UserDefaults.standard.set(encodedGameState, forKey: SavedGameState.persistenceKey)
-        }
+        modelContext.insert(gameState)
     }
 }
