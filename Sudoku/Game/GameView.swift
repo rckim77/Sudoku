@@ -12,18 +12,17 @@ struct GameView: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+
     @State private(set) var selectedCell = SelectedCell()
     @State private(set) var userAction = UserAction()
     @State private(set) var editState = EditState(isEditing: false)
     @State private(set) var workingGrid: GridValues
     @State private(set) var editGrid = EditGridValues(grid: [])
-    @State
-    private var alertItem: AlertItem?
-    @State
-    private var alertIsPresented: Bool = false
-    @State
-    private var hintButtonIsLoading: Bool = false
+    @State private var alertItem: AlertItem?
+    @State private var alertIsPresented: Bool = false
+    @State private var hintButtonIsLoading: Bool = false
     
+    let isPlayingSavedGame: Bool
     let viewModel: GameViewModel
     
     var body: some View {
@@ -119,7 +118,9 @@ struct GameView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onDisappear() {
-            self.resetGrids(for: viewModel.difficulty)
+            if !isPlayingSavedGame {
+                resetGrids(for: viewModel.difficulty)
+            }
         }
     }
     
@@ -131,9 +132,12 @@ struct GameView: View {
         editGrid.grid = []
     }
     
+    /// Currently we only save one game. To fetch, always get the first SavedGameState object in the model container.
     private func save() {
         let gameState = SavedGameState(workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty)
         
+        try? modelContext.delete(model: SavedGameState.self)
         modelContext.insert(gameState)
+        try? modelContext.save()
     }
 }
