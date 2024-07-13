@@ -9,25 +9,35 @@
 import SwiftUI
 
 /// Maintains state for working grid `grid`. `startingGrid` contains the initial grid.
-final class GridValues: ObservableObject {
-    @Published
+@Observable final class GridValues {
+
     private(set) var grid: [CoordinateValue]
-    
-    @Published
     private(set) var colorGrid: Set<CoordinateColor>
-    
     private(set) var startingGrid: [CoordinateValue]
 
     var isSolved: Bool {
         return SudokuSolver.gridIsSolved(self)
     }
-
-    /// When initialized, both the working and starting grids are identical.
+    
+    /// Used when starting a brand new game
     init(startingGrid: [CoordinateValue]) {
         self.grid = startingGrid
         self.startingGrid = startingGrid
         self.colorGrid = Set<CoordinateColor>()
-        self.initColorGrid(grid)
+        self.populateEmptyColorGrid(grid)
+    }
+
+    /// Used when loading from a saved game.
+    init(grid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor>?) {
+        self.grid = grid
+        self.startingGrid = startingGrid
+
+        if let colorGrid = colorGrid {
+            self.colorGrid = colorGrid
+        } else {
+            self.colorGrid = Set<CoordinateColor>()
+            self.populateEmptyColorGrid(grid)
+        }
     }
 
     func values(in squareIndex: Int, grid: [CoordinateValue]) -> [CoordinateValue] {
@@ -39,11 +49,11 @@ final class GridValues: ObservableObject {
     func reset(newGrid: [CoordinateValue]) {
         grid = newGrid
         startingGrid = newGrid
-        initColorGrid(grid)
+        populateEmptyColorGrid(grid)
     }
 
     func add(_ coordinateValue: CoordinateValue) {
-        let coordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+        let coordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
         removeValue(at: coordinate)
         grid.append(coordinateValue)
         updateColorGrid(coordinateValue)
@@ -57,7 +67,7 @@ final class GridValues: ObservableObject {
 
     func containsAValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Bool {
         let result = grid.contains { coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            let gridCoordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }
         return result
@@ -66,14 +76,14 @@ final class GridValues: ObservableObject {
     func getValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> Int? {
         let squareValues = values(in: coordinate.s, grid: grid)
         return squareValues.filter({ coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            let gridCoordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }).first?.v
     }
     
     func getCoordinateValue(at coordinate: Coordinate, grid: [CoordinateValue]) -> CoordinateValue? {
         return grid.filter({ coordinateValue -> Bool in
-            let gridCoordinate = (r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
+            let gridCoordinate = Coordinate(r: coordinateValue.r, c: coordinateValue.c, s: coordinateValue.s)
             return gridCoordinate == coordinate
         }).first
     }
@@ -179,8 +189,7 @@ final class GridValues: ObservableObject {
         return containsValueInCol
     }
     
-    private func initColorGrid(_ grid: [CoordinateValue]) {
-        colorGrid = Set<CoordinateColor>()
+    private func populateEmptyColorGrid(_ grid: [CoordinateValue]) {
         grid.forEach { coordinateValue in
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: .black)
             colorGrid.update(with: coordinateColor)

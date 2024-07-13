@@ -6,17 +6,16 @@
 //  Copyright © 2020 Self. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
-final class Difficulty: ObservableObject {
+@Observable final class Difficulty {
 
-    enum Level: String {
+    enum Level: String, Codable {
         case easy = "Easy"
         case medium = "Medium"
         case hard = "Hard"
     }
 
-    @Published
     var level: Level
 
     init(level: Level) {

@@ -9,16 +9,12 @@
 import SwiftUI
 
 struct ClearButton: View {
-    @EnvironmentObject
-    private var userAction: UserAction
-    @EnvironmentObject
-    private var selectedCell: SelectedCell
-    @EnvironmentObject
-    private var workingGrid: GridValues
-    @EnvironmentObject
-    private var editGrid: EditGridValues
-    @EnvironmentObject
-    private var editState: EditState
+
+    let selectedCoordinate: Coordinate?
+    var editGrid: EditGridValues
+    var editState: EditState
+    var userAction: UserAction
+    var workingGrid: GridValues
 
     private var horizontalPadding: CGFloat {
         guard !isIpad else {
@@ -42,7 +38,7 @@ struct ClearButton: View {
         Button(action: {
             self.userAction.action = .clear
 
-            guard let selectedCoordinate = self.selectedCell.coordinate,
+            guard let selectedCoordinate = self.selectedCoordinate,
                   !self.workingGrid.containsAValue(at: selectedCoordinate, grid: workingGrid.startingGrid) else {
                 // can't clear values that were part of starting board and unselected
                 return
@@ -59,11 +55,5 @@ struct ClearButton: View {
                 .font(.system(.headline, design: .rounded))
         }
         .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
-    }
-}
-
-struct ClearButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ClearButton()
     }
 }

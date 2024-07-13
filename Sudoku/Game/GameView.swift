@@ -11,41 +11,51 @@ import SwiftUI
 struct GameView: View {
 
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject
-    private var selectedCell: SelectedCell
-    @EnvironmentObject
-    private var userAction: UserAction
-    @EnvironmentObject
-    private var editState: EditState
-    @EnvironmentObject
-    private var workingGrid: GridValues
-    @EnvironmentObject
-    private var editGrid: EditGridValues
-    @EnvironmentObject
-    private var difficulty: Difficulty
-    @State
-    private var alertItem: AlertItem?
-    @State
-    private var alertIsPresented: Bool = false
-    @State
-    private var hintButtonIsLoading: Bool = false
+    @Environment(\.modelContext) private var modelContext
+
+    @State private(set) var selectedCell = SelectedCell()
+    @State private(set) var userAction = UserAction()
+    @State private(set) var editState = EditState(isEditing: false)
+    @State private(set) var workingGrid: GridValues
+    @State private(set) var editGrid = EditGridValues(grid: [])
+    @State private var alertItem: AlertItem?
+    @State private var alertIsPresented: Bool = false
+    @State private var hintButtonIsLoading: Bool = false
     
+    let isPlayingSavedGame: Bool
     let viewModel: GameViewModel
     
     var body: some View {
         ZStack {
             Color("dynamicBackground")
-                    .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)
             VStack(spacing: viewModel.verticalSpacing) {
                 if isIpad {
                     Spacer()
                 }
-                SudokuGrid(editGrid: editGrid.grid)
+                SudokuGrid(selectedCell: selectedCell,
+                           userAction: userAction,
+                           editGrid: editGrid.grid,
+                           workingGrid: workingGrid)
                 HStack(spacing: viewModel.actionButtonsHorizontalSpacing) {
-                    ClearButton()
-                    EditButton()
+                    ClearButton(selectedCoordinate: selectedCell.coordinate,
+                                editGrid: editGrid,
+                                editState: editState,
+                                userAction: userAction,
+                                workingGrid: workingGrid)
+                    EditButton(editState: editState)
+                    Button(action: {
+                        save()
+                    }) {
+                        Text("Save")
+                            .font(.system(.headline, design: .rounded))
+                    }
+                    .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
                 }
-                KeysRow(alert: $alertItem,
+                KeysRow(editGrid: editGrid,
+                        userAction: userAction,
+                        workingGrid: workingGrid,
+                        alert: $alertItem,
                         alertIsPresented: $alertIsPresented,
                         selectedCoordinate: selectedCell.coordinate,
                         isEditing: editState.isEditing)
@@ -92,7 +102,7 @@ struct GameView: View {
                     Button(role: .cancel) {} label: {
                         Text("Cancel")
                     }
-
+                    
                 case .completedCorrectly:
                     Button("Go back") {
                         dismiss()
@@ -108,7 +118,9 @@ struct GameView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onDisappear() {
-            self.resetGrids(for: self.difficulty.level)
+            if !isPlayingSavedGame {
+                resetGrids(for: viewModel.difficulty)
+            }
         }
     }
     
@@ -119,16 +131,13 @@ struct GameView: View {
         editState.isEditing = false
         editGrid.grid = []
     }
-}
-
-struct GameView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameView(viewModel: GameViewModel(difficulty: .easy))
-            .environmentObject(SelectedCell())
-            .environmentObject(UserAction())
-            .environmentObject(EditState())
-            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
-            .environmentObject(EditGridValues(grid: []))
-            .environmentObject(Difficulty(level: .easy))
+    
+    /// Currently we only save one game. To fetch, always get the first SavedGameState object in the model container.
+    private func save() {
+        let gameState = SavedGameState(workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty)
+        
+        try? modelContext.delete(model: SavedGameState.self)
+        modelContext.insert(gameState)
+        try? modelContext.save()
     }
 }

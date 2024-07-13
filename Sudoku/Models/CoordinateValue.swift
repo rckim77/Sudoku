@@ -8,15 +8,19 @@
 
 import Foundation
 
-struct CoordinateValue: Hashable {
+struct CoordinateValue: Hashable, Codable {
     let r: Int
     let c: Int
     let s: Int
     let v: Int
     
     var coordinate: Coordinate {
-        return (r: r, c: c, s: s)
+        return Coordinate(r: r, c: c, s: s)
     }
 }
 
-typealias Coordinate = (r: Int, c: Int, s: Int)
+struct Coordinate: Equatable, Codable {
+    let r: Int
+    let c: Int
+    let s: Int
+}

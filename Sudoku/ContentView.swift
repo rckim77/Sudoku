@@ -7,10 +7,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     
     private let viewModel = ContentViewModel()
+    @Query var savedGameState: [SavedGameState]
     
     var body: some View {
         NavigationStack {
@@ -18,21 +20,26 @@ struct ContentView: View {
                 Text("Sudoku AI")
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
-                HStack(spacing: viewModel.difficultyButtonHSpacing) {
-                    ForEach(viewModel.difficultyLevels, id: \.self) { level in
+                VStack(spacing: viewModel.savedGameVSpacing) {
+                    if let savedGameState = savedGameState.first {
                         NavigationLink {
-                            GameView(viewModel: GameViewModel(difficulty: level))
-                                .environmentObject(SelectedCell())
-                                .environmentObject(UserAction())
-                                .environmentObject(EditState())
-                                .environmentObject(GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)))
-                                .environmentObject(EditGridValues(grid: []))
-                                .environmentObject(Difficulty(level: level))
+                            GameView(selectedCell: SelectedCell(coordinate: savedGameState.selectedCell),
+                                     userAction: UserAction(action: savedGameState.userAction ?? .none),
+                                     editState: EditState(isEditing: savedGameState.isEditing),
+                                     workingGrid: GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid),
+                                     editGrid: EditGridValues(grid: savedGameState.editValues),
+                                     isPlayingSavedGame: true,
+                                     viewModel: GameViewModel(difficulty: savedGameState.difficulty))
                         } label: {
-                            Text(level.rawValue)
+                            Text("Continue game")
                                 .font(.system(.headline, design: .rounded))
                         }
                         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
+                    }
+                    HStack(spacing: viewModel.difficultyButtonHSpacing) {
+                        ForEach(viewModel.difficultyLevels, id: \.self) { level in
+                            GameLevelNavigationLink(level: level)
+                        }
                     }
                 }
                 VStack(spacing: 18) {

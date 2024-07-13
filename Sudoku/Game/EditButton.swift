@@ -10,8 +10,7 @@ import SwiftUI
 
 struct EditButton: View {
 
-    @EnvironmentObject
-    private var editState: EditState
+    var editState: EditState
 
     private var editButtonHorizontalPadding: CGFloat {
         if #available(iOS 14.0, *) {
@@ -43,16 +42,5 @@ struct EditButton: View {
                 .font(.system(size: imageSize, weight: .regular))
         }
         .dynamicButtonImageStyle(textColor: .black, backgroundColor: backgroundColor)
-    }
-}
-
-struct EditButton_Previews: PreviewProvider {
-    static var previews: some View {
-        HStack {
-            ClearButton()
-            EditButton()
-                .environmentObject(EditState())
-                .previewDevice(PreviewDevice(rawValue: "iPad (7th generation)"))
-        }
     }
 }

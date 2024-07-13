@@ -10,14 +10,9 @@ import SwiftUI
 
 struct KeysRow: View {
 
-    @EnvironmentObject
-    private var userAction: UserAction
-    // Note: startingGrid and workingGrid need to be different types in order for @EnvironmentObject to work properly
-    // Reference: https://www.hackingwithswift.com/quick-start/swiftui/what-is-the-environmentobject-property-wrapper
-    @EnvironmentObject
-    private var workingGrid: GridValues
-    @EnvironmentObject
-    private var editGrid: EditGridValues
+    var editGrid: EditGridValues
+    var userAction: UserAction
+    var workingGrid: GridValues
     @Binding
     var alert: AlertItem?
     @Binding
@@ -59,7 +54,7 @@ struct KeysRow: View {
 
         let coordinateValue = CoordinateValue(r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
         if isEditing {
-            editGrid.updateGuesses(value: digit, at: (r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s))
+            editGrid.updateGuesses(value: digit, at: Coordinate(r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s))
         } else {
             editGrid.removeValues(at: selectedCoordinate)
             workingGrid.add(coordinateValue)
@@ -77,11 +72,12 @@ struct KeysRow: View {
     }
 }
 
-struct KeysRow_Previews: PreviewProvider {
-    static var previews: some View {
-        KeysRow(alert: .constant(.completedCorrectly), alertIsPresented: .constant(false), selectedCoordinate: nil, isEditing: false)
-            .environmentObject(UserAction())
-            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
-            .environmentObject(EditGridValues(grid: []))
-    }
+#Preview {
+    KeysRow(editGrid: EditGridValues(grid: []),
+            userAction: UserAction(),
+            workingGrid: GridValues(startingGrid: GridFactory.easyGrid),
+            alert: .constant(.completedCorrectly),
+            alertIsPresented: .constant(false),
+            selectedCoordinate: nil,
+            isEditing: false)
 }

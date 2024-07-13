@@ -10,12 +10,9 @@ import SwiftUI
 
 struct Row: View {
 
-    @EnvironmentObject
-    private var selectedCell: SelectedCell
-    @EnvironmentObject
-    private var userAction: UserAction
-    @EnvironmentObject
-    private var workingGrid: GridValues
+    var selectedCell: SelectedCell
+    var userAction: UserAction
+    let workingGrid: GridValues
 
     let viewModel: RowViewModel
 
@@ -40,7 +37,7 @@ struct Row: View {
     }
 
     private func setRowButtonText(columnIndex: Int) -> String {
-        let coordinate = (r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
+        let coordinate = Coordinate(r: viewModel.index, c: columnIndex, s: viewModel.squareIndex)
         if let value = workingGrid.getValue(at: coordinate, grid: workingGrid.grid) {
             return "\(value)"
         } else {
@@ -50,7 +47,7 @@ struct Row: View {
 
     private func updateSelectedButton(columnIndex: Int) {
         if !isSelected(columnIndex: columnIndex) {
-            selectedCell.coordinate = (r: viewModel.index, c: viewModel.columns[columnIndex], s: viewModel.squareIndex)
+            selectedCell.coordinate = Coordinate(r: viewModel.index, c: viewModel.columns[columnIndex], s: viewModel.squareIndex)
         } else {
             selectedCell.coordinate = nil
         }
@@ -76,13 +73,11 @@ struct Row: View {
     }
 }
 
-struct Row_Previews: PreviewProvider {
-    static var previews: some View {
-        Row(viewModel: RowViewModel(index: 0,
-                                    squareIndex: 0,
-                                    guesses: []))
-            .environmentObject(SelectedCell())
-            .environmentObject(UserAction())
-            .environmentObject(GridValues(startingGrid: GridFactory.easyGrid))
-    }
+#Preview {
+    Row(selectedCell: SelectedCell(),
+        userAction: UserAction(),
+        workingGrid: GridValues(startingGrid: GridFactory.easyGrid),
+        viewModel: RowViewModel(index: 0,
+                                squareIndex: 0,
+                                guesses: []))
 }
