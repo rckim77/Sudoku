@@ -9,6 +9,11 @@
 import SwiftUI
 
 struct ContentViewModel: ViewModel {
+    
+    var savedGameVSpacing: CGFloat {
+        16 * (isIpad ? 2.5 : 1)
+    }
+    
     var difficultyButtonHSpacing: CGFloat {
         16 * (isIpad ? 2.5 : 1)
     }

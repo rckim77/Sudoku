@@ -20,7 +20,7 @@ struct ContentView: View {
                 Text("Sudoku AI")
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
-                VStack(spacing: 16) {
+                VStack(spacing: viewModel.savedGameVSpacing) {
                     if let savedGameState = savedGameState.first {
                         NavigationLink {
                             GameView(selectedCell: SelectedCell(coordinate: savedGameState.selectedCell),
