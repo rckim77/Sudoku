@@ -16,24 +16,6 @@ struct ClearButton: View {
     var userAction: UserAction
     var workingGrid: GridValues
 
-    private var horizontalPadding: CGFloat {
-        guard !isIpad else {
-            return 28
-        }
-        if screenHeight > 736 { // taller than 8 Plus
-            return 22
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 14
-        }
-    }
-
-    private var verticalPadding: CGFloat {
-        guard !isIpad else {
-            return 20
-        }
-        return 0
-    }
-
     var body: some View {
         Button(action: {
             self.userAction.action = .clear

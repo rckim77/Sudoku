@@ -10,6 +10,7 @@ import UIKit
 
 protocol ViewModel {
     var isIpad: Bool { get }
+    var isVision: Bool { get }
     var isLargestIpad: Bool { get }
     var screenHeight: CGFloat { get }
     var screenWidth: CGFloat { get }
@@ -19,10 +20,18 @@ extension ViewModel {
     var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
+    
+    var isVision: Bool {
+        UIDevice.current.userInterfaceIdiom == .vision
+    }
 
     /// E.g., 12.9-inch iPads
     var isLargestIpad: Bool {
-        isIpad && screenWidth > 1023
+        guard !isVision else {
+            return false
+        }
+
+        return isIpad && screenWidth > 1023
     }
 
     var screenHeight: CGFloat {

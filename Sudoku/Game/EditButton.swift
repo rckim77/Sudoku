@@ -12,18 +12,6 @@ struct EditButton: View {
 
     var editState: EditState
 
-    private var editButtonHorizontalPadding: CGFloat {
-        if #available(iOS 14.0, *) {
-            return isIpad ? 20 : 10
-        }
-        return isIpad ? 24 : 14
-    }
-    private var editButtonVerticalPadding: CGFloat {
-        if #available(iOS 14.0, *) {
-            return isIpad ? 20 : 10
-        }
-        return isIpad ? 26 : 16
-    }
     private var imageSize: CGFloat {
         isIpad ? 24 : 18
     }
