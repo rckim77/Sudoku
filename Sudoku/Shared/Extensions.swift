@@ -16,11 +16,19 @@ extension View {
     var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
+    
+    var isVision: Bool {
+        UIDevice.current.userInterfaceIdiom == .vision
+    }
 }
 
 extension ViewModifier {
     var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    var isVision: Bool {
+        UIDevice.current.userInterfaceIdiom == .vision
     }
 }
 

@@ -27,12 +27,19 @@ struct DynamicButtonStyle: ViewModifier {
     }
     
     func body(content: Content) -> some View {
-        content
-            .foregroundColor(textColor)
-            .padding(.vertical, buttonVerticalPadding)
-            .padding(.horizontal, buttonHorizontalPadding)
-            .background(backgroundColor)
-            .cornerRadius(8)
+        if isVision {
+            content
+                .foregroundColor(textColor)
+                .padding(.vertical, buttonVerticalPadding)
+                .padding(.horizontal, buttonHorizontalPadding)
+        } else {
+            content
+                .foregroundColor(textColor)
+                .padding(.vertical, buttonVerticalPadding)
+                .padding(.horizontal, buttonHorizontalPadding)
+                .background(backgroundColor)
+                .cornerRadius(8)
+        }
     }
 }
 
