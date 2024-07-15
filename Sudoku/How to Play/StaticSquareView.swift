@@ -14,9 +14,7 @@ struct StaticSquareView: View {
     let highlightSection: HighlightSection
     let grid: [CoordinateValue]
     
-    private var borderWidth: CGFloat {
-        screenHeight > 667 ? 3 : 2
-    }
+    private let borderWidth: CGFloat = 2
     
     private var isValidSquare: Bool {
         return index == 0 || index == 1 || index == 2

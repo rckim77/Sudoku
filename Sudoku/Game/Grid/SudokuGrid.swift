@@ -18,16 +18,14 @@ struct SudokuGrid: View {
     /// This width value determines how much space there is padded on the sides of
     /// the sudoku grid. The grid will resize and scale accordingly.
     static var spacerWidth: CGFloat {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return 160
-        } else {
+        if UIDevice.current.userInterfaceIdiom == .phone {
             return 8
+        } else {
+            return 160
         }
     }
     
-    private var borderWidth: CGFloat {
-        screenHeight > 667 ? 3 : 2
-    }
+    private let borderWidth: CGFloat = 2
     private let squareRowRanges = [(0...2), (3...5), (6...8)]
 
     var body: some View {

@@ -18,9 +18,7 @@ struct StaticGridView: View {
     let grid: [CoordinateValue]
     
     private let squareRowRanges = [(0...2), (3...5), (6...8)]
-    private var borderWidth: CGFloat {
-        screenHeight > 667 ? 3 : 2
-    }
+    private let borderWidth: CGFloat = 2
 
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {

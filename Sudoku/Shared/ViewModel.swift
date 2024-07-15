@@ -12,7 +12,6 @@ protocol ViewModel {
     var isIpad: Bool { get }
     var isVision: Bool { get }
     var isLargestIpad: Bool { get }
-    var screenHeight: CGFloat { get }
     var screenWidth: CGFloat { get }
 }
 
@@ -32,10 +31,6 @@ extension ViewModel {
         }
 
         return isIpad && screenWidth > 1023
-    }
-
-    var screenHeight: CGFloat {
-        UIScreen.main.bounds.height
     }
 
     var screenWidth: CGFloat {

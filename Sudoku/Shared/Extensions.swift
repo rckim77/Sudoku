@@ -22,10 +22,6 @@ extension View {
         isIpad && screenWidth > 1023
     }
 
-    var screenHeight: CGFloat {
-        UIScreen.main.bounds.height
-    }
-
     var screenWidth: CGFloat {
         UIScreen.main.bounds.width
     }

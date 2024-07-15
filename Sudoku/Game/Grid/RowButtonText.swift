@@ -30,8 +30,9 @@ struct RowButtonText: View {
     }
 }
 
-struct RowButtonText_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    VStack {
         RowButtonText(text: "1", foregroundColor: .black)
+        RowButtonText(text: "", foregroundColor: .black)
     }
 }
