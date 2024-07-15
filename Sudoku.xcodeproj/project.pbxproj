@@ -35,6 +35,7 @@
 		EC2148A92B366588005D5610 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2148A82B366588005D5610 /* API.swift */; };
 		EC2148AB2B3665A2005D5610 /* ChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2148AA2B3665A2005D5610 /* ChatResponse.swift */; };
 		EC2148AD2B366A3E005D5610 /* HintButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2148AC2B366A3E005D5610 /* HintButton.swift */; };
+		EC26D1372C44ABDB0088616C /* WindowSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC26D1362C44ABDB0088616C /* WindowSize.swift */; };
 		EC7D0FAE2BBB98BF0035FB6D /* RowViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D0FAD2BBB98BF0035FB6D /* RowViewModelTests.swift */; };
 		EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435DB24A58F4400D311FF /* ViewModel.swift */; };
 		EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E124A9A53A00D311FF /* CoordinateColor.swift */; };
@@ -99,6 +100,7 @@
 		EC2148A82B366588005D5610 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		EC2148AA2B3665A2005D5610 /* ChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponse.swift; sourceTree = "<group>"; };
 		EC2148AC2B366A3E005D5610 /* HintButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintButton.swift; sourceTree = "<group>"; };
+		EC26D1362C44ABDB0088616C /* WindowSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSize.swift; sourceTree = "<group>"; };
 		EC7D0FAB2BBB98BE0035FB6D /* SudokuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7D0FAD2BBB98BF0035FB6D /* RowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModelTests.swift; sourceTree = "<group>"; };
 		EC8435DB24A58F4400D311FF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				EC8435F324AE5F0800D311FF /* AlertItem.swift */,
 				EC2148AA2B3665A2005D5610 /* ChatResponse.swift */,
 				ECC299BB2C35FECC004F5A1B /* SavedGameState.swift */,
+				EC26D1362C44ABDB0088616C /* WindowSize.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				94600FC22499C73200E605FD /* Difficulty.swift in Sources */,
 				94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */,
 				ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */,
+				EC26D1372C44ABDB0088616C /* WindowSize.swift in Sources */,
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,
 				EC8435E424AA9B8300D311FF /* EditCellGridText.swift in Sources */,
 				EC8638C72BA12CE800CDC5E4 /* StaticGridView.swift in Sources */,

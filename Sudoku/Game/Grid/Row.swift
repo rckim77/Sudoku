@@ -74,10 +74,13 @@ struct Row: View {
 }
 
 #Preview {
-    Row(selectedCell: SelectedCell(),
-        userAction: UserAction(),
-        workingGrid: GridValues(startingGrid: GridFactory.easyGrid),
-        viewModel: RowViewModel(index: 0,
-                                squareIndex: 0,
-                                guesses: []))
+    GeometryReader { geometry in
+        Row(selectedCell: SelectedCell(),
+            userAction: UserAction(),
+            workingGrid: GridValues(startingGrid: GridFactory.easyGrid),
+            viewModel: RowViewModel(index: 2,
+                                    squareIndex: 0,
+                                    guesses: []))
+        .environment(WindowSize(size: geometry.size))
+    }
 }

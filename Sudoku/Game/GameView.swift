@@ -148,5 +148,8 @@ struct GameView: View {
 }
 
 #Preview {
-    GameView(workingGrid: GridValues(startingGrid: GridFactory.easyGrid), isPlayingSavedGame: false, viewModel: GameViewModel(difficulty: .easy))
+    GeometryReader { geometry in
+        GameView(workingGrid: GridValues(startingGrid: GridFactory.easyGrid), isPlayingSavedGame: false, viewModel: GameViewModel(difficulty: .easy))
+            .environment(WindowSize(size: geometry.size))
+    }
 }

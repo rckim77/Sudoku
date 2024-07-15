@@ -11,9 +11,13 @@ import SwiftData
 
 @main
 struct SudokuApp: App {
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GeometryReader { geometry in
+                ContentView()
+                    .environment(WindowSize(size: geometry.size))
+            }
         }
         .modelContainer(for: SavedGameState.self)
     }

@@ -10,6 +10,8 @@ import SwiftUI
 
 struct RowButtonText: View {
     
+    @Environment(WindowSize.self) var windowSize
+    
     let text: String
     let foregroundColor: Color
 
@@ -19,7 +21,7 @@ struct RowButtonText: View {
     }
 
     private var buttonMinHeight: CGFloat {
-        (screenWidth - (2 * SudokuGrid.spacerWidth)) / 9
+        (windowSize.size.width - (2 * SudokuGrid.spacerWidth)) / 9
     }
 
     var body: some View {
@@ -31,8 +33,12 @@ struct RowButtonText: View {
 }
 
 #Preview {
-    VStack {
-        RowButtonText(text: "1", foregroundColor: .black)
-        RowButtonText(text: "", foregroundColor: .black)
+    GeometryReader { geometry in
+        VStack {
+            RowButtonText(text: "1", foregroundColor: .black)
+                .environment(WindowSize(size: geometry.size))
+            RowButtonText(text: "", foregroundColor: .black)
+                .environment(WindowSize(size: geometry.size))
+        }
     }
 }

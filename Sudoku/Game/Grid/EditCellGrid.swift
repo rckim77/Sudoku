@@ -9,11 +9,13 @@
 import SwiftUI
 
 struct EditCellGrid: View {
+    
+    @Environment(WindowSize.self) private var windowSize
 
     let values: Set<Int>
 
     private var minHeight: CGFloat {
-        (screenWidth - (2 * SudokuGrid.spacerWidth)) / 9
+        (windowSize.size.width - (2 * SudokuGrid.spacerWidth)) / 9
     }
 
     private var verticalSpacing: CGFloat {
@@ -50,8 +52,9 @@ struct EditCellGrid: View {
     }
 }
 
-struct EditCellGrid_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    GeometryReader { geometry in
         EditCellGrid(values: Set(arrayLiteral: 1, 2, 3, 4, 7, 8, 9))
+            .environment(WindowSize(size: geometry.size))
     }
 }

@@ -54,8 +54,11 @@ struct SudokuGrid: View {
 }
 
 #Preview {
-    SudokuGrid(selectedCell: SelectedCell(),
-               userAction: UserAction(),
-               editGrid: [],
-               workingGrid: GridValues.init(startingGrid: GridFactory.easyGrid))
+    GeometryReader { geometry in
+        SudokuGrid(selectedCell: SelectedCell(),
+                   userAction: UserAction(),
+                   editGrid: [],
+                   workingGrid: GridValues.init(startingGrid: GridFactory.easyGrid))
+        .environment(WindowSize(size: geometry.size))
+    }
 }
