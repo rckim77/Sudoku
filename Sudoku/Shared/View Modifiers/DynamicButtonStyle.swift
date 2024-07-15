@@ -15,23 +15,15 @@ struct DynamicButtonStyle: ViewModifier {
     let isImage: Bool
 
     var buttonVerticalPadding: CGFloat {
-        if isLargestIpad {
+        if isIpad {
             return isImage ? 20.5 : 24
-        } else if isIpad {
-            return isImage ? 16.5 : 20
         } else {
             return 10
         }
     }
 
     var buttonHorizontalPadding: CGFloat {
-        if isLargestIpad {
-            return 38
-        } else if isIpad {
-            return 32
-        } else {
-            return 16
-        }
+        isIpad ? 38 : 16
     }
     
     func body(content: Content) -> some View {

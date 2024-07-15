@@ -16,29 +16,11 @@ extension View {
     var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
-
-    /// E.g., 12.9-inch iPads
-    var isLargestIpad: Bool {
-        isIpad && screenWidth > 1023
-    }
-
-    var screenWidth: CGFloat {
-        UIScreen.main.bounds.width
-    }
 }
 
 extension ViewModifier {
     var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
-    }
-    
-    var screenWidth: CGFloat {
-        UIScreen.main.bounds.width
-    }
-
-    /// E.g., 12.9-inch iPads
-    var isLargestIpad: Bool {
-        isIpad && screenWidth > 1023
     }
 }
 
