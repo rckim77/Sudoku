@@ -12,10 +12,6 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         ModifiedContent(content: self, modifier: CornerRadiusStyle(radius: radius, corners: corners))
     }
-    
-    var isIphone: Bool {
-        UIDevice.current.userInterfaceIdiom == .phone
-    }
 
     var isIpad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
