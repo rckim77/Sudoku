@@ -36,6 +36,7 @@
 		EC2148AB2B3665A2005D5610 /* ChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2148AA2B3665A2005D5610 /* ChatResponse.swift */; };
 		EC2148AD2B366A3E005D5610 /* HintButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2148AC2B366A3E005D5610 /* HintButton.swift */; };
 		EC26D1372C44ABDB0088616C /* WindowSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC26D1362C44ABDB0088616C /* WindowSize.swift */; };
+		EC720F942C45FB18004F27A2 /* AnyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC720F932C45FB18004F27A2 /* AnyShape.swift */; };
 		EC7D0FAE2BBB98BF0035FB6D /* RowViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D0FAD2BBB98BF0035FB6D /* RowViewModelTests.swift */; };
 		EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435DB24A58F4400D311FF /* ViewModel.swift */; };
 		EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8435E124A9A53A00D311FF /* CoordinateColor.swift */; };
@@ -101,6 +102,7 @@
 		EC2148AA2B3665A2005D5610 /* ChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatResponse.swift; sourceTree = "<group>"; };
 		EC2148AC2B366A3E005D5610 /* HintButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintButton.swift; sourceTree = "<group>"; };
 		EC26D1362C44ABDB0088616C /* WindowSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSize.swift; sourceTree = "<group>"; };
+		EC720F932C45FB18004F27A2 /* AnyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyShape.swift; sourceTree = "<group>"; };
 		EC7D0FAB2BBB98BE0035FB6D /* SudokuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7D0FAD2BBB98BF0035FB6D /* RowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModelTests.swift; sourceTree = "<group>"; };
 		EC8435DB24A58F4400D311FF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				94E1089824874AFB0091D043 /* Extensions.swift */,
 				EC8435DB24A58F4400D311FF /* ViewModel.swift */,
+				EC720F932C45FB18004F27A2 /* AnyShape.swift */,
 				EC8435F024AE517C00D311FF /* View Modifiers */,
 			);
 			path = Shared;
@@ -414,6 +417,7 @@
 				EC8435E224A9A53A00D311FF /* CoordinateColor.swift in Sources */,
 				EC8435E824ABEBD300D311FF /* SettingsView.swift in Sources */,
 				EC8435EC24AD913A00D311FF /* NewGameButton.swift in Sources */,
+				EC720F942C45FB18004F27A2 /* AnyShape.swift in Sources */,
 				EC2148AD2B366A3E005D5610 /* HintButton.swift in Sources */,
 				94600FB224973BD600E605FD /* EditCellGrid.swift in Sources */,
 				EC8435DC24A58F4400D311FF /* ViewModel.swift in Sources */,

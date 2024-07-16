@@ -24,3 +24,7 @@ struct GameLevelNavigationLink: View {
         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
     }
 }
+
+#Preview {
+    GameLevelNavigationLink(level: .easy)
+}

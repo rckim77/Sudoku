@@ -13,7 +13,7 @@ struct KeysRowButtonText: View {
     let text: String
 
     private var textHeight: CGFloat {
-        isIpad ? 72 : 48
+        isIphone ? 48 : 72
     }
     private var textFont: Font {
         let textStyle: Font.TextStyle = isIpad ? .largeTitle : .title
@@ -25,7 +25,6 @@ struct KeysRowButtonText: View {
             .foregroundColor(.black)
             .font(textFont)
             .frame(maxWidth: .infinity, minHeight: textHeight)
-            .background(Color("dynamicGray"))
     }
 }
 

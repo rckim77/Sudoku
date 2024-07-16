@@ -65,5 +65,8 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    GeometryReader { geometry in
+        ContentView()
+            .environment(WindowSize(size: geometry.size))
+    }
 }

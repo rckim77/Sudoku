@@ -25,13 +25,13 @@ struct DynamicButtonStyle: ViewModifier {
     var buttonHorizontalPadding: CGFloat {
         isIpad ? 38 : 16
     }
-    
+
     func body(content: Content) -> some View {
         if isVision {
             content
                 .foregroundColor(textColor)
-                .padding(.vertical, buttonVerticalPadding)
-                .padding(.horizontal, buttonHorizontalPadding)
+                .background(backgroundColor)
+                .clipShape(Capsule())
         } else {
             content
                 .foregroundColor(textColor)

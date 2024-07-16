@@ -39,3 +39,7 @@ struct ClearButton: View {
         .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
     }
 }
+
+#Preview {
+    ClearButton(selectedCoordinate: nil, editGrid: EditGridValues(grid: []), editState: EditState(isEditing: false), userAction: UserAction(), workingGrid: GridValues(startingGrid: GridFactory.easyGrid))
+}

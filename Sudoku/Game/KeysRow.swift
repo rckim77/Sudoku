@@ -37,12 +37,22 @@ struct KeysRow: View {
                     }) {
                         KeysRowButtonText(text: "\(digit)")
                     }
-                    .cornerRadius(self.buttonCornerRadius)
+                    .buttonStyle(.plain)
+                    .background(Color("dynamicGray"))
+                    .clipShape(clipShape)
                 }
             }
             .frame(maxWidth: .infinity)
             Spacer()
                 .frame(width: horizontalSpacing)
+        }
+    }
+    
+    private var clipShape: AnyShape {
+        if isVision {
+            AnyShape(Capsule())
+        } else {
+            AnyShape(RoundedRectangle(cornerRadius: buttonCornerRadius))
         }
     }
 
