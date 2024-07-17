@@ -29,26 +29,39 @@ struct SudokuGrid: View {
     private let squareRowRanges = [(0...2), (3...5), (6...8)]
 
     var body: some View {
-        HStack(spacing: 0) {
-            Spacer()
-                .frame(width: SudokuGrid.spacerWidth)
-            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-                ForEach(squareRowRanges, id: \.self) { squareRowRange in
-                    GridRow {
-                        ForEach(squareRowRange, id: \.self) { squareIndex in
-                            Square(index: squareIndex,
-                                   editGridSlice: self.editGrid.filter { $0.s == squareIndex },
-                                   selectedCell: selectedCell,
-                                   userAction: userAction,
-                                   workingGrid: workingGrid)
+        GeometryReader { geometry in
+            HStack(spacing: 0) {
+                Spacer()
+                    .frame(width: getSpacerWidth(screenSize: geometry.size))
+                Grid(horizontalSpacing: 0, verticalSpacing: 0) {
+                    ForEach(squareRowRanges, id: \.self) { squareRowRange in
+                        GridRow {
+                            ForEach(squareRowRange, id: \.self) { squareIndex in
+                                Square(index: squareIndex,
+                                       editGridSlice: self.editGrid.filter { $0.s == squareIndex },
+                                       selectedCell: selectedCell,
+                                       userAction: userAction,
+                                       workingGrid: workingGrid)
+                            }
                         }
                     }
                 }
+                .padding(borderWidth)
+                .border(Color.black, width: borderWidth)
+                Spacer()
+                    .frame(width: getSpacerWidth(screenSize: geometry.size))
             }
-            .padding(borderWidth)
-            .border(Color.black, width: borderWidth)
-            Spacer()
-                .frame(width: SudokuGrid.spacerWidth)
+        }
+    }
+    
+    private func getSpacerWidth(screenSize: CGSize) -> CGFloat {
+        if isIphone {
+            return 8
+        } else if isVision {
+            // maintain square aspect ratio
+            return (screenSize.width - screenSize.height) / 2
+        } else {
+            return 160
         }
     }
 }

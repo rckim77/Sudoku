@@ -31,7 +31,7 @@ struct GameView: View {
                 .edgesIgnoringSafeArea(.all)
             GeometryReader { geometry in
                 VStack(spacing: viewModel.verticalSpacing) {
-                    if isIpad {
+                    if !isIphone {
                         Spacer()
                     }
                     SudokuGrid(selectedCell: selectedCell,
@@ -121,6 +121,7 @@ struct GameView: View {
                 }
             }
         }
+        .clipShape(RoundedRectangle(cornerRadius: viewModel.backgroundCornerRadius))
         .navigationBarBackButtonHidden(true)
         .onDisappear() {
             if !isPlayingSavedGame {

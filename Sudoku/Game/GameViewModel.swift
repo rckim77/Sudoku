@@ -13,6 +13,9 @@ struct GameViewModel: ViewModel {
     let difficulty: Difficulty.Level
 
     var verticalSpacing: CGFloat = 24
+    var backgroundCornerRadius: CGFloat {
+        isVision ? 32 : 0
+    }
 
     let actionButtonsHorizontalSpacing: CGFloat = 12
     
