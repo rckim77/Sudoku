@@ -17,7 +17,7 @@ struct ClearButton: View {
     var workingGrid: GridValues
 
     var body: some View {
-        Button(action: {
+        Button("Clear", systemImage: "eraser") {
             self.userAction.action = .clear
 
             guard let selectedCoordinate = self.selectedCoordinate,
@@ -32,14 +32,7 @@ struct ClearButton: View {
             if !self.editState.isEditing {
                 self.workingGrid.removeValue(at: selectedCoordinate)
             }
-        }) {
-            Text("Clear")
-                .font(.system(.headline, design: .rounded))
         }
-        .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
+        .tint(.primary)
     }
-}
-
-#Preview {
-    ClearButton(selectedCoordinate: nil, editGrid: EditGridValues(grid: []), editState: EditState(isEditing: false), userAction: UserAction(), workingGrid: GridValues(startingGrid: GridFactory.easyGrid))
 }

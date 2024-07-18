@@ -23,12 +23,10 @@ struct EditButton: View {
     }
 
     var body: some View {
-        Button(action: {
+        Button("Edit", systemImage: editState.isEditing ? "square.and.pencil.circle.fill" : "square.and.pencil.circle") {
             self.editState.isEditing.toggle()
-        }) {
-            Image(systemName: imageName)
-                .font(.system(size: imageSize, weight: .regular))
         }
-        .dynamicButtonImageStyle(textColor: .black, backgroundColor: backgroundColor)
+        .contentTransition(.symbolEffect(.replace))
+        .tint(.primary)
     }
 }

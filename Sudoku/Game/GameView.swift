@@ -21,6 +21,7 @@ struct GameView: View {
     @State private var alertItem: AlertItem?
     @State private var alertIsPresented: Bool = false
     @State private var hintButtonIsLoading: Bool = false
+    @State private var saveButtonAnimate: Bool = false
     
     let isPlayingSavedGame: Bool
     let viewModel: GameViewModel
@@ -31,9 +32,7 @@ struct GameView: View {
                 .edgesIgnoringSafeArea(.all)
             GeometryReader { geometry in
                 VStack(spacing: viewModel.verticalSpacing) {
-                    if !isIphone {
-                        Spacer()
-                    }
+                    Spacer()
                     SudokuGrid(selectedCell: selectedCell,
                                userAction: userAction,
                                editGrid: editGrid.grid,
@@ -41,21 +40,6 @@ struct GameView: View {
                     Spacer()
                         .frame(maxWidth: .infinity,
                                maxHeight: viewModel.getSpacerMaxHeight(geometry.size.height))
-                    HStack(spacing: viewModel.actionButtonsHorizontalSpacing) {
-                        ClearButton(selectedCoordinate: selectedCell.coordinate,
-                                    editGrid: editGrid,
-                                    editState: editState,
-                                    userAction: userAction,
-                                    workingGrid: workingGrid)
-                        EditButton(editState: editState)
-                        Button(action: {
-                            save()
-                        }) {
-                            Text("Save")
-                                .font(.system(.headline, design: .rounded))
-                        }
-                        .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
-                    }
                     KeysRow(editGrid: editGrid,
                             userAction: userAction,
                             workingGrid: workingGrid,
@@ -63,34 +47,60 @@ struct GameView: View {
                             alertIsPresented: $alertIsPresented,
                             selectedCoordinate: selectedCell.coordinate,
                             isEditing: editState.isEditing)
-                    HStack(spacing: viewModel.actionButtonsHorizontalSpacing, content: {
-                        HintButton(isLoading: $hintButtonIsLoading) {
-                            Task {
-                                do {
-                                    hintButtonIsLoading = true
-                                    if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
-                                        alertItem = .hintSuccess(hint: hintMessage)
-                                        alertIsPresented = true
-                                    } else {
+                    Spacer()
+                        .frame(maxHeight: viewModel.verticalSpacing)
+                    NewGameButton(alert: $alertItem,
+                                  alertIsPresented: $alertIsPresented,
+                                  editGrid: editGrid.grid,
+                                  startingGrid: workingGrid.startingGrid,
+                                  workingGrid: workingGrid.grid)
+                    Spacer()
+                        .frame(maxHeight: viewModel.bottomVerticalSpacing)
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: viewModel.toolbarItemPlacement) {
+                        if !isVision {
+                            Spacer()
+                        }
+                        HStack(spacing: viewModel.toolbarItemHorizontalSpacing) {
+                            ClearButton(selectedCoordinate: selectedCell.coordinate,
+                                        editGrid: editGrid,
+                                        editState: editState,
+                                        userAction: userAction,
+                                        workingGrid: workingGrid)
+                            EditButton(editState: editState)
+                            HintButton(isLoading: $hintButtonIsLoading) {
+                                Task {
+                                    do {
+                                        hintButtonIsLoading = true
+                                        if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
+                                            alertItem = .hintSuccess(hint: hintMessage)
+                                            alertIsPresented = true
+                                        } else {
+                                            alertItem = .hintError
+                                            alertIsPresented = true
+                                        }
+                                        hintButtonIsLoading = false
+                                    } catch {
+                                        hintButtonIsLoading = false
                                         alertItem = .hintError
                                         alertIsPresented = true
                                     }
-                                    hintButtonIsLoading = false
-                                } catch {
-                                    hintButtonIsLoading = false
-                                    alertItem = .hintError
-                                    alertIsPresented = true
                                 }
                             }
+                            .disabled(hintButtonIsLoading)
+                            Button("Save", systemImage: "square.and.arrow.down") {
+                                save()
+                                saveButtonAnimate.toggle()
+                            }
+                            .symbolEffect(.bounce.down.byLayer, value: saveButtonAnimate)
+                            .tint(.primary)
                         }
-                        .disabled(hintButtonIsLoading)
-                        NewGameButton(alert: $alertItem,
-                                      alertIsPresented: $alertIsPresented,
-                                      editGrid: editGrid.grid,
-                                      startingGrid: workingGrid.startingGrid,
-                                      workingGrid: workingGrid.grid)
-                    })
-                    Spacer()
+                        .padding(.bottom, viewModel.toolbarBottomPadding)
+                        if !isVision {
+                            Spacer()
+                        }
+                    }
                 }
                 .alert(alertItem?.title ?? "Alert",
                        isPresented: $alertIsPresented,
@@ -121,7 +131,6 @@ struct GameView: View {
                 }
             }
         }
-        .clipShape(RoundedRectangle(cornerRadius: viewModel.backgroundCornerRadius))
         .navigationBarBackButtonHidden(true)
         .onDisappear() {
             if !isPlayingSavedGame {

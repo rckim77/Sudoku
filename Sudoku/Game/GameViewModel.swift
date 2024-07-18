@@ -12,12 +12,31 @@ struct GameViewModel: ViewModel {
     
     let difficulty: Difficulty.Level
 
-    var verticalSpacing: CGFloat = 24
-    var backgroundCornerRadius: CGFloat {
-        isVision ? 32 : 0
+    let bottomVerticalSpacing: CGFloat = 32
+
+    var verticalSpacing: CGFloat {
+        isVision ? 8 : 16
     }
 
-    let actionButtonsHorizontalSpacing: CGFloat = 12
+    var toolbarItemPlacement: ToolbarItemPlacement {
+        #if os(visionOS)
+        return .bottomOrnament
+        #else
+        return .bottomBar
+        #endif
+    }
+    
+    let toolbarItemHorizontalSpacing: CGFloat = 24
+    
+    var toolbarBottomPadding: CGFloat {
+        if isIpad {
+            return 32
+        } else if isVision {
+            return 0
+        } else {
+            return 16
+        }
+    }
     
     func getHint(grid: [CoordinateValue]) async throws -> String? {
         do {
@@ -32,6 +51,13 @@ struct GameViewModel: ViewModel {
     
     func getSpacerMaxHeight(_ geometryHeight: CGFloat) -> CGFloat {
         let verticalThreshold: CGFloat = 900
-        return geometryHeight > verticalThreshold ? 60 : 28
+
+        if isVision {
+            return 8
+        } else if geometryHeight > verticalThreshold {
+            return 60
+        } else {
+            return 16
+        }
     }
 }
