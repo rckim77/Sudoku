@@ -30,19 +30,14 @@ struct SudokuGrid: View {
 
     var body: some View {
         GeometryReader { geometry in
-            HStack(spacing: 0) {
-                Spacer()
-                    .frame(width: getSpacerWidth(screenSize: geometry.size))
-                GridContainerView { squareIndex in
-                    Square(index: squareIndex,
-                           editGridSlice: self.editGrid.filter { $0.s == squareIndex },
-                           selectedCell: selectedCell,
-                           userAction: userAction,
-                           workingGrid: workingGrid)
-                }
-                Spacer()
-                    .frame(width: getSpacerWidth(screenSize: geometry.size))
+            GridContainerView { squareIndex in
+                Square(index: squareIndex,
+                       editGridSlice: self.editGrid.filter { $0.s == squareIndex },
+                       selectedCell: selectedCell,
+                       userAction: userAction,
+                       workingGrid: workingGrid)
             }
+            .padding(.horizontal, getSpacerWidth(screenSize: geometry.size))
         }
     }
     
@@ -51,7 +46,7 @@ struct SudokuGrid: View {
             return 8
         } else if isVision {
             // maintain square aspect ratio
-            return (screenSize.width - screenSize.height) / 2
+            return abs(screenSize.width - screenSize.height) / 2
         } else {
             return 160
         }

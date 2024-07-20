@@ -14,6 +14,7 @@ struct RowButtonText: View {
     
     let text: String
     let foregroundColor: Color
+    let isStatic: Bool
 
     private var buttonTextFont: Font {
         let textStyle: Font.TextStyle = isIpad ? .largeTitle : .title
@@ -21,7 +22,8 @@ struct RowButtonText: View {
     }
 
     private var buttonMinHeight: CGFloat {
-        (windowSize.size.width - (2 * SudokuGrid.spacerWidth)) / 9
+        let spacerWidth = isStatic ? StaticGridView.spacerWidth : SudokuGrid.spacerWidth
+        return (windowSize.size.width - (2 * spacerWidth)) / 9
     }
 
     var body: some View {
@@ -35,9 +37,9 @@ struct RowButtonText: View {
 #Preview {
     GeometryReader { geometry in
         VStack {
-            RowButtonText(text: "1", foregroundColor: .black)
+            RowButtonText(text: "1", foregroundColor: .black, isStatic: true)
                 .environment(WindowSize(size: geometry.size))
-            RowButtonText(text: "", foregroundColor: .black)
+            RowButtonText(text: "", foregroundColor: .black, isStatic: true)
                 .environment(WindowSize(size: geometry.size))
         }
     }

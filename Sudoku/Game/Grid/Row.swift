@@ -66,9 +66,9 @@ struct Row: View {
             let text = setRowButtonText(columnIndex: columnIndex)
             if let coordinateValue = workingGrid.getCoordinateValue(at: coordinate, grid: workingGrid.grid) {
                 let foregroundColor = workingGrid.foregroundColorFor(coordinateValue) ?? .black
-                return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor))
+                return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor, isStatic: false))
             } else {
-                return AnyView(RowButtonText(text: text, foregroundColor: .black))
+                return AnyView(RowButtonText(text: text, foregroundColor: .black, isStatic: false))
             }
         }
     }
