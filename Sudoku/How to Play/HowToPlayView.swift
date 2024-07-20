@@ -11,10 +11,16 @@ import SwiftUI
 struct HowToPlayView: View {
     
     private var horizontalPadding: CGFloat {
-        return isIpad ? 140 : 4
+        isIphone ? 4 : 140
     }
     private var horizontalTextPadding: CGFloat {
-        return isIpad ? 0 : 12
+        if isVision {
+            return 60
+        } else if isIpad {
+            return 0
+        } else {
+            return 12
+        }
     }
 
     var body: some View {
@@ -50,5 +56,8 @@ struct HowToPlayView: View {
 }
 
 #Preview {
-    HowToPlayView()
+    GeometryReader { geometry in
+        HowToPlayView()
+            .environment(WindowSize(size: geometry.size))
+    }
 }

@@ -33,21 +33,13 @@ struct SudokuGrid: View {
             HStack(spacing: 0) {
                 Spacer()
                     .frame(width: getSpacerWidth(screenSize: geometry.size))
-                Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-                    ForEach(squareRowRanges, id: \.self) { squareRowRange in
-                        GridRow {
-                            ForEach(squareRowRange, id: \.self) { squareIndex in
-                                Square(index: squareIndex,
-                                       editGridSlice: self.editGrid.filter { $0.s == squareIndex },
-                                       selectedCell: selectedCell,
-                                       userAction: userAction,
-                                       workingGrid: workingGrid)
-                            }
-                        }
-                    }
+                GridContainerView { squareIndex in
+                    Square(index: squareIndex,
+                           editGridSlice: self.editGrid.filter { $0.s == squareIndex },
+                           selectedCell: selectedCell,
+                           userAction: userAction,
+                           workingGrid: workingGrid)
                 }
-                .padding(borderWidth)
-                .border(Color.black, width: borderWidth)
                 Spacer()
                     .frame(width: getSpacerWidth(screenSize: geometry.size))
             }

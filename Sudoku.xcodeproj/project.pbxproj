@@ -53,6 +53,7 @@
 		EC8638C72BA12CE800CDC5E4 /* StaticGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638C62BA12CE800CDC5E4 /* StaticGridView.swift */; };
 		EC8638CA2BA1311700CDC5E4 /* StaticSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638C92BA1311700CDC5E4 /* StaticSquareView.swift */; };
 		EC8638CC2BA1326F00CDC5E4 /* StaticRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638CB2BA1326F00CDC5E4 /* StaticRowView.swift */; };
+		ECB10FBA2C4BFF220005146D /* GridContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB10FB92C4BFF220005146D /* GridContainerView.swift */; };
 		ECC299BC2C35FECC004F5A1B /* SavedGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC299BB2C35FECC004F5A1B /* SavedGameState.swift */; };
 		ECC299C42C41D059004F5A1B /* GameLevelNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC299C32C41D059004F5A1B /* GameLevelNavigationLink.swift */; };
 		ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC830A324A41BC30075CE0E /* RowViewModel.swift */; };
@@ -120,6 +121,7 @@
 		EC8638C62BA12CE800CDC5E4 /* StaticGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticGridView.swift; sourceTree = "<group>"; };
 		EC8638C92BA1311700CDC5E4 /* StaticSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSquareView.swift; sourceTree = "<group>"; };
 		EC8638CB2BA1326F00CDC5E4 /* StaticRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticRowView.swift; sourceTree = "<group>"; };
+		ECB10FB92C4BFF220005146D /* GridContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridContainerView.swift; sourceTree = "<group>"; };
 		ECC299BB2C35FECC004F5A1B /* SavedGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedGameState.swift; sourceTree = "<group>"; };
 		ECC299C32C41D059004F5A1B /* GameLevelNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelNavigationLink.swift; sourceTree = "<group>"; };
 		ECC830A324A41BC30075CE0E /* RowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewModel.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				9467743A2487579300F636D4 /* SudokuGrid.swift */,
+				ECB10FB92C4BFF220005146D /* GridContainerView.swift */,
 				946774382487572700F636D4 /* Square.swift */,
 				EC8435F724AE728700D311FF /* SquareViewModel.swift */,
 				94677436248756CA00F636D4 /* Row.swift */,
@@ -409,6 +412,7 @@
 				EC8638C52BA1222400CDC5E4 /* HowToPlayView.swift in Sources */,
 				ECC299C42C41D059004F5A1B /* GameLevelNavigationLink.swift in Sources */,
 				ECC830A624A5567C0075CE0E /* GameViewModel.swift in Sources */,
+				ECB10FBA2C4BFF220005146D /* GridContainerView.swift in Sources */,
 				EC8435F424AE5F0800D311FF /* AlertItem.swift in Sources */,
 				94600FC02499C4A700E605FD /* ClearButton.swift in Sources */,
 				94600FB424973ECC00E605FD /* CoordinateEditValues.swift in Sources */,
