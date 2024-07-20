@@ -33,9 +33,3 @@ struct GridContainerView<Content: View>: View {
         .border(.black, width: borderWidth)
     }
 }
-
-#Preview {
-    GridContainerView { squareIndex in
-        Text("\(squareIndex)")
-    }
-}

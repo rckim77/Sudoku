@@ -23,23 +23,32 @@ struct StaticSquareView: View {
     var body: some View {
         Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             ForEach(0..<3) { rowIndex in
-                if rowIndex == 0 && isValidSquare && highlightSection == .row {
-                    StaticRowView(rowIndex: rowIndex, squareIndex: index, highlightSection: highlightSection, grid: grid)
-                        .background(.yellow)
-                } else {
-                    StaticRowView(rowIndex: rowIndex, squareIndex: index, highlightSection: highlightSection, grid: grid)
-                }
+                StaticRowView(rowIndex: rowIndex, squareIndex: index, highlightSection: highlightSection, grid: grid)
+                    .background(getBackgroundColor(rowIndex: rowIndex, isValidSquare: isValidSquare, highlightSection: highlightSection))
             }
         }
         .border(.black, width: borderWidth)
     }
+    
+    private func getBackgroundColor(rowIndex: Int, isValidSquare: Bool, highlightSection: HighlightSection) -> Color {
+        if rowIndex == 0 && isValidSquare && highlightSection == .row {
+            return .yellow
+        } else {
+            return .clear
+        }
+    }
 }
 
 #Preview {
-    VStack {
-        StaticSquareView(index: 0, highlightSection: .square, grid: GridFactory.easyGrid)
-        StaticSquareView(index: 1, highlightSection: .row, grid: GridFactory.easyGrid)
-        StaticSquareView(index: 2, highlightSection: .column, grid: GridFactory.easyGrid)
+    GeometryReader { geometry in
+        VStack {
+            StaticSquareView(index: 0, highlightSection: .square, grid: GridFactory.easyGrid)
+                .environment(WindowSize(size: geometry.size))
+            StaticSquareView(index: 1, highlightSection: .row, grid: GridFactory.easyGrid)
+                .environment(WindowSize(size: geometry.size))
+            StaticSquareView(index: 2, highlightSection: .column, grid: GridFactory.easyGrid)
+                .environment(WindowSize(size: geometry.size))
+        }
+        .padding(.horizontal, 132)
     }
-    .padding(.horizontal, 132)
 }
