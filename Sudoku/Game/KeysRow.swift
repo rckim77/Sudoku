@@ -23,7 +23,13 @@ struct KeysRow: View {
 
     private let buttonCornerRadius: CGFloat = 5
     private var horizontalSpacing: CGFloat {
-        isIpad ? 80 : 8
+        if isVision {
+            return 32
+        } else if isIpad {
+            return 80
+        } else {
+            return 8
+        }
     }
 
     var body: some View {
@@ -37,12 +43,22 @@ struct KeysRow: View {
                     }) {
                         KeysRowButtonText(text: "\(digit)")
                     }
-                    .cornerRadius(self.buttonCornerRadius)
+                    .buttonStyle(.plain)
+                    .background(Color("dynamicGray"))
+                    .clipShape(clipShape)
                 }
             }
             .frame(maxWidth: .infinity)
             Spacer()
                 .frame(width: horizontalSpacing)
+        }
+    }
+    
+    private var clipShape: AnyShape {
+        if isVision {
+            AnyShape(Capsule())
+        } else {
+            AnyShape(RoundedRectangle(cornerRadius: buttonCornerRadius))
         }
     }
 

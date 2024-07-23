@@ -33,7 +33,7 @@ enum AlertItem {
     var message: String {
         switch self {
         case .newGame:
-            return "If you go back, you will lose your current progress."
+            return "If you go back without saving, you will lose your current progress."
         case .completedCorrectly:
             return "You've completed the sudoku!"
         case .completedIncorrectly:

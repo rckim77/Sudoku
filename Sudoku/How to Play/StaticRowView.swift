@@ -24,23 +24,27 @@ struct StaticRowView: View {
             ForEach(0..<3) { colIndex in
                 let digit = grid.first(where: { $0.r == rowIndex && $0.c == colIndex && $0.s == squareIndex })?.v ?? -1
                 let digitText = digit == -1 ? " " : "\(digit)"
-                if colIndex == 0 && isValidSquare && highlightSection == .column {
-                    RowButtonText(text: digitText, foregroundColor: .black)
-                        .padding(.horizontal, 6)
-                        .frame(maxWidth: .infinity)
-                        .background(.yellow)
-                        .border(.black, width: 1)
-                } else {
-                    RowButtonText(text: digitText, foregroundColor: .black)
-                        .padding(.horizontal, 6)
-                        .frame(maxWidth: .infinity)
-                        .border(.black, width: 1)
-                }
+                RowButtonText(text: digitText, foregroundColor: .black, isStatic: true)
+                    .padding(.horizontal, 6)
+                    .frame(maxWidth: .infinity)
+                    .background(getBackgroundColor(colIndex: colIndex, isValidSquare: isValidSquare, highlightSection: highlightSection))
+                    .border(.black, width: 1)
             }
+        }
+    }
+    
+    private func getBackgroundColor(colIndex: Int, isValidSquare: Bool, highlightSection: HighlightSection) -> Color {
+        if colIndex == 0 && isValidSquare && highlightSection == .column {
+            return .yellow
+        } else {
+            return .clear
         }
     }
 }
 
 #Preview {
-    StaticRowView(rowIndex: 0, squareIndex: 0, highlightSection: .column, grid: GridFactory.easyGrid)
+    GeometryReader { geometry in
+        StaticRowView(rowIndex: 0, squareIndex: 0, highlightSection: .column, grid: GridFactory.easyGrid)
+            .environment(WindowSize(size: geometry.size))
+    }
 }

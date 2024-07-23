@@ -24,6 +24,7 @@ struct Row: View {
                 }) {
                     self.renderCellText(columnIndex: columnIndex)
                 }
+                .buttonBorderShape(.roundedRectangle(radius: 0)) // keeps UI consistent on visionOS
                 .border(Color.black, width: 1)
                 .background(self.viewModel.backgroundColorFor(columnIndex, selectedCell: self.selectedCell.coordinate))
             }
@@ -65,19 +66,22 @@ struct Row: View {
             let text = setRowButtonText(columnIndex: columnIndex)
             if let coordinateValue = workingGrid.getCoordinateValue(at: coordinate, grid: workingGrid.grid) {
                 let foregroundColor = workingGrid.foregroundColorFor(coordinateValue) ?? .black
-                return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor))
+                return AnyView(RowButtonText(text: text, foregroundColor: foregroundColor, isStatic: false))
             } else {
-                return AnyView(RowButtonText(text: text, foregroundColor: .black))
+                return AnyView(RowButtonText(text: text, foregroundColor: .black, isStatic: false))
             }
         }
     }
 }
 
 #Preview {
-    Row(selectedCell: SelectedCell(),
-        userAction: UserAction(),
-        workingGrid: GridValues(startingGrid: GridFactory.easyGrid),
-        viewModel: RowViewModel(index: 0,
-                                squareIndex: 0,
-                                guesses: []))
+    GeometryReader { geometry in
+        Row(selectedCell: SelectedCell(),
+            userAction: UserAction(),
+            workingGrid: GridValues(startingGrid: GridFactory.easyGrid),
+            viewModel: RowViewModel(index: 2,
+                                    squareIndex: 0,
+                                    guesses: []))
+        .environment(WindowSize(size: geometry.size))
+    }
 }

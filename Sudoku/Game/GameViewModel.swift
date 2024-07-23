@@ -12,37 +12,31 @@ struct GameViewModel: ViewModel {
     
     let difficulty: Difficulty.Level
 
+    let bottomVerticalSpacing: CGFloat = 32
+
     var verticalSpacing: CGFloat {
-        guard !isIpad else {
-            return 60
-        }
-
-        if screenHeight > 736 { // taller than 8 Plus
-            return 46
-        } else if screenHeight > 667 { // 8 Plus
-            return 24
-        } else { // 8, SE (2nd gen)
-            return 18
-        }
+        isVision ? 8 : 16
     }
 
-    var clearButtonHorizontalPadding: CGFloat {
-        if screenHeight > 736 { // taller than 8 Plus
-            return 22
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 14
+    var toolbarItemPlacement: ToolbarItemPlacement {
+        #if os(visionOS)
+        return .bottomOrnament
+        #else
+        return .bottomBar
+        #endif
+    }
+    
+    let toolbarItemHorizontalSpacing: CGFloat = 24
+    
+    var toolbarBottomPadding: CGFloat {
+        if isIpad {
+            return 32
+        } else if isVision {
+            return 0
+        } else {
+            return 16
         }
     }
-
-    var clearButtonVerticalPadding: CGFloat {
-        if screenHeight > 736 { // taller than 8 Plus
-            return 10
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 8
-        }
-    }
-
-    let actionButtonsHorizontalSpacing: CGFloat = 12
     
     func getHint(grid: [CoordinateValue]) async throws -> String? {
         do {
@@ -52,6 +46,18 @@ struct GameViewModel: ViewModel {
             return first.message.content
         } catch {
             return nil
+        }
+    }
+    
+    func getSpacerMaxHeight(_ geometryHeight: CGFloat) -> CGFloat {
+        let verticalThreshold: CGFloat = 900
+
+        if isVision {
+            return 8
+        } else if geometryHeight > verticalThreshold {
+            return 60
+        } else {
+            return 16
         }
     }
 }

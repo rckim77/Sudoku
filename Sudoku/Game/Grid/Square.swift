@@ -34,9 +34,12 @@ struct Square: View {
 }
 
 #Preview {
-    Square(index: 0,
-           editGridSlice: [],
-           selectedCell: SelectedCell(),
-           userAction: UserAction(),
-           workingGrid: GridValues(startingGrid: GridFactory.easyGrid))
+    GeometryReader { geometry in
+        Square(index: 0,
+               editGridSlice: [],
+               selectedCell: SelectedCell(),
+               userAction: UserAction(),
+               workingGrid: GridValues(startingGrid: GridFactory.easyGrid))
+            .environment(WindowSize(size: geometry.size))
+    }
 }

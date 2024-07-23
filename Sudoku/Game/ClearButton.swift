@@ -16,26 +16,8 @@ struct ClearButton: View {
     var userAction: UserAction
     var workingGrid: GridValues
 
-    private var horizontalPadding: CGFloat {
-        guard !isIpad else {
-            return 28
-        }
-        if screenHeight > 736 { // taller than 8 Plus
-            return 22
-        } else { // 8 Plus, 8, SE (2nd gen)
-            return 14
-        }
-    }
-
-    private var verticalPadding: CGFloat {
-        guard !isIpad else {
-            return 20
-        }
-        return 0
-    }
-
     var body: some View {
-        Button(action: {
+        Button("Clear", systemImage: "eraser") {
             self.userAction.action = .clear
 
             guard let selectedCoordinate = self.selectedCoordinate,
@@ -50,10 +32,7 @@ struct ClearButton: View {
             if !self.editState.isEditing {
                 self.workingGrid.removeValue(at: selectedCoordinate)
             }
-        }) {
-            Text("Clear")
-                .font(.system(.headline, design: .rounded))
         }
-        .dynamicButtonStyle(textColor: Color.black, backgroundColor: Color("dynamicGray"))
+        .tint(.primary)
     }
 }

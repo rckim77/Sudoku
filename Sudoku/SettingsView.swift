@@ -10,6 +10,11 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    #if os(visionOS)
+    @State private var animate = false
+    private let text = "Special shoutout to Don for helping me test this app for the Apple Vision Pro 🎉"
+    #endif
+    
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     private let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
 
@@ -28,10 +33,27 @@ struct SettingsView: View {
                 Text("Website")
                     .font(Font.system(.headline, design: .rounded))
             }
+            #if os(visionOS)
+            HStack(spacing: 0) {
+                ForEach(0..<text.count, id: \.self) { index in
+                    Text(String(text[text.index(text.startIndex, offsetBy: index)]))
+                        .font(Font.system(.subheadline, design: .rounded))
+                        .scaleEffect(animate ? 1.5 : 1.0)
+                        .animation(Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true).delay(0.1 * Double(index)), value: animate)
+                }
+            }
+            #endif
             Spacer()
         }
         .fullBackgroundStyle()
         .navigationTitle("Settings")
+        #if os(visionOS)
+        .onAppear {
+            DispatchQueue.main.async {
+                animate = true
+            }
+        }
+        #endif
     }
 }
 

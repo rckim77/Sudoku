@@ -15,18 +15,10 @@ struct HintButton: View {
     var action: () -> Void
     
     var body: some View {
-        Button(action: {
+        Button("Hint", systemImage: "lightbulb.max") {
             action()
-        }) {
-            if isLoading {
-                ProgressView()
-                    .tint(Color.blue)
-            } else {
-                Text("Hint")
-                    .font(.system(.headline, design: .rounded))
-            }
         }
-        .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
-        .animation(.default, value: isLoading)
+        .symbolEffect(.pulse, isActive: isLoading)
+        .tint(.primary)
     }
 }

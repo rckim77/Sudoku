@@ -18,46 +18,47 @@ struct SudokuGrid: View {
     /// This width value determines how much space there is padded on the sides of
     /// the sudoku grid. The grid will resize and scale accordingly.
     static var spacerWidth: CGFloat {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return 160
-        } else {
+        if UIDevice.current.userInterfaceIdiom == .phone {
             return 8
+        } else {
+            return 160
         }
     }
     
-    private var borderWidth: CGFloat {
-        screenHeight > 667 ? 3 : 2
-    }
+    private let borderWidth: CGFloat = 2
     private let squareRowRanges = [(0...2), (3...5), (6...8)]
 
     var body: some View {
-        HStack(spacing: 0) {
-            Spacer()
-                .frame(width: SudokuGrid.spacerWidth)
-            Grid(horizontalSpacing: 0, verticalSpacing: 0) {
-                ForEach(squareRowRanges, id: \.self) { squareRowRange in
-                    GridRow {
-                        ForEach(squareRowRange, id: \.self) { squareIndex in
-                            Square(index: squareIndex,
-                                   editGridSlice: self.editGrid.filter { $0.s == squareIndex },
-                                   selectedCell: selectedCell,
-                                   userAction: userAction,
-                                   workingGrid: workingGrid)
-                        }
-                    }
-                }
+        GeometryReader { geometry in
+            GridContainerView { squareIndex in
+                Square(index: squareIndex,
+                       editGridSlice: self.editGrid.filter { $0.s == squareIndex },
+                       selectedCell: selectedCell,
+                       userAction: userAction,
+                       workingGrid: workingGrid)
             }
-            .padding(borderWidth)
-            .border(Color.black, width: borderWidth)
-            Spacer()
-                .frame(width: SudokuGrid.spacerWidth)
+            .padding(.horizontal, getSpacerWidth(screenSize: geometry.size))
+        }
+    }
+    
+    private func getSpacerWidth(screenSize: CGSize) -> CGFloat {
+        if isIphone {
+            return 8
+        } else if isVision {
+            // maintain square aspect ratio
+            return abs(screenSize.width - screenSize.height) / 2
+        } else {
+            return 160
         }
     }
 }
 
 #Preview {
-    SudokuGrid(selectedCell: SelectedCell(),
-               userAction: UserAction(),
-               editGrid: [],
-               workingGrid: GridValues.init(startingGrid: GridFactory.easyGrid))
+    GeometryReader { geometry in
+        SudokuGrid(selectedCell: SelectedCell(),
+                   userAction: UserAction(),
+                   editGrid: [],
+                   workingGrid: GridValues.init(startingGrid: GridFactory.easyGrid))
+        .environment(WindowSize(size: geometry.size))
+    }
 }
