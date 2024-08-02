@@ -35,7 +35,7 @@ struct RowButtonText: View {
     }
     
     private func getHeight(size: CGSize) -> CGFloat {
-        if isVision {
+        if isVision && !isStatic {
             let horizontalPadding = abs(size.width - size.height)
             let extraVerticalOffset: CGFloat = 24 // other UI elements below the grid
             return ((size.width - horizontalPadding) / 9) - extraVerticalOffset
