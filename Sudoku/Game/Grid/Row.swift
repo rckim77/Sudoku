@@ -24,6 +24,11 @@ struct Row: View {
                 }) {
                     self.renderCellText(columnIndex: columnIndex)
                 }
+                #if os(visionOS)
+                .buttonStyle(PlainButtonStyle()) // this improves edit grid layout
+                #else
+                .buttonStyle(DefaultButtonStyle())
+                #endif
                 .buttonBorderShape(.roundedRectangle(radius: 0)) // keeps UI consistent on visionOS
                 .border(Color.black, width: 1)
                 .background(self.viewModel.backgroundColorFor(columnIndex, selectedCell: self.selectedCell.coordinate))
