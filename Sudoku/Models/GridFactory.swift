@@ -201,31 +201,33 @@ enum GridFactory {
         return convertedGrid
     }
     
+    /// Returns a string representation of a grid. The grid is represented as an array of arrays where each array
+    /// represents a square. Each array contains 9 integers; the 0 integer represents an empty space. The first
+    /// square is the top left and the last square in the array is the bottom right.
     static func stringGridFor(grid: [CoordinateValue]) -> String {
         var stringGrid = [[Int]]()
         
         for _ in 0..<9 {
-            let row = [Int](repeating: 0, count: 9)
-            stringGrid.append(row)
+            let square = [Int](repeating: 0, count: 9)
+            stringGrid.append(square)
         }
         
         for coordinate in grid {
-            var adjustedRowIndex = coordinate.r
-            var adjustedColIndex = coordinate.c
-            
-            if [3, 4, 5].contains(coordinate.s) {
-                adjustedRowIndex += 3
-            } else if [6, 7, 8].contains(coordinate.s) {
-                adjustedRowIndex += 6
+            // [r0c0, r0c1, r0c2, r1c0, r1c1, r1c2, r2c0, r2c1, r2c2]
+            var rowCol = 0
+
+            if coordinate.r == 1 {
+                rowCol += 3
+            } else if coordinate.r == 2 {
+                rowCol += 6
             }
-            
-            if [1, 4, 7].contains(coordinate.s) {
-                adjustedColIndex += 3
-            } else if [2, 5, 8].contains(coordinate.s) {
-                adjustedColIndex += 6
+            if coordinate.c == 1 {
+                rowCol += 1
+            } else if coordinate.c == 2 {
+                rowCol += 2
             }
-            
-            stringGrid[adjustedRowIndex][adjustedColIndex] = coordinate.v
+
+            stringGrid[coordinate.s][rowCol] = coordinate.v
         }
         
         return String(describing: stringGrid)

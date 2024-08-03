@@ -13,13 +13,14 @@ struct EditCellGridText: View {
     let digitText: String
     
     private var font: Font.TextStyle {
-        isIpad ? .headline : .footnote
+        isIphone ? .footnote : .headline
     }
 
     var body: some View {
         Text(digitText)
             .foregroundColor(Color("dynamicBlue"))
             .font(.system(font, design: .rounded))
+            .minimumScaleFactor(0.6)
             .frame(maxWidth: .infinity)
     }
 }

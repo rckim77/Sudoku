@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RowButtonText: View {
     
-    @Environment(WindowSize.self) var windowSize
+    @Environment(WindowSize.self) private var windowSize
     
     let text: String
     let foregroundColor: Color
@@ -30,7 +30,18 @@ struct RowButtonText: View {
         Text(text)
             .foregroundColor(foregroundColor)
             .font(buttonTextFont)
-            .frame(maxWidth: .infinity, minHeight: buttonMinHeight)
+            .frame(maxWidth: .infinity)
+            .frame(height: getHeight(size: windowSize.size))
+    }
+    
+    private func getHeight(size: CGSize) -> CGFloat {
+        if isVision && !isStatic {
+            let horizontalPadding = abs(size.width - size.height)
+            let extraVerticalOffset: CGFloat = 24 // other UI elements below the grid
+            return ((size.width - horizontalPadding) / 9) - extraVerticalOffset
+        } else {
+            return buttonMinHeight
+        }
     }
 }
 

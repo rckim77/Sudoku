@@ -36,12 +36,22 @@ struct API {
         let bearerToken = ""
         var prompt: [[String: String]] = []
         let stringGrid = GridFactory.stringGridFor(grid: grid)
-        let content = "Provide a helpful clue specific to the following sudoku puzzle:\n \(stringGrid)"
+        let content = """
+            You are a sudoku assistant. Provide a single succinct hint specific to the following sudoku puzzle 
+            without giving away too much. The sudoku will be represented as an array of arrays where each array
+            represents a square. There are 9 squares in the sudoku. Each square contains 9 integer values. If there
+            is a 0 in the square, that means it is empty and we need to input a valid integer 1 through 9. The
+            first square in the array is the top left square of the sudoku. The second square is the top center
+            square. The third square is the top right square. The fourth square is the middle left square. The
+            fifth square is the middle center square. The sixth square is the middle right square. The seventh
+            square is the bottom left square. The eighth square is the bottom center square. The ninth square is
+            the bottom right square. Here is the sudoku:\n \(stringGrid)
+        """
 
-        prompt.append(["role": "user", "content": content])
+        prompt.append(["role": "system", "content": content])
         
         let requestBody: [String: Any] = [
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4o-mini",
             "messages": prompt
         ]
         

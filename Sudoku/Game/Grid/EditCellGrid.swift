@@ -19,28 +19,46 @@ struct EditCellGrid: View {
     }
 
     private var verticalSpacing: CGFloat {
-        isIpad ? 2 : -4
+        if isIphone {
+            return -4
+        } else if isIpad {
+            return 2
+        } else {
+            return 0
+        }
     }
 
     var body: some View {
-        VStack(spacing: verticalSpacing) {
-            HStack(spacing: 0) {
+        Grid(horizontalSpacing: 0, verticalSpacing: verticalSpacing) {
+            GridRow {
                 EditCellGridText(digitText: text(for: 0))
                 EditCellGridText(digitText: text(for: 1))
                 EditCellGridText(digitText: text(for: 2))
             }
-            HStack(spacing: 0) {
+            GridRow {
                 EditCellGridText(digitText: text(for: 3))
                 EditCellGridText(digitText: text(for: 4))
                 EditCellGridText(digitText: text(for: 5))
             }
-            HStack(spacing: 0) {
+            GridRow {
                 EditCellGridText(digitText: text(for: 6))
                 EditCellGridText(digitText: text(for: 7))
                 EditCellGridText(digitText: text(for: 8))
             }
         }
-        .frame(maxWidth: .infinity, minHeight: minHeight)
+        .frame(maxWidth: .infinity)
+        .frame(height: getHeight(size: windowSize.size))
+    }
+    
+    private func getHeight(size: CGSize) -> CGFloat {
+        if isVision {
+            let horizontalPadding = abs(size.width - size.height)
+            // other UI elements below the grid
+            let extraVerticalOffset: CGFloat = 24
+            return ((size.width - horizontalPadding) / 9) - extraVerticalOffset
+        } else {
+            return minHeight
+        }
     }
 
     private func text(for editIndex: Int) -> String {
