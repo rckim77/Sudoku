@@ -7,11 +7,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct GameView: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    
+    @Query private var savedGameState: [SavedGameState]
 
     @State private(set) var selectedCell = SelectedCell()
     @State private(set) var userAction = UserAction()
@@ -90,7 +93,7 @@ struct GameView: View {
                             }
                             .disabled(hintButtonIsLoading)
                             Button("Save", systemImage: "square.and.arrow.down") {
-                                save()
+                                checkSaveIfNeeded()
                                 saveButtonAnimate.toggle()
                             }
                             .symbolEffect(.bounce.down.byLayer, value: saveButtonAnimate)
@@ -125,6 +128,12 @@ struct GameView: View {
                         Button("Thanks") {}
                     case .completedIncorrectly, .hintError:
                         Button("Dismiss") {}
+                    case .overwriteWarning:
+                        Button(role: .destructive) {
+                            save()
+                        } label: {
+                            Text("Confirm")
+                        }
                     }
                 } message: { item in
                     Text(item.message)
@@ -145,6 +154,15 @@ struct GameView: View {
         userAction.action = .none
         editState.isEditing = false
         editGrid.grid = []
+    }
+    
+    private func checkSaveIfNeeded() {
+        if !savedGameState.isEmpty {
+            alertItem = .overwriteWarning
+            alertIsPresented = true
+        } else {
+            save()
+        }
     }
     
     /// Currently we only save one game. To fetch, always get the first SavedGameState object in the model container.

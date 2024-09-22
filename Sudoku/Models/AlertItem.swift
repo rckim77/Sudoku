@@ -14,6 +14,7 @@ enum AlertItem {
     case completedIncorrectly
     case hintSuccess(hint: String)
     case hintError
+    case overwriteWarning
     
     var title: String {
         switch self {
@@ -27,6 +28,8 @@ enum AlertItem {
             return "Hint"
         case .hintError:
             return "Hint"
+        case .overwriteWarning:
+            return "Heads up!"
         }
     }
     
@@ -42,6 +45,8 @@ enum AlertItem {
             return hint
         case .hintError:
             return "Oops! Something went wrong. Try again later."
+        case .overwriteWarning:
+            return "Looks like you already have a saved game. Do you want to overwrite with this game?"
         }
     }
 }
