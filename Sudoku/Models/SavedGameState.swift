@@ -15,13 +15,13 @@ final class SavedGameState {
     var workingGrid: [CoordinateValue]
     var startingGrid: [CoordinateValue]
     var colorGrid: Set<CoordinateColor>
-    var userAction: UserAction.ActionType?
+    var userAction: UserAction.ActionType
     var selectedCell: Coordinate?
     var isEditing: Bool
     var editValues: [CoordinateEditValues]
     var difficulty: Difficulty.Level
     
-    init(workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor>, userAction: UserAction.ActionType?, selectedCell: Coordinate?, isEditing: Bool, editValues: [CoordinateEditValues], difficulty: Difficulty.Level) {
+    init(workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor>, userAction: UserAction.ActionType, selectedCell: Coordinate?, isEditing: Bool, editValues: [CoordinateEditValues], difficulty: Difficulty.Level) {
         self.workingGrid = workingGrid
         self.startingGrid = startingGrid
         self.colorGrid = colorGrid

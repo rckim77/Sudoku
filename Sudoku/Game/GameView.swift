@@ -9,6 +9,13 @@
 import SwiftUI
 import SwiftData
 
+enum SavedState {
+    case startedUnsaved
+    case startedSaved
+    case saved
+    case unsaved
+}
+
 struct GameView: View {
 
     @Environment(\.dismiss) private var dismiss
@@ -16,6 +23,7 @@ struct GameView: View {
     
     @Query private var savedGameState: [SavedGameState]
 
+    @State var savedState: SavedState
     @State private(set) var selectedCell = SelectedCell()
     @State private(set) var userAction = UserAction()
     @State private(set) var editState = EditState(isEditing: false)
@@ -25,9 +33,12 @@ struct GameView: View {
     @State private var alertIsPresented: Bool = false
     @State private var hintButtonIsLoading: Bool = false
     @State private var saveButtonAnimate: Bool = false
-    
-    let isPlayingSavedGame: Bool
+
     let viewModel: GameViewModel
+    
+    private var hasUpdatedGrid: Bool {
+        return workingGrid.grid.count > workingGrid.startingGrid.count || !editGrid.isEmpty
+    }
     
     var body: some View {
         ZStack {
@@ -49,14 +60,14 @@ struct GameView: View {
                             alert: $alertItem,
                             alertIsPresented: $alertIsPresented,
                             selectedCoordinate: selectedCell.coordinate,
-                            isEditing: editState.isEditing)
+                            isEditing: editState.isEditing,
+                            savedState: $savedState)
                     Spacer()
                         .frame(maxHeight: viewModel.verticalSpacing)
                     NewGameButton(alert: $alertItem,
                                   alertIsPresented: $alertIsPresented,
-                                  editGrid: editGrid.grid,
-                                  startingGrid: workingGrid.startingGrid,
-                                  workingGrid: workingGrid.grid)
+                                  hasUpdatedGrid: hasUpdatedGrid,
+                                  savedState: savedState)
                     Spacer()
                         .frame(maxHeight: viewModel.bottomVerticalSpacing)
                 }
@@ -70,7 +81,8 @@ struct GameView: View {
                                         editGrid: editGrid,
                                         editState: editState,
                                         userAction: userAction,
-                                        workingGrid: workingGrid)
+                                        workingGrid: workingGrid,
+                                        savedState: $savedState)
                             EditButton(editState: editState)
                             HintButton(isLoading: $hintButtonIsLoading) {
                                 Task {
@@ -142,18 +154,35 @@ struct GameView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onDisappear() {
-            if !isPlayingSavedGame {
+            switch savedState {
+            case .startedUnsaved:
                 resetGrids(for: viewModel.difficulty)
+            case .startedSaved, .saved:
+                break
+            case .unsaved:
+                resetToPreviouslySavedGrid()
             }
         }
     }
     
     private func resetGrids(for level: Difficulty.Level) {
-        workingGrid.reset(newGrid: GridFactory.randomGridForDifficulty(level: level))
+        workingGrid.resetTo(newGrid: GridFactory.randomGridForDifficulty(level: level))
         selectedCell.coordinate = nil
         userAction.action = .none
         editState.isEditing = false
         editGrid.grid = []
+    }
+    
+    private func resetToPreviouslySavedGrid() {
+        guard let savedGame = savedGameState.first else {
+            return
+        }
+        workingGrid.resetFrom(savedGame: savedGame)
+        selectedCell.coordinate = savedGame.selectedCell
+        
+        userAction.action = savedGame.userAction
+        editState.isEditing = savedGame.isEditing
+        editGrid.grid = savedGame.editValues
     }
     
     private func checkSaveIfNeeded() {
@@ -172,12 +201,13 @@ struct GameView: View {
         try? modelContext.delete(model: SavedGameState.self)
         modelContext.insert(gameState)
         try? modelContext.save()
+        savedState = .saved
     }
 }
 
 #Preview {
     GeometryReader { geometry in
-        GameView(workingGrid: GridValues(startingGrid: GridFactory.easyGrid), isPlayingSavedGame: false, viewModel: GameViewModel(difficulty: .easy))
+        GameView(savedState: .startedUnsaved, workingGrid: GridValues(startingGrid: GridFactory.easyGrid), viewModel: GameViewModel(difficulty: .easy))
             .environment(WindowSize(size: geometry.size))
     }
 }
