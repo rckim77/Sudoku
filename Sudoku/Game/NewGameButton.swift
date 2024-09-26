@@ -12,18 +12,15 @@ struct NewGameButton: View {
 
     @Environment(\.dismiss) private var dismiss
 
-    @Binding
-    var alert: AlertItem?
-    @Binding
-    var alertIsPresented: Bool
+    @Binding var alert: AlertItem?
+    @Binding var alertIsPresented: Bool
 
-    let editGrid: [CoordinateEditValues]
-    let startingGrid: [CoordinateValue]
-    let workingGrid: [CoordinateValue]
+    let hasUpdatedGrid: Bool
+    let savedState: SavedState
 
     var body: some View {
         Button(action: {
-            if self.workingGrid.count > self.startingGrid.count || !self.editGrid.isEmpty {
+            if hasUpdatedGrid && savedState == .unsaved {
                 self.alert = .newGame
                 self.alertIsPresented = true
             } else {
@@ -41,8 +38,7 @@ struct NewGameButton_Previews: PreviewProvider {
     static var previews: some View {
         NewGameButton(alert: .constant(.newGame),
                       alertIsPresented: .constant(false),
-                      editGrid: [],
-                      startingGrid: GridFactory.easyGrid,
-                      workingGrid: GridFactory.easyGrid)
+                      hasUpdatedGrid: true,
+                      savedState: .saved)
     }
 }

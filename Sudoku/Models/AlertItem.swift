@@ -9,16 +9,15 @@
 import Foundation
 
 enum AlertItem {
-    case newGame
     case completedCorrectly
     case completedIncorrectly
     case hintSuccess(hint: String)
     case hintError
+    case newGame
+    case overwriteWarning
     
     var title: String {
         switch self {
-        case .newGame:
-            return "Are you sure?"
         case .completedCorrectly:
             return "Congratulations!"
         case .completedIncorrectly:
@@ -27,13 +26,15 @@ enum AlertItem {
             return "Hint"
         case .hintError:
             return "Hint"
+        case .newGame:
+            return "Are you sure?"
+        case .overwriteWarning:
+            return "Heads up!"
         }
     }
     
     var message: String {
         switch self {
-        case .newGame:
-            return "If you go back without saving, you will lose your current progress."
         case .completedCorrectly:
             return "You've completed the sudoku!"
         case .completedIncorrectly:
@@ -42,6 +43,10 @@ enum AlertItem {
             return hint
         case .hintError:
             return "Oops! Something went wrong. Try again later."
+        case .newGame:
+            return "If you go back without saving, you will lose your current progress."
+        case .overwriteWarning:
+            return "Looks like you already have a saved game. Do you want to overwrite with this game?"
         }
     }
 }

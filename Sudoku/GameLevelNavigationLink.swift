@@ -14,8 +14,8 @@ struct GameLevelNavigationLink: View {
     
     var body: some View {
         NavigationLink {
-            GameView(workingGrid: GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)),
-                     isPlayingSavedGame: false,
+            GameView(savedState: .startedUnsaved,
+                     workingGrid: GridValues(startingGrid: GridFactory.randomGridForDifficulty(level: level)),
                      viewModel: GameViewModel(difficulty: level))
         } label: {
             Text(level.rawValue)

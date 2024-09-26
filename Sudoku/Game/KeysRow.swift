@@ -13,13 +13,14 @@ struct KeysRow: View {
     var editGrid: EditGridValues
     var userAction: UserAction
     var workingGrid: GridValues
-    @Binding
-    var alert: AlertItem?
-    @Binding
-    var alertIsPresented: Bool
+
+    @Binding var alert: AlertItem?
+    @Binding var alertIsPresented: Bool
     
     let selectedCoordinate: Coordinate?
     let isEditing: Bool
+    
+    @Binding var savedState: SavedState
 
     private let buttonCornerRadius: CGFloat = 5
     private var horizontalSpacing: CGFloat {
@@ -63,6 +64,7 @@ struct KeysRow: View {
     }
 
     private func updateForDigit(_ digit: Int) {
+        savedState = .unsaved
         userAction.action = .digit(digit)
         guard let selectedCoordinate = selectedCoordinate, !workingGrid.containsAValue(at: selectedCoordinate, grid: workingGrid.startingGrid) else {
             return
@@ -95,5 +97,6 @@ struct KeysRow: View {
             alert: .constant(.completedCorrectly),
             alertIsPresented: .constant(false),
             selectedCoordinate: nil,
-            isEditing: false)
+            isEditing: false,
+            savedState: .constant(.unsaved))
 }

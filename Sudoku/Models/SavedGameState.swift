@@ -12,16 +12,16 @@ import SwiftData
 @Model
 final class SavedGameState {
 
-    let workingGrid: [CoordinateValue]
-    let startingGrid: [CoordinateValue]
-    let colorGrid: Set<CoordinateColor>
-    let userAction: UserAction.ActionType?
-    let selectedCell: Coordinate?
-    let isEditing: Bool
-    let editValues: [CoordinateEditValues]
-    let difficulty: Difficulty.Level
+    var workingGrid: [CoordinateValue]
+    var startingGrid: [CoordinateValue]
+    var colorGrid: Set<CoordinateColor>
+    var userAction: UserAction.ActionType
+    var selectedCell: Coordinate?
+    var isEditing: Bool
+    var editValues: [CoordinateEditValues]
+    var difficulty: Difficulty.Level
     
-    init(workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor>, userAction: UserAction.ActionType?, selectedCell: Coordinate?, isEditing: Bool, editValues: [CoordinateEditValues], difficulty: Difficulty.Level) {
+    init(workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor>, userAction: UserAction.ActionType, selectedCell: Coordinate?, isEditing: Bool, editValues: [CoordinateEditValues], difficulty: Difficulty.Level) {
         self.workingGrid = workingGrid
         self.startingGrid = startingGrid
         self.colorGrid = colorGrid

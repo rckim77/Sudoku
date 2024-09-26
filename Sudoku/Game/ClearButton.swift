@@ -15,9 +15,11 @@ struct ClearButton: View {
     var editState: EditState
     var userAction: UserAction
     var workingGrid: GridValues
+    @Binding var savedState: SavedState
 
     var body: some View {
         Button("Clear", systemImage: "eraser") {
+            self.savedState = .unsaved
             self.userAction.action = .clear
 
             guard let selectedCoordinate = self.selectedCoordinate,

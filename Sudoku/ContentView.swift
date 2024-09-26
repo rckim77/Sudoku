@@ -23,12 +23,12 @@ struct ContentView: View {
                 VStack(spacing: viewModel.savedGameVSpacing) {
                     if let savedGameState = savedGameState.first {
                         NavigationLink {
-                            GameView(selectedCell: SelectedCell(coordinate: savedGameState.selectedCell),
-                                     userAction: UserAction(action: savedGameState.userAction ?? .none),
+                            GameView(savedState: .startedSaved,
+                                     selectedCell: SelectedCell(coordinate: savedGameState.selectedCell),
+                                     userAction: UserAction(action: savedGameState.userAction),
                                      editState: EditState(isEditing: savedGameState.isEditing),
                                      workingGrid: GridValues(grid: savedGameState.workingGrid, startingGrid: savedGameState.startingGrid, colorGrid: savedGameState.colorGrid),
                                      editGrid: EditGridValues(grid: savedGameState.editValues),
-                                     isPlayingSavedGame: true,
                                      viewModel: GameViewModel(difficulty: savedGameState.difficulty))
                         } label: {
                             Text("Continue game")

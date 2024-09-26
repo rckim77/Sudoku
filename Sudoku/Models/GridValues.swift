@@ -46,10 +46,16 @@ import SwiftUI
         }
     }
 
-    func reset(newGrid: [CoordinateValue]) {
+    func resetTo(newGrid: [CoordinateValue]) {
         grid = newGrid
         startingGrid = newGrid
         populateEmptyColorGrid(grid)
+    }
+    
+    func resetFrom(savedGame: SavedGameState) {
+        grid = savedGame.workingGrid
+        startingGrid = savedGame.startingGrid
+        colorGrid = savedGame.colorGrid
     }
 
     func add(_ coordinateValue: CoordinateValue) {
@@ -196,5 +202,3 @@ import SwiftUI
         }
     }
 }
-
-
