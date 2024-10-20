@@ -1,5 +1,5 @@
 //
-//  ContentViewModel.swift
+//  MenuViewModel.swift
 //  Sudoku
 //
 //  Created by Ray Kim on 7/2/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ContentViewModel: ViewModel {
+struct MenuViewModel: ViewModel {
     
     var savedGameVSpacing: CGFloat {
         16 * (isIpad ? 2.5 : 1)
