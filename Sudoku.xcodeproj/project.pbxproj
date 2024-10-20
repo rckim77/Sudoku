@@ -186,10 +186,11 @@
 				ECE447EC2B4F514C003D0BC8 /* SudokuApp.swift */,
 				EC2148A82B366588005D5610 /* API.swift */,
 				94E108862487333B0091D043 /* ContentView.swift */,
-				EC90CC342CC481B2005F4BE3 /* MenuNavigationLinks.swift */,
 				EC8435F524AE717500D311FF /* ContentViewModel.swift */,
 				ECC299C32C41D059004F5A1B /* GameLevelNavigationLink.swift */,
+				EC90CC322CC47268005F4BE3 /* StatsView.swift */,
 				EC8435E724ABEBD300D311FF /* SettingsView.swift */,
+				EC90CC342CC481B2005F4BE3 /* MenuNavigationLinks.swift */,
 				94E9F32C2493FC3300B1D003 /* SudokuSolver.swift */,
 				EC8435EF24AE4E9900D311FF /* Game */,
 				EC8638C82BA130EA00CDC5E4 /* How to Play */,
@@ -251,7 +252,6 @@
 				94600FBF2499C4A700E605FD /* ClearButton.swift */,
 				94E10896248740890091D043 /* KeysRow.swift */,
 				94A9CCB72488A96D008551B6 /* KeysRowButtonText.swift */,
-				EC90CC322CC47268005F4BE3 /* StatsView.swift */,
 				ECC830A224A3F8C70075CE0E /* Grid */,
 			);
 			path = Game;
