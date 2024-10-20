@@ -54,6 +54,7 @@
 		EC8638CA2BA1311700CDC5E4 /* StaticSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638C92BA1311700CDC5E4 /* StaticSquareView.swift */; };
 		EC8638CC2BA1326F00CDC5E4 /* StaticRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8638CB2BA1326F00CDC5E4 /* StaticRowView.swift */; };
 		EC90CC332CC47268005F4BE3 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC90CC322CC47268005F4BE3 /* StatsView.swift */; };
+		EC90CC352CC481B2005F4BE3 /* MenuNavigationLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC90CC342CC481B2005F4BE3 /* MenuNavigationLinks.swift */; };
 		ECB10FBA2C4BFF220005146D /* GridContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB10FB92C4BFF220005146D /* GridContainerView.swift */; };
 		ECC299BC2C35FECC004F5A1B /* SavedGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC299BB2C35FECC004F5A1B /* SavedGameState.swift */; };
 		ECC299C42C41D059004F5A1B /* GameLevelNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC299C32C41D059004F5A1B /* GameLevelNavigationLink.swift */; };
@@ -123,6 +124,7 @@
 		EC8638C92BA1311700CDC5E4 /* StaticSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSquareView.swift; sourceTree = "<group>"; };
 		EC8638CB2BA1326F00CDC5E4 /* StaticRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticRowView.swift; sourceTree = "<group>"; };
 		EC90CC322CC47268005F4BE3 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		EC90CC342CC481B2005F4BE3 /* MenuNavigationLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNavigationLinks.swift; sourceTree = "<group>"; };
 		ECB10FB92C4BFF220005146D /* GridContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridContainerView.swift; sourceTree = "<group>"; };
 		ECC299BB2C35FECC004F5A1B /* SavedGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedGameState.swift; sourceTree = "<group>"; };
 		ECC299C32C41D059004F5A1B /* GameLevelNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelNavigationLink.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				ECE447EC2B4F514C003D0BC8 /* SudokuApp.swift */,
 				EC2148A82B366588005D5610 /* API.swift */,
 				94E108862487333B0091D043 /* ContentView.swift */,
+				EC90CC342CC481B2005F4BE3 /* MenuNavigationLinks.swift */,
 				EC8435F524AE717500D311FF /* ContentViewModel.swift */,
 				ECC299C32C41D059004F5A1B /* GameLevelNavigationLink.swift */,
 				EC8435E724ABEBD300D311FF /* SettingsView.swift */,
@@ -401,6 +404,7 @@
 				94600FC22499C73200E605FD /* Difficulty.swift in Sources */,
 				94E1089B24874B9D0091D043 /* CornerRadiusStyle.swift in Sources */,
 				ECC830A424A41BC30075CE0E /* RowViewModel.swift in Sources */,
+				EC90CC352CC481B2005F4BE3 /* MenuNavigationLinks.swift in Sources */,
 				EC26D1372C44ABDB0088616C /* WindowSize.swift in Sources */,
 				94E1089924874AFB0091D043 /* Extensions.swift in Sources */,
 				EC8435E424AA9B8300D311FF /* EditCellGridText.swift in Sources */,

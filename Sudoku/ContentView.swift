@@ -42,29 +42,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                VStack(spacing: 18) {
-                    NavigationLink {
-                        StatsView()
-                    } label: {
-                        Label("Stats", systemImage: "chart.bar")
-                            .font(.system(.headline, design: .rounded))
-                            .tint(Color("dynamicDarkGray"))
-                    }
-                    NavigationLink {
-                        HowToPlayView()
-                    } label: {
-                        Label("How to play", systemImage: "questionmark.circle")
-                            .font(.system(.headline, design: .rounded))
-                            .tint(Color("dynamicDarkGray"))
-                    }
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        Label("Settings", systemImage: "gear")
-                            .font(.system(.headline, design: .rounded))
-                            .tint(Color("dynamicDarkGray"))
-                    }
-                }
+                MenuNavigationLinks()
             }
             .fullBackgroundStyle()
         }
