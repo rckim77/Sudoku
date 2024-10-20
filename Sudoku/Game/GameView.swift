@@ -40,6 +40,8 @@ struct GameView: View {
         return workingGrid.grid.count > workingGrid.startingGrid.count || !editGrid.isEmpty
     }
     
+    @AppStorage("gamesCompleted") private var gamesCompleted = 0
+    
     var body: some View {
         ZStack {
             Color("dynamicBackground")
@@ -134,6 +136,7 @@ struct GameView: View {
                         
                     case .completedCorrectly:
                         Button("Go back") {
+                            saveUserStats()
                             dismiss()
                         }
                     case .hintSuccess(_):
@@ -202,6 +205,10 @@ struct GameView: View {
         modelContext.insert(gameState)
         try? modelContext.save()
         savedState = .saved
+    }
+
+    private func saveUserStats() {
+        gamesCompleted += 1
     }
 }
 

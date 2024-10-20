@@ -44,6 +44,13 @@ struct ContentView: View {
                 }
                 VStack(spacing: 18) {
                     NavigationLink {
+                        StatsView()
+                    } label: {
+                        Label("Stats", systemImage: "chart.bar")
+                            .font(.system(.headline, design: .rounded))
+                            .tint(Color("dynamicDarkGray"))
+                    }
+                    NavigationLink {
                         HowToPlayView()
                     } label: {
                         Label("How to play", systemImage: "questionmark.circle")
