@@ -39,8 +39,8 @@ struct GameView: View {
     private var hasUpdatedGrid: Bool {
         return workingGrid.grid.count > workingGrid.startingGrid.count || !editGrid.isEmpty
     }
-    
-    @AppStorage("gamesCompleted") private var gamesCompleted = 0
+
+    @AppStorage("totalGamesCompleted") var totalGamesCompleted = 0
     
     var body: some View {
         ZStack {
@@ -208,7 +208,7 @@ struct GameView: View {
     }
 
     private func saveUserStats() {
-        gamesCompleted += 1
+        totalGamesCompleted += 1
     }
 }
 

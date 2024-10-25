@@ -9,22 +9,21 @@
 import SwiftUI
 
 struct StatsView: View {
-    @AppStorage("gamesCompleted") private var gamesCompleted = 0
+
+    @AppStorage("totalGamesCompleted") var totalGamesCompleted = 0
     
     var body: some View {
         List {
-            Section("Achievements") {
-                HStack {
-                    Text("Games Completed")
-                    Spacer()
-                    Text("\(gamesCompleted)")
-                        .foregroundColor(.secondary)
-                }
+            HStack {
+                Text("Total games completed")
+                Spacer()
+                Text("\(totalGamesCompleted)")
+                    .tint(Color("dynamicDarkGray"))
             }
         }
         .font(Font.system(.headline, design: .rounded))
         .fullBackgroundStyle()
-        .navigationTitle("Statistics")
+        .navigationTitle("Stats")
         .navigationBarTitleDisplayMode(.large)
     }
 }
