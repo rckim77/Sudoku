@@ -41,6 +41,9 @@ struct GameView: View {
     }
 
     @AppStorage("totalGamesCompleted") var totalGamesCompleted = 0
+    @AppStorage("totalEasyGamesCompleted") var totalEasyGamesCompleted = 0
+    @AppStorage("totalMediumGamesCompleted") var totalMediumGamesCompleted = 0
+    @AppStorage("totalHardGamesCompleted") var totalHardGamesCompleted = 0
     
     var body: some View {
         ZStack {
@@ -209,6 +212,15 @@ struct GameView: View {
 
     private func saveUserStats() {
         totalGamesCompleted += 1
+
+        switch viewModel.difficulty {
+        case .easy:
+            totalEasyGamesCompleted += 1
+        case .medium:
+            totalMediumGamesCompleted += 1
+        case .hard:
+            totalHardGamesCompleted += 1
+        }
     }
 }
 
