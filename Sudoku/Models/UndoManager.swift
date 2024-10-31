@@ -29,8 +29,4 @@ struct UndoAction {
         guard canUndo else { return nil }
         return actions.removeLast()
     }
-    
-    func clear() {
-        actions.removeAll()
-    }
 }
