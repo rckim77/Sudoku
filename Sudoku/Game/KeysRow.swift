@@ -22,6 +22,8 @@ struct KeysRow: View {
     
     @Binding var savedState: SavedState
 
+    var undoManager: UndoManager
+
     private let buttonCornerRadius: CGFloat = 5
     private var horizontalSpacing: CGFloat {
         if isVision {
@@ -64,29 +66,63 @@ struct KeysRow: View {
     }
 
     private func updateForDigit(_ digit: Int) {
-        savedState = .unsaved
-        userAction.action = .digit(digit)
-        guard let selectedCoordinate = selectedCoordinate, !workingGrid.containsAValue(at: selectedCoordinate, grid: workingGrid.startingGrid) else {
+        guard let selectedCoordinate = selectedCoordinate,
+              !workingGrid.containsAValue(at: selectedCoordinate, grid: workingGrid.startingGrid) else {
             return
         }
-
-        let coordinateValue = CoordinateValue(r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s, v: digit)
+        
         if isEditing {
-            editGrid.updateGuesses(value: digit, at: Coordinate(r: selectedCoordinate.r, c: selectedCoordinate.c, s: selectedCoordinate.s))
+            // For edit mode, track each individual pencil mark change
+            let currentGuesses = editGrid.guesses(for: selectedCoordinate)?.values ?? Set()
+            if currentGuesses.contains(digit) {
+                // Removing a pencil mark
+                trackUndoAction(at: selectedCoordinate, action: .remove(digit: digit))
+            } else {
+                // Adding a pencil mark
+                trackUndoAction(at: selectedCoordinate, action: .add(digit: digit))
+            }
+            editGrid.updateGuesses(value: digit, at: selectedCoordinate)
+            savedState = .unsaved
+            userAction.action = .digit(digit)
         } else {
-            editGrid.removeValues(at: selectedCoordinate)
-            workingGrid.add(coordinateValue)
-            
-            if workingGrid.grid.count == 81 {
-                if workingGrid.isSolved {
-                    alert = .completedCorrectly
-                    alertIsPresented = true
-                } else {
-                    alert = .completedIncorrectly
-                    alertIsPresented = true
+            // For normal mode, only track if we're changing the value
+            let currentValue = workingGrid.getValue(at: selectedCoordinate, grid: workingGrid.grid)
+            if currentValue != digit {
+                trackUndoAction(at: selectedCoordinate, action: .none)
+                editGrid.removeValues(at: selectedCoordinate)
+                
+                let coordinateValue = CoordinateValue(r: selectedCoordinate.r,
+                                                    c: selectedCoordinate.c,
+                                                    s: selectedCoordinate.s,
+                                                    v: digit)
+                workingGrid.add(coordinateValue)
+                savedState = .unsaved
+                userAction.action = .digit(digit)
+                
+                if workingGrid.grid.count == 81 {
+                    if workingGrid.isSolved {
+                        alert = .completedCorrectly
+                        alertIsPresented = true
+                    } else {
+                        alert = .completedIncorrectly
+                        alertIsPresented = true
+                    }
                 }
             }
         }
+    }
+    
+    private func trackUndoAction(at coordinate: Coordinate, action: EditActionType) {
+        let previousValue = workingGrid.getValue(at: coordinate, grid: workingGrid.grid)
+        let previousEditValues = editGrid.guesses(for: coordinate)?.values ?? Set()
+        
+        undoManager.addAction(UndoAction(
+            coordinate: coordinate,
+            previousValue: previousValue,
+            previousEditValues: previousEditValues,
+            wasEditing: isEditing,
+            editActionType: action
+        ))
     }
 }
 
@@ -98,5 +134,6 @@ struct KeysRow: View {
             alertIsPresented: .constant(false),
             selectedCoordinate: nil,
             isEditing: false,
-            savedState: .constant(.unsaved))
+            savedState: .constant(.unsaved),
+            undoManager: UndoManager())
 }

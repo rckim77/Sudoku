@@ -33,6 +33,7 @@ struct GameView: View {
     @State private var alertIsPresented: Bool = false
     @State private var hintButtonIsLoading: Bool = false
     @State private var saveButtonAnimate: Bool = false
+    @State private(set) var undoManager = UndoManager()
 
     let viewModel: GameViewModel
     
@@ -66,7 +67,8 @@ struct GameView: View {
                             alertIsPresented: $alertIsPresented,
                             selectedCoordinate: selectedCell.coordinate,
                             isEditing: editState.isEditing,
-                            savedState: $savedState)
+                            savedState: $savedState,
+                            undoManager: undoManager)
                     Spacer()
                         .frame(maxHeight: viewModel.verticalSpacing)
                     NewGameButton(alert: $alertItem,
@@ -82,12 +84,19 @@ struct GameView: View {
                             Spacer()
                         }
                         HStack(spacing: viewModel.toolbarItemHorizontalSpacing) {
+                            Button("Undo", systemImage: "arrow.uturn.backward") {
+                                handleUndo()
+                            }
+                            .disabled(!undoManager.canUndo)
+                            .tint(.primary)
+                            
                             ClearButton(selectedCoordinate: selectedCell.coordinate,
-                                        editGrid: editGrid,
-                                        editState: editState,
-                                        userAction: userAction,
-                                        workingGrid: workingGrid,
-                                        savedState: $savedState)
+                                      editGrid: editGrid,
+                                      editState: editState,
+                                      userAction: userAction,
+                                      workingGrid: workingGrid,
+                                      savedState: $savedState,
+                                      undoManager: undoManager)
                             EditButton(editState: editState)
                             HintButton(isLoading: $hintButtonIsLoading) {
                                 Task {
@@ -220,6 +229,56 @@ struct GameView: View {
             totalMediumGamesCompleted += 1
         case .hard:
             totalHardGamesCompleted += 1
+        }
+    }
+
+    private func handleUndo() {
+        guard let lastAction = undoManager.undo() else { return }
+        
+        editState.isEditing = lastAction.wasEditing
+        
+        if lastAction.wasEditing {
+            switch lastAction.editActionType {
+            case .add(let digit):
+                // If we were adding a digit, remove it
+                var newValues = lastAction.previousEditValues
+                newValues.remove(digit)
+                updateEditValues(at: lastAction.coordinate, with: newValues)
+            case .remove(let digit):
+                // If we were removing a digit, add it back
+                var newValues = lastAction.previousEditValues
+                newValues.insert(digit)
+                updateEditValues(at: lastAction.coordinate, with: newValues)
+            case .none:
+                // Handle regular value changes
+                updateEditValues(at: lastAction.coordinate, with: lastAction.previousEditValues)
+            case .clearAll:
+                updateEditValues(at: lastAction.coordinate, with: lastAction.previousEditValues)
+            }
+        } else {
+            if let previousValue = lastAction.previousValue {
+                workingGrid.add(CoordinateValue(r: lastAction.coordinate.r,
+                                              c: lastAction.coordinate.c,
+                                              s: lastAction.coordinate.s,
+                                              v: previousValue))
+            } else {
+                workingGrid.removeValue(at: lastAction.coordinate)
+            }
+            
+            updateEditValues(at: lastAction.coordinate, with: lastAction.previousEditValues)
+        }
+        
+        savedState = .unsaved
+    }
+
+    private func updateEditValues(at coordinate: Coordinate, with values: Set<Int>) {
+        editGrid.removeValues(at: coordinate)
+        if !values.isEmpty {
+            let editValues = CoordinateEditValues(r: coordinate.r,
+                                                c: coordinate.c,
+                                                s: coordinate.s,
+                                                values: values)
+            editGrid.grid.append(editValues)
         }
     }
 }
