@@ -39,6 +39,11 @@ struct GameView: View {
     private var hasUpdatedGrid: Bool {
         return workingGrid.grid.count > workingGrid.startingGrid.count || !editGrid.isEmpty
     }
+
+    @AppStorage("totalGamesCompleted") var totalGamesCompleted = 0
+    @AppStorage("totalEasyGamesCompleted") var totalEasyGamesCompleted = 0
+    @AppStorage("totalMediumGamesCompleted") var totalMediumGamesCompleted = 0
+    @AppStorage("totalHardGamesCompleted") var totalHardGamesCompleted = 0
     
     var body: some View {
         ZStack {
@@ -134,6 +139,7 @@ struct GameView: View {
                         
                     case .completedCorrectly:
                         Button("Go back") {
+                            saveUserStats()
                             dismiss()
                         }
                     case .hintSuccess(_):
@@ -202,6 +208,19 @@ struct GameView: View {
         modelContext.insert(gameState)
         try? modelContext.save()
         savedState = .saved
+    }
+
+    private func saveUserStats() {
+        totalGamesCompleted += 1
+
+        switch viewModel.difficulty {
+        case .easy:
+            totalEasyGamesCompleted += 1
+        case .medium:
+            totalMediumGamesCompleted += 1
+        case .hard:
+            totalHardGamesCompleted += 1
+        }
     }
 }
 

@@ -15,7 +15,7 @@ struct SudokuApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geometry in
-                ContentView()
+                MenuView()
                     .environment(WindowSize(size: geometry.size))
             }
         }

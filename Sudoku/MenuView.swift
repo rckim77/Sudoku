@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MenuView.swift
 //  Sudoku
 //
 //  Created by Raymond Kim on 6/2/20.
@@ -9,9 +9,9 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct MenuView: View {
     
-    private let viewModel = ContentViewModel()
+    private let viewModel = MenuViewModel()
     @Query var savedGameState: [SavedGameState]
     
     var body: some View {
@@ -42,22 +42,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                VStack(spacing: 18) {
-                    NavigationLink {
-                        HowToPlayView()
-                    } label: {
-                        Label("How to play", systemImage: "questionmark.circle")
-                            .font(.system(.headline, design: .rounded))
-                            .tint(Color("dynamicDarkGray"))
-                    }
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        Label("Settings", systemImage: "gear")
-                            .font(.system(.headline, design: .rounded))
-                            .tint(Color("dynamicDarkGray"))
-                    }
-                }
+                MenuNavigationLinks()
             }
             .fullBackgroundStyle()
         }
@@ -66,7 +51,7 @@ struct ContentView: View {
 
 #Preview {
     GeometryReader { geometry in
-        ContentView()
+        MenuView()
             .environment(WindowSize(size: geometry.size))
     }
 }
