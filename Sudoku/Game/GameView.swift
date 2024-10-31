@@ -250,9 +250,7 @@ struct GameView: View {
                 newValues.insert(digit)
                 updateEditValues(at: lastAction.coordinate, with: newValues)
             case .none:
-                // Handle regular value changes
-                updateEditValues(at: lastAction.coordinate, with: lastAction.previousEditValues)
-            case .clearAll:
+                // Handle regular value changes and clearAll
                 updateEditValues(at: lastAction.coordinate, with: lastAction.previousEditValues)
             }
         } else {

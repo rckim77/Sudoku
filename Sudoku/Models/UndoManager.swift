@@ -4,7 +4,6 @@ enum EditActionType {
     case none
     case add(digit: Int)
     case remove(digit: Int)
-    case clearAll
 }
 
 struct UndoAction {
@@ -34,4 +33,4 @@ struct UndoAction {
     func clear() {
         actions.removeAll()
     }
-} 
+}

@@ -38,7 +38,7 @@ struct ClearButton: View {
                     previousValue: previousValue,
                     previousEditValues: previousEditValues,
                     wasEditing: editState.isEditing,
-                    editActionType: .clearAll
+                    editActionType: .none
                 ))
                 
                 self.savedState = .unsaved
