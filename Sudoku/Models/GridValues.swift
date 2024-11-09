@@ -52,7 +52,7 @@ import SwiftUI
         populateEmptyColorGrid(grid)
     }
     
-    func resetFrom(savedGame: SavedGameState) {
+    func resetFrom(savedGame: GameConfig) {
         grid = savedGame.workingGrid
         startingGrid = savedGame.startingGrid
         colorGrid = savedGame.colorGrid
@@ -200,5 +200,19 @@ import SwiftUI
             let coordinateColor = CoordinateColor(coordinate: coordinateValue, color: .black)
             colorGrid.update(with: coordinateColor)
         }
+    }
+}
+
+extension GridValues: Hashable {
+    static func == (lhs: GridValues, rhs: GridValues) -> Bool {
+        return lhs.grid == rhs.grid &&
+        lhs.colorGrid == rhs.colorGrid &&
+        lhs.startingGrid == rhs.startingGrid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(grid)
+        hasher.combine(colorGrid)
+        hasher.combine(startingGrid)
     }
 }

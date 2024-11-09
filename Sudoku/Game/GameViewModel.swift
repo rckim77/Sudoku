@@ -60,4 +60,14 @@ struct GameViewModel: ViewModel {
             return 16
         }
     }
+    
+//    func fetchNewBoard() async {
+//        do {
+//            let newBoard = try await GridFactory.randomGridForDifficulty(level: difficulty)
+//            // Update the working grid with the new board
+//            workingGrid.resetTo(newGrid: newBoard)
+//        } catch {
+//            // Handle error
+//        }
+//    }
 }
