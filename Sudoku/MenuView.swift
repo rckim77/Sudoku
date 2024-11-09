@@ -13,8 +13,7 @@ struct MenuView: View {
     
     private let viewModel = MenuViewModel()
     @Query var savedGameState: [GameConfig]
-    @State private var gameConfigs: [GameConfig] = []
-    @State var isLoading = false
+    @State var gameConfigs: [GameConfig] = []
     
     var body: some View {
         NavigationStack(path: $gameConfigs) {
@@ -32,7 +31,7 @@ struct MenuView: View {
                     }
                     HStack(spacing: viewModel.difficultyButtonHSpacing) {
                         ForEach(viewModel.difficultyLevels, id: \.self) { level in
-                            GameLevelButton(isLoading: $isLoading, gameConfigs: $gameConfigs, level: level)
+                            GameLevelButton(gameConfigs: $gameConfigs, level: level)
                         }
                     }
                 }

@@ -9,10 +9,11 @@
 import SwiftUI
 
 struct GameLevelButton: View {
-    
-    @Binding var isLoading: Bool
+
     @Binding var gameConfigs: [GameConfig]
     let level: Difficulty.Level
+    
+    @State private var isLoading = false
     
     var body: some View {
         Button(action: {
@@ -40,5 +41,5 @@ struct GameLevelButton: View {
 }
 
 #Preview {
-    GameLevelButton(isLoading: .constant(false), gameConfigs: .constant([]), level: .easy)
+    GameLevelButton(gameConfigs: .constant([]), level: .easy)
 }
