@@ -13,10 +13,11 @@ struct MenuView: View {
     
     private let viewModel = MenuViewModel()
     @Query var savedGameState: [GameConfig]
-    @State private var gameState: [GameConfig] = []
+    @State private var gameConfigs: [GameConfig] = []
+    @State var isLoading = false
     
     var body: some View {
-        NavigationStack(path: $gameState) {
+        NavigationStack(path: $gameConfigs) {
             VStack(spacing: viewModel.buttonsVSpacing) {
                 Text("Sudoku AI")
                     .font(.system(.largeTitle, design: .rounded))
@@ -31,13 +32,7 @@ struct MenuView: View {
                     }
                     HStack(spacing: viewModel.difficultyButtonHSpacing) {
                         ForEach(viewModel.difficultyLevels, id: \.self) { level in
-                            let startingGrid = GridFactory.randomGridForDifficulty(level: level)
-                            let gameConfig = GameConfig(savedState: .startedUnsaved, workingGrid: startingGrid, startingGrid: startingGrid, colorGrid: [], userAction: .none, selectedCell: nil, isEditing: false, editValues: [], difficulty: level)
-                            NavigationLink(value: gameConfig) {
-                                Text(level.rawValue)
-                                    .font(.system(.headline, design: .rounded))
-                            }
-                            .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
+                            GameLevelButton(isLoading: $isLoading, gameConfigs: $gameConfigs, level: level)
                         }
                     }
                 }
