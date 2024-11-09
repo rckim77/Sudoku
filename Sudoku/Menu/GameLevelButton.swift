@@ -44,9 +44,11 @@ struct GameLevelButton: View {
                         group.cancelAll()
                         return result
                     }
+                    print("got result")
                     let gameConfig = GameConfig(savedState: .startedUnsaved, workingGrid: board, startingGrid: board, difficulty: level)
                     gameConfigs.append(gameConfig)
                 } catch {
+                    print("didn't get result, falling back to static grid")
                     let startingGrid = GridFactory.randomGridForDifficulty(level: level)
                     let gameConfig = GameConfig(savedState: .startedUnsaved, workingGrid: startingGrid, startingGrid: startingGrid, difficulty: level)
                     gameConfigs.append(gameConfig)
