@@ -12,7 +12,12 @@ struct API {
     
     enum APIError: Error {
         case invalidURL
+        case invalidStringGrid
+        case messageNotAString
     }
+
+    // DO NOT COMMIT THIS TOKEN
+    static let chatGPTKey = ""
     
     /// Helper method for POST requests sending JSON with basic error handling
     static func postURLRequest(url: String, requestBody: [String: Any]) throws -> URLRequest {
@@ -31,9 +36,6 @@ struct API {
     }
 
     static func getHint(grid: [CoordinateValue]) async throws -> ChatResponse? {
-        
-        // set to your ChatGPT API secret key (otherwise hint functionality won't work)
-        let bearerToken = ""
         var prompt: [[String: String]] = []
         let stringGrid = GridFactory.stringGridFor(grid: grid)
         let content = """
@@ -57,7 +59,7 @@ struct API {
         
         var urlRequest = try postURLRequest(url: "https://api.openai.com/v1/chat/completions", requestBody: requestBody)
 
-        urlRequest.addValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("Bearer \(API.chatGPTKey)", forHTTPHeaderField: "Authorization")
 
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
@@ -66,5 +68,82 @@ struct API {
         let chatResponse = try decoder.decode(ChatResponse.self, from: data)
 
         return chatResponse
+    }
+
+    static func generateSudokuBoard(difficulty: Difficulty.Level) async throws -> [CoordinateValue] {
+        let content = """
+            You are a Sudoku puzzle generator for people to solve. Generate a classic \(difficulty.rawValue.lowercased()) Sudoku starting board with a single solution given the JSON schema provided as an array of coordinate values. The objective is to fill a 9 by 9 grid with digits so that each column, each row, and each of the nine 3 by 3 subgrids that compose the grid contains all the digits from 1 to 9. For cells that are initially empty, do not return them at all in the array–only return starting coordinate values that populate the board. Ensure that the generated board is valid, solvable, and a suitable difficulty.
+        """
+        print(content)
+        let requestBody: [String: Any] = [
+            "model": "gpt-4o-mini",
+            "messages": [
+                ["role": "system", "content": content]
+            ],
+            "response_format": [
+                "type": "json_schema",
+                "json_schema": [
+                    "name": "sudoku_board",
+                    "schema": [
+                        "type": "object",
+                        "properties": [
+                            "coordinate_values": [
+                                "type": "array",
+                                "description": "An array of cells in the Sudoku board.",
+                                "items": [
+                                    "type": "object",
+                                    "properties": [
+                                        "r": [
+                                            "type": "number",
+                                            "description": "The row index relative to the square within the Sudoku board it's in, must be an integer between 0 and 2."
+                                        ],
+                                        "c": [
+                                            "type": "number",
+                                            "description": "The column index relative to the square within the Sudoku board it's in, must be an integer between 0 and 2."
+                                        ],
+                                        "s": [
+                                            "type": "number",
+                                            "description": "The square index of the Sudoku board, must be an integer between 0 and 8. A square is a 3 by 3 subgrid that contains all of the digits from 1 to 9. The index 0 maps to the top left subgrid, 1 maps to the top middle, 2 maps to the top right, 3 maps to the middle left, 4 maps to the center, 5 maps to the middle right, 6 maps to the bottom left, 7 maps to the bottom middle, and 8 maps to the bottom right subgrid."
+                                        ],
+                                        "v": [
+                                            "type": "number",
+                                            "description": "The value in the Sudoku coordinate, must be an integer between 1 and 9."
+                                        ]
+                                    ],
+                                    "required": ["r", "c", "s", "v"],
+                                    "additionalProperties": false
+                                ]
+                            ]
+                        ],
+                        "required": ["coordinate_values"],
+                        "additionalProperties": false
+                    ],
+                    "strict": true
+                ]
+            ]
+        ]
+        
+        var urlRequest = try postURLRequest(url: "https://api.openai.com/v1/chat/completions", requestBody: requestBody)
+        urlRequest.addValue("Bearer \(API.chatGPTKey)", forHTTPHeaderField: "Authorization")
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let chatResponse = try decoder.decode(ChatResponse.self, from: data)
+        
+        guard let stringGrid = chatResponse.choices.first?.message.content else {
+            throw APIError.messageNotAString
+        }
+
+        let jsonData = Data(stringGrid.utf8)
+        let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
+        
+        guard let coordinateValuesData = jsonObject?["coordinate_values"] as? [[String: Any]] else {
+            throw APIError.invalidStringGrid
+        }
+        
+        let coordinateValues = try decoder.decode([CoordinateValue].self, from: JSONSerialization.data(withJSONObject: coordinateValuesData))
+        
+        return coordinateValues
     }
 }

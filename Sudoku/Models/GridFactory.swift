@@ -13,7 +13,7 @@ typealias ShortCoordinate = (Int, Int, Int)
 
 enum GridFactory {
 
-    static func randomGridForDifficulty(level: Difficulty.Level) -> [CoordinateValue] {        
+    static func randomGridForDifficulty(level: Difficulty.Level) -> [CoordinateValue] {
         let randomNumber = Int.random(in: 0...2)
         switch level {
         case .easy:
