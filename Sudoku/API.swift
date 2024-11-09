@@ -94,19 +94,10 @@ struct API {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let chatResponse = try decoder.decode(ChatResponse.self, from: data)
         
-        guard let stringGrid = chatResponse.choices.first?.message.content else {
+        guard let coordinateValues = chatResponse.coordinateValues else {
             throw APIError.messageNotAString
         }
 
-        let jsonData = Data(stringGrid.utf8)
-        let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
-        
-        guard let coordinateValuesData = jsonObject?["coordinate_values"] as? [[String: Any]] else {
-            throw APIError.invalidStringGrid
-        }
-        
-        let coordinateValues = try decoder.decode([CoordinateValue].self, from: JSONSerialization.data(withJSONObject: coordinateValuesData))
-        
         return coordinateValues
     }
 }
