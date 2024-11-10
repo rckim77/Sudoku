@@ -98,26 +98,10 @@ struct GameView: View {
                                       savedState: $savedState,
                                       undoManager: undoManager)
                             EditButton(editState: editState)
-                            HintButton(isLoading: $hintButtonIsLoading) {
-                                Task {
-                                    do {
-                                        hintButtonIsLoading = true
-                                        if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid, difficulty: viewModel.difficulty) {
-                                            alertItem = .hintSuccess(hint: hintMessage)
-                                            alertIsPresented = true
-                                        } else {
-                                            alertItem = .hintError
-                                            alertIsPresented = true
-                                        }
-                                        hintButtonIsLoading = false
-                                    } catch {
-                                        hintButtonIsLoading = false
-                                        alertItem = .hintError
-                                        alertIsPresented = true
-                                    }
-                                }
-                            }
-                            .disabled(hintButtonIsLoading)
+                            HintButton(alertItem: $alertItem,
+                                      alertIsPresented: $alertIsPresented,
+                                      grid: workingGrid.grid,
+                                      difficulty: viewModel.difficulty)
                             Button("Save", systemImage: "square.and.arrow.down") {
                                 checkSaveIfNeeded()
                                 saveButtonAnimate.toggle()
