@@ -7,8 +7,10 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
+    @Environment(\.modelContext) private var modelContext
     
     #if os(visionOS)
     @State private var animate = false
@@ -17,6 +19,8 @@ struct SettingsView: View {
     
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     private let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+
+    @State private var showingDeleteConfirmation = false
 
     var body: some View {
         VStack(spacing: 24) {
@@ -32,6 +36,31 @@ struct SettingsView: View {
             }) {
                 Text("Website")
                     .font(Font.system(.headline, design: .rounded))
+            }
+            Button(action: {
+                // clear user defaults (e.g., achievements)
+                if let bundleID = Bundle.main.bundleIdentifier {
+                    UserDefaults.standard.removePersistentDomain(forName: bundleID)
+                }
+                
+                // clear persisted data (e.g., saved game)
+                do {
+                    try modelContext.delete(model: GameConfig.self)
+                    try modelContext.save()
+                } catch {
+                    print("Error deleting SwiftData models: \(error)")
+                }
+                
+                showingDeleteConfirmation = true
+            }) {
+                Text("Delete saved data")
+                    .font(Font.system(.headline, design: .rounded))
+                    .foregroundColor(.red)
+            }
+            .alert("Data Deleted", isPresented: $showingDeleteConfirmation) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("Data has been deleted successfully.")
             }
             #if os(visionOS)
             HStack(spacing: 0) {
