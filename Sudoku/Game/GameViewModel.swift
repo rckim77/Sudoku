@@ -38,9 +38,9 @@ struct GameViewModel: ViewModel {
         }
     }
     
-    func getHint(grid: [CoordinateValue]) async throws -> String? {
+    func getHint(grid: [CoordinateValue], difficulty: Difficulty.Level) async throws -> String? {
         do {
-            guard let response = try await API.getHint(grid: grid), let first = response.choices.first else {
+            guard let response = try await API.getHint(grid: grid, difficulty: difficulty), let first = response.choices.first else {
                 return nil
             }
             return first.message.content

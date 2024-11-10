@@ -31,13 +31,14 @@ struct API {
         return urlRequest
     }
 
-    static func getHint(grid: [CoordinateValue]) async throws -> OpenAIChatCompletionResponseBody? {
+    static func getHint(grid: [CoordinateValue], difficulty: Difficulty.Level) async throws -> OpenAIChatCompletionResponseBody? {
         let openAIService = AIProxy.openAIService(
             partialKey: "v2|c7d0ff39|qrIzn_OLLetLdcWN",
             serviceURL: "https://api.aiproxy.pro/c160196f/657d65d2"
         )
 
         let stringGrid = GridFactory.stringGridFor(grid: grid)
+        let difficultyString = difficulty.rawValue.lowercased()
         let content = """
             You are a sudoku expert and assistant. Provide a single succinct hint specific to the following sudoku 
             puzzle without giving away too much. The sudoku will be represented as an array of arrays where each 
@@ -53,7 +54,13 @@ struct API {
         
             When explaining the hint, do not use certain words as described earlier. Instead of subgrid, say square. Do not
             refer to rows, columns, and subgrids by their indices but rather in more user-friendly terms that are more visual
-            and intuitive (e.g., top leftmost square has a 1–the cell next to it can only be two possible numbers).
+            and intuitive (e.g., top leftmost square has a 1–the cell next to it can only be two possible numbers). When
+            describing possible integers within a cell, call it them candidates.
+        
+            Make sure the hint is appropriate for the difficulty of the sudoku board. This sudoku has a difficulty level of
+            \(difficultyString). The harder the difficulty, the less helpful the hint should be. The easier the sudoku, the more
+            obvious the hint should be. Make sure the hint helps the user problem solve. Do not give overly obvious hints (e.g., 
+            this cell is a 4). Use terms that a sudoku player would understand (e.g., X-Wing, naked pairs, hidden pairs).
 
             Here is the sudoku:\n \(stringGrid)
         """

@@ -102,7 +102,7 @@ struct GameView: View {
                                 Task {
                                     do {
                                         hintButtonIsLoading = true
-                                        if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
+                                        if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid, difficulty: viewModel.difficulty) {
                                             alertItem = .hintSuccess(hint: hintMessage)
                                             alertIsPresented = true
                                         } else {
