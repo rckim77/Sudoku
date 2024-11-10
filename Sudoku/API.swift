@@ -12,8 +12,6 @@ struct API {
     
     enum APIError: Error {
         case invalidURL
-        case invalidStringGrid
-        case messageNotAString
     }
 
     // DO NOT COMMIT THIS TOKEN
@@ -68,36 +66,5 @@ struct API {
         let chatResponse = try decoder.decode(ChatResponse.self, from: data)
 
         return chatResponse
-    }
-
-    static func generateSudokuBoard(difficulty: Difficulty.Level) async throws -> [CoordinateValue] {
-        let content = """
-            You are a Sudoku puzzle generator for people to solve. Generate a classic \(difficulty.rawValue.lowercased()) Sudoku starting board with a single solution given the JSON schema provided as an array of coordinate values. The objective is to fill a 9 by 9 grid with digits so that each column, each row, and each of the nine 3 by 3 subgrids that compose the grid contains all the digits from 1 to 9. For cells that are initially empty, do not return them at all in the array–only return starting coordinate values that populate the board. Ensure that the generated board is valid, solvable, and a suitable difficulty.
-        """
-
-        let requestBody: [String: Any] = [
-            "model": "gpt-4o-mini",
-            "messages": [
-                ["role": "system", "content": content]
-            ],
-            "response_format": [
-                "type": "json_schema",
-                "json_schema": SudokuSchema.schema
-            ]
-        ]
-        
-        var urlRequest = try postURLRequest(url: "https://api.openai.com/v1/chat/completions", requestBody: requestBody)
-        urlRequest.addValue("Bearer \(API.chatGPTKey)", forHTTPHeaderField: "Authorization")
-        let (data, _) = try await URLSession.shared.data(for: urlRequest)
-        
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let chatResponse = try decoder.decode(ChatResponse.self, from: data)
-        
-        guard let coordinateValues = chatResponse.coordinateValues else {
-            throw APIError.messageNotAString
-        }
-
-        return coordinateValues
     }
 }
