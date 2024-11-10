@@ -31,7 +31,7 @@ struct HintButton: View {
     private func getHint() async {
         do {
             isLoading = true
-            if let response = try await API.getHint(grid: grid, difficulty: difficulty), let hintMessage = response.choices.first?.message.content {
+            if let hintMessage = try await API.getHint(grid: grid, difficulty: difficulty) {
                 alertItem = .hintSuccess(hint: hintMessage)
                 alertIsPresented = true
             } else {

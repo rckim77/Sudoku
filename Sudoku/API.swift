@@ -31,7 +31,7 @@ struct API {
         return urlRequest
     }
 
-    static func getHint(grid: [CoordinateValue], difficulty: Difficulty.Level) async throws -> OpenAIChatCompletionResponseBody? {
+    static func getHint(grid: [CoordinateValue], difficulty: Difficulty.Level) async throws -> String? {
         let openAIService = AIProxy.openAIService(
             partialKey: "v2|c7d0ff39|qrIzn_OLLetLdcWN",
             serviceURL: "https://api.aiproxy.pro/c160196f/657d65d2"
@@ -68,7 +68,7 @@ struct API {
         do {
             let requestBody = OpenAIChatCompletionRequestBody(model: "gpt-4o-mini", messages: [.system(content: .text(content))])
             let response = try await openAIService.chatCompletionRequest(body: requestBody)
-            return response
+            return response.choices.first?.message.content
         } catch AIProxyError.unsuccessfulRequest(statusCode: let statusCode, responseBody: let responseBody) {
             print("Received \(statusCode) status code with response body: \(responseBody)")
             return nil
