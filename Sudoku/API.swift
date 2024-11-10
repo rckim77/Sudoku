@@ -7,15 +7,13 @@
 //
 
 import Foundation
+import AIProxy
 
 struct API {
     
     enum APIError: Error {
         case invalidURL
     }
-
-    // DO NOT COMMIT THIS TOKEN
-    static let chatGPTKey = ""
     
     /// Helper method for POST requests sending JSON with basic error handling
     static func postURLRequest(url: String, requestBody: [String: Any]) throws -> URLRequest {
@@ -33,7 +31,12 @@ struct API {
         return urlRequest
     }
 
-    static func getHint(grid: [CoordinateValue]) async throws -> ChatResponse? {
+    static func getHint(grid: [CoordinateValue]) async throws -> OpenAIChatCompletionResponseBody? {
+        let openAIService = AIProxy.openAIService(
+            partialKey: "v2|c7d0ff39|qrIzn_OLLetLdcWN",
+            serviceURL: "https://api.aiproxy.pro/c160196f/657d65d2"
+        )
+
         var prompt: [[String: String]] = []
         let stringGrid = GridFactory.stringGridFor(grid: grid)
         let content = """
@@ -50,21 +53,16 @@ struct API {
 
         prompt.append(["role": "system", "content": content])
         
-        let requestBody: [String: Any] = [
-            "model": "gpt-4o-mini",
-            "messages": prompt
-        ]
-        
-        var urlRequest = try postURLRequest(url: "https://api.openai.com/v1/chat/completions", requestBody: requestBody)
-
-        urlRequest.addValue("Bearer \(API.chatGPTKey)", forHTTPHeaderField: "Authorization")
-
-        let (data, _) = try await URLSession.shared.data(for: urlRequest)
-        
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let chatResponse = try decoder.decode(ChatResponse.self, from: data)
-
-        return chatResponse
+        do {
+            let requestBody = OpenAIChatCompletionRequestBody(model: "gpt-4o-mini", messages: [.system(content: .text(content))])
+            let response = try await openAIService.chatCompletionRequest(body: requestBody)
+            return response
+        } catch AIProxyError.unsuccessfulRequest(statusCode: let statusCode, responseBody: let responseBody) {
+            print("Received \(statusCode) status code with response body: \(responseBody)")
+            return nil
+        } catch {
+            print("Could not create OpenAI chat completion: \(error.localizedDescription)")
+            return nil
+        }
     }
 }
