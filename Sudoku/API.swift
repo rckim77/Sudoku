@@ -37,21 +37,26 @@ struct API {
             serviceURL: "https://api.aiproxy.pro/c160196f/657d65d2"
         )
 
-        var prompt: [[String: String]] = []
         let stringGrid = GridFactory.stringGridFor(grid: grid)
         let content = """
-            You are a sudoku assistant. Provide a single succinct hint specific to the following sudoku puzzle 
-            without giving away too much. The sudoku will be represented as an array of arrays where each array
-            represents a square. There are 9 squares in the sudoku. Each square contains 9 integer values. If there
-            is a 0 in the square, that means it is empty and we need to input a valid integer 1 through 9. The
-            first square in the array is the top left square of the sudoku. The second square is the top center
-            square. The third square is the top right square. The fourth square is the middle left square. The
-            fifth square is the middle center square. The sixth square is the middle right square. The seventh
-            square is the bottom left square. The eighth square is the bottom center square. The ninth square is
-            the bottom right square. Here is the sudoku:\n \(stringGrid)
-        """
+            You are a sudoku expert and assistant. Provide a single succinct hint specific to the following sudoku 
+            puzzle without giving away too much. The sudoku will be represented as an array of arrays where each 
+            array represents a 3 x 3 subgrid in a specific order. There are 9 subgrids in the sudoku board. Each 
+            solved subgrid contains the numbers 1 to 9 only once each. The overall sudoku board must follow standard 
+            sudoku rules. If there is a 0 in the input subgrid, that means that cell is unsolved. 
+        
+            The first array in the input board is the top leftmost subgrid of the sudoku board. The second array 
+            is the top center subgrid. The third array is the top rightmost subgrid. The fourth array is the middle 
+            row leftmost subgrid. The fifth array is the middle row center subgrid. The sixth array is the middle row 
+            rightmost subgrid. The seventh array represents is the bottom leftmost subgrid. The eighth array is the bottom 
+            center subgrid. The ninth array is the bottom rightmost subgrid. 
+        
+            When explaining the hint, do not use certain words as described earlier. Instead of subgrid, say square. Do not
+            refer to rows, columns, and subgrids by their indices but rather in more user-friendly terms that are more visual
+            and intuitive (e.g., top leftmost square has a 1–the cell next to it can only be two possible numbers).
 
-        prompt.append(["role": "system", "content": content])
+            Here is the sudoku:\n \(stringGrid)
+        """
         
         do {
             let requestBody = OpenAIChatCompletionRequestBody(model: "gpt-4o-mini", messages: [.system(content: .text(content))])
