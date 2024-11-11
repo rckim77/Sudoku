@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftData
 
-enum SavedState {
+enum SavedState: Codable {
     case startedUnsaved
     case startedSaved
     case saved
@@ -21,7 +21,7 @@ struct GameView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     
-    @Query private var savedGameState: [SavedGameState]
+    @Query private var savedGameState: [GameConfig]
 
     @State var savedState: SavedState
     @State private(set) var selectedCell = SelectedCell()
@@ -98,26 +98,10 @@ struct GameView: View {
                                       savedState: $savedState,
                                       undoManager: undoManager)
                             EditButton(editState: editState)
-                            HintButton(isLoading: $hintButtonIsLoading) {
-                                Task {
-                                    do {
-                                        hintButtonIsLoading = true
-                                        if let hintMessage = try await viewModel.getHint(grid: workingGrid.grid) {
-                                            alertItem = .hintSuccess(hint: hintMessage)
-                                            alertIsPresented = true
-                                        } else {
-                                            alertItem = .hintError
-                                            alertIsPresented = true
-                                        }
-                                        hintButtonIsLoading = false
-                                    } catch {
-                                        hintButtonIsLoading = false
-                                        alertItem = .hintError
-                                        alertIsPresented = true
-                                    }
-                                }
-                            }
-                            .disabled(hintButtonIsLoading)
+                            HintButton(alertItem: $alertItem,
+                                      alertIsPresented: $alertIsPresented,
+                                      grid: workingGrid.grid,
+                                      difficulty: viewModel.difficulty)
                             Button("Save", systemImage: "square.and.arrow.down") {
                                 checkSaveIfNeeded()
                                 saveButtonAnimate.toggle()
@@ -211,9 +195,9 @@ struct GameView: View {
     
     /// Currently we only save one game. To fetch, always get the first SavedGameState object in the model container.
     private func save() {
-        let gameState = SavedGameState(workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty)
+        let gameState = GameConfig(savedState: savedState, workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty)
         
-        try? modelContext.delete(model: SavedGameState.self)
+        try? modelContext.delete(model: GameConfig.self)
         modelContext.insert(gameState)
         try? modelContext.save()
         savedState = .saved

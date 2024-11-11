@@ -1,5 +1,5 @@
 //
-//  SavedGameState.swift
+//  GameConfig.swift
 //  Sudoku
 //
 //  Created by Ray Kim on 7/3/24.
@@ -10,8 +10,9 @@ import Foundation
 import SwiftData
 
 @Model
-final class SavedGameState {
+final class GameConfig {
 
+    var savedState: SavedState
     var workingGrid: [CoordinateValue]
     var startingGrid: [CoordinateValue]
     var colorGrid: Set<CoordinateColor>
@@ -21,7 +22,8 @@ final class SavedGameState {
     var editValues: [CoordinateEditValues]
     var difficulty: Difficulty.Level
     
-    init(workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor>, userAction: UserAction.ActionType, selectedCell: Coordinate?, isEditing: Bool, editValues: [CoordinateEditValues], difficulty: Difficulty.Level) {
+    init(savedState: SavedState, workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor> = [], userAction: UserAction.ActionType = .none, selectedCell: Coordinate? = nil, isEditing: Bool = false, editValues: [CoordinateEditValues] = [], difficulty: Difficulty.Level) {
+        self.savedState = savedState
         self.workingGrid = workingGrid
         self.startingGrid = startingGrid
         self.colorGrid = colorGrid

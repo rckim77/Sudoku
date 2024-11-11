@@ -19,6 +19,6 @@ struct SudokuApp: App {
                     .environment(WindowSize(size: geometry.size))
             }
         }
-        .modelContainer(for: SavedGameState.self)
+        .modelContainer(for: GameConfig.self)
     }
 }

@@ -61,6 +61,13 @@
             ReferencedContainer = "container:Sudoku.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "AIPROXY_DEVICE_CHECK_BYPASS"
+            value = "4b422179-0d3b-487e-83e7-ec85232d61db"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
