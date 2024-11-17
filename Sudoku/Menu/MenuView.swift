@@ -39,19 +39,7 @@ struct MenuView: View {
             }
             .fullBackgroundStyle()
             .navigationDestination(for: GameConfig.self) { gameConfig in
-                let selectedCell = SelectedCell(coordinate: gameConfig.selectedCell)
-                let userAction = UserAction(action: gameConfig.userAction)
-                let editState = EditState(isEditing: gameConfig.isEditing)
-                let workingGrid = GridValues(grid: gameConfig.workingGrid, startingGrid: gameConfig.startingGrid, colorGrid: gameConfig.colorGrid)
-                let editGrid = EditGridValues(grid: gameConfig.editValues)
-                let viewModel = GameViewModel(difficulty: gameConfig.difficulty)
-                GameView(savedState: gameConfig.savedState,
-                         selectedCell: selectedCell,
-                         userAction: userAction,
-                         editState: editState,
-                         workingGrid: workingGrid,
-                         editGrid: editGrid,
-                         viewModel: viewModel)
+                GameView(gameConfig)
             }
         }
     }
