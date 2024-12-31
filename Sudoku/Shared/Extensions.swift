@@ -24,6 +24,10 @@ extension View {
     var isVision: Bool {
         UIDevice.current.userInterfaceIdiom == .vision
     }
+    
+    func shimmer() -> some View {
+        modifier(ShimmerEffect())
+    }
 }
 
 extension ViewModifier {

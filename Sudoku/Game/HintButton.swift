@@ -44,6 +44,7 @@ struct HintButton: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .redacted(reason: .placeholder)
+        .shimmer()
     }
     
     var body: some View {
