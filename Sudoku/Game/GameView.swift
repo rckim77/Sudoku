@@ -108,10 +108,8 @@ struct GameView: View {
                                       savedState: $savedState,
                                       undoManager: undoManager)
                             EditButton(editState: editState)
-                            HintButton(alertItem: $alertItem,
-                                      alertIsPresented: $alertIsPresented,
-                                      grid: workingGrid.grid,
-                                      difficulty: viewModel.difficulty)
+                            HintButton(grid: workingGrid.grid,
+                                     difficulty: viewModel.difficulty)
                             Button("Save", systemImage: "square.and.arrow.down") {
                                 checkSaveIfNeeded()
                                 saveButtonAnimate.toggle()

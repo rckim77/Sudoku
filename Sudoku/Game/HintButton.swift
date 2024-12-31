@@ -9,13 +9,42 @@
 import SwiftUI
 
 struct HintButton: View {
+    
+    enum LoadingState: Equatable {
+        case idle, loading, loaded(message: String), error
+        
+        var rawValue: String {
+            switch self {
+                case .idle: return ""
+                case .loading: return "Generating hint..."
+                case .loaded(message: let message): return message
+                case .error: return "Oops Something went wrong. Try again."
+            }
+        }
+    }
 
-    @Binding var alertItem: AlertItem?
-    @Binding var alertIsPresented: Bool
+    @State private var showingHintSheet = false
+    @State private var hintState: LoadingState = .idle
+    
     let grid: [CoordinateValue]
     let difficulty: Difficulty.Level
-
-    @State private var isLoading = false
+    
+    private var textView: some View {
+        Text(hintState.rawValue)
+            .font(.system(.body, design: .rounded))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+    
+    private var placeholderView: some View {
+        VStack {
+            Text("placeholder text placeholder text placeholder")
+            Text("placeholder text placeholder text placeholder")
+            Text("placeholder text placeholder text placeholder")
+            Text("placeholder text placeholder text placeholder")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .redacted(reason: .placeholder)
+    }
     
     var body: some View {
         Button("Hint", systemImage: "lightbulb.max") {
@@ -24,24 +53,36 @@ struct HintButton: View {
             }
         }
         .tint(.primary)
-        .symbolEffect(.pulse, value: isLoading)
-        .disabled(isLoading)
+        .symbolEffect(.pulse, value: hintState == .loading)
+        .disabled(hintState == .loading)
+        .sheet(isPresented: $showingHintSheet) {
+            Group {
+                if hintState == .loading {
+                    placeholderView
+                } else {
+                    textView
+                }
+            }
+            .padding(16)
+            .transition(.opacity)
+            .presentationDetents([.height(180)])
+            .presentationDragIndicator(.visible)
+            .animation(.easeInOut, value: hintState)
+        }
     }
     
     private func getHint() async {
         do {
-            isLoading = true
-            if let hintMessage = try await API.getHint(grid: grid, difficulty: difficulty) {
-                alertItem = .hintSuccess(hint: hintMessage)
-                alertIsPresented = true
+            showingHintSheet = true
+            hintState = .loading
+            
+            if let hint = try await API.getHint(grid: grid, difficulty: difficulty) {
+                hintState = .loaded(message: hint)
             } else {
-                alertItem = .hintError
-                alertIsPresented = true
+                hintState = .error
             }
         } catch {
-            alertItem = .hintError
-            alertIsPresented = true
+            hintState = .error
         }
-        isLoading = false
     }
 }
