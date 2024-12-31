@@ -18,7 +18,7 @@ struct HintButton: View {
                 case .idle: return ""
                 case .loading: return "Generating hint..."
                 case .loaded(message: let message): return message
-                case .error: return "Oops Something went wrong. Try again."
+                case .error: return "Oops! Something went wrong. Try again."
             }
         }
     }
@@ -29,6 +29,19 @@ struct HintButton: View {
     let grid: [CoordinateValue]
     let difficulty: Difficulty.Level
     
+    private var placeholderText: String {
+        let text =
+        """
+            placeholder text placeholder text placeholder text placeholder text
+            placeholder text placeholder text placeholder text placeholder text
+            placeholder text placeholder text placeholder text placeholder text
+            placeholder text placeholder text placeholder text placeholder text
+            placeholder text placeholder text placeholder text placeholder text
+        """
+        
+        return text
+    }
+    
     private var textView: some View {
         Text(hintState.rawValue)
             .font(.system(.body, design: .rounded))
@@ -36,15 +49,10 @@ struct HintButton: View {
     }
     
     private var placeholderView: some View {
-        VStack {
-            Text("placeholder text placeholder text placeholder")
-            Text("placeholder text placeholder text placeholder")
-            Text("placeholder text placeholder text placeholder")
-            Text("placeholder text placeholder text placeholder")
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .redacted(reason: .placeholder)
-        .shimmer()
+        Text(placeholderText)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .redacted(reason: .placeholder)
+            .shimmer()
     }
     
     var body: some View {
@@ -66,7 +74,7 @@ struct HintButton: View {
             }
             .padding(16)
             .transition(.opacity)
-            .presentationDetents([.height(180)])
+            .presentationDetents([.medium, .height(170)])
             .presentationDragIndicator(.visible)
             .animation(.easeInOut, value: hintState)
         }
