@@ -13,14 +13,14 @@ struct ShimmerEffect: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .mask(
+            .mask {
                 Rectangle()
                     .fill(
                         LinearGradient(
                             gradient: Gradient(stops: [
                                 .init(color: .clear, location: 0),
-                                .init(color: .black.opacity(0.6), location: 0.45),
-                                .init(color: .black.opacity(0.6), location: 0.55),
+                                .init(color: .black.opacity(0.5), location: 0.45),
+                                .init(color: .black.opacity(0.5), location: 0.55),
                                 .init(color: .clear, location: 1)
                             ]),
                             startPoint: .topLeading,
@@ -29,9 +29,9 @@ struct ShimmerEffect: ViewModifier {
                     )
                     .offset(x: -100)
                     .offset(x: phase)
-            )
+            }
             .onAppear {
-                withAnimation(.linear(duration: 2.5).repeatForever(autoreverses: false)) {
+                withAnimation(.linear(duration: 3).delay(0.25).repeatForever(autoreverses: false)) {
                     phase = 400
                 }
             }

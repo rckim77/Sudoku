@@ -55,7 +55,7 @@ struct API {
             When explaining the hint, do not use certain words as described earlier. Instead of subgrid, say square. Do not
             refer to rows, columns, and subgrids by their indices but rather in more user-friendly terms that are more visual
             and intuitive (e.g., top leftmost square has a 1–the cell next to it can only be two possible numbers). When
-            describing possible integers within a cell, call them candidates.
+            describing possible integers within a cell, call them candidates. Refer to the zeroes as empty cells, do not say zero.
         
             Make sure the hint is appropriate for the difficulty of the sudoku board. This sudoku has a difficulty level of
             \(difficultyString). The harder the difficulty, the less helpful the hint should be. The easier the sudoku, the more

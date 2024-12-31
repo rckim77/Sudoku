@@ -23,7 +23,14 @@ struct HintButton: View {
         }
     }
 
+    /// Note: used only for visionOS
+    @Binding var alertItem: AlertItem?
+    /// Note: used only for visionOS
+    @Binding var alertIsPresented: Bool
+    
+    /// Note: used for iOS and iPadOS
     @State private var showingHintSheet = false
+    /// Note: used for iOS and iPadOS
     @State private var hintState: LoadingState = .idle
     
     let grid: [CoordinateValue]
@@ -82,16 +89,31 @@ struct HintButton: View {
     
     private func getHint() async {
         do {
-            showingHintSheet = true
+            showingHintSheet = !isVision
             hintState = .loading
             
             if let hint = try await API.getHint(grid: grid, difficulty: difficulty) {
                 hintState = .loaded(message: hint)
+
+                if isVision {
+                    alertItem = .hintSuccess(hint: hint)
+                    alertIsPresented = true
+                }
             } else {
                 hintState = .error
+
+                if isVision {
+                    alertItem = .hintError
+                    alertIsPresented = true
+                }
             }
         } catch {
             hintState = .error
+
+            if isVision {
+                alertItem = .hintError
+                alertIsPresented = true
+            }
         }
     }
 }
