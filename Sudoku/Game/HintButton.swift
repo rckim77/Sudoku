@@ -111,15 +111,8 @@ struct HintButton: View {
                     alertIsPresented = true
                 }
             }
-        } catch API.APIError.quotaExceeded {
-            hintState = .error(.quotaExceeded)
-            
-            if isVision {
-                alertItem = .hintErrorQuota
-                alertIsPresented = true
-            }
         } catch {
-            hintState = .error(nil)
+            hintState = .error(error as? API.APIError)
 
             if isVision {
                 alertItem = .hintError
