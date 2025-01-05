@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AlertItem {
+enum AlertItem: Equatable {
     case completedCorrectly
     case completedIncorrectly
     case hintSuccess(hint: String)

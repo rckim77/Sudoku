@@ -188,6 +188,11 @@ struct GameView: View {
         .onReceive(timer) { _ in
             elapsedTime += 1
         }
+        .onChange(of: alertIsPresented, { oldValue, newValue in
+            if newValue, alertItem == .completedCorrectly {
+                stopTimer()
+            }
+        })
         .onDisappear() {
             stopTimer()
             switch savedState {
