@@ -20,9 +20,9 @@ struct HintButton: View {
                 case .loaded(message: let message): return message
             case .error(let errorType):
                 if case .quotaExceeded = errorType {
-                    return "Quota exceeded. Please try again later."
+                    return AlertItem.hintErrorQuota.message
                 }
-                return "Oops! Something went wrong. Try again."
+                return AlertItem.hintError.message
             }
         }
     }
