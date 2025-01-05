@@ -50,12 +50,14 @@ struct API {
             1. For easy: Focus on single candidates or obvious patterns
             2. For medium: Look for hidden pairs or pointing pairs
             3. For hard: Suggest advanced techniques like X-Wings or XY-Wings
-            4. Always verify numbers mentioned in your hint exist in their stated positions
+            4. Always verify numbers mentioned in your hint are valid in their stated positions. Double-check 
+               that suggested numbers to place in empty cells do not already have a digit there in the input 
+               grid. A hint is valid if it does not violate standard Sudoku rules.
             5. Use at most 2 sentences
             6. Never give away direct solutions
             7. Use terminology that is appropriate when helping a human and not a computer. When referring
-               to rows and columns, make it clear which ones (e.g., fourth row from the top).
-
+               to rows and columns, make it clear which ones (e.g., fourth row from the top). Refer to 0 as
+               an empty cell.
         """
         
         do {
