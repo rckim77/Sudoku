@@ -34,18 +34,34 @@ struct GameView: View {
     @State private var hintButtonIsLoading: Bool = false
     @State private var saveButtonAnimate: Bool = false
     @State private(set) var undoManager = UndoManager()
-
     let viewModel: GameViewModel
     
-    private var hasUpdatedGrid: Bool {
-        return workingGrid.grid.count > workingGrid.startingGrid.count || !editGrid.isEmpty
-    }
+    // MARK: - Timer
+
+    @State private var elapsedTime: TimeInterval = 0
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    // MARK: - Statistics
 
     @AppStorage("totalGamesCompleted") var totalGamesCompleted = 0
     @AppStorage("totalEasyGamesCompleted") var totalEasyGamesCompleted = 0
     @AppStorage("totalMediumGamesCompleted") var totalMediumGamesCompleted = 0
     @AppStorage("totalHardGamesCompleted") var totalHardGamesCompleted = 0
     
+    // MARK: - Computed properties
+    
+    private var hasUpdatedGrid: Bool {
+        return workingGrid.grid.count > workingGrid.startingGrid.count || !editGrid.isEmpty
+    }
+    
+    private var formattedElapsedTime: String {
+        let minutes = Int(elapsedTime) / 60 % 60
+        let seconds = Int(elapsedTime) % 60
+        return String(format: "%d:%02d", minutes, seconds)
+    }
+    
+    // MARK: - Initialization
+
     init(_ gameConfig: GameConfig) {
         self.savedState = gameConfig.savedState
         self.selectedCell = SelectedCell(coordinate: gameConfig.selectedCell)
@@ -81,10 +97,15 @@ struct GameView: View {
                             undoManager: undoManager)
                     Spacer()
                         .frame(maxHeight: viewModel.verticalSpacing)
-                    NewGameButton(alert: $alertItem,
+                    ZStack(alignment: .center) {
+                        NewGameButton(alert: $alertItem,
                                   alertIsPresented: $alertIsPresented,
                                   hasUpdatedGrid: hasUpdatedGrid,
                                   savedState: savedState)
+                        Text(formattedElapsedTime)
+                            .font(.system(.headline, design: .rounded))
+                            .offset(x: viewModel.timerHorizontalOffset)
+                    }
                     Spacer()
                         .frame(maxHeight: viewModel.bottomVerticalSpacing)
                 }
@@ -162,7 +183,11 @@ struct GameView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onReceive(timer) { _ in
+            elapsedTime += 1
+        }
         .onDisappear() {
+            stopTimer()
             switch savedState {
             case .startedUnsaved:
                 resetGrids(for: viewModel.difficulty)
@@ -172,6 +197,10 @@ struct GameView: View {
                 resetToPreviouslySavedGrid()
             }
         }
+    }
+
+    private func stopTimer() {
+        timer.upstream.connect().cancel()
     }
     
     private func resetGrids(for level: Difficulty.Level) {
