@@ -16,7 +16,11 @@ struct GameLevelButton: View {
     var body: some View {
         Button(action: {
             let startingGrid = GridFactory.randomGridForDifficulty(level: level)
-            let gameConfig = GameConfig(savedState: .startedUnsaved, workingGrid: startingGrid, startingGrid: startingGrid, difficulty: level)
+            let gameConfig = GameConfig(savedState: .startedUnsaved,
+                                        workingGrid: startingGrid,
+                                        startingGrid: startingGrid,
+                                        difficulty: level,
+                                        elapsedTime: 0)
             gameConfigs.append(gameConfig)
         }) {
             Text(level.rawValue)

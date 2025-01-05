@@ -38,7 +38,7 @@ struct GameView: View {
     
     // MARK: - Timer
 
-    @State private var elapsedTime: TimeInterval = 0
+    @State private var elapsedTime: TimeInterval
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     // MARK: - Statistics
@@ -70,6 +70,7 @@ struct GameView: View {
         self.workingGrid = GridValues(grid: gameConfig.workingGrid, startingGrid: gameConfig.startingGrid, colorGrid: gameConfig.colorGrid)
         self.editGrid = EditGridValues(grid: gameConfig.editValues)
         self.viewModel = .init(difficulty: gameConfig.difficulty)
+        self.elapsedTime = gameConfig.elapsedTime ?? 0
     }
     
     var body: some View {
@@ -234,7 +235,7 @@ struct GameView: View {
     
     /// Currently we only save one game. To fetch, always get the first SavedGameState object in the model container.
     private func save() {
-        let gameState = GameConfig(savedState: savedState, workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty)
+        let gameState = GameConfig(savedState: savedState, workingGrid: workingGrid.grid, startingGrid: workingGrid.startingGrid, colorGrid: workingGrid.colorGrid, userAction: userAction.action, selectedCell: selectedCell.coordinate, isEditing: editState.isEditing, editValues: editGrid.grid, difficulty: viewModel.difficulty, elapsedTime: elapsedTime)
         
         try? modelContext.delete(model: GameConfig.self)
         modelContext.insert(gameState)
@@ -310,7 +311,8 @@ struct GameView: View {
         let gameConfig = GameConfig(savedState: .startedUnsaved,
                                     workingGrid: startingGrid,
                                     startingGrid: startingGrid,
-                                    difficulty: .easy)
+                                    difficulty: .easy,
+                                    elapsedTime: 0)
         GameView(gameConfig)
             .environment(WindowSize(size: geometry.size))
     }
