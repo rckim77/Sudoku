@@ -46,6 +46,16 @@ struct GameView: View {
     @AppStorage("totalMediumGamesCompleted") var totalMediumGamesCompleted = 0
     @AppStorage("totalHardGamesCompleted") var totalHardGamesCompleted = 0
     
+    init(_ gameConfig: GameConfig) {
+        self.savedState = gameConfig.savedState
+        self.selectedCell = SelectedCell(coordinate: gameConfig.selectedCell)
+        self.userAction = UserAction(action: gameConfig.userAction)
+        self.editState = EditState(isEditing: gameConfig.isEditing)
+        self.workingGrid = GridValues(grid: gameConfig.workingGrid, startingGrid: gameConfig.startingGrid, colorGrid: gameConfig.colorGrid)
+        self.editGrid = EditGridValues(grid: gameConfig.editValues)
+        self.viewModel = .init(difficulty: gameConfig.difficulty)
+    }
+    
     var body: some View {
         ZStack {
             Color("dynamicBackground")
@@ -99,9 +109,9 @@ struct GameView: View {
                                       undoManager: undoManager)
                             EditButton(editState: editState)
                             HintButton(alertItem: $alertItem,
-                                      alertIsPresented: $alertIsPresented,
-                                      grid: workingGrid.grid,
-                                      difficulty: viewModel.difficulty)
+                                       alertIsPresented: $alertIsPresented,
+                                       grid: workingGrid.grid,
+                                       difficulty: viewModel.difficulty)
                             Button("Save", systemImage: "square.and.arrow.down") {
                                 checkSaveIfNeeded()
                                 saveButtonAnimate.toggle()
@@ -267,7 +277,12 @@ struct GameView: View {
 
 #Preview {
     GeometryReader { geometry in
-        GameView(savedState: .startedUnsaved, workingGrid: GridValues(startingGrid: GridFactory.easyGrid), viewModel: GameViewModel(difficulty: .easy))
+        let startingGrid = GridFactory.randomGridForDifficulty(level: .easy)
+        let gameConfig = GameConfig(savedState: .startedUnsaved,
+                                    workingGrid: startingGrid,
+                                    startingGrid: startingGrid,
+                                    difficulty: .easy)
+        GameView(gameConfig)
             .environment(WindowSize(size: geometry.size))
     }
 }
