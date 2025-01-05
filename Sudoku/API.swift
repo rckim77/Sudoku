@@ -40,31 +40,22 @@ struct API {
         let stringGrid = GridFactory.stringGridFor(grid: grid)
         let difficultyString = difficulty.rawValue.lowercased()
         let content = """
-            You are a sudoku expert and assistant. Provide a single succinct hint specific to the following sudoku 
-            puzzle without giving away too much. The sudoku will be represented as an array of arrays where each 
-            array represents a 3 x 3 subgrid in a specific order. There are 9 subgrids in the sudoku board. Each 
-            solved subgrid contains the numbers 1 to 9 only once each. The overall sudoku board must follow standard 
-            sudoku rules. If there is a 0 in the input subgrid, that means that cell is unsolved. 
-        
-            The first array in the input board is the top leftmost subgrid of the sudoku board. The second array 
-            is the top center subgrid. The third array is the top rightmost subgrid. The fourth array is the middle 
-            row leftmost subgrid. The fifth array is the middle row center subgrid. The sixth array is the middle row 
-            rightmost subgrid. The seventh array represents is the bottom leftmost subgrid. The eighth array is the bottom 
-            center subgrid. The ninth array is the bottom rightmost subgrid. 
-        
-            When explaining the hint, do not use certain words as described earlier. Instead of subgrid, say square. Do not
-            refer to rows, columns, and subgrids by their indices but rather in more user-friendly terms that are more visual
-            and intuitive (e.g., top leftmost square has a 1–the cell next to it can only be two possible numbers). When
-            describing possible integers within a cell, call them candidates. Refer to the zeroes as empty cells, do not say zero.
-        
-            Make sure the hint is appropriate for the difficulty of the sudoku board. This sudoku has a difficulty level of
-            \(difficultyString). The harder the difficulty, the less helpful the hint should be. The easier the sudoku, the more
-            obvious the hint should be. Make sure the hint helps the user problem solve. Do not give overly obvious hints (e.g., 
-            this cell is a 4). Use terms that a sudoku player would understand (e.g., X-Wing, naked pairs, hidden pairs).
-        
-            Make sure the hint is succinct. It should not be more than a few sentences.
+            You are a Sudoku assistant. The following is a Sudoku puzzle of \(difficultyString) difficulty.
+            Empty cells are marked as 0. The grid is represented as 9 arrays, each representing a 3x3 block 
+            from left to right, top to bottom:
 
-            Here is the sudoku:\n \(stringGrid)
+            \(stringGrid)
+
+            Provide one specific, accurate hint that:
+            1. For easy: Focus on single candidates or obvious patterns
+            2. For medium: Look for hidden pairs or pointing pairs
+            3. For hard: Suggest advanced techniques like X-Wings or XY-Wings
+            4. Always verify numbers mentioned in your hint exist in their stated positions
+            5. Use at most 2 sentences
+            6. Never give away direct solutions
+            7. Use terminology that is appropriate when helping a human and not a computer. When referring
+               to rows and columns, make it clear which ones (e.g., fourth row from the top).
+
         """
         
         do {
