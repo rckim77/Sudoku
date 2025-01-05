@@ -147,7 +147,7 @@ struct GameView: View {
                         }
                     case .hintSuccess(_):
                         Button("Thanks") {}
-                    case .completedIncorrectly, .hintError:
+                    case .completedIncorrectly, .hintError, .hintErrorQuota:
                         Button("Dismiss") {}
                     case .overwriteWarning:
                         Button(role: .destructive) {

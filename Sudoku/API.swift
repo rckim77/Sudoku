@@ -12,7 +12,7 @@ import AIProxy
 struct API {
     
     enum APIError: Error {
-        case invalidURL
+        case invalidURL, quotaExceeded
     }
     
     /// Helper method for POST requests sending JSON with basic error handling
@@ -66,6 +66,9 @@ struct API {
             return response.choices.first?.message.content
         } catch AIProxyError.unsuccessfulRequest(statusCode: let statusCode, responseBody: let responseBody) {
             print("Received \(statusCode) status code with response body: \(responseBody)")
+            if statusCode == 429 {
+                throw APIError.quotaExceeded
+            }
             return nil
         } catch {
             print("Could not create OpenAI chat completion: \(error.localizedDescription)")
