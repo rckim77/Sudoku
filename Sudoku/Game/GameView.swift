@@ -47,7 +47,8 @@ struct GameView: View {
     @AppStorage("totalEasyGamesCompleted") var totalEasyGamesCompleted = 0
     @AppStorage("totalMediumGamesCompleted") var totalMediumGamesCompleted = 0
     @AppStorage("totalHardGamesCompleted") var totalHardGamesCompleted = 0
-    
+    @AppStorage("fastestTimeCompleted") var fastestTimeCompleted: TimeInterval?
+
     // MARK: - Computed properties
     
     private var hasUpdatedGrid: Bool {
@@ -253,6 +254,12 @@ struct GameView: View {
             totalMediumGamesCompleted += 1
         case .hard:
             totalHardGamesCompleted += 1
+        }
+        
+        if let currentFastestTime = fastestTimeCompleted {
+            fastestTimeCompleted = min(elapsedTime, currentFastestTime)
+        } else {
+            fastestTimeCompleted = elapsedTime
         }
     }
 
