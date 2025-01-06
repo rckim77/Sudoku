@@ -17,6 +17,10 @@ struct GameViewModel: ViewModel {
     var verticalSpacing: CGFloat {
         isVision ? 8 : 16
     }
+    
+    var timerHorizontalOffset: CGFloat {
+        isIpad ? 140 : 100
+    }
 
     var toolbarItemPlacement: ToolbarItemPlacement {
         #if os(visionOS)

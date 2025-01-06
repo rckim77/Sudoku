@@ -21,8 +21,9 @@ final class GameConfig {
     var isEditing: Bool
     var editValues: [CoordinateEditValues]
     var difficulty: Difficulty.Level
+    var elapsedTime: TimeInterval?
     
-    init(savedState: SavedState, workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor> = [], userAction: UserAction.ActionType = .none, selectedCell: Coordinate? = nil, isEditing: Bool = false, editValues: [CoordinateEditValues] = [], difficulty: Difficulty.Level) {
+    init(savedState: SavedState, workingGrid: [CoordinateValue], startingGrid: [CoordinateValue], colorGrid: Set<CoordinateColor> = [], userAction: UserAction.ActionType = .none, selectedCell: Coordinate? = nil, isEditing: Bool = false, editValues: [CoordinateEditValues] = [], difficulty: Difficulty.Level, elapsedTime: TimeInterval?) {
         self.savedState = savedState
         self.workingGrid = workingGrid
         self.startingGrid = startingGrid
@@ -32,5 +33,6 @@ final class GameConfig {
         self.isEditing = isEditing
         self.editValues = editValues
         self.difficulty = difficulty
+        self.elapsedTime = elapsedTime
     }
 }

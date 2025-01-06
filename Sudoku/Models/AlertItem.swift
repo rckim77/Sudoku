@@ -8,11 +8,12 @@
 
 import Foundation
 
-enum AlertItem {
+enum AlertItem: Equatable {
     case completedCorrectly
     case completedIncorrectly
     case hintSuccess(hint: String)
     case hintError
+    case hintErrorQuota
     case newGame
     case overwriteWarning
     
@@ -24,7 +25,7 @@ enum AlertItem {
             return "Almost!"
         case .hintSuccess(_):
             return "Hint"
-        case .hintError:
+        case .hintError, .hintErrorQuota:
             return "Hint"
         case .newGame:
             return "Are you sure?"
@@ -43,6 +44,8 @@ enum AlertItem {
             return hint
         case .hintError:
             return "Oops! Something went wrong. Try again later."
+        case .hintErrorQuota:
+            return "Quota exceeded. Please try again later."
         case .newGame:
             return "If you go back without saving, you will lose your current progress."
         case .overwriteWarning:

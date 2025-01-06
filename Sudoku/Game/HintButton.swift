@@ -11,14 +11,18 @@ import SwiftUI
 struct HintButton: View {
     
     enum LoadingState: Equatable {
-        case idle, loading, loaded(message: String), error
+        case idle, loading, loaded(message: String), error(_ error: API.APIError?)
         
         var rawValue: String {
             switch self {
                 case .idle: return ""
                 case .loading: return "Generating hint..."
                 case .loaded(message: let message): return message
-                case .error: return "Oops! Something went wrong. Try again."
+            case .error(let errorType):
+                if case .quotaExceeded = errorType {
+                    return AlertItem.hintErrorQuota.message
+                }
+                return AlertItem.hintError.message
             }
         }
     }
@@ -100,7 +104,7 @@ struct HintButton: View {
                     alertIsPresented = true
                 }
             } else {
-                hintState = .error
+                hintState = .error(nil)
 
                 if isVision {
                     alertItem = .hintError
@@ -108,7 +112,7 @@ struct HintButton: View {
                 }
             }
         } catch {
-            hintState = .error
+            hintState = .error(error as? API.APIError)
 
             if isVision {
                 alertItem = .hintError
