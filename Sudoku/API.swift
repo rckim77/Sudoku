@@ -31,9 +31,9 @@ struct API {
         return urlRequest
     }
 
-    static func getHint(grid: [CoordinateValue], difficulty: Difficulty.Level) async throws -> String? {
+    static func getHint(grid: [CoordinateValue], difficulty: Difficulty.Level) async throws -> Hint? {
         if let singleHint = SudokuSolver.findSingles(grid).first {
-            return singleHint.description
+            return singleHint
         }
         
         let openAIService = AIProxy.openAIService(
@@ -66,7 +66,8 @@ struct API {
                 messages: [.system(content: .text(content))]
             )
             let response = try await openAIService.chatCompletionRequest(body: requestBody)
-            return response.choices.first?.message.content
+            let hint = Hint(coordinate: nil, hintType: .open, overrideDescription: response.choices.first?.message.content)
+            return hint
         } catch AIProxyError.unsuccessfulRequest(statusCode: let statusCode, responseBody: let responseBody) {
             print("Received \(statusCode) status code with response body: \(responseBody)")
             if statusCode == 429 {

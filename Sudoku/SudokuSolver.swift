@@ -106,8 +106,8 @@ struct SudokuSolver {
     /// Finds naked and hidden singles in the grid
     /// - Parameter gridValues: The current state of the Sudoku grid
     /// - Returns: Array of tuples containing coordinate and description of found singles
-    static func findSingles(_ gridValues: [CoordinateValue]) -> [(coordinate: CoordinateValue, description: String)] {
-        var singles: [(CoordinateValue, String)] = []
+    static func findSingles(_ gridValues: [CoordinateValue]) -> [Hint] {
+        var singles = [Hint]()
         let fullGrid = createFullGrid(gridValues)
         let convertedGrid = convertGrid(gridValues)
         
@@ -134,7 +134,8 @@ struct SudokuSolver {
                 if possibleValues.count == 1 {
                     if let value = possibleValues.first {
                         let nakedSingle = CoordinateValue(r: row, c: col, s: squareIndex, v: value)
-                        singles.append((nakedSingle, "There is at least one naked single on this board. Can you find it?"))
+                        let hint = Hint(coordinate: nakedSingle, hintType: .nakedSingle)
+                        singles.append(hint)
                     }
                 }
                 
@@ -157,8 +158,9 @@ struct SudokuSolver {
                         
                         if isHiddenInRow || isHiddenInCol || isHiddenInSquare {
                             let hiddenSingle = CoordinateValue(r: row, c: col, s: squareIndex, v: value)
-                            let location = isHiddenInRow ? "row" : (isHiddenInCol ? "column" : "square")
-                            singles.append((hiddenSingle, "There is a hidden single on this board. Can you find it?"))
+//                            let location = isHiddenInRow ? "row" : (isHiddenInCol ? "column" : "square")
+                            let hint = Hint(coordinate: hiddenSingle, hintType: .hiddenSingle)
+                            singles.append(hint)
                         }
                     }
                 }

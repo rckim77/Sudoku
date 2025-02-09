@@ -37,7 +37,7 @@ struct HintButton: View {
     /// Note: used for iOS and iPadOS
     @State private var hintState: LoadingState = .idle
     
-    private static var hintCache: [String: String] = [:]
+    private static var hintCache: [String: Hint] = [:]
     static func clearCache() {
         hintCache.removeAll()
     }
@@ -97,11 +97,11 @@ struct HintButton: View {
     }
     
     private func getHint() async {
-        func updateOnSuccess(_ hint: String) {
-            hintState = .loaded(message: hint)
+        func updateOnSuccess(_ hint: Hint) {
+            hintState = .loaded(message: hint.description)
 
             if isVision {
-                alertItem = .hintSuccess(hint: hint)
+                alertItem = .hintSuccess(hint: hint.description)
                 alertIsPresented = true
             }
         }
@@ -109,6 +109,7 @@ struct HintButton: View {
             showingHintSheet = !isVision
             hintState = .loading
             
+            // check cache first
             let cacheKey = grid.map { coordinate in String(coordinate.v) }.joined()
             
             if let cachedHint = Self.hintCache[cacheKey] {
@@ -116,8 +117,10 @@ struct HintButton: View {
                 return
             }
             
+            // fetch hint from API and cache
             if let hint = try await API.getHint(grid: grid, difficulty: difficulty) {
                 Self.hintCache[cacheKey] = hint
+                print(Self.hintCache)
                 updateOnSuccess(hint)
             } else {
                 hintState = .error(nil)
