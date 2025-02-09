@@ -21,6 +21,7 @@ struct SettingsView: View {
     private let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
 
     @State private var showingDeleteConfirmation = false
+    @State private var showingCacheClearConfirmation = false
 
     var body: some View {
         VStack(spacing: 24) {
@@ -61,6 +62,19 @@ struct SettingsView: View {
                 Button("OK", role: .cancel) { }
             } message: {
                 Text("Data has been deleted successfully.")
+            }
+            Button(action: {
+                HintButton.clearCache()
+                showingCacheClearConfirmation = true
+            }) {
+                Text("Clear hint cache")
+                    .font(Font.system(.headline, design: .rounded))
+                    .foregroundColor(.red)
+            }
+            .alert("Cache cleared", isPresented: $showingCacheClearConfirmation) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("Cache has been cleared successfully.")
             }
             #if os(visionOS)
             HStack(spacing: 0) {
