@@ -19,6 +19,7 @@ enum GridFactory {
         case .easy:
             let easyGrids = [easyGrid, easyGrid1, easyGrid2]
             return easyGrids[randomNumber]
+//            return GridFactory.superEasyGrid
         case .medium:
             let mediumGrids = [mediumGrid, mediumGrid1, mediumGrid2]
             return mediumGrids[randomNumber]
