@@ -105,32 +105,33 @@ struct HintButton: View {
         }
     }
     
+    private func updateOnError(_ error: API.APIError?) {
+        hintState = .error(error)
+
+        if isVision {
+            alertItem = .hintError
+            alertIsPresented = true
+        }
+    }
+    
     private func updateWith(cachedHint: Hint) {
+        var hintDescription = cachedHint.description
+
         switch cachedHint.hintType {
         case .nakedSingle:
             if let value = cachedHint.coordinate?.v {
-                let hint = Hint(coordinate: cachedHint.coordinate,
-                                hintType: cachedHint.hintType,
-                                overrideDescription: "Somewhere on the board, there is a naked single \(value). Can you find it?")
-                updateOnSuccess(hint)
-                return
-            } else {
-                break
+                hintDescription = "Somewhere on the board, there is a naked single \(value). Can you find it?"
             }
         case .hiddenSingle:
             if let value = cachedHint.coordinate?.v {
-                let hint = Hint(coordinate: cachedHint.coordinate,
-                                hintType: cachedHint.hintType,
-                                overrideDescription: "Somewhere on the board, there is a hidden single \(value). Can you find it?")
-                updateOnSuccess(hint)
-                return
-            } else {
-                break
+                hintDescription = "Somewhere on the board, there is a hidden single \(value). Can you find it?"
             }
         default:
-            updateOnSuccess(cachedHint)
-            return
+            break
         }
+
+        let hint = Hint(coordinate: cachedHint.coordinate, hintType: cachedHint.hintType, overrideDescription: hintDescription)
+        updateOnSuccess(hint)
     }
 
     private func getHint() async {
@@ -146,20 +147,10 @@ struct HintButton: View {
                 Self.hintCache[cacheKey] = hint
                 updateOnSuccess(hint)
             } else {
-                hintState = .error(nil)
-
-                if isVision {
-                    alertItem = .hintError
-                    alertIsPresented = true
-                }
+                updateOnError(nil)
             }
         } catch {
-            hintState = .error(error as? API.APIError)
-
-            if isVision {
-                alertItem = .hintError
-                alertIsPresented = true
-            }
+            updateOnError(error as? API.APIError)
         }
     }
 }
