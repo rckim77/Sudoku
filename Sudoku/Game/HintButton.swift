@@ -96,31 +96,54 @@ struct HintButton: View {
         }
     }
     
-    private func getHint() async {
-        func updateOnSuccess(_ hint: Hint) {
-            hintState = .loaded(message: hint.description)
+    private func updateOnSuccess(_ hint: Hint) {
+        hintState = .loaded(message: hint.description)
 
-            if isVision {
-                alertItem = .hintSuccess(hint: hint.description)
-                alertIsPresented = true
-            }
+        if isVision {
+            alertItem = .hintSuccess(hint: hint.description)
+            alertIsPresented = true
         }
+    }
+    
+    private func updateWith(cachedHint: Hint) {
+        switch cachedHint.hintType {
+        case .nakedSingle:
+            if let value = cachedHint.coordinate?.v {
+                let hint = Hint(coordinate: cachedHint.coordinate,
+                                hintType: cachedHint.hintType,
+                                overrideDescription: "Somewhere on the board, there is a naked single \(value). Can you find it?")
+                updateOnSuccess(hint)
+                return
+            } else {
+                break
+            }
+        case .hiddenSingle:
+            if let value = cachedHint.coordinate?.v {
+                let hint = Hint(coordinate: cachedHint.coordinate,
+                                hintType: cachedHint.hintType,
+                                overrideDescription: "Somewhere on the board, there is a hidden single \(value). Can you find it?")
+                updateOnSuccess(hint)
+                return
+            } else {
+                break
+            }
+        default:
+            updateOnSuccess(cachedHint)
+            return
+        }
+    }
+
+    private func getHint() async {
         do {
             showingHintSheet = !isVision
             hintState = .loading
-            
-            // check cache first
+
             let cacheKey = grid.map { coordinate in String(coordinate.v) }.joined()
             
             if let cachedHint = Self.hintCache[cacheKey] {
-                updateOnSuccess(cachedHint)
-                return
-            }
-            
-            // fetch hint from API and cache
-            if let hint = try await API.getHint(grid: grid, difficulty: difficulty) {
+                updateWith(cachedHint: cachedHint)
+            } else if let hint = try await API.getHint(grid: grid, difficulty: difficulty) {
                 Self.hintCache[cacheKey] = hint
-                print(Self.hintCache)
                 updateOnSuccess(hint)
             } else {
                 hintState = .error(nil)
