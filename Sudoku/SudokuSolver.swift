@@ -89,4 +89,84 @@ struct SudokuSolver {
             return colIndex
         }
     }
+
+    /// Creates a full 9x9 grid with empty cells marked as nil
+    static func createFullGrid(_ partialGrid: [CoordinateValue]) -> [[CoordinateValue?]] {
+        var fullGrid = Array(repeating: Array(repeating: nil as CoordinateValue?, count: 9), count: 9)
+        let convertedGrid = convertGrid(partialGrid)
+        
+        // Fill in the known values
+        for value in convertedGrid {
+            fullGrid[value.r][value.c] = value
+        }
+        
+        return fullGrid
+    }
+
+    /// Finds naked and hidden singles in the grid
+    /// - Parameter gridValues: The current state of the Sudoku grid
+    /// - Returns: Array of tuples containing coordinate and description of found singles
+    static func findSingles(_ gridValues: [CoordinateValue]) -> [Hint] {
+        var singles = [Hint]()
+        let fullGrid = createFullGrid(gridValues)
+        let convertedGrid = convertGrid(gridValues)
+        
+        // Check each cell in the grid
+        for row in 0..<9 {
+            for col in 0..<9 {
+                // Skip filled cells
+                if fullGrid[row][col] != nil { continue }
+                
+                // Calculate square index
+                let squareIndex = (row / 3) * 3 + (col / 3)
+                
+                // Get all values in the same row, column, and square
+                let rowValues = convertedGrid.filter { $0.r == row }.map { $0.v }
+                let colValues = convertedGrid.filter { $0.c == col }.map { $0.v }
+                let squareValues = convertedGrid.filter { $0.s == squareIndex }.map { $0.v }
+                
+                // Find possible values for this cell
+                let allPossible = Set(1...9)
+                let usedValues = Set(rowValues + colValues + squareValues)
+                let possibleValues = allPossible.subtracting(usedValues)
+                
+                // Check for naked single (only one possible value)
+                if possibleValues.count == 1 {
+                    if let value = possibleValues.first {
+                        let nakedSingle = CoordinateValue(r: row, c: col, s: squareIndex, v: value)
+                        let hint = Hint(coordinate: nakedSingle, hintType: .nakedSingle)
+                        singles.append(hint)
+                    }
+                }
+                
+                // Check for hidden single in row, column, and square
+                for value in 1...9 {
+                    if !usedValues.contains(value) {
+                        let emptyCellsInRow = (0..<9).filter { fullGrid[row][$0] == nil }.count
+                        let emptyCellsInCol = (0..<9).filter { fullGrid[$0][col] == nil }.count
+                        let squareStartRow = (row / 3) * 3
+                        let squareStartCol = (col / 3) * 3
+                        let emptyCellsInSquare = (squareStartRow..<squareStartRow+3).flatMap { r in
+                            (squareStartCol..<squareStartCol+3).map { c in
+                                fullGrid[r][c] == nil
+                            }
+                        }.filter { $0 }.count
+                        
+                        let isHiddenInRow = emptyCellsInRow == 1
+                        let isHiddenInCol = emptyCellsInCol == 1
+                        let isHiddenInSquare = emptyCellsInSquare == 1
+                        
+                        if isHiddenInRow || isHiddenInCol || isHiddenInSquare {
+                            let hiddenSingle = CoordinateValue(r: row, c: col, s: squareIndex, v: value)
+//                            let location = isHiddenInRow ? "row" : (isHiddenInCol ? "column" : "square")
+                            let hint = Hint(coordinate: hiddenSingle, hintType: .hiddenSingle)
+                            singles.append(hint)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return singles
+    }
 }

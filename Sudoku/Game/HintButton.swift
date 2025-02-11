@@ -37,6 +37,11 @@ struct HintButton: View {
     /// Note: used for iOS and iPadOS
     @State private var hintState: LoadingState = .idle
     
+    private static var hintCache: [String: Hint] = [:]
+    static func clearCache() {
+        hintCache.removeAll()
+    }
+    
     let grid: [CoordinateValue]
     let difficulty: Difficulty.Level
     
@@ -91,33 +96,61 @@ struct HintButton: View {
         }
     }
     
+    private func updateOnSuccess(_ hint: Hint) {
+        hintState = .loaded(message: hint.description)
+
+        if isVision {
+            alertItem = .hintSuccess(hint: hint.description)
+            alertIsPresented = true
+        }
+    }
+    
+    private func updateOnError(_ error: API.APIError?) {
+        hintState = .error(error)
+
+        if isVision {
+            alertItem = .hintError
+            alertIsPresented = true
+        }
+    }
+    
+    private func updateWith(cachedHint: Hint) {
+        var hintDescription = cachedHint.description
+
+        switch cachedHint.hintType {
+        case .nakedSingle:
+            if let value = cachedHint.coordinate?.v {
+                hintDescription = "Somewhere on the board, there is a naked single \(value). Can you find it?"
+            }
+        case .hiddenSingle:
+            if let value = cachedHint.coordinate?.v {
+                hintDescription = "Somewhere on the board, there is a hidden single \(value). Can you find it?"
+            }
+        default:
+            break
+        }
+
+        let hint = Hint(coordinate: cachedHint.coordinate, hintType: cachedHint.hintType, overrideDescription: hintDescription)
+        updateOnSuccess(hint)
+    }
+
     private func getHint() async {
         do {
             showingHintSheet = !isVision
             hintState = .loading
+
+            let cacheKey = grid.map { coordinate in String(coordinate.v) }.joined()
             
-            if let hint = try await API.getHint(grid: grid, difficulty: difficulty) {
-                hintState = .loaded(message: hint)
-
-                if isVision {
-                    alertItem = .hintSuccess(hint: hint)
-                    alertIsPresented = true
-                }
+            if let cachedHint = Self.hintCache[cacheKey] {
+                updateWith(cachedHint: cachedHint)
+            } else if let hint = try await API.getHint(grid: grid, difficulty: difficulty) {
+                Self.hintCache[cacheKey] = hint
+                updateOnSuccess(hint)
             } else {
-                hintState = .error(nil)
-
-                if isVision {
-                    alertItem = .hintError
-                    alertIsPresented = true
-                }
+                updateOnError(nil)
             }
         } catch {
-            hintState = .error(error as? API.APIError)
-
-            if isVision {
-                alertItem = .hintError
-                alertIsPresented = true
-            }
+            updateOnError(error as? API.APIError)
         }
     }
 }
