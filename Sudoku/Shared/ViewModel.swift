@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 protocol ViewModel {
     var isIpad: Bool { get }
     var isVision: Bool { get }
