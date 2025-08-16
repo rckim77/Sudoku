@@ -1,6 +1,6 @@
 //
-//  SnapshotTests.swift
-//  SudokuTests
+//  HowToPlayViewTests.swift
+//  Sudoku
 //
 //  Created by Ray Kim on 8/16/25.
 //  Copyright © 2025 Self. All rights reserved.
@@ -24,20 +24,12 @@ Note: The devices will have to be updated over time as we drop iOS support for
 
 */
 @MainActor
-struct SnapshotTests {
+struct HowToPlayViewTests {
     
     private let devices: [(String, ViewImageConfig)] = [("iPhone13Mini", .iPhone13Mini),
                                                         ("iPhone13", .iPhone13),
                                                         ("iPhone13ProMax", .iPhone13ProMax)]
 
-    @Test func testMenuViewSnapshots() async throws {
-        for (name, device) in devices {
-            let view = MenuView()
-            let vc = UIHostingController(rootView: view)
-            assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
-        }
-    }
-    
     @Test func testHowToPlayViewSnapshots() async throws {
         for (name, device) in devices {
             guard let size = device.size else {
@@ -46,6 +38,8 @@ struct SnapshotTests {
             let view = HowToPlayView().environment(WindowSize(size: size))
             let vc = UIHostingController(rootView: view)
             assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
+            let darkMode = UITraitCollection(userInterfaceStyle: .dark)
+            assertSnapshot(of: vc, as: .image(on: device, traits: darkMode), named: "\(name)SizeDark")
         }
     }
 }
