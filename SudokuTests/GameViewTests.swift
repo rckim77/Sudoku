@@ -1,5 +1,5 @@
 //
-//  SnapshotTests.swift
+//  GameViewTests.swift
 //  SudokuTests
 //
 //  Created by Ray Kim on 8/16/25.
@@ -24,28 +24,28 @@ Note: The devices will have to be updated over time as we drop iOS support for
 
 */
 @MainActor
-struct SnapshotTests {
+struct GameViewTests {
     
     private let devices: [(String, ViewImageConfig)] = [("iPhone13Mini", .iPhone13Mini),
                                                         ("iPhone13", .iPhone13),
                                                         ("iPhone13ProMax", .iPhone13ProMax)]
 
-    @Test func testMenuViewSnapshots() async throws {
-        for (name, device) in devices {
-            let view = MenuView()
-            let vc = UIHostingController(rootView: view)
-            assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
-        }
-    }
-    
-    @Test func testHowToPlayViewSnapshots() async throws {
+    @Test func testGameViewSnapshots() async throws {
         for (name, device) in devices {
             guard let size = device.size else {
                 return assertionFailure("missing size in SnapshotTesting")
             }
-            let view = HowToPlayView().environment(WindowSize(size: size))
+            let startingGrid = GridFactory.easyGrid
+            let gameConfig = GameConfig(savedState: .startedUnsaved,
+                                        workingGrid: startingGrid,
+                                        startingGrid: startingGrid,
+                                        difficulty: .easy,
+                                        elapsedTime: 0)
+            let view = GameView(gameConfig).environment(WindowSize(size: size))
             let vc = UIHostingController(rootView: view)
             assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
+            let darkMode = UITraitCollection(userInterfaceStyle: .dark)
+            assertSnapshot(of: vc, as: .image(on: device, traits: darkMode), named: "\(name)SizeDark")
         }
     }
 }
