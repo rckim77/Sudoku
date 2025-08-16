@@ -25,16 +25,14 @@ jobs:
     - name: Show available simulators
       run: xcrun simctl list devices available | head -20
     
-    - name: Resolve Swift Package dependencies
-      run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
-    
     - name: Build project for testing
       run: |
         xcodebuild build-for-testing \
           -project Sudoku.xcodeproj \
           -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4,arch=arm64' \
           -configuration Debug \
+          -resolvePackageDependencies \
           CODE_SIGNING_ALLOWED=NO
       
     - name: Run tests
@@ -42,6 +40,6 @@ jobs:
         xcodebuild test-without-building \
           -project Sudoku.xcodeproj \
           -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4,arch=arm64' \
           -configuration Debug \
           CODE_SIGNING_ALLOWED=NO
