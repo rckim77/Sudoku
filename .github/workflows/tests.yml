@@ -22,7 +22,7 @@ jobs:
       run: xcodebuild -version
     
     - name: Show available simulators
-      run: xcrun simctl list devices available
+      run: xcrun simctl list devices available | sed '/^-- tvOS /,/^-- [^-]/ { /^-- tvOS /d; /^-- [^-]/!d; }' | sed '/^-- watchOS /,/^-- [^-]/ { /^-- watchOS /d; /^-- [^-]/!d; }'
     
     - name: Resolve Swift Package dependencies
       run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
