@@ -40,7 +40,9 @@ extension ViewModifier {
     }
 }
 
-extension Color: Codable {
+extension Color: @retroactive Decodable {}
+extension Color: @retroactive Encodable {}
+extension Color {
     
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
