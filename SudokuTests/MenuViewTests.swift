@@ -28,13 +28,18 @@ struct MenueViewTests {
     
     private let devices: [(String, ViewImageConfig)] = [("iPhone13Mini", .iPhone13Mini),
                                                         ("iPhone13", .iPhone13),
-                                                        ("iPhone13ProMax", .iPhone13ProMax)]
+                                                        ("iPhone13ProMax", .iPhone13ProMax),
+                                                        ("iPad10_2", .iPad10_2(.portrait)),
+                                                        ("iPad12_9", .iPadPro12_9(.portrait))]
 
     @Test func testMenuViewSnapshots() async throws {
         for (name, device) in devices {
+            guard let size = device.size else {
+                return assertionFailure("missing size in SnapshotTesting")
+            }
             let view = MenuView()
             let vc = UIHostingController(rootView: view)
-            assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
+            assertSnapshot(of: vc, as: .image(size: size), named: "\(name)Size")
         }
     }
 }
