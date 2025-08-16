@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,7 +26,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		EC90CD2D2CCC302A005F4BE3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		EC90CD2D2CCC302A005F4BE3 /* Exceptions for "Sudoku" folder in "Sudoku" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -36,25 +36,32 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		EC90CCB62CCC3027005F4BE3 /* SudokuTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SudokuTests; sourceTree = "<group>"; };
-		EC90CCF62CCC302A005F4BE3 /* Sudoku */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (EC90CD2D2CCC302A005F4BE3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Sudoku; sourceTree = "<group>"; };
+		EC90CCB62CCC3027005F4BE3 /* SudokuTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SudokuTests;
+			sourceTree = "<group>";
+		};
+		EC90CCF62CCC302A005F4BE3 /* Sudoku */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EC90CD2D2CCC302A005F4BE3 /* Exceptions for "Sudoku" folder in "Sudoku" target */,
+			);
+			path = Sudoku;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		94E1087C2487333A0091D043 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				EC3E0F942CE1330E0026AA8C /* AIProxy in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EC7D0FA82BBB98BE0035FB6D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -89,8 +96,6 @@
 				94E1087D2487333A0091D043 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
 				EC90CCF62CCC302A005F4BE3 /* Sudoku */,
@@ -142,7 +147,6 @@
 				};
 			};
 			buildConfigurationList = 94E1087A2487333A0091D043 /* Build configuration list for PBXProject "Sudoku" */;
-			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -153,6 +157,7 @@
 			packageReferences = (
 				EC3E0F922CE1330E0026AA8C /* XCRemoteSwiftPackageReference "aiproxyswift" */,
 			);
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 94E108802487333A0091D043 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,34 +171,26 @@
 /* Begin PBXResourcesBuildPhase section */
 		94E1087D2487333A0091D043 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EC7D0FA92BBB98BE0035FB6D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		94E1087B2487333A0091D043 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EC7D0FA72BBB98BE0035FB6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -206,7 +203,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		94E108912487333F0091D043 /* Debug */ = {
+		94E108912487333F0091D043 /* Debug configuration for PBXProject "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -272,7 +269,7 @@
 			};
 			name = Debug;
 		};
-		94E108922487333F0091D043 /* Release */ = {
+		94E108922487333F0091D043 /* Release configuration for PBXProject "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -332,7 +329,7 @@
 			};
 			name = Release;
 		};
-		94E108942487333F0091D043 /* Debug */ = {
+		94E108942487333F0091D043 /* Debug configuration for PBXNativeTarget "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -370,7 +367,7 @@
 			};
 			name = Debug;
 		};
-		94E108952487333F0091D043 /* Release */ = {
+		94E108952487333F0091D043 /* Release configuration for PBXNativeTarget "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -408,7 +405,7 @@
 			};
 			name = Release;
 		};
-		EC7D0FB12BBB98BF0035FB6D /* Debug */ = {
+		EC7D0FB12BBB98BF0035FB6D /* Debug configuration for PBXNativeTarget "SudokuTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -433,7 +430,7 @@
 			};
 			name = Debug;
 		};
-		EC7D0FB22BBB98BF0035FB6D /* Release */ = {
+		EC7D0FB22BBB98BF0035FB6D /* Release configuration for PBXNativeTarget "SudokuTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -463,28 +460,25 @@
 		94E1087A2487333A0091D043 /* Build configuration list for PBXProject "Sudoku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				94E108912487333F0091D043 /* Debug */,
-				94E108922487333F0091D043 /* Release */,
+				94E108912487333F0091D043 /* Debug configuration for PBXProject "Sudoku" */,
+				94E108922487333F0091D043 /* Release configuration for PBXProject "Sudoku" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		94E108932487333F0091D043 /* Build configuration list for PBXNativeTarget "Sudoku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				94E108942487333F0091D043 /* Debug */,
-				94E108952487333F0091D043 /* Release */,
+				94E108942487333F0091D043 /* Debug configuration for PBXNativeTarget "Sudoku" */,
+				94E108952487333F0091D043 /* Release configuration for PBXNativeTarget "Sudoku" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		EC7D0FB32BBB98BF0035FB6D /* Build configuration list for PBXNativeTarget "SudokuTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EC7D0FB12BBB98BF0035FB6D /* Debug */,
-				EC7D0FB22BBB98BF0035FB6D /* Release */,
+				EC7D0FB12BBB98BF0035FB6D /* Debug configuration for PBXNativeTarget "SudokuTests" */,
+				EC7D0FB22BBB98BF0035FB6D /* Release configuration for PBXNativeTarget "SudokuTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
