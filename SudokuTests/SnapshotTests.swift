@@ -25,13 +25,44 @@ Note: The devices will have to be updated over time as we drop iOS support for
 */
 @MainActor
 struct SnapshotTests {
+    
+    private let devices: [(String, ViewImageConfig)] = [("iPhone13Mini", .iPhone13Mini),
+                                                        ("iPhone13", .iPhone13),
+                                                        ("iPhone13ProMax", .iPhone13ProMax)]
 
     @Test func testMenuViewSnapshots() async throws {
-        let view = MenuView()
-        let vc = UIHostingController(rootView: view)
-
-        assertSnapshot(of: vc, as: .image(on: .iPhone13Mini), named: "iPhone13MiniSize")
-        assertSnapshot(of: vc, as: .image(on: .iPhone13), named: "iPhone13Size")
-        assertSnapshot(of: vc, as: .image(on: .iPhone13ProMax), named: "iPhone13ProMaxSize")
+        for (name, device) in devices {
+            let view = MenuView()
+            let vc = UIHostingController(rootView: view)
+            assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
+        }
+    }
+    
+    @Test func testHowToPlayViewSnapshots() async throws {
+        for (name, device) in devices {
+            guard let size = device.size else {
+                return assertionFailure("missing size in SnapshotTesting")
+            }
+            let view = HowToPlayView().environment(WindowSize(size: size))
+            let vc = UIHostingController(rootView: view)
+            assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
+        }
+    }
+    
+    @Test func testGameViewSnapshots() async throws {
+        for (name, device) in devices {
+            guard let size = device.size else {
+                return assertionFailure("missing size in SnapshotTesting")
+            }
+            let startingGrid = GridFactory.easyGrid
+            let gameConfig = GameConfig(savedState: .startedUnsaved,
+                                        workingGrid: startingGrid,
+                                        startingGrid: startingGrid,
+                                        difficulty: .easy,
+                                        elapsedTime: 0)
+            let view = GameView(gameConfig).environment(WindowSize(size: size))
+            let vc = UIHostingController(rootView: view)
+            assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
+        }
     }
 }
