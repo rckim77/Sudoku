@@ -28,7 +28,9 @@ struct HowToPlayViewTests {
     
     private let devices: [(String, ViewImageConfig)] = [("iPhone13Mini", .iPhone13Mini),
                                                         ("iPhone13", .iPhone13),
-                                                        ("iPhone13ProMax", .iPhone13ProMax)]
+                                                        ("iPhone13ProMax", .iPhone13ProMax),
+                                                        ("iPad10_2", .iPad10_2(.portrait)),
+                                                        ("iPad12_9", .iPadPro12_9(.portrait))]
 
     @Test func testHowToPlayViewSnapshots() async throws {
         for (name, device) in devices {
@@ -37,9 +39,9 @@ struct HowToPlayViewTests {
             }
             let view = HowToPlayView().environment(WindowSize(size: size))
             let vc = UIHostingController(rootView: view)
-            assertSnapshot(of: vc, as: .image(on: device), named: "\(name)Size")
+            assertSnapshot(of: vc, as: .image(size: size), named: "\(name)Size")
             let darkMode = UITraitCollection(userInterfaceStyle: .dark)
-            assertSnapshot(of: vc, as: .image(on: device, traits: darkMode), named: "\(name)SizeDark")
+            assertSnapshot(of: vc, as: .image(size: size, traits: darkMode), named: "\(name)SizeDark")
         }
     }
 }
