@@ -1,0 +1,45 @@
+name: Run iOS Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [ main ]
+
+jobs:
+  Tests:
+    runs-on: macos-15
+    timeout-minutes: 20
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Select Xcode 16.4
+      run: sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+    
+    - name: Show Xcode version
+      run: xcodebuild -version
+    
+    - name: Show available simulators
+      run: xcrun simctl list devices available | head -20
+    
+    - name: Resolve Swift Package dependencies
+      run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
+    
+    - name: Build project for testing
+      run: |
+        xcodebuild build-for-testing \
+          -project Sudoku.xcodeproj \
+          -scheme SudokuTests \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4,arch=arm64' \
+          -configuration Debug \
+          CODE_SIGNING_ALLOWED=NO
+      
+    - name: Run tests
+      run: |
+        xcodebuild test-without-building \
+          -project Sudoku.xcodeproj \
+          -scheme SudokuTests \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4,arch=arm64' \
+          -configuration Debug \
+          CODE_SIGNING_ALLOWED=NO
