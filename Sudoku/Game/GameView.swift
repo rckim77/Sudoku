@@ -113,38 +113,13 @@ struct GameView: View {
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: viewModel.toolbarItemPlacement) {
-                        if !isVision {
-                            Spacer()
-                        }
-                        HStack(spacing: viewModel.toolbarItemHorizontalSpacing) {
-                            Button("Undo", systemImage: "arrow.uturn.backward") {
-                                handleUndo()
+                        if #available(iOS 26, *) {
+                            actionButtons
+                        } else {
+                            HStack(spacing: viewModel.toolbarItemHorizontalSpacing) {
+                                actionButtons
                             }
-                            .disabled(!undoManager.canUndo)
-                            .tint(.primary)
-                            
-                            ClearButton(selectedCoordinate: selectedCell.coordinate,
-                                      editGrid: editGrid,
-                                      editState: editState,
-                                      userAction: userAction,
-                                      workingGrid: workingGrid,
-                                      savedState: $savedState,
-                                      undoManager: undoManager)
-                            EditButton(editState: editState)
-                            HintButton(alertItem: $alertItem,
-                                       alertIsPresented: $alertIsPresented,
-                                       grid: workingGrid.grid,
-                                       difficulty: viewModel.difficulty)
-                            Button("Save", systemImage: "square.and.arrow.down") {
-                                checkSaveIfNeeded()
-                                saveButtonAnimate.toggle()
-                            }
-                            .symbolEffect(.bounce.down.byLayer, value: saveButtonAnimate)
-                            .tint(.primary)
-                        }
-                        .padding(.bottom, viewModel.toolbarBottomPadding)
-                        if !isVision {
-                            Spacer()
+                            .padding(.bottom, viewModel.toolbarBottomPadding)
                         }
                     }
                 }
@@ -203,6 +178,35 @@ struct GameView: View {
             case .unsaved:
                 resetToPreviouslySavedGrid()
             }
+        }
+    }
+    
+    private var actionButtons: some View {
+        Group {
+            Button("Undo", systemImage: "arrow.uturn.backward") {
+                handleUndo()
+            }
+            .disabled(!undoManager.canUndo)
+            .tint(.primary)
+            
+            ClearButton(selectedCoordinate: selectedCell.coordinate,
+                      editGrid: editGrid,
+                      editState: editState,
+                      userAction: userAction,
+                      workingGrid: workingGrid,
+                      savedState: $savedState,
+                      undoManager: undoManager)
+            EditButton(editState: editState)
+            HintButton(alertItem: $alertItem,
+                       alertIsPresented: $alertIsPresented,
+                       grid: workingGrid.grid,
+                       difficulty: viewModel.difficulty)
+            Button("Save", systemImage: "square.and.arrow.down") {
+                checkSaveIfNeeded()
+                saveButtonAnimate.toggle()
+            }
+            .symbolEffect(.bounce.down.byLayer, value: saveButtonAnimate)
+            .tint(.primary)
         }
     }
 
