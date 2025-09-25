@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		EC3E0F942CE1330E0026AA8C /* AIProxy in Frameworks */ = {isa = PBXBuildFile; productRef = EC3E0F932CE1330E0026AA8C /* AIProxy */; };
+		EC63D5D02E510AA700B5D4D0 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = EC63D5CF2E510AA700B5D4D0 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +27,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		EC90CD2D2CCC302A005F4BE3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		EC90CD2D2CCC302A005F4BE3 /* Exceptions for "Sudoku" folder in "Sudoku" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -36,25 +37,33 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		EC90CCB62CCC3027005F4BE3 /* SudokuTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SudokuTests; sourceTree = "<group>"; };
-		EC90CCF62CCC302A005F4BE3 /* Sudoku */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (EC90CD2D2CCC302A005F4BE3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Sudoku; sourceTree = "<group>"; };
+		EC90CCB62CCC3027005F4BE3 /* SudokuTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SudokuTests;
+			sourceTree = "<group>";
+		};
+		EC90CCF62CCC302A005F4BE3 /* Sudoku */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EC90CD2D2CCC302A005F4BE3 /* Exceptions for "Sudoku" folder in "Sudoku" target */,
+			);
+			path = Sudoku;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		94E1087C2487333A0091D043 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				EC3E0F942CE1330E0026AA8C /* AIProxy in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EC7D0FA82BBB98BE0035FB6D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
+				EC63D5D02E510AA700B5D4D0 /* SnapshotTesting in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -90,8 +99,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			fileSystemSynchronizedGroups = (
 				EC90CCF62CCC302A005F4BE3 /* Sudoku */,
 			);
@@ -117,6 +124,9 @@
 				EC90CCB62CCC3027005F4BE3 /* SudokuTests */,
 			);
 			name = SudokuTests;
+			packageProductDependencies = (
+				EC63D5CF2E510AA700B5D4D0 /* SnapshotTesting */,
+			);
 			productName = SudokuTests;
 			productReference = EC7D0FAB2BBB98BE0035FB6D /* SudokuTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -129,7 +139,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 2600;
 				ORGANIZATIONNAME = Self;
 				TargetAttributes = {
 					94E1087E2487333A0091D043 = {
@@ -142,7 +152,6 @@
 				};
 			};
 			buildConfigurationList = 94E1087A2487333A0091D043 /* Build configuration list for PBXProject "Sudoku" */;
-			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -152,7 +161,9 @@
 			mainGroup = 94E108762487333A0091D043;
 			packageReferences = (
 				EC3E0F922CE1330E0026AA8C /* XCRemoteSwiftPackageReference "aiproxyswift" */,
+				EC63D5CE2E510AA700B5D4D0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 94E108802487333A0091D043 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,34 +177,26 @@
 /* Begin PBXResourcesBuildPhase section */
 		94E1087D2487333A0091D043 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EC7D0FA92BBB98BE0035FB6D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		94E1087B2487333A0091D043 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EC7D0FA72BBB98BE0035FB6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -206,7 +209,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		94E108912487333F0091D043 /* Debug */ = {
+		94E108912487333F0091D043 /* Debug configuration for PBXProject "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -242,6 +245,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 49BZEB79BF;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -264,13 +268,14 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Debug;
 		};
-		94E108922487333F0091D043 /* Release */ = {
+		94E108922487333F0091D043 /* Release configuration for PBXProject "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -306,6 +311,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 49BZEB79BF;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -321,6 +327,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -328,23 +335,22 @@
 			};
 			name = Release;
 		};
-		94E108942487333F0091D043 /* Debug */ = {
+		94E108942487333F0091D043 /* Debug configuration for PBXNativeTarget "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
-				DEVELOPMENT_TEAM = 49BZEB79BF;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sudoku/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.12.0;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rckim.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -361,29 +367,28 @@
 				SWIFT_UPCOMING_FEATURE_INFER_SENDABLE_FROM_CAPTURES = YES;
 				SWIFT_UPCOMING_FEATURE_ISOLATED_DEFAULT_VALUES = YES;
 				SWIFT_UPCOMING_FEATURE_REGION_BASED_ISOLATION = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 1.0;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		94E108952487333F0091D043 /* Release */ = {
+		94E108952487333F0091D043 /* Release configuration for PBXNativeTarget "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
-				DEVELOPMENT_TEAM = 49BZEB79BF;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sudoku/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.12.0;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rckim.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -400,23 +405,22 @@
 				SWIFT_UPCOMING_FEATURE_INFER_SENDABLE_FROM_CAPTURES = YES;
 				SWIFT_UPCOMING_FEATURE_ISOLATED_DEFAULT_VALUES = YES;
 				SWIFT_UPCOMING_FEATURE_REGION_BASED_ISOLATION = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 1.0;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		EC7D0FB12BBB98BF0035FB6D /* Debug */ = {
+		EC7D0FB12BBB98BF0035FB6D /* Debug configuration for PBXNativeTarget "SudokuTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 49BZEB79BF;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rckim.SudokuTests;
@@ -429,20 +433,20 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sudoku.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sudoku";
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		EC7D0FB22BBB98BF0035FB6D /* Release */ = {
+		EC7D0FB22BBB98BF0035FB6D /* Release configuration for PBXNativeTarget "SudokuTests" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 49BZEB79BF;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rckim.SudokuTests;
@@ -454,6 +458,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sudoku.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sudoku";
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -463,28 +468,25 @@
 		94E1087A2487333A0091D043 /* Build configuration list for PBXProject "Sudoku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				94E108912487333F0091D043 /* Debug */,
-				94E108922487333F0091D043 /* Release */,
+				94E108912487333F0091D043 /* Debug configuration for PBXProject "Sudoku" */,
+				94E108922487333F0091D043 /* Release configuration for PBXProject "Sudoku" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		94E108932487333F0091D043 /* Build configuration list for PBXNativeTarget "Sudoku" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				94E108942487333F0091D043 /* Debug */,
-				94E108952487333F0091D043 /* Release */,
+				94E108942487333F0091D043 /* Debug configuration for PBXNativeTarget "Sudoku" */,
+				94E108952487333F0091D043 /* Release configuration for PBXNativeTarget "Sudoku" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		EC7D0FB32BBB98BF0035FB6D /* Build configuration list for PBXNativeTarget "SudokuTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EC7D0FB12BBB98BF0035FB6D /* Debug */,
-				EC7D0FB22BBB98BF0035FB6D /* Release */,
+				EC7D0FB12BBB98BF0035FB6D /* Debug configuration for PBXNativeTarget "SudokuTests" */,
+				EC7D0FB22BBB98BF0035FB6D /* Release configuration for PBXNativeTarget "SudokuTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
@@ -498,6 +500,14 @@
 				kind = branch;
 			};
 		};
+		EC63D5CE2E510AA700B5D4D0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.18.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -505,6 +515,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC3E0F922CE1330E0026AA8C /* XCRemoteSwiftPackageReference "aiproxyswift" */;
 			productName = AIProxy;
+		};
+		EC63D5CF2E510AA700B5D4D0 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC63D5CE2E510AA700B5D4D0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

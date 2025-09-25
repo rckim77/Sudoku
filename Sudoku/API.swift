@@ -65,7 +65,7 @@ struct API {
                 model: "gpt-4o-mini",
                 messages: [.system(content: .text(content))]
             )
-            let response = try await openAIService.chatCompletionRequest(body: requestBody)
+            let response = try await openAIService.chatCompletionRequest(body: requestBody, secondsToWait: 60)
             let hint = Hint(coordinate: nil, hintType: .open, overrideDescription: response.choices.first?.message.content)
             return hint
         } catch AIProxyError.unsuccessfulRequest(statusCode: let statusCode, responseBody: let responseBody) {

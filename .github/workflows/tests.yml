@@ -6,7 +6,8 @@ on:
     branches: [ main ]
 
 jobs:
-  Tests:
+  unit_tests:
+    name: Unit Tests
     runs-on: macos-15
     timeout-minutes: 20
     
@@ -14,14 +15,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Select Xcode 16.4
-      run: sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+    - name: Select Xcode 26
+      run: sudo xcode-select -s /Applications/Xcode_26.app/Contents/Developer
     
     - name: Show Xcode version
       run: xcodebuild -version
     
     - name: Show available simulators
-      run: xcrun simctl list devices available | head -20
+      run: xcrun simctl list devices available
     
     - name: Resolve Swift Package dependencies
       run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
@@ -31,15 +32,15 @@ jobs:
         xcodebuild build-for-testing \
           -project Sudoku.xcodeproj \
           -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4,arch=arm64' \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=26.0,arch=arm64' \
           -configuration Debug \
           CODE_SIGNING_ALLOWED=NO
       
-    - name: Run tests
+    - name: Run unit tests
       run: |
         xcodebuild test-without-building \
           -project Sudoku.xcodeproj \
           -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4,arch=arm64' \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=26.0,arch=arm64' \
           -configuration Debug \
           CODE_SIGNING_ALLOWED=NO
