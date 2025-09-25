@@ -1,0 +1,96 @@
+/* 
+  Localizable.strings
+  Sudoku
+  
+  Korean localization
+  Copyright © 2025 Self. All rights reserved.
+*/
+
+// MARK: - App Title and Main Menu
+"app_title" = "스도쿠 AI";
+"continue_game" = "게임 계속하기";
+"new_game" = "새 게임";
+
+// MARK: - Difficulty Levels
+"difficulty_easy" = "쉬움";
+"difficulty_medium" = "보통";
+"difficulty_hard" = "어려움";
+
+// MARK: - Navigation and Menu Items
+"nav_stats" = "통계";
+"nav_how_to_play" = "게임 방법";
+"nav_settings" = "설정";
+
+// MARK: - Game Actions and Buttons
+"action_undo" = "되돌리기";
+"action_save" = "저장";
+"action_confirm" = "확인";
+"action_cancel" = "취소";
+"action_clear" = "지우기";
+"action_edit" = "편집";
+"action_hint" = "힌트";
+
+// MARK: - Alert Titles
+"alert_congratulations" = "축하합니다!";
+"alert_almost" = "거의 다 됐어요!";
+"alert_hint_title" = "힌트";
+"alert_confirm_title" = "정말이신가요?";
+"alert_heads_up" = "알려드립니다!";
+"alert_data_deleted" = "데이터 삭제됨";
+"alert_cache_cleared" = "캐시 정리됨";
+
+// MARK: - Alert Messages
+"alert_completed_correctly" = "스도쿠를 완성했습니다!";
+"alert_completed_incorrectly" = "죄송하지만 아직 올바르지 않습니다. 힌트 기능을 사용해 보세요.";
+"alert_hint_error" = "앗! 문제가 발생했습니다. 나중에 다시 시도해 주세요.";
+"alert_hint_quota" = "할당량을 초과했습니다. 나중에 다시 시도해 주세요.";
+"alert_new_game_message" = "저장하지 않고 돌아가면 현재 진행 상황을 잃게 됩니다.";
+"alert_overwrite_warning" = "이미 저장된 게임이 있는 것 같습니다. 이 게임으로 덮어쓰시겠습니까?";
+"alert_data_deleted_message" = "데이터가 성공적으로 삭제되었습니다.";
+"alert_cache_cleared_message" = "캐시가 성공적으로 정리되었습니다.";
+
+// MARK: - Alert Actions
+"alert_go_back" = "돌아가기";
+"alert_thanks" = "감사합니다";
+"alert_dismiss" = "닫기";
+"alert_ok" = "확인";
+
+// MARK: - Settings
+"settings_version" = "버전 %@ (%@)";
+"settings_copyright" = "© 2023 Ray Kim";
+"settings_website" = "웹사이트";
+"settings_delete_data" = "저장된 데이터 삭제";
+"settings_clear_cache" = "힌트 캐시 정리";
+
+// MARK: - Statistics
+"stats_title" = "통계";
+"stats_fastest_time" = "최단 완성 시간";
+"stats_total_games" = "총 완성한 게임 수";
+"stats_section_difficulty" = "난이도";
+"stats_easy" = "쉬움";
+"stats_medium" = "보통";
+"stats_hard" = "어려움";
+
+// MARK: - Time Formatting
+"time_format_hours_minutes_seconds" = "%d시간 %d분 %d초";
+"time_format_minutes_seconds" = "%d분 %d초";
+"time_format_seconds" = "%d초";
+
+// MARK: - How To Play
+"howto_title" = "게임 방법";
+"howto_intro" = "스도쿠는 격자 안의 모든 개별 숫자 칸을 올바른 숫자로 채우는 퍼즐입니다. 그렇다면 올바른 숫자는 무엇으로 결정될까요? 충족해야 할 몇 가지 요구사항이 있습니다:";
+"howto_rule_rows" = "첫째, 격자의 모든 행에는 1부터 9까지의 숫자가 포함되어야 합니다. 각 숫자는 한 번만 나타날 수 있습니다.";
+"howto_rule_columns" = "둘째, 격자의 모든 열에도 1부터 9까지의 숫자가 정확히 한 번씩 포함되어야 합니다.";
+"howto_rule_squares" = "격자 내에 굵은 테두리로 표시된 9개의 사각형이 있는 것을 볼 수 있습니다. 아래에서는 하나의 사각형이 노란색으로 강조 표시되어 있습니다. 세 번째 요구사항은 이러한 각 사각형에도 1부터 9까지의 숫자가 한 자리씩만 포함되어야 한다는 것입니다.";
+"howto_conclusion_1" = "세 가지 조건이 모두 충족되면 스도쿠 격자가 해결된 것입니다.";
+"howto_conclusion_2" = "스도쿠 퍼즐의 난이도는 처음에 이미 채워진 숫자의 개수에 따라 달라질 수 있습니다. 행운을 빌며 즐겁게 풀어보세요!";
+
+// MARK: - Hint System
+"hint_loading" = "힌트 생성 중...";
+"hint_naked_single" = "이 보드에는 최소 하나의 네이키드 싱글이 있습니다. 찾을 수 있나요?";
+"hint_hidden_single" = "이 보드에는 최소 하나의 히든 싱글이 있습니다. 찾을 수 있나요?";
+"hint_naked_single_value" = "보드 어딘가에 네이키드 싱글 %d가 있습니다. 찾을 수 있나요?";
+"hint_hidden_single_value" = "보드 어딘가에 히든 싱글 %d가 있습니다. 찾을 수 있나요?";
+
+// MARK: - Vision OS Special Message  
+"vision_special_message" = "Apple Vision Pro용 앱 테스트를 도와준 Don에게 특별한 감사를 보냅니다 🎉";

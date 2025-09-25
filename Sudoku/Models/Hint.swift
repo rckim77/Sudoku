@@ -17,9 +17,9 @@ struct Hint {
         var rawValue: String {
             switch self {
             case .nakedSingle:
-                return "There is at least one naked single on this board. Can you find it?"
+                return String(localized: "hint_naked_single")
             case .hiddenSingle:
-                return "There is at least one hidden single on this board. Can you find it?"
+                return String(localized: "hint_hidden_single")
             case .open:
                 return "fallback"
             }

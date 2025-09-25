@@ -16,13 +16,13 @@ struct HintButton: View {
         var rawValue: String {
             switch self {
                 case .idle: return ""
-                case .loading: return "Generating hint..."
+                case .loading: return String(localized: "hint_loading")
                 case .loaded(message: let message): return message
             case .error(let errorType):
                 if case .quotaExceeded = errorType {
-                    return AlertItem.hintErrorQuota.message
+                    return String(localized: "alert_hint_quota")
                 }
-                return AlertItem.hintError.message
+                return String(localized: "alert_hint_error")
             }
         }
     }
@@ -120,11 +120,11 @@ struct HintButton: View {
         switch cachedHint.hintType {
         case .nakedSingle:
             if let value = cachedHint.coordinate?.v {
-                hintDescription = "Somewhere on the board, there is a naked single \(value). Can you find it?"
+                hintDescription = String(localized: "hint_naked_single_value", defaultValue: "Somewhere on the board, there is a naked single \(value). Can you find it?", table: nil, locale: .current, arguments: value)
             }
         case .hiddenSingle:
             if let value = cachedHint.coordinate?.v {
-                hintDescription = "Somewhere on the board, there is a hidden single \(value). Can you find it?"
+                hintDescription = String(localized: "hint_hidden_single_value", defaultValue: "Somewhere on the board, there is a hidden single \(value). Can you find it?", table: nil, locale: .current, arguments: value)
             }
         default:
             break

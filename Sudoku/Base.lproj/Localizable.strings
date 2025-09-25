@@ -1,0 +1,96 @@
+/* 
+  Localizable.strings
+  Sudoku
+  
+  Created for localization support.
+  Copyright © 2025 Self. All rights reserved.
+*/
+
+// MARK: - App Title and Main Menu
+"app_title" = "Sudoku AI";
+"continue_game" = "Continue game";
+"new_game" = "New game";
+
+// MARK: - Difficulty Levels
+"difficulty_easy" = "Easy";
+"difficulty_medium" = "Medium";
+"difficulty_hard" = "Hard";
+
+// MARK: - Navigation and Menu Items
+"nav_stats" = "Stats";
+"nav_how_to_play" = "How to play";
+"nav_settings" = "Settings";
+
+// MARK: - Game Actions and Buttons
+"action_undo" = "Undo";
+"action_save" = "Save";
+"action_confirm" = "Confirm";
+"action_cancel" = "Cancel";
+"action_clear" = "Clear";
+"action_edit" = "Edit";
+"action_hint" = "Hint";
+
+// MARK: - Alert Titles
+"alert_congratulations" = "Congratulations!";
+"alert_almost" = "Almost!";
+"alert_hint_title" = "Hint";
+"alert_confirm_title" = "Are you sure?";
+"alert_heads_up" = "Heads up!";
+"alert_data_deleted" = "Data Deleted";
+"alert_cache_cleared" = "Cache cleared";
+
+// MARK: - Alert Messages
+"alert_completed_correctly" = "You've completed the sudoku!";
+"alert_completed_incorrectly" = "Sorry but that's not quite right. Try and use the hint feature to help you.";
+"alert_hint_error" = "Oops! Something went wrong. Try again later.";
+"alert_hint_quota" = "Quota exceeded. Please try again later.";
+"alert_new_game_message" = "If you go back without saving, you will lose your current progress.";
+"alert_overwrite_warning" = "Looks like you already have a saved game. Do you want to overwrite with this game?";
+"alert_data_deleted_message" = "Data has been deleted successfully.";
+"alert_cache_cleared_message" = "Cache has been cleared successfully.";
+
+// MARK: - Alert Actions
+"alert_go_back" = "Go back";
+"alert_thanks" = "Thanks";
+"alert_dismiss" = "Dismiss";
+"alert_ok" = "OK";
+
+// MARK: - Settings
+"settings_version" = "Version %@ (%@)";
+"settings_copyright" = "© 2023 Ray Kim";
+"settings_website" = "Website";
+"settings_delete_data" = "Delete saved data";
+"settings_clear_cache" = "Clear hint cache";
+
+// MARK: - Statistics
+"stats_title" = "Stats";
+"stats_fastest_time" = "Fastest time completed";
+"stats_total_games" = "Total games completed";
+"stats_section_difficulty" = "Difficulty";
+"stats_easy" = "Easy";
+"stats_medium" = "Medium";
+"stats_hard" = "Hard";
+
+// MARK: - Time Formatting
+"time_format_hours_minutes_seconds" = "%d hours, %d minutes, and %d seconds";
+"time_format_minutes_seconds" = "%d minutes and %d seconds";
+"time_format_seconds" = "%d seconds";
+
+// MARK: - How To Play
+"howto_title" = "How to play";
+"howto_intro" = "Sudoku is a puzzle where you fill all the individual digit squares inside a grid with the right digit. But what determines the right digit? There are a few requirements that must be met:";
+"howto_rule_rows" = "First, every row in the grid must include the numbers 1 to 9. Each digit can only appear once.";
+"howto_rule_columns" = "Second, every column in the grid must also include the numbers 1 to 9 exactly once.";
+"howto_rule_squares" = "You'll notice that within the grid there are nine squares shown with bold borders. Below is one square highlighted in yellow. The third requirement is that each of these squares must also only contain the numbers 1 through 9, once per digit.";
+"howto_conclusion_1" = "If all three conditions are met, then the Sudoku grid has been solved.";
+"howto_conclusion_2" = "The difficulty of a Sudoku puzzle can range depending on how many digits are already filled in at the beginning. Good luck and have fun solving them!";
+
+// MARK: - Hint System
+"hint_loading" = "Generating hint...";
+"hint_naked_single" = "There is at least one naked single on this board. Can you find it?";
+"hint_hidden_single" = "There is at least one hidden single on this board. Can you find it?";
+"hint_naked_single_value" = "Somewhere on the board, there is a naked single %d. Can you find it?";
+"hint_hidden_single_value" = "Somewhere on the board, there is a hidden single %d. Can you find it?";
+
+// MARK: - Vision OS Special Message  
+"vision_special_message" = "Special shoutout to Don for helping me test this app for the Apple Vision Pro 🎉";

@@ -20,36 +20,36 @@ enum AlertItem: Equatable {
     var title: String {
         switch self {
         case .completedCorrectly:
-            return "Congratulations!"
+            return String(localized: "alert_congratulations")
         case .completedIncorrectly:
-            return "Almost!"
+            return String(localized: "alert_almost")
         case .hintSuccess(_):
-            return "Hint"
+            return String(localized: "alert_hint_title")
         case .hintError, .hintErrorQuota:
-            return "Hint"
+            return String(localized: "alert_hint_title")
         case .newGame:
-            return "Are you sure?"
+            return String(localized: "alert_confirm_title")
         case .overwriteWarning:
-            return "Heads up!"
+            return String(localized: "alert_heads_up")
         }
     }
     
     var message: String {
         switch self {
         case .completedCorrectly:
-            return "You've completed the sudoku!"
+            return String(localized: "alert_completed_correctly")
         case .completedIncorrectly:
-            return "Sorry but that's not quite right. Try and use the hint feature to help you."
+            return String(localized: "alert_completed_incorrectly")
         case .hintSuccess(let hint):
             return hint
         case .hintError:
-            return "Oops! Something went wrong. Try again later."
+            return String(localized: "alert_hint_error")
         case .hintErrorQuota:
-            return "Quota exceeded. Please try again later."
+            return String(localized: "alert_hint_quota")
         case .newGame:
-            return "If you go back without saving, you will lose your current progress."
+            return String(localized: "alert_new_game_message")
         case .overwriteWarning:
-            return "Looks like you already have a saved game. Do you want to overwrite with this game?"
+            return String(localized: "alert_overwrite_warning")
         }
     }
 }
