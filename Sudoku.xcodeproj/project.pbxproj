@@ -338,7 +338,7 @@
 		94E108942487333F0091D043 /* Debug configuration for PBXNativeTarget "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = sudokuappicon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
@@ -376,7 +376,7 @@
 		94E108952487333F0091D043 /* Release configuration for PBXNativeTarget "Sudoku" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = sudokuappicon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
