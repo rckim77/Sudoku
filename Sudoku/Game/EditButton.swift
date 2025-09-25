@@ -23,7 +23,7 @@ struct EditButton: View {
     }
 
     var body: some View {
-        Button("Edit", systemImage: editState.isEditing ? "square.and.pencil.circle.fill" : "square.and.pencil.circle") {
+        Button("action_edit", systemImage: editState.isEditing ? "square.and.pencil.circle.fill" : "square.and.pencil.circle") {
             self.editState.isEditing.toggle()
         }
         .contentTransition(.symbolEffect(.replace))

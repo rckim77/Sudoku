@@ -14,7 +14,7 @@ struct SettingsView: View {
     
     #if os(visionOS)
     @State private var animate = false
-    private let text = "Special shoutout to Don for helping me test this app for the Apple Vision Pro 🎉"
+    private let text = String(localized: "vision_special_message")
     #endif
     
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
@@ -25,17 +25,17 @@ struct SettingsView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            Text("Sudoku AI")
+            Text("app_title")
                 .font(Font.system(.largeTitle, design: .rounded).bold())
-            Text("Version \(appVersion) (\(buildVersion))")
+            Text("settings_version", locale: .current, arguments: appVersion, buildVersion)
                 .font(Font.system(.headline, design: .rounded))
-            Text("© 2023 Ray Kim")
+            Text("settings_copyright")
                 .font(Font.system(.headline, design: .rounded))
             Button(action: {
                 let url = URL(string: "https://www.facebook.com/Sudoku-Classic-105010301266062")!
                 UIApplication.shared.open(url)
             }) {
-                Text("Website")
+                Text("settings_website")
                     .font(Font.system(.headline, design: .rounded))
             }
             Button(action: {
@@ -54,27 +54,27 @@ struct SettingsView: View {
                 
                 showingDeleteConfirmation = true
             }) {
-                Text("Delete saved data")
+                Text("settings_delete_data")
                     .font(Font.system(.headline, design: .rounded))
                     .foregroundColor(.red)
             }
-            .alert("Data Deleted", isPresented: $showingDeleteConfirmation) {
-                Button("OK", role: .cancel) { }
+            .alert("alert_data_deleted", isPresented: $showingDeleteConfirmation) {
+                Button("alert_ok", role: .cancel) { }
             } message: {
-                Text("Data has been deleted successfully.")
+                Text("alert_data_deleted_message")
             }
             Button(action: {
                 HintButton.clearCache()
                 showingCacheClearConfirmation = true
             }) {
-                Text("Clear hint cache")
+                Text("settings_clear_cache")
                     .font(Font.system(.headline, design: .rounded))
                     .foregroundColor(.red)
             }
-            .alert("Cache cleared", isPresented: $showingCacheClearConfirmation) {
-                Button("OK", role: .cancel) { }
+            .alert("alert_cache_cleared", isPresented: $showingCacheClearConfirmation) {
+                Button("alert_ok", role: .cancel) { }
             } message: {
-                Text("Cache has been cleared successfully.")
+                Text("alert_cache_cleared_message")
             }
             #if os(visionOS)
             HStack(spacing: 0) {

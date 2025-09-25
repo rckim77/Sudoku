@@ -132,26 +132,26 @@ struct GameView: View {
                         Button(role: .destructive) {
                             dismiss()
                         } label: {
-                            Text("Confirm")
+                            Text("action_confirm")
                         }
                         Button(role: .cancel) {} label: {
-                            Text("Cancel")
+                            Text("action_cancel")
                         }
                         
                     case .completedCorrectly:
-                        Button("Go back") {
+                        Button("alert_go_back") {
                             saveUserStats()
                             dismiss()
                         }
                     case .hintSuccess(_):
-                        Button("Thanks") {}
+                        Button("alert_thanks") {}
                     case .completedIncorrectly, .hintError, .hintErrorQuota:
-                        Button("Dismiss") {}
+                        Button("alert_dismiss") {}
                     case .overwriteWarning:
                         Button(role: .destructive) {
                             save()
                         } label: {
-                            Text("Confirm")
+                            Text("action_confirm")
                         }
                     }
                 } message: { item in
@@ -183,7 +183,7 @@ struct GameView: View {
     
     private var actionButtons: some View {
         Group {
-            Button("Undo", systemImage: "arrow.uturn.backward") {
+            Button("action_undo", systemImage: "arrow.uturn.backward") {
                 handleUndo()
             }
             .disabled(!undoManager.canUndo)
@@ -201,7 +201,7 @@ struct GameView: View {
                        alertIsPresented: $alertIsPresented,
                        grid: workingGrid.grid,
                        difficulty: viewModel.difficulty)
-            Button("Save", systemImage: "square.and.arrow.down") {
+            Button("action_save", systemImage: "square.and.arrow.down") {
                 checkSaveIfNeeded()
                 saveButtonAnimate.toggle()
             }
