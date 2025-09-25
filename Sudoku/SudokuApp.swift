@@ -11,12 +11,26 @@ import SwiftData
 
 @main
 struct SudokuApp: App {
+    @State private var isLaunchScreenVisible = true
 
     var body: some Scene {
         WindowGroup {
             GeometryReader { geometry in
-                MenuView()
-                    .environment(WindowSize(size: geometry.size))
+                if isLaunchScreenVisible {
+                    LaunchScreenView()
+                        .onAppear {
+                            // Show launch screen for a brief moment, then transition to main app
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                withAnimation(.easeInOut(duration: 0.5)) {
+                                    isLaunchScreenVisible = false
+                                }
+                            }
+                        }
+                } else {
+                    MenuView()
+                        .environment(WindowSize(size: geometry.size))
+                        .transition(.opacity)
+                }
             }
         }
         .modelContainer(for: GameConfig.self)
