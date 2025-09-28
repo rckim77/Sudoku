@@ -17,20 +17,18 @@ enum AlertItem: Equatable {
     case newGame
     case overwriteWarning
     
-    var title: String {
+    var localizedTitle: String {
         switch self {
         case .completedCorrectly:
-            return "Congratulations!"
+            return "alert.title.completed-correctly"
         case .completedIncorrectly:
-            return "Almost!"
-        case .hintSuccess(_):
-            return "Hint"
-        case .hintError, .hintErrorQuota:
-            return "Hint"
+            return "alert.title.completed-incorrectly"
+        case .hintSuccess(_), .hintError, .hintErrorQuota:
+            return "alert.title.hint"
         case .newGame:
-            return "Are you sure?"
+            return "alert.title.new-game"
         case .overwriteWarning:
-            return "Heads up!"
+            return "alert.title.overwrite-warning"
         }
     }
     

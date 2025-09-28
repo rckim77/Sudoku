@@ -72,7 +72,7 @@ struct HintButton: View {
     }
     
     var body: some View {
-        Button("Hint", systemImage: "lightbulb.max") {
+        Button("", systemImage: "lightbulb.max") {
             Task {
                 await getHint()
             }

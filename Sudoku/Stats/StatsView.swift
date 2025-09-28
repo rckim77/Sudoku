@@ -38,7 +38,7 @@ struct StatsView: View {
                 StatsRow(title: "Fastest time completed", value: formattedFastestTime)
             }
             StatsRow(title: "Total games completed", value: "\(totalGamesCompleted)")
-            Section("Difficulty") {
+            Section("stats.section-title.difficulty") {
                 StatsRow(title: "Easy", value: "\(totalEasyGamesCompleted)")
                 StatsRow(title: "Medium", value: "\(totalMediumGamesCompleted)")
                 StatsRow(title: "Hard", value: "\(totalHardGamesCompleted)")
@@ -46,7 +46,7 @@ struct StatsView: View {
         }
         .font(Font.system(.headline, design: .rounded))
         .fullBackgroundStyle()
-        .navigationTitle("Stats")
+        .navigationTitle("stats.title")
         .navigationBarTitleDisplayMode(.large)
     }
 }

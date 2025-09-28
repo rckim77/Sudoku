@@ -27,7 +27,7 @@ struct NewGameButton: View {
                 dismiss()
             }
         }) {
-            Text("New game")
+            Text("button.new-game")
                 .font(.system(.headline, design: .rounded))
         }
         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
