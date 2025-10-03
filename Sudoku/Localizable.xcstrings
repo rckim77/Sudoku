@@ -433,13 +433,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Somewhere on the board, there is a hidden single %@. Can you find it?"
+            "value" : "Somewhere on the board, there is a hidden single %lld. Can you find it?"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "보드 어딘가에 히든 싱글 %@이(가) 있습니다. 찾을 수 있나요?"
+            "value" : "보드 어딘가에 히든 싱글 %lld 이(가) 있습니다. 찾을 수 있나요?"
           }
         }
       }
@@ -467,13 +467,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Somewhere on the board, there is a naked single %@. Can you find it?"
+            "value" : "Somewhere on the board, there is a naked single %lld. Can you find it?"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "보드 어딘가에 나키드 싱글 %@이(가) 있습니다. 찾을 수 있나요?"
+            "value" : "보드 어딘가에 나키드 싱글 %lld 이(가) 있습니다. 찾을 수 있나요?"
           }
         }
       }
