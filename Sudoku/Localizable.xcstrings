@@ -2,7 +2,15 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-      "comment" : "Used for buttons with optional text"
+      "comment" : "Used for buttons with optional text",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "alert.button.cancel" : {
       "comment" : "A button label that dismisses an alert.",
@@ -12,6 +20,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
           }
         }
       }
@@ -25,6 +39,12 @@
             "state" : "translated",
             "value" : "Close"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닫기"
+          }
         }
       }
     },
@@ -36,6 +56,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
           }
         }
       }
@@ -49,6 +75,12 @@
             "state" : "translated",
             "value" : "Dismiss"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닫기"
+          }
         }
       }
     },
@@ -61,6 +93,114 @@
             "state" : "translated",
             "value" : "Go back"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "돌아가기"
+          }
+        }
+      }
+    },
+    "alert.message.completed-correctly" : {
+      "comment" : "Message shown when user completes the sudoku correctly.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You've completed the sudoku!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스도쿠를 완성했습니다!"
+          }
+        }
+      }
+    },
+    "alert.message.completed-incorrectly" : {
+      "comment" : "Message shown when user completes the sudoku incorrectly.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorry but that's not quite right. Try and use the hint feature to help you."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "죄송하지만 정답이 아닙니다. 힌트 기능을 사용해보세요."
+          }
+        }
+      }
+    },
+    "alert.message.hint-error" : {
+      "comment" : "Message shown when there's an error generating a hint.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oops! Something went wrong. Try again later."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앗! 문제가 발생했습니다. 나중에 다시 시도해주세요."
+          }
+        }
+      }
+    },
+    "alert.message.hint-error-quota" : {
+      "comment" : "Message shown when hint quota is exceeded.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quota exceeded. Please try again later."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "할당량을 초과했습니다. 나중에 다시 시도해주세요."
+          }
+        }
+      }
+    },
+    "alert.message.new-game" : {
+      "comment" : "Message shown when user tries to start a new game.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you go back without saving, you will lose your current progress."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장하지 않고 돌아가면 현재 진행 상황을 잃게 됩니다."
+          }
+        }
+      }
+    },
+    "alert.message.overwrite-warning" : {
+      "comment" : "Message shown when user tries to overwrite an existing saved game.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looks like you already have a saved game. Do you want to overwrite with this game?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미 저장된 게임이 있는 것 같습니다. 이 게임으로 덮어쓰시겠습니까?"
+          }
         }
       }
     },
@@ -71,6 +211,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Congratulations!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "축하합니다!"
           }
         }
       }
@@ -83,6 +229,12 @@
             "state" : "translated",
             "value" : "Almost!"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "거의 다 왔어요!"
+          }
         }
       }
     },
@@ -93,6 +245,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alert"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림"
           }
         }
       }
@@ -105,6 +263,12 @@
             "state" : "translated",
             "value" : "Hint"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "힌트"
+          }
         }
       }
     },
@@ -116,6 +280,12 @@
             "state" : "translated",
             "value" : "Are you sure?"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정말로 하시겠습니까?"
+          }
         }
       }
     },
@@ -126,6 +296,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Heads up!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주의!"
           }
         }
       }
@@ -139,6 +315,12 @@
             "state" : "translated",
             "value" : "Sudoku AI"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스도쿠 AI"
+          }
         }
       }
     },
@@ -150,6 +332,148 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New game"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 게임"
+          }
+        }
+      }
+    },
+    "difficulty.easy" : {
+      "comment" : "Easy difficulty level name.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easy"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "쉬움"
+          }
+        }
+      }
+    },
+    "difficulty.hard" : {
+      "comment" : "Hard difficulty level name.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hard"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "어려움"
+          }
+        }
+      }
+    },
+    "difficulty.medium" : {
+      "comment" : "Medium difficulty level name.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "보통"
+          }
+        }
+      }
+    },
+    "hint.generating" : {
+      "comment" : "Text shown while generating a hint.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generating hint..."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "힌트 생성 중..."
+          }
+        }
+      }
+    },
+    "hint.hidden-single" : {
+      "comment" : "Hint message for hidden single technique.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is at least one hidden single on this board. Can you find it?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 보드에는 적어도 하나의 히든 싱글이 있습니다. 찾을 수 있나요?"
+          }
+        }
+      }
+    },
+    "hint.hidden-single-value" : {
+      "comment" : "Hint message for hidden single with specific value.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Somewhere on the board, there is a hidden single %@. Can you find it?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "보드 어딘가에 히든 싱글 %@이(가) 있습니다. 찾을 수 있나요?"
+          }
+        }
+      }
+    },
+    "hint.naked-single" : {
+      "comment" : "Hint message for naked single technique.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is at least one naked single on this board. Can you find it?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 보드에는 적어도 하나의 나키드 싱글이 있습니다. 찾을 수 있나요?"
+          }
+        }
+      }
+    },
+    "hint.naked-single-value" : {
+      "comment" : "Hint message for naked single with specific value.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Somewhere on the board, there is a naked single %@. Can you find it?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "보드 어딘가에 나키드 싱글 %@이(가) 있습니다. 찾을 수 있나요?"
           }
         }
       }
@@ -163,6 +487,12 @@
             "state" : "translated",
             "value" : "First, every row in the grid must include the numbers 1 to 9. Each digit can only appear once."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "첫째, 격자의 모든 행에는 1부터 9까지의 숫자가 포함되어야 합니다. 각 숫자는 한 번만 나타날 수 있습니다."
+          }
         }
       }
     },
@@ -174,6 +504,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "If all three conditions are met, then the Sudoku grid has been solved. The difficulty of a Sudoku puzzle can range depending on how many digits are already filled in at the beginning. Good luck and have fun solving them!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "세 가지 조건이 모두 충족되면 스도쿠 격자가 해결된 것입니다. 스도쿠 퍼즐의 난이도는 시작할 때 이미 채워진 숫자의 개수에 따라 달라질 수 있습니다. 행운을 빕니다!"
           }
         }
       }
@@ -187,6 +523,12 @@
             "state" : "translated",
             "value" : "Second, every column in the grid must also include the numbers 1 to 9 exactly once."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "둘째, 격자의 모든 열에도 1부터 9까지의 숫자가 정확히 한 번씩 포함되어야 합니다."
+          }
         }
       }
     },
@@ -198,6 +540,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You'll notice that within the grid there are nine squares shown with bold borders. Below is one square highlighted in yellow. The third requirement is that each of these squares must also only contain the numbers 1 through 9, once per digit."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "격자 안에 굵은 테두리로 표시된 9개의 사각형이 있다는 것을 알 수 있습니다. 아래는 노란색으로 강조된 사각형입니다. 세 번째 조건은 이러한 각 사각형에도 1부터 9까지의 숫자가 각각 한 번씩만 포함되어야 한다는 것입니다."
           }
         }
       }
@@ -211,6 +559,12 @@
             "state" : "translated",
             "value" : "Sudoku is a puzzle where you fill all the individual digit squares inside a grid with the right digit. But what determines the right digit? There are a few requirements that must be met:"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스도쿠는 격자 안의 모든 개별 숫자 칸을 올바른 숫자로 채우는 퍼즐입니다. 그렇다면 올바른 숫자는 무엇으로 결정될까요? 충족되어야 할 몇 가지 조건이 있습니다:"
+          }
         }
       }
     },
@@ -222,6 +576,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "How to play"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 방법"
           }
         }
       }
@@ -235,6 +595,12 @@
             "state" : "translated",
             "value" : "Continue game"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게임 계속하기"
+          }
         }
       }
     },
@@ -246,6 +612,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version %1$@ (%2$@)"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버전 %1$@ (%2$@)"
           }
         }
       }
@@ -259,6 +631,12 @@
             "state" : "translated",
             "value" : "Clear hint cache"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "힌트 캐시 지우기"
+          }
         }
       }
     },
@@ -270,6 +648,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cache has been cleared successfully."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캐시가 성공적으로 지워졌습니다."
           }
         }
       }
@@ -283,6 +667,12 @@
             "state" : "translated",
             "value" : "Cache cleared"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캐시 지워짐"
+          }
         }
       }
     },
@@ -291,6 +681,12 @@
       "isCommentAutoGenerated" : true,
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2023 Ray Kim"
+          }
+        },
+        "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "© 2023 Ray Kim"
@@ -307,6 +703,12 @@
             "state" : "translated",
             "value" : "Delete saved data"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장된 데이터 삭제"
+          }
         }
       }
     },
@@ -318,6 +720,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Data has been deleted successfully."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "데이터가 성공적으로 삭제되었습니다."
           }
         }
       }
@@ -331,6 +739,29 @@
             "state" : "translated",
             "value" : "Data deleted"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "데이터 삭제됨"
+          }
+        }
+      }
+    },
+    "settings.special-message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Special shoutout to Don for helping me test this app for the Apple Vision Pro 🎉"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Vision Pro에서 이 앱을 테스트하는 데 도움을 준 Don에게 특별한 감사를 전합니다 🎉"
+          }
         }
       }
     },
@@ -342,6 +773,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
           }
         }
       }
@@ -355,6 +792,29 @@
             "state" : "translated",
             "value" : "Website"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "웹사이트"
+          }
+        }
+      }
+    },
+    "stats.fastest-time" : {
+      "comment" : "Label for fastest completion time in stats.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fastest time completed"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최단 완료 시간"
+          }
         }
       }
     },
@@ -367,6 +827,12 @@
             "state" : "translated",
             "value" : "Difficulty"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "난이도"
+          }
         }
       }
     },
@@ -378,6 +844,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stats"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "통계"
+          }
+        }
+      }
+    },
+    "stats.total-games" : {
+      "comment" : "Label for total games completed in stats.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total games completed"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "총 완료한 게임"
           }
         }
       }

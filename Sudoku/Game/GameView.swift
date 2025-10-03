@@ -154,7 +154,11 @@ struct GameView: View {
                         }
                     }
                 } message: { item in
-                    Text(item.message)
+                    if case .hintSuccess(hint: _) = item {
+                        Text(item.message)
+                    } else {
+                        Text(LocalizedStringKey(stringLiteral: item.message))
+                    }
                 }
             }
         }

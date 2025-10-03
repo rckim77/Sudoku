@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct StatsRow: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: String
     
     var body: some View {
@@ -23,5 +23,5 @@ struct StatsRow: View {
 }
 
 #Preview {
-    StatsRow(title: "Sample Stat", value: "42")
+    StatsRow(title: "stats.total-games", value: "42")
 }

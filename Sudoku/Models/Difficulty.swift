@@ -14,6 +14,14 @@ import SwiftUI
         case easy = "Easy"
         case medium = "Medium"
         case hard = "Hard"
+        
+        var localizedValue: LocalizedStringKey {
+            switch self {
+            case .easy: "difficulty.easy"
+            case .medium: "difficulty.medium"
+            case .hard: "difficulty.hard"
+            }
+        }
     }
 
     var level: Level

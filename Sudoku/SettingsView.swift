@@ -14,7 +14,7 @@ struct SettingsView: View {
     
     #if os(visionOS)
     @State private var animate = false
-    private let text = "Special shoutout to Don for helping me test this app for the Apple Vision Pro 🎉"
+    private let text = String(localized: "settings.special-message")
     #endif
     
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
