@@ -85,9 +85,11 @@ struct GameView: View {
                                userAction: userAction,
                                editGrid: editGrid.grid,
                                workingGrid: workingGrid)
+                        .aspectRatio(1.0, contentMode: .fit)
+                        .frame(maxHeight: viewModel.getMaxGridHeight(geometry.size))
                     Spacer()
                         .frame(maxWidth: .infinity,
-                               maxHeight: viewModel.getSpacerMaxHeight(geometry.size.height))
+                               maxHeight: viewModel.getSpacerMaxHeight(geometry.size))
                     KeysRow(editGrid: editGrid,
                             userAction: userAction,
                             workingGrid: workingGrid,

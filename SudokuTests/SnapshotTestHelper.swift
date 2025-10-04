@@ -27,5 +27,7 @@ public struct SnapshotTestHelper {
                                     ("iPhone13", .iPhone13),
                                     ("iPhone13ProMax", .iPhone13ProMax),
                                     ("iPad10_2", .iPad10_2(.portrait)),
-                                    ("iPad12_9", .iPadPro12_9(.portrait))]
+                                    ("iPad10_2_Landscape", .iPad10_2(.landscape)),
+                                    ("iPad12_9", .iPadPro12_9(.portrait)),
+                                    ("iPad12_9_Landscape", .iPadPro12_9(.landscape))]
 }

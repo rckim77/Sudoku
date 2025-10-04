@@ -42,15 +42,33 @@ struct GameViewModel: ViewModel {
         }
     }
     
-    func getSpacerMaxHeight(_ geometryHeight: CGFloat) -> CGFloat {
+    func getSpacerMaxHeight(_ geometrySize: CGSize) -> CGFloat {
         let verticalThreshold: CGFloat = 900
+        let isLandscape = geometrySize.width > geometrySize.height
 
         if isVision {
             return 8
-        } else if geometryHeight > verticalThreshold {
+        } else if isLandscape && isIpad {
+            // In landscape mode on iPad, minimize spacer to save vertical space
+            return 8
+        } else if geometrySize.height > verticalThreshold {
             return 60
         } else {
             return 16
+        }
+    }
+    
+    func getMaxGridHeight(_ geometrySize: CGSize) -> CGFloat? {
+        let isLandscape = geometrySize.width > geometrySize.height
+        
+        if isLandscape && isIpad {
+            // In landscape mode on iPad, constrain grid height to fit available space
+            // Reserve space for: KeysRow (~80pt), toolbar (~70pt), timer/buttons (~80pt), spacers (~50pt)
+            let reservedSpace: CGFloat = 280
+            return max(geometrySize.height - reservedSpace, 300)
+        } else {
+            // In portrait mode or on other devices, let the grid size naturally
+            return nil
         }
     }
 }
