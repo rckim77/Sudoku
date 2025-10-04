@@ -63,9 +63,12 @@ struct GameViewModel: ViewModel {
         
         if isLandscape && isIpad {
             // In landscape mode on iPad, constrain grid height to fit available space
-            // Reserve space for: KeysRow (~80pt), toolbar (~70pt), timer/buttons (~80pt), spacers (~50pt)
-            let reservedSpace: CGFloat = 280
-            return max(geometrySize.height - reservedSpace, 300)
+            // Reserve space for: KeysRow (72pt + spacing), toolbar (~50pt), 
+            // timer/buttons (~50pt), spacers (~60pt), safe areas (~20pt)
+            let reservedSpace: CGFloat = 252
+            let maxGridHeight = geometrySize.height - reservedSpace
+            // Grid should fill most of available space (minimum 300pt for small windows)
+            return max(maxGridHeight, 300)
         } else {
             // In portrait mode or on other devices, let the grid size naturally
             return nil
