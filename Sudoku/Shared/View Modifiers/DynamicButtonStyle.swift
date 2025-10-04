@@ -38,7 +38,7 @@ struct DynamicButtonStyle: ViewModifier {
                 .padding(.vertical, buttonVerticalPadding)
                 .padding(.horizontal, buttonHorizontalPadding)
                 .background(backgroundColor)
-                .cornerRadius(8)
+                .cornerRadius(16)
         }
     }
 }

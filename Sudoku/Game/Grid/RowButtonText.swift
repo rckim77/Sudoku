@@ -21,11 +21,6 @@ struct RowButtonText: View {
         return Font.system(textStyle, design: .rounded).bold()
     }
 
-    private var buttonMinHeight: CGFloat {
-        let spacerWidth = isStatic ? StaticGridView.spacerWidth : SudokuGrid.spacerWidth
-        return (windowSize.size.width - (2 * spacerWidth)) / 9
-    }
-
     var body: some View {
         Text(text)
             .foregroundColor(foregroundColor)
@@ -35,12 +30,16 @@ struct RowButtonText: View {
     }
     
     private func getHeight(size: CGSize) -> CGFloat {
-        if isVision && !isStatic {
+        if isStatic {
+            return (windowSize.size.width - (2 * StaticGridView.spacerWidth)) / 9
+        }
+        
+        if isVision {
             let horizontalPadding = abs(size.width - size.height)
             let extraVerticalOffset: CGFloat = 24 // other UI elements below the grid
             return ((size.width - horizontalPadding) / 9) - extraVerticalOffset
         } else {
-            return buttonMinHeight
+            return (windowSize.size.width - (2 * SudokuGrid.spacerWidth)) / 9
         }
     }
 }

@@ -15,13 +15,20 @@ struct SudokuGrid: View {
     let editGrid: [CoordinateEditValues]
     let workingGrid: GridValues
     
-    /// This width value determines how much space there is padded on the sides of
-    /// the sudoku grid. The grid will resize and scale accordingly.
+    /// This width value affects the row text height and the edit cell grid height, which will resize and scale
+    /// the overall grid's height accordingly. Update `getSpacerWidth(screenSize:)` when
+    /// updating this var if applicable.
     static var spacerWidth: CGFloat {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return 8
-        } else {
-            return 160
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone: return 8
+        case .pad:
+            switch UIDevice.current.orientation {
+            case .landscapeRight, .landscapeLeft:
+                return 350
+            default:
+                return 160
+            }
+        default: return 160
         }
     }
     
@@ -41,14 +48,21 @@ struct SudokuGrid: View {
         }
     }
     
+    /// This width value determines how much space there is padded on the sides of
+    /// the sudoku grid. The grid will resize and scale accordingly.
     private func getSpacerWidth(screenSize: CGSize) -> CGFloat {
         if isIphone {
             return 8
         } else if isVision {
             // maintain square aspect ratio
             return abs(screenSize.width - screenSize.height) / 2
-        } else {
-            return 160
+        } else { // iPad
+            switch UIDevice.current.orientation {
+            case .landscapeRight, .landscapeLeft:
+                return 350
+            default:
+                return 160
+            }
         }
     }
 }

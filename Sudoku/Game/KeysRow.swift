@@ -24,7 +24,7 @@ struct KeysRow: View {
 
     var undoManager: UndoManager
 
-    private let buttonCornerRadius: CGFloat = 5
+    private let buttonCornerRadius: CGFloat = 16
     private var horizontalSpacing: CGFloat {
         if isVision {
             return 32
