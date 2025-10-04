@@ -123,7 +123,7 @@ struct GameView: View {
                         }
                     }
                 }
-                .alert(alertItem?.title ?? "Alert",
+                .alert(LocalizedStringKey(stringLiteral: alertItem?.localizedTitle ?? "alert.title.default"),
                        isPresented: $alertIsPresented,
                        presenting: alertItem
                 ) { item in
@@ -132,30 +132,33 @@ struct GameView: View {
                         Button(role: .destructive) {
                             dismiss()
                         } label: {
-                            Text("Confirm")
+                            Text("alert.button.confirm")
                         }
                         Button(role: .cancel) {} label: {
-                            Text("Cancel")
+                            Text("alert.button.cancel")
                         }
-                        
                     case .completedCorrectly:
-                        Button("Go back") {
+                        Button("alert.button.return") {
                             saveUserStats()
                             dismiss()
                         }
                     case .hintSuccess(_):
-                        Button("Thanks") {}
+                        Button("alert.button.close") {}
                     case .completedIncorrectly, .hintError, .hintErrorQuota:
-                        Button("Dismiss") {}
+                        Button("alert.button.dismiss") {}
                     case .overwriteWarning:
                         Button(role: .destructive) {
                             save()
                         } label: {
-                            Text("Confirm")
+                            Text("alert.button.confirm")
                         }
                     }
                 } message: { item in
-                    Text(item.message)
+                    if case .hintSuccess(hint: _) = item {
+                        Text(item.message)
+                    } else {
+                        Text(LocalizedStringKey(stringLiteral: item.message))
+                    }
                 }
             }
         }
@@ -183,7 +186,7 @@ struct GameView: View {
     
     private var actionButtons: some View {
         Group {
-            Button("Undo", systemImage: "arrow.uturn.backward") {
+            Button("", systemImage: "arrow.uturn.backward") {
                 handleUndo()
             }
             .disabled(!undoManager.canUndo)
@@ -201,7 +204,7 @@ struct GameView: View {
                        alertIsPresented: $alertIsPresented,
                        grid: workingGrid.grid,
                        difficulty: viewModel.difficulty)
-            Button("Save", systemImage: "square.and.arrow.down") {
+            Button("", systemImage: "square.and.arrow.down") {
                 checkSaveIfNeeded()
                 saveButtonAnimate.toggle()
             }

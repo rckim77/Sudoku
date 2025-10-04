@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum AlertItem: Equatable {
     case completedCorrectly
@@ -17,39 +18,38 @@ enum AlertItem: Equatable {
     case newGame
     case overwriteWarning
     
-    var title: String {
+    var localizedTitle: String {
         switch self {
         case .completedCorrectly:
-            return "Congratulations!"
+            return "alert.title.completed-correctly"
         case .completedIncorrectly:
-            return "Almost!"
-        case .hintSuccess(_):
-            return "Hint"
-        case .hintError, .hintErrorQuota:
-            return "Hint"
+            return "alert.title.completed-incorrectly"
+        case .hintSuccess(_), .hintError, .hintErrorQuota:
+            return "alert.title.hint"
         case .newGame:
-            return "Are you sure?"
+            return "alert.title.new-game"
         case .overwriteWarning:
-            return "Heads up!"
+            return "alert.title.overwrite-warning"
         }
     }
     
+    /// Will return either a localizable string key or the actual translated message from the API
     var message: String {
         switch self {
         case .completedCorrectly:
-            return "You've completed the sudoku!"
+            return "alert.message.completed-correctly"
         case .completedIncorrectly:
-            return "Sorry but that's not quite right. Try and use the hint feature to help you."
+            return "alert.message.completed-incorrectly"
         case .hintSuccess(let hint):
             return hint
         case .hintError:
-            return "Oops! Something went wrong. Try again later."
+            return "alert.message.hint-error"
         case .hintErrorQuota:
-            return "Quota exceeded. Please try again later."
+            return "alert.message.hint-error-quota"
         case .newGame:
-            return "If you go back without saving, you will lose your current progress."
+            return "alert.message.new-game"
         case .overwriteWarning:
-            return "Looks like you already have a saved game. Do you want to overwrite with this game?"
+            return "alert.message.overwrite-warning"
         }
     }
 }

@@ -16,13 +16,13 @@ struct HintButton: View {
         var rawValue: String {
             switch self {
                 case .idle: return ""
-                case .loading: return "Generating hint..."
+                case .loading: return "hint.generating"
                 case .loaded(message: let message): return message
-            case .error(let errorType):
-                if case .quotaExceeded = errorType {
-                    return AlertItem.hintErrorQuota.message
-                }
-                return AlertItem.hintError.message
+                case .error(let errorType):
+                    if case .quotaExceeded = errorType {
+                        return AlertItem.hintErrorQuota.message
+                    }
+                    return AlertItem.hintError.message
             }
         }
     }
@@ -59,7 +59,7 @@ struct HintButton: View {
     }
     
     private var textView: some View {
-        Text(hintState.rawValue)
+        Text(LocalizedStringKey(hintState.rawValue))
             .font(.system(.body, design: .rounded))
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
@@ -72,7 +72,7 @@ struct HintButton: View {
     }
     
     var body: some View {
-        Button("Hint", systemImage: "lightbulb.max") {
+        Button("", systemImage: "lightbulb.max") {
             Task {
                 await getHint()
             }
@@ -120,11 +120,13 @@ struct HintButton: View {
         switch cachedHint.hintType {
         case .nakedSingle:
             if let value = cachedHint.coordinate?.v {
-                hintDescription = "Somewhere on the board, there is a naked single \(value). Can you find it?"
+                let format = String(localized: "hint.naked-single-value")
+                hintDescription = String(format: format, locale: .current, value)
             }
         case .hiddenSingle:
             if let value = cachedHint.coordinate?.v {
-                hintDescription = "Somewhere on the board, there is a hidden single \(value). Can you find it?"
+                let format = String(localized: "hint.hidden-single-value")
+                hintDescription = String(format: format, locale: .current, value)
             }
         default:
             break

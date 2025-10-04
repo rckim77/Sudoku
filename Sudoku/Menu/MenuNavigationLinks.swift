@@ -27,21 +27,21 @@ struct MenuNavigationLinks: View {
             NavigationLink {
                 StatsView()
             } label: {
-                Label("Stats", systemImage: "chart.bar")
+                Label("stats.title", systemImage: "chart.bar")
                     .font(.system(.headline, design: .rounded))
                     .tint(Color("dynamicDarkGray"))
             }
             NavigationLink {
                 HowToPlayView()
             } label: {
-                Label("How to play", systemImage: "questionmark.circle")
+                Label("how-to-play.title", systemImage: "questionmark.circle")
                     .font(.system(.headline, design: .rounded))
                     .tint(Color("dynamicDarkGray"))
             }
             NavigationLink {
                 SettingsView()
             } label: {
-                Label("Settings", systemImage: "gear")
+                Label("settings.title", systemImage: "gear")
                     .font(.system(.headline, design: .rounded))
                     .tint(Color("dynamicDarkGray"))
             }

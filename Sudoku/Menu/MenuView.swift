@@ -18,13 +18,13 @@ struct MenuView: View {
     var body: some View {
         NavigationStack(path: $gameConfigs) {
             VStack(spacing: viewModel.buttonsVSpacing) {
-                Text("Sudoku AI")
+                Text("app-title")
                     .font(.system(.largeTitle, design: .rounded))
                     .bold()
                 VStack(spacing: viewModel.savedGameVSpacing) {
                     if let savedGameState = savedGameState.first {
                         NavigationLink(value: savedGameState) {
-                            Text("Continue game")
+                            Text("menu.button.continue-game")
                                 .font(.system(.headline, design: .rounded))
                         }
                         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))

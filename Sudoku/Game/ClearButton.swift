@@ -19,7 +19,7 @@ struct ClearButton: View {
     var undoManager: UndoManager
 
     var body: some View {
-        Button("Clear", systemImage: "eraser") {
+        Button("", systemImage: "eraser") {
             guard let selectedCoordinate = self.selectedCoordinate,
                   !self.workingGrid.containsAValue(at: selectedCoordinate, grid: workingGrid.startingGrid) else {
                 return

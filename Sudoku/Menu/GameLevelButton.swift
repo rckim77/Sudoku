@@ -23,7 +23,7 @@ struct GameLevelButton: View {
                                         elapsedTime: 0)
             gameConfigs.append(gameConfig)
         }) {
-            Text(level.rawValue)
+            Text(level.localizedValue)
                 .font(.system(.headline, design: .rounded))
         }
         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))

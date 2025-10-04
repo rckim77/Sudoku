@@ -14,14 +14,14 @@ struct Hint {
         case hiddenSingle
         case open
         
-        var rawValue: String {
+        var localizedKey: LocalizedStringResource {
             switch self {
             case .nakedSingle:
-                return "There is at least one naked single on this board. Can you find it?"
+                return "hint.naked-single"
             case .hiddenSingle:
-                return "There is at least one hidden single on this board. Can you find it?"
-            case .open:
-                return "fallback"
+                return "hint.hidden-single"
+            case .open: // not applicable for localization
+                return ""
             }
         }
     }
@@ -36,6 +36,6 @@ struct Hint {
     }
     
     var description: String {
-        return overrideDescription ?? hintType.rawValue
+        return overrideDescription ?? String(localized: hintType.localizedKey)
     }
 }

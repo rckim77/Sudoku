@@ -58,6 +58,7 @@ struct API {
             4. Always verify your hint is valid and doesn't violate Sudoku rules
             5. Use at most 2 sentences and never give direct solutions
             6. Use natural language when referring to positions (e.g., 'third row from top')
+            7. Output in the following language/region: \(Locale.current.language.languageCode?.identifier ?? "en-US")
         """
         
         do {

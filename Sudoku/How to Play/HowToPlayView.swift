@@ -35,23 +35,22 @@ struct HowToPlayView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Sudoku is a puzzle where you fill all the individual digit squares inside a grid with the right digit. But what determines the right digit? There are a few requirements that must be met:")
-                        Text("First, every row in the grid must include the numbers 1 to 9. Each digit can only appear once.")
+                        Text("how-to-play.overview")
+                        Text("how-to-play.explainer-first")
                     }
                     .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .row, grid: GridFactory.easyGrid)
                         .padding(.horizontal, horizontalGridPadding)
-                    Text("Second, every column in the grid must also include the numbers 1 to 9 exactly once.")
+                    Text("how-to-play.explainer-second")
                         .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .column, grid: GridFactory.easyGrid)
                         .padding(.horizontal, horizontalGridPadding)
-                    Text("You'll notice that within the grid there are nine squares shown with bold borders. Below is one square highlighted in yellow. The third requirement is that each of these squares must also only contain the numbers 1 through 9, once per digit.")
+                    Text("how-to-play.explainer-third")
                         .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .square, grid: GridFactory.easyGrid)
                         .padding(.horizontal, horizontalGridPadding)
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("If all three conditions are met, then the Sudoku grid has been solved.")
-                        Text("The difficulty of a Sudoku puzzle can range depending on how many digits are already filled in at the beginning. Good luck and have fun solving them!")
+                        Text("how-to-play.explainer-fourth")
                     }
                     .padding(.horizontal, horizontalTextPadding)
                 }
@@ -61,7 +60,7 @@ struct HowToPlayView: View {
             }
             .font(Font.system(.headline, design: .rounded))
             .fullBackgroundStyle()
-            .navigationTitle("How to play")
+            .navigationTitle("how-to-play.title")
             .navigationBarTitleDisplayMode(.large)
         }
     }

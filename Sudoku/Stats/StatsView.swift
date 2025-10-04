@@ -35,18 +35,18 @@ struct StatsView: View {
     var body: some View {
         List {
             if let formattedFastestTime = formattedFastestTime {
-                StatsRow(title: "Fastest time completed", value: formattedFastestTime)
+                StatsRow(title: "stats.fastest-time", value: formattedFastestTime)
             }
-            StatsRow(title: "Total games completed", value: "\(totalGamesCompleted)")
-            Section("Difficulty") {
-                StatsRow(title: "Easy", value: "\(totalEasyGamesCompleted)")
-                StatsRow(title: "Medium", value: "\(totalMediumGamesCompleted)")
-                StatsRow(title: "Hard", value: "\(totalHardGamesCompleted)")
+            StatsRow(title: "stats.total-games", value: "\(totalGamesCompleted)")
+            Section("stats.section-title.difficulty") {
+                StatsRow(title: "difficulty.easy", value: "\(totalEasyGamesCompleted)")
+                StatsRow(title: "difficulty.medium", value: "\(totalMediumGamesCompleted)")
+                StatsRow(title: "difficulty.hard", value: "\(totalHardGamesCompleted)")
             }
         }
         .font(Font.system(.headline, design: .rounded))
         .fullBackgroundStyle()
-        .navigationTitle("Stats")
+        .navigationTitle("stats.title")
         .navigationBarTitleDisplayMode(.large)
     }
 }
