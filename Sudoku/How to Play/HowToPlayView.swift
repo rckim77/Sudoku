@@ -9,25 +9,9 @@
 import SwiftUI
 
 struct HowToPlayView: View {
-    
-    /// Note: For iPad and iPhone, the return value must match `StaticGridView.spacerWidth`.
-    private var horizontalContainerPadding: CGFloat {
-        if isVision {
-            return 300
-        } else if isIpad {
-            return 140
-        } else {
-            return 4
-        }
-    }
 
     private var horizontalTextPadding: CGFloat {
         isIphone ? 12 : 0
-    }
-    
-    /// Used for additional grid padding on visionOS.
-    private var horizontalGridPadding: CGFloat {
-        isVision ? StaticGridView.spacerWidth - horizontalContainerPadding : 0
     }
 
     var body: some View {
@@ -40,15 +24,12 @@ struct HowToPlayView: View {
                     }
                     .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .row, grid: GridFactory.easyGrid)
-                        .padding(.horizontal, horizontalGridPadding)
                     Text("how-to-play.explainer-second")
                         .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .column, grid: GridFactory.easyGrid)
-                        .padding(.horizontal, horizontalGridPadding)
                     Text("how-to-play.explainer-third")
                         .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .square, grid: GridFactory.easyGrid)
-                        .padding(.horizontal, horizontalGridPadding)
                     VStack(alignment: .leading, spacing: 12) {
                         Text("how-to-play.explainer-fourth")
                     }
@@ -56,12 +37,22 @@ struct HowToPlayView: View {
                 }
                 .padding(.top, 8)
                 .padding(.bottom, 24)
-                .padding(.horizontal, horizontalContainerPadding)
+                .padding(.horizontal, getContainerHorizontalPadding(geometry.size))
             }
             .font(Font.system(.headline, design: .rounded))
             .fullBackgroundStyle()
             .navigationTitle("how-to-play.title")
             .navigationBarTitleDisplayMode(.large)
+        }
+    }
+    
+    private func getContainerHorizontalPadding(_ size: CGSize) -> CGFloat {
+        if isIphone {
+            return 4
+        } else if size.height >= size.width { // portrait or square
+            return 24
+        } else { // landscape
+            return 140
         }
     }
 }

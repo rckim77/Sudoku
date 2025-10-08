@@ -21,13 +21,6 @@ struct SudokuGrid: View {
     static var spacerWidth: CGFloat {
         switch UIDevice.current.userInterfaceIdiom {
         case .phone: return 8
-        case .pad:
-            switch UIDevice.current.orientation {
-            case .landscapeRight, .landscapeLeft:
-                return 350
-            default:
-                return 160
-            }
         default: return 160
         }
     }
@@ -57,12 +50,7 @@ struct SudokuGrid: View {
             // maintain square aspect ratio
             return abs(screenSize.width - screenSize.height) / 2
         } else { // iPad
-            switch UIDevice.current.orientation {
-            case .landscapeRight, .landscapeLeft:
-                return 350
-            default:
-                return 160
-            }
+            return 160
         }
     }
 }

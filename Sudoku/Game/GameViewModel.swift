@@ -15,18 +15,7 @@ struct GameViewModel: ViewModel {
     let bottomVerticalSpacing: CGFloat = 32
 
     var verticalSpacing: CGFloat {
-        if isVision {
-            return 8
-        } else if isIpad {
-            switch UIDevice.current.orientation {
-            case .landscapeLeft, .landscapeRight:
-                return 6
-            default:
-                return 16
-            }
-        } else {
-            return 16
-        }
+        isVision ? 8 : 16
     }
     
     var timerHorizontalOffset: CGFloat {

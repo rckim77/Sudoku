@@ -13,16 +13,7 @@ struct KeysRowButtonText: View {
     let text: String
 
     private var textHeight: CGFloat {
-        if isIpad {
-            switch UIDevice.current.orientation {
-            case .landscapeLeft, .landscapeRight:
-                return 60
-            default:
-                return 72
-            }
-        } else {
-            return 48
-        }
+        isIpad ? 74: 48
     }
     private var textFont: Font {
         let textStyle: Font.TextStyle = isIpad ? .largeTitle : .title
