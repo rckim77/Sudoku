@@ -11,12 +11,13 @@ import SwiftUI
 struct KeysRowButtonText: View {
 
     let text: String
+    let isCompact: Bool
 
     private var textHeight: CGFloat {
-        isIpad ? 74: 48
+        isCompact ? 48 : 74
     }
     private var textFont: Font {
-        let textStyle: Font.TextStyle = isIpad ? .largeTitle : .title
+        let textStyle: Font.TextStyle = isCompact ? .title : .largeTitle
         return Font.system(textStyle, design: .rounded)
     }
 
@@ -29,5 +30,5 @@ struct KeysRowButtonText: View {
 }
 
 #Preview {
-    KeysRowButtonText(text: "1")
+    KeysRowButtonText(text: "1", isCompact: false)
 }

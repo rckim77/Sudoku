@@ -36,6 +36,10 @@ struct GameView: View {
     @State private(set) var undoManager = UndoManager()
     let viewModel: GameViewModel
     
+    /// This represents the window height at which we need to alter the UI
+    /// to deal with the very constrained height.
+    static var lowerThreshold: CGFloat = 540
+    
     // MARK: - Timer
 
     @State private var elapsedTime: TimeInterval
@@ -86,8 +90,7 @@ struct GameView: View {
                                editGrid: editGrid.grid,
                                workingGrid: workingGrid)
                     Spacer()
-                        .frame(maxWidth: .infinity,
-                               maxHeight: viewModel.getSpacerMaxHeight(geometry.size.height))
+                        .frame(maxHeight: viewModel.getSpacerMaxHeight(geometry.size.height))
                     KeysRow(editGrid: editGrid,
                             userAction: userAction,
                             workingGrid: workingGrid,
@@ -95,21 +98,23 @@ struct GameView: View {
                             alertIsPresented: $alertIsPresented,
                             selectedCoordinate: selectedCell.coordinate,
                             isEditing: editState.isEditing,
+                            isCompact: geometry.size.height < GameView.lowerThreshold,
                             savedState: $savedState,
                             undoManager: undoManager)
                     Spacer()
-                        .frame(maxHeight: viewModel.verticalSpacing)
+                        .frame(maxHeight: viewModel.getSpacerMaxHeight(geometry.size.height))
                     ZStack(alignment: .center) {
                         NewGameButton(alert: $alertItem,
-                                  alertIsPresented: $alertIsPresented,
-                                  hasUpdatedGrid: hasUpdatedGrid,
-                                  savedState: savedState)
+                                      alertIsPresented: $alertIsPresented,
+                                      hasUpdatedGrid: hasUpdatedGrid,
+                                      savedState: savedState,
+                                      isCompact: geometry.size.height < GameView.lowerThreshold)
                         Text(formattedElapsedTime)
                             .font(.system(.headline, design: .rounded))
                             .offset(x: viewModel.timerHorizontalOffset)
                     }
                     Spacer()
-                        .frame(maxHeight: viewModel.bottomVerticalSpacing)
+                        .frame(maxHeight: viewModel.getBottomVerticalSpacing(geometry.size.height))
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: viewModel.toolbarItemPlacement) {

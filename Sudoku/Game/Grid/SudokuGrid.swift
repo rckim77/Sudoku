@@ -46,11 +46,8 @@ struct SudokuGrid: View {
     private func getSpacerWidth(screenSize: CGSize) -> CGFloat {
         if isIphone {
             return 8
-        } else if isVision {
-            // maintain square aspect ratio
+        } else { // maintain square aspect ratio
             return abs(screenSize.width - screenSize.height) / 2
-        } else { // iPad
-            return 160
         }
     }
 }

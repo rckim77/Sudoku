@@ -12,6 +12,7 @@ import UIKit
 protocol ViewModel {
     var isIpad: Bool { get }
     var isVision: Bool { get }
+    var isIphone: Bool { get }
 }
 
 extension ViewModel {
@@ -21,5 +22,9 @@ extension ViewModel {
     
     var isVision: Bool {
         UIDevice.current.userInterfaceIdiom == .vision
+    }
+    
+    var isIphone: Bool {
+        UIDevice.current.userInterfaceIdiom == .phone
     }
 }

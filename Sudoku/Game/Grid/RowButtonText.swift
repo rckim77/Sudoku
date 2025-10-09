@@ -25,7 +25,7 @@ struct RowButtonText: View {
         Text(text)
             .foregroundColor(foregroundColor)
             .font(buttonTextFont)
-            .minimumScaleFactor(0.7)
+            .minimumScaleFactor(0.45)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .aspectRatio(1, contentMode: .fit)
     }
