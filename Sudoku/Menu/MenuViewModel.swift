@@ -14,10 +14,6 @@ struct MenuViewModel: ViewModel {
         16 * (isIpad ? 2.5 : 1)
     }
     
-    var difficultyButtonHSpacing: CGFloat {
-        16 * (isIpad ? 2.5 : 1)
-    }
-    
     var buttonsVSpacing: CGFloat {
         40 * (isIpad ? 2 : 1)
     }

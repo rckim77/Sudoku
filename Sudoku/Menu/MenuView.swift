@@ -29,7 +29,7 @@ struct MenuView: View {
                         }
                         .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
                     }
-                    HStack(spacing: viewModel.difficultyButtonHSpacing) {
+                    HStack(spacing: 16) {
                         ForEach(viewModel.difficultyLevels, id: \.self) { level in
                             GameLevelButton(gameConfigs: $gameConfigs, level: level)
                         }

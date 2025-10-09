@@ -14,16 +14,8 @@ struct EditCellGrid: View {
 
     let values: Set<Int>
 
-    private var verticalSpacing: CGFloat {
-        if isIphone {
-            return -4
-        } else {
-            return 0
-        }
-    }
-
     var body: some View {
-        Grid(horizontalSpacing: 0, verticalSpacing: verticalSpacing) {
+        Grid(horizontalSpacing: 0, verticalSpacing: 0) {
             GridRow {
                 EditCellGridText(digitText: text(for: 0))
                 EditCellGridText(digitText: text(for: 1))

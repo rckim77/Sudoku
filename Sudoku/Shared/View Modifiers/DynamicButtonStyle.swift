@@ -14,6 +14,8 @@ struct DynamicButtonStyle: ViewModifier {
     let backgroundColor: Color?
     let isImage: Bool
     let isCompact: Bool
+    
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     var buttonVerticalPadding: CGFloat {
         if isIpad {
@@ -30,7 +32,7 @@ struct DynamicButtonStyle: ViewModifier {
     }
 
     var buttonHorizontalPadding: CGFloat {
-        isIpad ? 38 : 16
+        horizontalSizeClass == .compact ? 16 : 38
     }
 
     func body(content: Content) -> some View {
