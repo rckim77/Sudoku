@@ -37,17 +37,23 @@ struct SudokuGrid: View {
                        userAction: userAction,
                        workingGrid: workingGrid)
             }
-            .padding(.horizontal, getSpacerWidth(screenSize: geometry.size))
+            .padding(.horizontal, getSpacerWidth(size: geometry.size))
         }
     }
     
     /// This width value determines how much space there is padded on the sides of
-    /// the sudoku grid. The grid will resize and scale accordingly.
-    private func getSpacerWidth(screenSize: CGSize) -> CGFloat {
+    /// the sudoku grid. The grid will resize and scale accordingly. Note that
+    /// `size` is relative to the grid, not the entire window.
+    private func getSpacerWidth(size: CGSize) -> CGFloat {
         if isIphone {
             return 8
         } else { // maintain square aspect ratio
-            return abs(screenSize.width - screenSize.height) / 2
+            let spacing = abs(size.width - size.height) / 2
+
+            if size.width < size.height {
+                return 16
+            }
+            return spacing
         }
     }
 }
