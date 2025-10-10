@@ -13,32 +13,31 @@ struct EditCellGrid: View {
     @Environment(WindowSize.self) private var windowSize
 
     let values: Set<Int>
+    
+    private var verticalSpacing: CGFloat {
+        if isIphone {
+            return -0.2
+        } else {
+            return 0
+        }
+    }
 
     var body: some View {
-        Grid(horizontalSpacing: 0, verticalSpacing: 0) {
+        Grid(horizontalSpacing: 0, verticalSpacing: verticalSpacing) {
             GridRow {
                 EditCellGridText(digitText: text(for: 0))
-                    .opacity(getOpacity(for: 0))
                 EditCellGridText(digitText: text(for: 1))
-                    .opacity(getOpacity(for: 1))
                 EditCellGridText(digitText: text(for: 2))
-                    .opacity(getOpacity(for: 2))
             }
             GridRow {
                 EditCellGridText(digitText: text(for: 3))
-                    .opacity(getOpacity(for: 3))
                 EditCellGridText(digitText: text(for: 4))
-                    .opacity(getOpacity(for: 4))
                 EditCellGridText(digitText: text(for: 5))
-                    .opacity(getOpacity(for: 5))
             }
             GridRow {
                 EditCellGridText(digitText: text(for: 6))
-                    .opacity(getOpacity(for: 6))
                 EditCellGridText(digitText: text(for: 7))
-                    .opacity(getOpacity(for: 7))
                 EditCellGridText(digitText: text(for: 8))
-                    .opacity(getOpacity(for: 8))
             }
         }
         .frame(maxWidth: .infinity)
@@ -48,17 +47,8 @@ struct EditCellGrid: View {
     private func text(for editIndex: Int) -> String {
         if values.contains(where: { $0 == editIndex + 1 }) {
             return "\(editIndex + 1)"
-        } else { // this should never show but is needed for consistent vertical spacing
-            return "X"
-        }
-    }
-    
-    /// This function hides placeholder edit values or shows appropriate edit values
-    private func getOpacity(for editIndex: Int) -> Double {
-        if values.contains(where: { $0 == editIndex + 1 }) {
-            return 1
         } else {
-            return 0
+            return " "
         }
     }
 }

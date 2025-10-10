@@ -42,7 +42,7 @@ struct GameViewModel: ViewModel {
 
     func getBottomVerticalSpacing(_ geometryHeight: CGFloat) -> CGFloat {
         if geometryHeight < GameView.lowerThreshold {
-            return 12
+            return 4
         } else {
             return 32
         }

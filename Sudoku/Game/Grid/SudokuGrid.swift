@@ -15,16 +15,6 @@ struct SudokuGrid: View {
     let editGrid: [CoordinateEditValues]
     let workingGrid: GridValues
     
-    /// This width value affects the row text height and the edit cell grid height, which will resize and scale
-    /// the overall grid's height accordingly. Update `getSpacerWidth(screenSize:)` when
-    /// updating this var if applicable.
-    static var spacerWidth: CGFloat {
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone: return 8
-        default: return 160
-        }
-    }
-    
     private let borderWidth: CGFloat = 2
     private let squareRowRanges = [(0...2), (3...5), (6...8)]
 
