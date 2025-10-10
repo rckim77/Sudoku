@@ -49,9 +49,9 @@ struct HowToPlayView: View {
     private func getContainerHorizontalPadding(_ size: CGSize) -> CGFloat {
         if isIphone {
             return 4
-        } else if size.height >= size.width { // portrait or square
+        } else if size.width < 550 { // not a lot of horizontal space
             return 24
-        } else { // landscape
+        } else { // lots of horizontal space
             return 140
         }
     }
