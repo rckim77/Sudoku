@@ -11,19 +11,7 @@ import SwiftUI
 struct MenuNavigationLinks: View {
 
     var body: some View {
-        #if os(visionOS)
-        HStack(spacing: 18) {
-            navigationLinks
-        }
-        #else
         VStack(spacing: 18) {
-            navigationLinks
-        }
-        #endif
-    }
-    
-    private var navigationLinks: some View {
-        Group {
             NavigationLink {
                 StatsView()
             } label: {
