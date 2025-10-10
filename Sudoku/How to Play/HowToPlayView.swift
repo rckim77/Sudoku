@@ -13,6 +13,8 @@ struct HowToPlayView: View {
     private var horizontalTextPadding: CGFloat {
         isIphone ? 12 : 0
     }
+    
+    private let widthThreshold: CGFloat = 600
 
     var body: some View {
         GeometryReader { geometry in
@@ -24,12 +26,15 @@ struct HowToPlayView: View {
                     }
                     .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .row, grid: GridFactory.easyGrid)
+                        .padding(.horizontal, getGridHorizontalPadding(geometry.size))
                     Text("how-to-play.explainer-second")
                         .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .column, grid: GridFactory.easyGrid)
+                        .padding(.horizontal, getGridHorizontalPadding(geometry.size))
                     Text("how-to-play.explainer-third")
                         .padding(.horizontal, horizontalTextPadding)
                     StaticGridView(highlightSection: .square, grid: GridFactory.easyGrid)
+                        .padding(.horizontal, getGridHorizontalPadding(geometry.size))
                     VStack(alignment: .leading, spacing: 12) {
                         Text("how-to-play.explainer-fourth")
                     }
@@ -49,10 +54,20 @@ struct HowToPlayView: View {
     private func getContainerHorizontalPadding(_ size: CGSize) -> CGFloat {
         if isIphone {
             return 4
-        } else if size.width < 550 { // not a lot of horizontal space
+        } else if size.width < widthThreshold { // not a lot of horizontal space
             return 24
         } else { // lots of horizontal space
             return 140
+        }
+    }
+
+    private func getGridHorizontalPadding(_ size: CGSize) -> CGFloat {
+        if isIphone {
+            return 0
+        } else if size.width < widthThreshold {
+            return 0
+        } else {
+            return 48
         }
     }
 }
