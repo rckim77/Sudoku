@@ -39,15 +39,17 @@ jobs:
           ${{ runner.os }}-spm-xcode-${{ env.XCODE_VERSION }}-
           ${{ runner.os }}-spm-
 
-    - name: Show available simulators
-      run: xcrun simctl list devices available
+    # Uncomment below for debugging
+    # - name: Show available simulators
+    #   run: xcrun simctl list devices available
 
     - name: Resolve Swift Package dependencies
-      run: xcodebuild \
-        -project Sudoku.xcodeproj \
-        -scheme SudokuTests \
-        -resolvePackageDependencies \
-        -derivedDataPath "${DERIVED_DATA_PATH}"
+      run: 
+        xcodebuild \
+          -project Sudoku.xcodeproj \
+          -scheme SudokuTests \
+          -resolvePackageDependencies \
+          -derivedDataPath "${DERIVED_DATA_PATH}"
 
     - name: Set dynamic env
       run: |
