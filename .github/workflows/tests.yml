@@ -44,12 +44,13 @@ jobs:
     #   run: xcrun simctl list devices available
 
     - name: Resolve Swift Package dependencies
-      run: 
-        xcodebuild \
-          -project Sudoku.xcodeproj \
-          -scheme SudokuTests \
-          -resolvePackageDependencies \
-          -derivedDataPath "${DERIVED_DATA_PATH}"
+      shell: bash
+      run: >
+        xcodebuild
+        -project Sudoku.xcodeproj
+        -scheme SudokuTests
+        -resolvePackageDependencies
+        -derivedDataPath "${DERIVED_DATA_PATH}"
 
     - name: Set dynamic env
       run: |
