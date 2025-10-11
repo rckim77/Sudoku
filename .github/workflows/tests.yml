@@ -15,8 +15,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Select Xcode 26
-      run: sudo xcode-select -s /Applications/Xcode_26.app/Contents/Developer
+    - name: Select Xcode 26.0.1
+      run: sudo xcode-select -s /Applications/Xcode_26.0.1.app/Contents/Developer
     
     - name: Show Xcode version
       run: xcodebuild -version
@@ -27,18 +27,9 @@ jobs:
     - name: Resolve Swift Package dependencies
       run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
     
-    - name: Build project for testing
+    - name: Build and run tests
       run: |
-        xcodebuild build-for-testing \
-          -project Sudoku.xcodeproj \
-          -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64' \
-          -configuration Debug \
-          CODE_SIGNING_ALLOWED=NO
-      
-    - name: Run unit tests
-      run: |
-        xcodebuild test-without-building \
+        xcodebuild test \
           -project Sudoku.xcodeproj \
           -scheme SudokuTests \
           -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64' \
