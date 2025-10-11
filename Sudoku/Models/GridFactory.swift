@@ -14,17 +14,17 @@ typealias ShortCoordinate = (Int, Int, Int)
 enum GridFactory {
 
     static func randomGridForDifficulty(level: Difficulty.Level) -> [CoordinateValue] {
-        let randomNumber = Int.random(in: 0...2)
+        let randomNumber = Int.random(in: 0...3)
         switch level {
         case .easy:
-            let easyGrids = [easyGrid, easyGrid1, easyGrid2]
+            let easyGrids = [easyGrid, easyGrid1, easyGrid2, easyGrid3]
             return easyGrids[randomNumber]
 //            return GridFactory.superEasyGrid
         case .medium:
-            let mediumGrids = [mediumGrid, mediumGrid1, mediumGrid2]
+            let mediumGrids = [mediumGrid, mediumGrid1, mediumGrid2, mediumGrid3]
             return mediumGrids[randomNumber]
         case .hard:
-            let hardGrids = [hardGrid, hardGrid1, hardGrid2]
+            let hardGrids = [hardGrid, hardGrid1, hardGrid2, hardGrid3]
             return hardGrids[randomNumber]
         }
     }
@@ -87,6 +87,20 @@ enum GridFactory {
         let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
         return GridFactory.convertToCoordinateValues(squares: squares)
     }
+    
+    static var easyGrid3: [CoordinateValue] {
+        let square0 = [(0, 0, 9), (0, 2, 3), (1, 1, 4), (1, 2, 6)]
+        let square1 = [(1, 1, 7), (2, 2, 5)]
+        let square2 = [(0, 2, 8), (1, 1, 2), (2, 1, 4), (2, 2, 6)]
+        let square3 = [(0, 2, 7), (1, 1, 3)]
+        let square4 = [(0, 0, 5), (0, 1, 1), (0, 2, 3), (1, 0, 2), (1, 2, 4), (2, 0, 7), (2, 1, 6), (2, 2, 8)]
+        let square5 = [(1, 1, 8), (2, 0, 5)]
+        let square6 = [(0, 0, 1), (0, 1, 2), (1, 1, 7), (2, 0, 4)]
+        let square7 = [(0, 0, 3), (1, 1, 4)]
+        let square8 = [(1, 0, 1), (1, 1, 5), (2, 0, 8), (2, 2, 3)]
+        let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
+        return GridFactory.convertToCoordinateValues(squares: squares)
+    }
 
     static var mediumGrid: [CoordinateValue] {
         let square0 = [(0, 0, 1), (0, 2, 2), (1, 0, 3), (1, 1, 9)]
@@ -126,6 +140,20 @@ enum GridFactory {
         let square6 = [(0, 2, 6), (1, 2, 9)]
         let square7 = [(0, 1, 7), (1, 0, 2), (1, 2, 6), (2, 0, 9), (2, 2, 8)]
         let square8 = [(0, 0, 4), (1, 0, 8), (2, 1, 2)]
+        let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
+        return GridFactory.convertToCoordinateValues(squares: squares)
+    }
+    
+    static var mediumGrid3: [CoordinateValue] {
+        let square0 = [(0, 0, 2), (0, 1, 6)]
+        let square1 = [(0, 0, 8), (0, 1, 1), (0, 2, 7), (2, 2, 4)]
+        let square2 = [(1, 0, 5), (1, 1, 6), (2, 1, 1)]
+        let square3 = [(0, 0, 9), (0, 2, 4), (1, 1, 7), (2, 0, 3), (2, 2, 2)]
+        let square4 = [(1, 2, 2)]
+        let square5 = [(1, 1, 9), (1, 2, 1)]
+        let square6 = [(2, 0, 5), (2, 1, 2)]
+        let square7 = [(0, 2, 5), (2, 0, 4), (2, 1, 8), (2, 2, 9)]
+        let square8 = [(0, 1, 3), (1, 0, 9), (1, 1, 8)]
         let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
         return GridFactory.convertToCoordinateValues(squares: squares)
     }
@@ -171,6 +199,21 @@ enum GridFactory {
         let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
         return GridFactory.convertToCoordinateValues(squares: squares)
     }
+    
+    static var hardGrid3: [CoordinateValue] {
+        let square0 = [(0, 0, 9), (0, 2, 8), (1, 0, 6), (1, 1, 2)]
+        let square1 = [(0, 2, 4), (2, 0, 9)]
+        let square2 = [(0, 1, 2), (1, 2, 3), (2, 0, 6)]
+        let square3 = [(0, 1, 9), (1, 0, 1), (1, 2, 2), (2, 1, 6)]
+        let square4 = [(0, 1, 7), (0, 2, 8), (2, 1, 1), (2, 2, 3)]
+        let square5 = [(0, 2, 6), (1, 1, 4), (2, 2, 9)]
+        let square6 = [(1, 0, 2), (1, 1, 8), (2, 0, 5), (2, 2, 3)]
+        let square7 = [(0, 0, 8), (2, 2, 9)]
+        let square8 = [(0, 0, 5), (1, 2, 4), (2, 1, 6)]
+        let squares = [square0, square1, square2, square3, square4, square5, square6, square7, square8]
+        return GridFactory.convertToCoordinateValues(squares: squares)
+    }
+
     
     // MARK: - Conversion methods
 
