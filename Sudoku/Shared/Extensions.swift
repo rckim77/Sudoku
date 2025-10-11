@@ -38,6 +38,10 @@ extension ViewModifier {
     var isVision: Bool {
         UIDevice.current.userInterfaceIdiom == .vision
     }
+    
+    var isIphone: Bool {
+        UIDevice.current.userInterfaceIdiom == .phone
+    }
 }
 
 extension Color: @retroactive Decodable {}

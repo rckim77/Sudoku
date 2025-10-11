@@ -5,42 +5,127 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     branches: [ main ]
 
+permissions:
+  contents: read
+  actions: read       # needed to look up the artifact download URL
+  pull-requests: write
+
 jobs:
   unit_tests:
     name: Unit Tests
     runs-on: macos-15
     timeout-minutes: 20
-    
+    env:
+      DERIVED_DATA_PATH: ${{ github.workspace }}/.derived_data
+      IPHONE_DEST: "platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64"
+      IPAD_DEST: "platform=iOS Simulator,name=iPad Pro 11-inch (M4),OS=26.0,arch=arm64"
+      XCODE_VERSION: "26.0.1"
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
-    - name: Select Xcode 26
-      run: sudo xcode-select -s /Applications/Xcode_26.app/Contents/Developer
-    
-    - name: Show Xcode version
-      run: xcodebuild -version
-    
+
+    - name: Select Xcode Version
+      run: sudo xcode-select -s /Applications/Xcode_${{ env.XCODE_VERSION }}.app/Contents/Developer
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ env.DERIVED_DATA_PATH }}/SourcePackages
+          ~/Library/Caches/org.swift.swiftpm
+        key: ${{ runner.os }}-spm-xcode-${{ env.XCODE_VERSION }}-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-xcode-${{ env.XCODE_VERSION }}-
+          ${{ runner.os }}-spm-
+
     - name: Show available simulators
       run: xcrun simctl list devices available
-    
+
     - name: Resolve Swift Package dependencies
-      run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
-    
-    - name: Build project for testing
+      run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies -derivedDataPath "${DERIVED_DATA_PATH}"
+
+    - name: Set dynamic env
       run: |
-        xcodebuild build-for-testing \
+        echo "UNIT_XCRESULT=$RUNNER_TEMP/UnitTests.xcresult" >> "$GITHUB_ENV"
+        echo "IPAD_XCRESULT=$RUNNER_TEMP/IpadTests.xcresult" >> "$GITHUB_ENV"
+
+    - name: Build and run unit tests and iPhone snapshot tests
+      id: unit_tests
+      continue-on-error: true
+      run: |
+        set -o pipefail
+        xcodebuild test \
           -project Sudoku.xcodeproj \
           -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64' \
+          -destination "${IPHONE_DEST}" \
           -configuration Debug \
+          -resultBundlePath "${UNIT_XCRESULT}" \
           CODE_SIGNING_ALLOWED=NO
-      
-    - name: Run unit tests
+
+    - name: Build and run iPad snapshot tests
+      id: ipad_tests
+      continue-on-error: true
       run: |
-        xcodebuild test-without-building \
+        set -o pipefail
+        xcodebuild test \
           -project Sudoku.xcodeproj \
-          -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64' \
+          -scheme SudokuIpadTests \
+          -destination "${IPAD_DEST}" \
           -configuration Debug \
+          -resultBundlePath "${IPAD_XCRESULT}" \
           CODE_SIGNING_ALLOWED=NO
+
+    - name: Upload unit test .xcresult bundle
+      if: steps.unit_tests.outcome == 'failure'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.run_id }}.xcresult
+        path: ${{ env.UNIT_XCRESULT }}
+        if-no-files-found: error
+        retention-days: 14
+
+    - name: Upload iPad .xcresult bundle
+      if: steps.ipad_tests.outcome == 'failure'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.run_id }}-ipad.xcresult
+        path: ${{ env.IPAD_XCRESULT }}
+        if-no-files-found: error
+        retention-days: 14
+
+    - name: Comment on pull request
+      if: steps.unit_tests.outcome == 'failure' || steps.ipad_tests.outcome == 'failure'
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const prNumber = context.payload.pull_request.number;
+
+          const { data } = await github.request(
+            'GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts',
+            {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId
+            }
+          );
+          const name = `${context.runId}.xcresult`;
+          const ipadName = `${context.runId}-ipad.xcresult`;
+          const art = data.artifacts.find(a => a.name === name || a.name === ipadName);
+          if (!art) {
+            throw new Error(`Artifact ${name} not found, double check the name`);
+          }
+
+          const body = '❌ Unit tests failed, see run [here](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).';
+
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: prNumber,
+            body
+          });
+
+    - name: Fail job if unit tests failed
+      if: steps.unit_tests.outcome == 'failure' || steps.ipad_tests.outcome == 'failure'
+      run: exit 1

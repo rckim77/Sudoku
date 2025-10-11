@@ -14,16 +14,6 @@ enum HighlightSection {
 
 struct StaticGridView: View {
     
-    static var spacerWidth: CGFloat {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return 4
-        } else if UIDevice.current.userInterfaceIdiom == .pad {
-            return 140
-        } else {
-            return 400
-        }
-    }
-    
     let highlightSection: HighlightSection
     let grid: [CoordinateValue]
     

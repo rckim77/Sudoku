@@ -17,6 +17,7 @@ struct NewGameButton: View {
 
     let hasUpdatedGrid: Bool
     let savedState: SavedState
+    let isCompact: Bool
 
     var body: some View {
         Button(action: {
@@ -30,7 +31,7 @@ struct NewGameButton: View {
             Text("button.new-game")
                 .font(.system(.headline, design: .rounded))
         }
-        .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2))
+        .dynamicButtonStyle(backgroundColor: Color.blue.opacity(0.2), isCompact: isCompact)
     }
 }
 
@@ -39,6 +40,7 @@ struct NewGameButton_Previews: PreviewProvider {
         NewGameButton(alert: .constant(.newGame),
                       alertIsPresented: .constant(false),
                       hasUpdatedGrid: true,
-                      savedState: .saved)
+                      savedState: .saved,
+                      isCompact: false)
     }
 }

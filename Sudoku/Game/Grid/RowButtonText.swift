@@ -21,27 +21,13 @@ struct RowButtonText: View {
         return Font.system(textStyle, design: .rounded).bold()
     }
 
-    private var buttonMinHeight: CGFloat {
-        let spacerWidth = isStatic ? StaticGridView.spacerWidth : SudokuGrid.spacerWidth
-        return (windowSize.size.width - (2 * spacerWidth)) / 9
-    }
-
     var body: some View {
         Text(text)
             .foregroundColor(foregroundColor)
             .font(buttonTextFont)
-            .frame(maxWidth: .infinity)
-            .frame(height: getHeight(size: windowSize.size))
-    }
-    
-    private func getHeight(size: CGSize) -> CGFloat {
-        if isVision && !isStatic {
-            let horizontalPadding = abs(size.width - size.height)
-            let extraVerticalOffset: CGFloat = 24 // other UI elements below the grid
-            return ((size.width - horizontalPadding) / 9) - extraVerticalOffset
-        } else {
-            return buttonMinHeight
-        }
+            .minimumScaleFactor(0.45)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .aspectRatio(1, contentMode: .fit)
     }
 }
 
