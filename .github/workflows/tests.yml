@@ -16,7 +16,6 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 20
     env:
-      UNIT_XCRESULT: ${{ runner.temp }}/UnitTests.xcresult
       IPHONE_DEST: "platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64"
 
     steps:
@@ -35,6 +34,10 @@ jobs:
     - name: Resolve Swift Package dependencies
       run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
 
+    - name: Set dynamic env
+      run: |
+        echo "UNIT_XCRESULT=$RUNNER_TEMP/UnitTests.xcresult" >> "$GITHUB_ENV"
+
     - name: Build and run unit tests (iPhone)
       id: unit_tests
       continue-on-error: true
@@ -46,7 +49,7 @@ jobs:
           -destination "${IPHONE_DEST}" \
           -configuration Debug \
           -resultBundlePath "${UNIT_XCRESULT}" \
-          CODE_SIGNING_ALLOWED=NO | xcpretty
+          CODE_SIGNING_ALLOWED=NO
 
     - name: Upload unit test .xcresult bundle
       if: steps.unit_tests.outcome == 'failure'
@@ -65,7 +68,6 @@ jobs:
         script: |
           const prNumber = context.payload.pull_request.number;
 
-          // List artifacts for this run and find the one we just uploaded
           const { data } = await github.request(
             'GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts',
             {
@@ -80,7 +82,6 @@ jobs:
             throw new Error(`Artifact ${name} not found`);
           }
 
-          // archive_download_url is an authenticated, one-click download for signed-in users
           const body = [
             '❌ **Unit tests failed**.',
             '',
