@@ -27,11 +27,20 @@ jobs:
     - name: Resolve Swift Package dependencies
       run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
     
-    - name: Build and run tests
+    - name: Build and run unit tests and iPhone snapshot tests
       run: |
         xcodebuild test \
           -project Sudoku.xcodeproj \
           -scheme SudokuTests \
           -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64' \
+          -configuration Debug \
+          CODE_SIGNING_ALLOWED=NO
+
+    - name: Build and run iPad snapshot tests
+      run: |
+        xcodebuild test \
+          -project Sudoku.xcodeproj \
+          -scheme SudokuIpadTests \
+          -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M4),OS=26.0,arch=arm64' \
           -configuration Debug \
           CODE_SIGNING_ALLOWED=NO
