@@ -1,5 +1,5 @@
 //
-//  SudokuIpadTests.swift
+//  SnapshotIpadTests.swift
 //  SudokuIpadTests
 //
 //  Created by Ray Kim on 10/10/25.
@@ -14,7 +14,7 @@ import SwiftUI
 
 @Suite(.snapshots(record: .never))
 @MainActor
-struct SnapshotTests {
+struct SnapshotIpadTests {
 
     @Test(arguments: SnapshotTestHelper.ipads)
     func testGameViewSnapshot(_ device: Device) async throws {
