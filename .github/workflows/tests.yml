@@ -76,10 +76,10 @@ jobs:
               run_id: context.runId
             }
           );
-          const name = `unit-tests-xcresult-${context.runId}`;
+          const name = `${context.runId}.xcresult`;
           const art = data.artifacts.find(a => a.name === name);
           if (!art) {
-            throw new Error(`Artifact ${name} not found`);
+            throw new Error(`Artifact ${name} not found, double check the name`);
           }
 
           const body = '❌ Unit tests failed, see run [here](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).';

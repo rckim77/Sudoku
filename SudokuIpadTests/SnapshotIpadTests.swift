@@ -29,9 +29,9 @@ struct SnapshotIpadTests {
                                     elapsedTime: 0)
         let view = GameView(gameConfig).environment(WindowSize(size: size))
         let vc = UIHostingController(rootView: view)
-        assertSnapshot(of: vc, as: .image(on: device.1, drawHierarchyInKeyWindow: true), named: "\(device.0)")
+        assertSnapshot(of: vc, as: .image(on: device.1, drawHierarchyInKeyWindow: true, perceptualPrecision: SnapshotTestHelper.precision), named: "\(device.0)")
         let darkMode = UITraitCollection(userInterfaceStyle: .dark)
-        assertSnapshot(of: vc, as: .image(on: device.1, drawHierarchyInKeyWindow: true, traits: darkMode), named: "\(device.0)Dark")
+        assertSnapshot(of: vc, as: .image(on: device.1, drawHierarchyInKeyWindow: true, perceptualPrecision: SnapshotTestHelper.precision, traits: darkMode), named: "\(device.0)Dark")
     }
     
     @Test(arguments: SnapshotTestHelper.ipads)

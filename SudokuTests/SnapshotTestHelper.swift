@@ -30,4 +30,6 @@ public struct SnapshotTestHelper {
     /// Use iPad Pro 11-inch M4 (26.0) simulator
     static let ipads: [Device] = [("iPadPro11Portrait", .iPadPro11(.portrait)),
                                   ("iPadPro12_9Landscape", .iPadPro12_9(.landscape))]
+    
+    static let precision: Float = 0.99
 }
