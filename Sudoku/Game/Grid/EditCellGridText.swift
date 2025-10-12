@@ -20,8 +20,9 @@ struct EditCellGridText: View {
         Text(digitText)
             .foregroundColor(Color("dynamicBlue"))
             .font(.system(font, design: .rounded))
-            .minimumScaleFactor(0.6)
-            .frame(maxWidth: .infinity)
+            .minimumScaleFactor(0.3)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .aspectRatio(1, contentMode: .fit)
     }
 }
 

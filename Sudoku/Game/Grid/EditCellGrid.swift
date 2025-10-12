@@ -13,16 +13,10 @@ struct EditCellGrid: View {
     @Environment(WindowSize.self) private var windowSize
 
     let values: Set<Int>
-
-    private var minHeight: CGFloat {
-        (windowSize.size.width - (2 * SudokuGrid.spacerWidth)) / 9
-    }
-
+    
     private var verticalSpacing: CGFloat {
         if isIphone {
-            return -4
-        } else if isIpad {
-            return 2
+            return -0.2
         } else {
             return 0
         }
@@ -47,25 +41,14 @@ struct EditCellGrid: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: getHeight(size: windowSize.size))
-    }
-    
-    private func getHeight(size: CGSize) -> CGFloat {
-        if isVision {
-            let horizontalPadding = abs(size.width - size.height)
-            // other UI elements below the grid
-            let extraVerticalOffset: CGFloat = 24
-            return ((size.width - horizontalPadding) / 9) - extraVerticalOffset
-        } else {
-            return minHeight
-        }
+        .aspectRatio(1, contentMode: .fit)
     }
 
     private func text(for editIndex: Int) -> String {
         if values.contains(where: { $0 == editIndex + 1 }) {
             return "\(editIndex + 1)"
         } else {
-            return ""
+            return " "
         }
     }
 }

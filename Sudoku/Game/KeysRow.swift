@@ -19,20 +19,15 @@ struct KeysRow: View {
     
     let selectedCoordinate: Coordinate?
     let isEditing: Bool
+    let isCompact: Bool
     
     @Binding var savedState: SavedState
 
     var undoManager: UndoManager
 
-    private let buttonCornerRadius: CGFloat = 5
+    private let buttonCornerRadius: CGFloat = 16
     private var horizontalSpacing: CGFloat {
-        if isVision {
-            return 32
-        } else if isIpad {
-            return 80
-        } else {
-            return 8
-        }
+        isIphone ? 8 : 32
     }
 
     var body: some View {
@@ -44,7 +39,7 @@ struct KeysRow: View {
                     Button(action: {
                         self.updateForDigit(digit)
                     }) {
-                        KeysRowButtonText(text: "\(digit)")
+                        KeysRowButtonText(text: "\(digit)", isCompact: isCompact)
                     }
                     .buttonStyle(.plain)
                     .background(Color("dynamicGray"))
@@ -134,6 +129,7 @@ struct KeysRow: View {
             alertIsPresented: .constant(false),
             selectedCoordinate: nil,
             isEditing: false,
+            isCompact: false,
             savedState: .constant(.unsaved),
             undoManager: UndoManager())
 }

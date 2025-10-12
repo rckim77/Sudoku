@@ -9,10 +9,18 @@
 /* Begin PBXBuildFile section */
 		EC3E0F942CE1330E0026AA8C /* AIProxy in Frameworks */ = {isa = PBXBuildFile; productRef = EC3E0F932CE1330E0026AA8C /* AIProxy */; };
 		EC63D5D02E510AA700B5D4D0 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = EC63D5CF2E510AA700B5D4D0 /* SnapshotTesting */; };
+		EC8740DF2E99E0BC004B8178 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = EC8740DE2E99E0BC004B8178 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		EC7D0FAF2BBB98BF0035FB6D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 94E108772487333A0091D043 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94E1087E2487333A0091D043;
+			remoteInfo = Sudoku;
+		};
+		EC8740D62E99E01D004B8178 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 94E108772487333A0091D043 /* Project object */;
 			proxyType = 1;
@@ -24,9 +32,17 @@
 /* Begin PBXFileReference section */
 		94E1087F2487333A0091D043 /* Sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7D0FAB2BBB98BE0035FB6D /* SudokuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC8740D22E99E01D004B8178 /* SudokuIpadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuIpadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EC8740DC2E99E03D004B8178 /* Exceptions for "SudokuTests" folder in "SudokuIpadTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SnapshotTestHelper.swift,
+			);
+			target = EC8740D12E99E01D004B8178 /* SudokuIpadTests */;
+		};
 		EC90CD2D2CCC302A005F4BE3 /* Exceptions for "Sudoku" folder in "Sudoku" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -37,8 +53,16 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		EC8740D32E99E01D004B8178 /* SudokuIpadTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SudokuIpadTests;
+			sourceTree = "<group>";
+		};
 		EC90CCB62CCC3027005F4BE3 /* SudokuTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EC8740DC2E99E03D004B8178 /* Exceptions for "SudokuTests" folder in "SudokuIpadTests" target */,
+			);
 			path = SudokuTests;
 			sourceTree = "<group>";
 		};
@@ -65,6 +89,12 @@
 				EC63D5D02E510AA700B5D4D0 /* SnapshotTesting in Frameworks */,
 			);
 		};
+		EC8740CF2E99E01D004B8178 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				EC8740DF2E99E0BC004B8178 /* SnapshotTesting in Frameworks */,
+			);
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -73,6 +103,8 @@
 			children = (
 				EC90CCF62CCC302A005F4BE3 /* Sudoku */,
 				EC90CCB62CCC3027005F4BE3 /* SudokuTests */,
+				EC8740D32E99E01D004B8178 /* SudokuIpadTests */,
+				EC8740DD2E99E0BC004B8178 /* Frameworks */,
 				94E108802487333A0091D043 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,8 +114,16 @@
 			children = (
 				94E1087F2487333A0091D043 /* Sudoku.app */,
 				EC7D0FAB2BBB98BE0035FB6D /* SudokuTests.xctest */,
+				EC8740D22E99E01D004B8178 /* SudokuIpadTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EC8740DD2E99E0BC004B8178 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +171,30 @@
 			productReference = EC7D0FAB2BBB98BE0035FB6D /* SudokuTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		EC8740D12E99E01D004B8178 /* SudokuIpadTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC8740D82E99E01D004B8178 /* Build configuration list for PBXNativeTarget "SudokuIpadTests" */;
+			buildPhases = (
+				EC8740CE2E99E01D004B8178 /* Sources */,
+				EC8740CF2E99E01D004B8178 /* Frameworks */,
+				EC8740D02E99E01D004B8178 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC8740D72E99E01D004B8178 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				EC8740D32E99E01D004B8178 /* SudokuIpadTests */,
+			);
+			name = SudokuIpadTests;
+			packageProductDependencies = (
+				EC8740DE2E99E0BC004B8178 /* SnapshotTesting */,
+			);
+			productName = SudokuIpadTests;
+			productReference = EC8740D22E99E01D004B8178 /* SudokuIpadTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -138,7 +202,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				ORGANIZATIONNAME = Self;
 				TargetAttributes = {
@@ -147,6 +211,10 @@
 					};
 					EC7D0FAA2BBB98BE0035FB6D = {
 						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 94E1087E2487333A0091D043;
+					};
+					EC8740D12E99E01D004B8178 = {
+						CreatedOnToolsVersion = 26.0;
 						TestTargetID = 94E1087E2487333A0091D043;
 					};
 				};
@@ -171,6 +239,7 @@
 			targets = (
 				94E1087E2487333A0091D043 /* Sudoku */,
 				EC7D0FAA2BBB98BE0035FB6D /* SudokuTests */,
+				EC8740D12E99E01D004B8178 /* SudokuIpadTests */,
 			);
 		};
 /* End PBXProject section */
@@ -182,6 +251,11 @@
 			);
 		};
 		EC7D0FA92BBB98BE0035FB6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		EC8740D02E99E01D004B8178 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -199,6 +273,11 @@
 			files = (
 			);
 		};
+		EC8740CE2E99E01D004B8178 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -206,6 +285,11 @@
 			isa = PBXTargetDependency;
 			target = 94E1087E2487333A0091D043 /* Sudoku */;
 			targetProxy = EC7D0FAF2BBB98BF0035FB6D /* PBXContainerItemProxy */;
+		};
+		EC8740D72E99E01D004B8178 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 94E1087E2487333A0091D043 /* Sudoku */;
+			targetProxy = EC8740D62E99E01D004B8178 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -344,7 +428,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = sudokuappicon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sudoku/Info.plist;
@@ -354,7 +438,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.1.0;
+				MARKETING_VERSION = 5.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rckim.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -383,7 +467,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = sudokuappicon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_ASSET_PATHS = "\"Sudoku/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sudoku/Info.plist;
@@ -393,7 +477,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.1.0;
+				MARKETING_VERSION = 5.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rckim.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -430,13 +514,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rckim.SudokuTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sudoku.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sudoku";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -456,14 +540,71 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rckim.SudokuTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sudoku.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sudoku";
 				XROS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		EC8740D92E99E01D004B8178 /* Debug configuration for PBXNativeTarget "SudokuIpadTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49BZEB79BF;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rckim.SudokuIpadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sudoku.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sudoku";
+			};
+			name = Debug;
+		};
+		EC8740DA2E99E01D004B8178 /* Release configuration for PBXNativeTarget "SudokuIpadTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 49BZEB79BF;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rckim.SudokuIpadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sudoku.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sudoku";
 			};
 			name = Release;
 		};
@@ -491,6 +632,14 @@
 			buildConfigurations = (
 				EC7D0FB12BBB98BF0035FB6D /* Debug configuration for PBXNativeTarget "SudokuTests" */,
 				EC7D0FB22BBB98BF0035FB6D /* Release configuration for PBXNativeTarget "SudokuTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		EC8740D82E99E01D004B8178 /* Build configuration list for PBXNativeTarget "SudokuIpadTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC8740D92E99E01D004B8178 /* Debug configuration for PBXNativeTarget "SudokuIpadTests" */,
+				EC8740DA2E99E01D004B8178 /* Release configuration for PBXNativeTarget "SudokuIpadTests" */,
 			);
 			defaultConfigurationName = Release;
 		};
@@ -522,6 +671,11 @@
 			productName = AIProxy;
 		};
 		EC63D5CF2E510AA700B5D4D0 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC63D5CE2E510AA700B5D4D0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		EC8740DE2E99E0BC004B8178 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EC63D5CE2E510AA700B5D4D0 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;

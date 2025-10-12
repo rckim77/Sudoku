@@ -5,42 +5,77 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     branches: [ main ]
 
+permissions:
+  contents: read
+  actions: read       # needed to look up the artifact download URL
+  pull-requests: write
+
 jobs:
   unit_tests:
     name: Unit Tests
     runs-on: macos-15
-    timeout-minutes: 20
-    
+    timeout-minutes: 30
+    env:
+      DERIVED_DATA_PATH: ${{ github.workspace }}/.derived_data
+      IPHONE_DEST: "platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64"
+      XCODE_VERSION: "26.0.1"
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
-    - name: Select Xcode 26
-      run: sudo xcode-select -s /Applications/Xcode_26.app/Contents/Developer
-    
-    - name: Show Xcode version
-      run: xcodebuild -version
-    
-    - name: Show available simulators
-      run: xcrun simctl list devices available
-    
+
+    - name: Select Xcode Version
+      run: sudo xcode-select -s /Applications/Xcode_${{ env.XCODE_VERSION }}.app/Contents/Developer
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ env.DERIVED_DATA_PATH }}/SourcePackages
+          ~/Library/Caches/org.swift.swiftpm
+        key: ${{ runner.os }}-spm-xcode-${{ env.XCODE_VERSION }}-${{ hashFiles('**/Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-spm-xcode-${{ env.XCODE_VERSION }}-
+          ${{ runner.os }}-spm-
+
+    # Uncomment below for debugging
+    # - name: Show available simulators
+    #   run: xcrun simctl list devices available
+
     - name: Resolve Swift Package dependencies
-      run: xcodebuild -project Sudoku.xcodeproj -resolvePackageDependencies
-    
-    - name: Build project for testing
+      shell: bash
+      run: >
+        xcodebuild
+        -project Sudoku.xcodeproj
+        -scheme SudokuTests
+        -resolvePackageDependencies
+        -derivedDataPath "${DERIVED_DATA_PATH}"
+
+    - name: Set dynamic env
       run: |
-        xcodebuild build-for-testing \
+        echo "UNIT_XCRESULT=$RUNNER_TEMP/UnitTests.xcresult" >> "$GITHUB_ENV"
+
+    # Note: currently we only run uni tests and iPhone snapshot tests in CI. You can still
+    # test iPad snapshot tests locally using the SudokuIpadTests scheme pointed to 
+    # an iPad simulator.
+    - name: Build and run unit tests
+      id: unit_tests
+      continue-on-error: true
+      run: |
+        set -o pipefail
+        xcodebuild test \
           -project Sudoku.xcodeproj \
           -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64' \
+          -destination "${IPHONE_DEST}" \
           -configuration Debug \
+          -resultBundlePath "${UNIT_XCRESULT}" \
           CODE_SIGNING_ALLOWED=NO
-      
-    - name: Run unit tests
-      run: |
-        xcodebuild test-without-building \
-          -project Sudoku.xcodeproj \
-          -scheme SudokuTests \
-          -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64' \
-          -configuration Debug \
-          CODE_SIGNING_ALLOWED=NO
+
+    - name: Upload unit test .xcresult bundle
+      if: steps.unit_tests.outcome == 'failure'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.run_id }}.xcresult
+        path: ${{ env.UNIT_XCRESULT }}
+        if-no-files-found: error
+        retention-days: 14

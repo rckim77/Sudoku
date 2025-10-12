@@ -13,21 +13,30 @@ struct DynamicButtonStyle: ViewModifier {
     let textColor: Color?
     let backgroundColor: Color?
     let isImage: Bool
+    let isCompact: Bool
+    
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     var buttonVerticalPadding: CGFloat {
         if isIpad {
-            return isImage ? 20.5 : 24
+            if isImage {
+                return 20.5
+            } else if isCompact {
+                return 10
+            } else {
+                return 24
+            }
         } else {
             return 10
         }
     }
 
     var buttonHorizontalPadding: CGFloat {
-        isIpad ? 38 : 16
+        horizontalSizeClass == .compact ? 16 : 38
     }
 
     func body(content: Content) -> some View {
-        if isVision {
+        if isVision { // Note: visionOS adds its own padding
             content
                 .foregroundColor(textColor)
                 .background(backgroundColor)
@@ -38,17 +47,17 @@ struct DynamicButtonStyle: ViewModifier {
                 .padding(.vertical, buttonVerticalPadding)
                 .padding(.horizontal, buttonHorizontalPadding)
                 .background(backgroundColor)
-                .cornerRadius(8)
+                .cornerRadius(16)
         }
     }
 }
 
 extension View {
-    func dynamicButtonStyle(textColor: Color? = nil, backgroundColor: Color? = nil) -> some View {
-        self.modifier(DynamicButtonStyle(textColor: textColor, backgroundColor: backgroundColor, isImage: false))
+    func dynamicButtonStyle(textColor: Color? = nil, backgroundColor: Color? = nil, isCompact: Bool = false) -> some View {
+        self.modifier(DynamicButtonStyle(textColor: textColor, backgroundColor: backgroundColor, isImage: false, isCompact: isCompact))
     }
     
     func dynamicButtonImageStyle(textColor: Color? = nil, backgroundColor: Color? = nil) -> some View {
-        self.modifier(DynamicButtonStyle(textColor: textColor, backgroundColor: backgroundColor, isImage: true))
+        self.modifier(DynamicButtonStyle(textColor: textColor, backgroundColor: backgroundColor, isImage: true, isCompact: false))
     }
 }

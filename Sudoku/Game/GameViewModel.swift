@@ -11,11 +11,9 @@ import SwiftUI
 struct GameViewModel: ViewModel {
     
     let difficulty: Difficulty.Level
-
-    let bottomVerticalSpacing: CGFloat = 32
-
+    
     var verticalSpacing: CGFloat {
-        isVision ? 8 : 16
+        isIphone ? 16 : 4
     }
     
     var timerHorizontalOffset: CGFloat {
@@ -41,16 +39,30 @@ struct GameViewModel: ViewModel {
             return 16
         }
     }
-    
-    func getSpacerMaxHeight(_ geometryHeight: CGFloat) -> CGFloat {
-        let verticalThreshold: CGFloat = 900
 
-        if isVision {
-            return 8
-        } else if geometryHeight > verticalThreshold {
-            return 60
+    func getBottomVerticalSpacing(_ geometryHeight: CGFloat) -> CGFloat {
+        if geometryHeight < GameView.lowerThreshold {
+            return 4
         } else {
+            return 32
+        }
+    }
+    
+    /// For the sudoku grid to render properly, both window height and width matter.
+    /// Reduce the spacer height if the window height is constrained.
+    func getSpacerMaxHeight(_ geometryHeight: CGFloat) -> CGFloat {
+        if isIphone {
             return 16
+        } else {
+            let upperThreshold: CGFloat = 840 // have extra height
+
+            if geometryHeight > upperThreshold {
+                return 60
+            } else if geometryHeight < GameView.lowerThreshold {
+                return 2
+            } else {
+                return 8
+            }
         }
     }
 }

@@ -25,8 +25,6 @@ struct StaticRowView: View {
                 let digit = grid.first(where: { $0.r == rowIndex && $0.c == colIndex && $0.s == squareIndex })?.v ?? -1
                 let digitText = digit == -1 ? " " : "\(digit)"
                 RowButtonText(text: digitText, foregroundColor: .black, isStatic: true)
-                    .padding(.horizontal, 6)
-                    .frame(maxWidth: .infinity)
                     .background(getBackgroundColor(colIndex: colIndex, isValidSquare: isValidSquare, highlightSection: highlightSection))
                     .border(.black, width: 1)
             }

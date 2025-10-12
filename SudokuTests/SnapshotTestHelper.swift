@@ -23,9 +23,13 @@ Note: The devices will have to be updated over time as we drop iOS support for
 
 */
 public struct SnapshotTestHelper {
-    static let devices: [Device] = [("iPhone13Mini", .iPhone13Mini),
+    /// Use iPhone 16 Pro (26.0) simulator
+    static let iphones: [Device] = [("iPhone13Mini", .iPhone13Mini),
                                     ("iPhone13", .iPhone13),
-                                    ("iPhone13ProMax", .iPhone13ProMax),
-                                    ("iPad10_2", .iPad10_2(.portrait)),
-                                    ("iPad12_9", .iPadPro12_9(.portrait))]
+                                    ("iPhone13ProMax", .iPhone13ProMax)]
+    /// Use iPad Pro 11-inch M4 (26.0) simulator
+    static let ipads: [Device] = [("iPadPro11Portrait", .iPadPro11(.portrait)),
+                                  ("iPadPro12_9Landscape", .iPadPro12_9(.landscape))]
+    
+    static let precision: Float = 0.99
 }
