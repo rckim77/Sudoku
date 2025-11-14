@@ -46,7 +46,7 @@ struct API {
         let stringGrid = GridFactory.stringGridFor(grid: grid)
         let difficultyString = difficulty.rawValue.lowercased()
         
-        let content = """
+        let prompt = """
             You are a Sudoku assistant. The following is a Sudoku puzzle of \(difficultyString) difficulty.
             Empty cells are marked as 0. The grid is represented as 9 arrays, each representing a 3x3 square
             from left to right, top to bottom:
@@ -66,7 +66,7 @@ struct API {
         if #available(iOS 26, *), SystemLanguageModel.default.isAvailable {
             let session = LanguageModelSession()
             do {
-                let response = try await session.respond(to: content).content
+                let response = try await session.respond(to: prompt).content
                 return Hint(hintType: .open, overrideDescription: response)
             } catch {
                 throw APIError.modelSessionError
@@ -74,10 +74,10 @@ struct API {
         } else {
             do {
                 let requestBody = OpenAIChatCompletionRequestBody(
-                    model: "gpt-4o-mini",
-                    messages: [.system(content: .text(content))]
+                    model: "gpt-4.1-mini",
+                    messages: [.system(content: .text(prompt))]
                 )
-                let response = try await openAIService.chatCompletionRequest(body: requestBody, secondsToWait: 60)
+                let response = try await openAIService.chatCompletionRequest(body: requestBody, secondsToWait: 20)
                 let hint = Hint(coordinate: nil, hintType: .open, overrideDescription: response.choices.first?.message.content)
                 return hint
             } catch AIProxyError.unsuccessfulRequest(statusCode: let statusCode, responseBody: let responseBody) {
