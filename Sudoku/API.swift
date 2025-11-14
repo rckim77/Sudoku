@@ -63,7 +63,7 @@ struct API {
             7. Output in the following language/region: \(Locale.current.language.languageCode?.identifier ?? "en-US")
         """
 
-        if #available(iOS 26, *), SystemLanguageModel.default.isAvailable {
+        if #available(iOS 26, visionOS 26, *), SystemLanguageModel.default.isAvailable {
             let session = LanguageModelSession()
             do {
                 let response = try await session.respond(to: prompt).content
