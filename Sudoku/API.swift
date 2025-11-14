@@ -6,13 +6,14 @@
 //  Copyright © 2023 Self. All rights reserved.
 //
 
-import Foundation
 import AIProxy
+import Foundation
+import FoundationModels
 
 struct API {
     
     enum APIError: Error {
-        case invalidURL, quotaExceeded
+        case invalidURL, quotaExceeded, modelSessionError
     }
     
     /// Helper method for POST requests sending JSON with basic error handling
@@ -31,6 +32,7 @@ struct API {
         return urlRequest
     }
 
+    /// Returns hint from either Apple Intelligence (if compatible) or ChatGPT via AIProxy.
     static func getHint(grid: [CoordinateValue], difficulty: Difficulty.Level) async throws -> Hint? {
         if let singleHint = SudokuSolver.findSingles(grid).first {
             return singleHint
@@ -60,24 +62,34 @@ struct API {
             6. Use natural language when referring to positions (e.g., 'third row from top')
             7. Output in the following language/region: \(Locale.current.language.languageCode?.identifier ?? "en-US")
         """
-        
-        do {
-            let requestBody = OpenAIChatCompletionRequestBody(
-                model: "gpt-4o-mini",
-                messages: [.system(content: .text(content))]
-            )
-            let response = try await openAIService.chatCompletionRequest(body: requestBody, secondsToWait: 60)
-            let hint = Hint(coordinate: nil, hintType: .open, overrideDescription: response.choices.first?.message.content)
-            return hint
-        } catch AIProxyError.unsuccessfulRequest(statusCode: let statusCode, responseBody: let responseBody) {
-            print("Received \(statusCode) status code with response body: \(responseBody)")
-            if statusCode == 429 {
-                throw APIError.quotaExceeded
+
+        if #available(iOS 26, *), SystemLanguageModel.default.isAvailable {
+            let session = LanguageModelSession()
+            do {
+                let response = try await session.respond(to: content).content
+                return Hint(hintType: .open, overrideDescription: response)
+            } catch {
+                throw APIError.modelSessionError
             }
-            return nil
-        } catch {
-            print("Could not create OpenAI chat completion: \(error.localizedDescription)")
-            return nil
+        } else {
+            do {
+                let requestBody = OpenAIChatCompletionRequestBody(
+                    model: "gpt-4o-mini",
+                    messages: [.system(content: .text(content))]
+                )
+                let response = try await openAIService.chatCompletionRequest(body: requestBody, secondsToWait: 60)
+                let hint = Hint(coordinate: nil, hintType: .open, overrideDescription: response.choices.first?.message.content)
+                return hint
+            } catch AIProxyError.unsuccessfulRequest(statusCode: let statusCode, responseBody: let responseBody) {
+                print("Received \(statusCode) status code with response body: \(responseBody)")
+                if statusCode == 429 {
+                    throw APIError.quotaExceeded
+                }
+                return nil
+            } catch {
+                print("Could not create OpenAI chat completion: \(error.localizedDescription)")
+                return nil
+            }
         }
     }
 }
