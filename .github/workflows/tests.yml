@@ -17,12 +17,15 @@ jobs:
     timeout-minutes: 30
     env:
       DERIVED_DATA_PATH: ${{ github.workspace }}/.derived_data
-      IPHONE_DEST: "platform=iOS Simulator,name=iPhone 16 Pro,OS=26.0,arch=arm64"
-      XCODE_VERSION: "26.0.1"
+      IPHONE_DEST: "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.1,arch=arm64"
+      XCODE_VERSION: "26.1"
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Check Available Xcode Versions
+      run: xcrun xcodebuild -version -available_xcodes
 
     - name: Select Xcode Version
       run: sudo xcode-select -s /Applications/Xcode_${{ env.XCODE_VERSION }}.app/Contents/Developer
