@@ -33,6 +33,7 @@ struct GameView: View {
     @State private var alertIsPresented: Bool = false
     @State private var hintButtonIsLoading: Bool = false
     @State private var saveButtonAnimate: Bool = false
+    @State private var isPaused: Bool = false
     @State private(set) var undoManager = UndoManager()
     let viewModel: GameViewModel
     
@@ -116,6 +117,8 @@ struct GameView: View {
                     Spacer()
                         .frame(maxHeight: viewModel.getBottomVerticalSpacing(geometry.size.height))
                 }
+                .blur(radius: isPaused ? 4 : 0)
+                .allowsHitTesting(!isPaused)
                 .toolbar {
                     ToolbarItemGroup(placement: viewModel.toolbarItemPlacement) {
                         if #available(iOS 26, *) {
@@ -166,9 +169,27 @@ struct GameView: View {
                     }
                 }
             }
+            if isPaused {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                VStack(spacing: 16) {
+                    Text("game.paused.title")
+                        .font(.system(.title2, design: .rounded).bold())
+                    Text("game.paused.description")
+                        .multilineTextAlignment(.center)
+                        .font(.system(.headline, design: .rounded))
+                        .padding(.horizontal)
+                    Button("game.button.resume") {
+                        isPaused = false
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.blue)
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
         .onReceive(timer) { _ in
+            guard !isPaused else { return }
             elapsedTime += 1
         }
         .onChange(of: alertIsPresented, { oldValue, newValue in
@@ -188,9 +209,13 @@ struct GameView: View {
             }
         }
     }
-    
+
     private var actionButtons: some View {
         Group {
+            Button(isPaused ? "game.button.resume" : "game.button.pause", systemImage: isPaused ? "play.fill" : "pause.fill") {
+                isPaused.toggle()
+            }
+            .tint(.primary)
             Button("", systemImage: "arrow.uturn.backward") {
                 handleUndo()
             }
