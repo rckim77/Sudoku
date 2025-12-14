@@ -24,9 +24,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Check Available Xcode Versions
-      run: xcrun xcodebuild -version -available_xcodes
-
+    # To find available Xcode versions for current mac runner, see here: https://github.com/actions/runner-images/tree/main/images/macos
+      
     - name: Select Xcode Version
       run: sudo xcode-select -s /Applications/Xcode_${{ env.XCODE_VERSION }}.app/Contents/Developer
 
@@ -58,7 +57,7 @@ jobs:
       run: |
         echo "UNIT_XCRESULT=$RUNNER_TEMP/UnitTests.xcresult" >> "$GITHUB_ENV"
 
-    # Note: currently we only run uni tests and iPhone snapshot tests in CI. You can still
+    # Note: currently we only run unit tests and iPhone snapshot tests in CI. You can still
     # test iPad snapshot tests locally using the SudokuIpadTests scheme pointed to 
     # an iPad simulator.
     - name: Build and run unit tests

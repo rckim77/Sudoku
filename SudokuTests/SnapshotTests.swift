@@ -12,7 +12,7 @@ import SnapshotTesting
 import Testing
 import SwiftUI
 
-@Suite(.snapshots(record: .never))
+@Suite(.snapshots(record: .none))
 @MainActor
 struct SnapshotTests {
 
