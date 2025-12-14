@@ -231,15 +231,7 @@ struct GameView: View {
 
     private var actionButtons: some View {
         Group {
-            Button {
-                withAnimation(.easeInOut(duration: 0.1)) {
-                    isPaused.toggle()
-                }
-            } label: {
-                Image(systemName: isPaused ? "play.fill" : "pause.fill")
-                    .contentTransition(.symbolEffect(.replace))
-            }
-            .tint(.primary)
+            PauseButton(isPaused: $isPaused)
             Button("", systemImage: "arrow.uturn.backward") {
                 handleUndo()
             }
