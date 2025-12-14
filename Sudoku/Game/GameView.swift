@@ -212,7 +212,9 @@ struct GameView: View {
                         Text("game.button.resume")
                             .font(.system(.headline, design: .rounded))
                     }
+                    #if !os(visionOS)
                     .buttonStyle(.glassProminent)
+                    #endif
                 } else {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.1)) {
