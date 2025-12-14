@@ -117,7 +117,7 @@ struct GameView: View {
                     Spacer()
                         .frame(maxHeight: viewModel.getBottomVerticalSpacing(geometry.size.height))
                 }
-                .blur(radius: isPaused ? 4 : 0)
+                .blur(radius: isPaused ? 6 : 0)
                 .allowsHitTesting(!isPaused)
                 .toolbar {
                     ToolbarItemGroup(placement: viewModel.toolbarItemPlacement) {
@@ -170,21 +170,7 @@ struct GameView: View {
                 }
             }
             if isPaused {
-                Color.black.opacity(0.4)
-                    .ignoresSafeArea()
-                VStack(spacing: 16) {
-                    Text("game.paused.title")
-                        .font(.system(.title2, design: .rounded).bold())
-                    Text("game.paused.description")
-                        .multilineTextAlignment(.center)
-                        .font(.system(.headline, design: .rounded))
-                        .padding(.horizontal)
-                    Button("game.button.resume") {
-                        isPaused = false
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.blue)
-                }
+                pausedOverlayView
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -206,6 +192,34 @@ struct GameView: View {
                 break
             case .unsaved:
                 resetToPreviouslySavedGrid()
+            }
+        }
+    }
+    
+    private var pausedOverlayView: some View {
+        Group {
+            Color.black.opacity(0.15)
+                .ignoresSafeArea()
+            VStack(spacing: 16) {
+                Text("game.paused.title")
+                    .font(.system(.title2, design: .rounded).bold())
+                if #available(iOS 26.0, *) {
+                    Button(action: {
+                        isPaused = false
+                    }) {
+                        Text("game.button.resume")
+                            .font(.system(.headline, design: .rounded))
+                    }
+                    .buttonStyle(.glassProminent)
+                } else {
+                    Button(action: {
+                        isPaused = false
+                    }) {
+                        Text("game.button.resume")
+                            .font(.system(.headline, design: .rounded))
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
             }
         }
     }
