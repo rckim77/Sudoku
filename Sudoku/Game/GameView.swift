@@ -33,6 +33,7 @@ struct GameView: View {
     @State private var alertIsPresented: Bool = false
     @State private var hintButtonIsLoading: Bool = false
     @State private var saveButtonAnimate: Bool = false
+    @State private var isPaused: Bool = false
     @State private(set) var undoManager = UndoManager()
     let viewModel: GameViewModel
     
@@ -116,6 +117,8 @@ struct GameView: View {
                     Spacer()
                         .frame(maxHeight: viewModel.getBottomVerticalSpacing(geometry.size.height))
                 }
+                .blur(radius: isPaused ? 6 : 0)
+                .allowsHitTesting(!isPaused)
                 .toolbar {
                     ToolbarItemGroup(placement: viewModel.toolbarItemPlacement) {
                         if #available(iOS 26, *) {
@@ -166,9 +169,13 @@ struct GameView: View {
                     }
                 }
             }
+            if isPaused {
+                pausedOverlayView
+            }
         }
         .navigationBarBackButtonHidden(true)
         .onReceive(timer) { _ in
+            guard !isPaused else { return }
             elapsedTime += 1
         }
         .onChange(of: alertIsPresented, { oldValue, newValue in
@@ -189,12 +196,48 @@ struct GameView: View {
         }
     }
     
+    private var pausedOverlayView: some View {
+        ZStack {
+            Color.black.opacity(0.15)
+                .ignoresSafeArea()
+            VStack(spacing: 16) {
+                Text("game.paused.title")
+                    .font(.system(.title2, design: .rounded).bold())
+                if #available(iOS 26.0, *) {
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.1)) {
+                            isPaused = false
+                        }
+                    }) {
+                        Text("game.button.resume")
+                            .font(.system(.headline, design: .rounded))
+                    }
+                    #if !os(visionOS)
+                    .buttonStyle(.glassProminent)
+                    #endif
+                } else {
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.1)) {
+                            isPaused = false
+                        }
+                    }) {
+                        Text("game.button.resume")
+                            .font(.system(.headline, design: .rounded))
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            }
+        }
+        .transition(.opacity)
+    }
+
     private var actionButtons: some View {
         Group {
+            PauseButton(isPaused: $isPaused)
             Button("", systemImage: "arrow.uturn.backward") {
                 handleUndo()
             }
-            .disabled(!undoManager.canUndo)
+            .disabled(!undoManager.canUndo && isPaused)
             .tint(.primary)
             
             ClearButton(selectedCoordinate: selectedCell.coordinate,
@@ -204,17 +247,22 @@ struct GameView: View {
                       workingGrid: workingGrid,
                       savedState: $savedState,
                       undoManager: undoManager)
+                .disabled(isPaused)
+
             EditButton(editState: editState)
+                .disabled(isPaused)
             HintButton(alertItem: $alertItem,
                        alertIsPresented: $alertIsPresented,
                        grid: workingGrid.grid,
                        difficulty: viewModel.difficulty)
+                .disabled(isPaused)
             Button("", systemImage: "square.and.arrow.down") {
                 checkSaveIfNeeded()
                 saveButtonAnimate.toggle()
             }
             .symbolEffect(.bounce.down.byLayer, value: saveButtonAnimate)
             .tint(.primary)
+            .disabled(isPaused)
         }
     }
 
